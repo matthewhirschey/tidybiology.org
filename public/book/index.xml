@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Books on A Tidybiology website</title>
+    <link>/book/</link>
+    <description>Recent content in Books on A Tidybiology website</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 13 Dec 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/book/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Tidybiology Final Project</title>
+      <link>/book/06_final_template/</link>
+      <pubDate>Fri, 13 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/book/06_final_template/</guid>
+      <description>Load libraries, such as tidyverse and tidybiology #uncomment (or select) to clear environment; good for provenance rm(list=ls())   Import data DESCRIBE YOUR DATA
+#IMPORT YOUR DATA #MAKE SURE TO GET THE CODE CHUNK OPTIONS SET  Take a glimpse into the data in the dataframe DESCRIBE WHAT YOU SEE
+#DEPENDING ON DATA, NOT TOTALLY NECESSARY  EDA EXPLORATORY DATA ANALYSIS
+#COMMENCE ROLLING #MAKE COMMENTS #WRITE WHAT YOU SEE  EDA Graph BEGIN TO EXPLORE HOW YOU MIGHT PLOT IT.</description>
+    </item>
+    
+    <item>
+      <title>Tidybiology: Class 5 Report Exercise</title>
+      <link>/book/05_exercise_report/</link>
+      <pubDate>Fri, 13 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/book/05_exercise_report/</guid>
+      <description>##### STUDENTS START HERE ##### #Which tissue has the most unique mitochondrial proteins? mitocarta_class5 %&amp;gt;% group_by(location) %&amp;gt;% count(true_false, sort = TRUE) ## # A tibble: 42 x 3 ## # Groups: location [14] ## location true_false n ## &amp;lt;chr&amp;gt; &amp;lt;lgl&amp;gt; &amp;lt;int&amp;gt; ## 1 placenta TRUE 866 ## 2 adipose TRUE 857 ## 3 testis TRUE 853 ## 4 largeintestine TRUE 841 ## 5 spinalcord TRUE 824 ## 6 cerebrum TRUE 818 ## 7 cerebellum TRUE 809 ## 8 brainstem TRUE 804 ## 9 liver TRUE 794 ## 10 stomach TRUE 794 ## # … with 32 more rows #Store an object to call below top &amp;lt;- mitocarta_class5 %&amp;gt;% group_by(location) %&amp;gt;% count(true_false, sort = TRUE) %&amp;gt;% ungroup() %&amp;gt;% slice(1) #Store favorite gene fav &amp;lt;- mitocarta_class5 %&amp;gt;% filter(symbol == &amp;quot;MDH2&amp;quot;) %&amp;gt;% #students: &amp;lt;-- put your favorite mitochondrial gene here arrange(desc(intensity)) %&amp;gt;% slice(1) The compartment has the highest number of unique mitochondrial proteins, with number annotated in this tissue.</description>
+    </item>
+    
+    <item>
+      <title>04_student</title>
+      <link>/book/04_join_student/</link>
+      <pubDate>Thu, 12 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/book/04_join_student/</guid>
+      <description>Importing data into R The readr package (found in the tidyverse collection) contains a number of useful functions of the form
+read_* to import data. For example, if you have a .csv file, you would use the read_csv function
+Download a file from uniprot.org
+After selecting some columns of interest, click the Download button and download as a compressed Text file
+Rename the file to something simple (yet informative!), like uniprot and make sure the extension is .</description>
+    </item>
+    
+    <item>
+      <title>Class 4- stringr workshop</title>
+      <link>/book/04_stringr_homework/</link>
+      <pubDate>Thu, 12 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/book/04_stringr_homework/</guid>
+      <description>load the proteins and mitocarta set. Join them like we did in class
+Now you are going to search for a new motif within the dataset. In this case, try searching for either the AcylPhosphatase 1 signature ([LIV]-x-G-x-V-Q-[GH]-V-x-[FM]-R) or the Tyrosine kinase phosphorylation site 1 motif ([RK]-x(2)-[DE]-x(3)-Y)
+Now add a column to the proteins dataframe using your code. Decide whether you would prefer your output to be numeric or logical.</description>
+    </item>
+    
+    <item>
+      <title>Stringr/RegEx</title>
+      <link>/book/04_stringr_lecture/</link>
+      <pubDate>Thu, 12 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/book/04_stringr_lecture/</guid>
+      <description>#Stringr
+What is a string?
+A “string” is just a character variable that contains one or more characters.
+Often we need to extract information from or wrangle strings them to get the data we need from them, but this can be difficult. To help with this process we will be using stringr, a package that allows you to work with strings in R in a relatively simple manner.</description>
+    </item>
+    
+    <item>
+      <title>Class3-ggplot walkthrough</title>
+      <link>/book/03_ggplot2-lecture/</link>
+      <pubDate>Wed, 11 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/book/03_ggplot2-lecture/</guid>
+      <description>#lets glimpse at our data
+##Exercise 1- Run the presented code in your console
+#Basics of a ggplot code
+Below is an example of the most basic form of the ggplot code
+ggplot(data)+ #this will generate a blank plot for your data. At this point, ggplot knows what to plot, but not how. geom(mapping=aes(x, y)) #adding a geom tells ggplot how you would like to map your data Take a moment to look back at the code you ran previously.</description>
+    </item>
+    
+    <item>
+      <title>ggplot Class Workshop/Homework</title>
+      <link>/book/03_ggplot2-hw/</link>
+      <pubDate>Wed, 11 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/book/03_ggplot2-hw/</guid>
+      <description>data(chromosome) Using the uniprot_base dataset, make a simple histogram of either Gene number or Protein number
+#tip: try log transforming your variable to see how it changes the visualization of the data Using the chromosome dataset, make a scatterplot comparing chromosome length and centromere position
+Add labels to the centrosomes with the lowest and highest centromere positions
+Change the size and/or shape of the points
+Add all the appropriate labels to your graph</description>
+    </item>
+    
+    <item>
+      <title>ggplot Class Workshop/Homework 2</title>
+      <link>/book/03_ggplot2-mito-hw2/</link>
+      <pubDate>Wed, 11 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/book/03_ggplot2-mito-hw2/</guid>
+      <description>getwd() ## [1] &amp;quot;/Users/akshaybareja/Desktop/R Stuff/Tidybiology Website - all versions/Tidybiology - lithium theme/content/book&amp;quot; In the following plot, figure out how to hide outliers
+ggplot(mitocarta, aes(x=hg19_chromosome, y=log(protein_length)))+ geom_boxplot() Try making a violin plot instead of a box plot
+Change the fill, but not the outline of the violin plots
+Add original datapoints underneath the violin plot
+Change the transparency of the violin plots
+Add all the appropriate labels to your graph</description>
+    </item>
+    
+    <item>
+      <title>02_workshop</title>
+      <link>/book/02_dplyr_workshop/</link>
+      <pubDate>Tue, 10 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/book/02_dplyr_workshop/</guid>
+      <description>Workshop You will be using the chromosome dataset to answer all the following questions
+Add your answers (text and/or code chunks as required) in the space after each question
+The chromosome dataset can be found in the tidybiology package. To load it, run the following
+devtools::install_github(&amp;quot;hirscheylab/tidybiology&amp;quot;) ## Skipping install of &amp;#39;tidybiology&amp;#39; from a github remote, the SHA1 (9826da55) has not changed since last install. ## Use `force = TRUE` to force installation data(chromosome) ## Warning in data(chromosome): data set &amp;#39;chromosome&amp;#39; not found  Please answer the following questions What type of object is chromosome?</description>
+    </item>
+    
+    <item>
+      <title>Introduction to dplyr</title>
+      <link>/book/02_dplyr_student/</link>
+      <pubDate>Tue, 10 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/book/02_dplyr_student/</guid>
+      <description>Loading the proteins and mitocarta datasets into RStudio The datasets can be found in the proteins and mitocarta packages on the Hirsheylab Github page
+To install and load the packages, run the following
+devtools::install_github(&amp;quot;hirscheylab/proteins&amp;quot;) devtools::install_github(&amp;quot;hirscheylab/mitocarta&amp;quot;) library(proteins) library(mitocarta)  Inspecting the proteins dataset Use the dim() function to see how many rows (observations) and columns (variables) there are
+dim(proteins) ## [1] 20430 8  Inspecting the proteins dataset Use the glimpse() function to see what kinds of variables the dataset contains</description>
+    </item>
+    
+    <item>
+      <title>Class 1 Project</title>
+      <link>/book/01_homework/</link>
+      <pubDate>Mon, 09 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/book/01_homework/</guid>
+      <description>Load libraries library(tidyverse) ## ── Attaching packages ──────────────────────────────────────────────────────────────────────── tidyverse 1.3.0 ── ## ✔ ggplot2 3.2.1 ✔ purrr 0.3.3 ## ✔ tibble 2.1.3 ✔ dplyr 0.8.3 ## ✔ tidyr 1.0.0 ✔ stringr 1.4.0 ## ✔ readr 1.3.1 ✔ forcats 0.4.0 ## ── Conflicts ─────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ── ## ✖ dplyr::filter() masks stats::filter() ## ✖ dplyr::lag() masks stats::lag() library(tidybiology)  Import data This is the code chunk that imports data. We will discuss how this code works in the next few sessions.</description>
+    </item>
+    
+    <item>
+      <title>R Markdown</title>
+      <link>/book/01_exercise/</link>
+      <pubDate>Mon, 09 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/book/01_exercise/</guid>
+      <description>This is an R Markdown file. It contains plain text interspersed with grey chunks of code. You can use the file to take notes and run code. For example, you can write your name on the line below. Try it:
+# You can write code in chunks that look like this. # This chunk uses the code plot(simplechromosome) to plot a data set. # To run the code, click the Green play button at the # top right of this chunk.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>/book/05_exercise_params/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/book/05_exercise_params/</guid>
+      <description>My favorite gene is MDH2, which encodes a mitochondrial protein that is most abundant in the heart and is 338 amino acids long. The average length of proteins in the heart is 370 amino acids, which makes MDH2 shorter than average.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>/book/05_homework/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/book/05_homework/</guid>
+      <description>Load libraries knitr::opts_chunk$set(warning = FALSE, message = FALSE) library(tidyverse) ## ── Attaching packages ──────────────────────────────────────────────────────────────────────── tidyverse 1.3.0 ── ## ✔ ggplot2 3.2.1 ✔ purrr 0.3.3 ## ✔ tibble 2.1.3 ✔ dplyr 0.8.3 ## ✔ tidyr 1.0.0 ✔ stringr 1.4.0 ## ✔ readr 1.3.1 ✔ forcats 0.4.0 ## ── Conflicts ─────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ── ## ✖ dplyr::filter() masks stats::filter() ## ✖ dplyr::lag() masks stats::lag() library(tidybiology) library(mitocarta) library(proteins)  Explore Before importing, view each dataframe available in the tidybiology package.</description>
+    </item>
+    
+  </channel>
+</rss>

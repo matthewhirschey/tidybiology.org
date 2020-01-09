@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.60.1" />
+
+
+<title>02_workshop - A Tidybiology website</title>
+<meta property="og:title" content="02_workshop - A Tidybiology website">
+
+
+  <link href='/favicon.ico' rel='icon' type='image/x-icon'/>
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/tidybiology_hex.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="/book/">Book</a></li>
+    
+    <li><a href="https://github.com/hirscheylab/tidybiology">GitHub</a></li>
+    
+    <li><a href="/docs/">Package</a></li>
+    
+    <li><a href="https://akshay-bareja.shinyapps.io/Chromosome/#section-scratchpad">Quiz</a></li>
+    
+    <li><a href="https://twitter.com/matthewhirschey">Twitter</a></li>
+    
+    <li><a href="https://www.youtube.com/channel/UCstAS6IpgYgZ9Cvcag_YlCQ">YouTube</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+
+    <h1 class="article-title">02_workshop</h1>
+
+    
+
+    <div class="article-content">
+      
+
+
+<div id="workshop" class="section level2">
+<h2>Workshop</h2>
+<p>You will be using the <code>chromosome</code> dataset to answer all the following questions</p>
+<p>Add your answers (text and/or code chunks as required) in the space after each question</p>
+<p>The <code>chromosome</code> dataset can be found in the tidybiology package. To load it, run the following</p>
+<pre class="r"><code>devtools::install_github(&quot;hirscheylab/tidybiology&quot;)</code></pre>
+<pre><code>## Skipping install of &#39;tidybiology&#39; from a github remote, the SHA1 (9826da55) has not changed since last install.
+##   Use `force = TRUE` to force installation</code></pre>
+<pre class="r"><code>data(chromosome)</code></pre>
+<pre><code>## Warning in data(chromosome): data set &#39;chromosome&#39; not found</code></pre>
+</div>
+<div id="please-answer-the-following-questions" class="section level2">
+<h2>Please answer the following questions</h2>
+<p>What type of object is <code>chromosome</code>?</p>
+<p>How many observations and variables does <code>chromosome</code> contain?</p>
+<p>What are the top five chromosomes in terms of the number of protein coding genes (look at the <code>protein_codinggenes</code> variable)? Based on your output, would you say that chromosome length is proportional to the number of protein coding genes?</p>
+<p>Using the <code>protein_codinggenes</code> and <code>pseudo_genes</code> variables, create a new variable called <code>total_genes</code> that contains the sum of protein coding genes and pseudogenes</p>
+<p>Similarly, create a new variable called <code>total_rna</code> that contains the sum of all the different rna types i.e. the sum of all variables whose name ends in <code>_rna</code></p>
+<p>Make a table that contains the mean of <code>total_genes</code> and <code>total_rna</code></p>
+<p>How many chromosomes have a higher than average total number of genes? Type out (or copy/paste) the names of these chromosomes</p>
+<p>Create a new column that contains chromosome length in centimetres</p>
+</div>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+
+    
+  </body>
+</html>
+

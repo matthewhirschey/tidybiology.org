@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.60.1" />
+
+
+<title>Tidybiology: Class 5 Report Exercise - Favorite Gene  - A Tidybiology website</title>
+<meta property="og:title" content="Tidybiology: Class 5 Report Exercise - A Tidybiology website">
+
+
+  <link href='/favicon.ico' rel='icon' type='image/x-icon'/>
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/tidybiology_hex.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="/book/">Book</a></li>
+    
+    <li><a href="https://github.com/hirscheylab/tidybiology">GitHub</a></li>
+    
+    <li><a href="/docs/">Package</a></li>
+    
+    <li><a href="https://akshay-bareja.shinyapps.io/Chromosome/#section-scratchpad">Quiz</a></li>
+    
+    <li><a href="https://twitter.com/matthewhirschey">Twitter</a></li>
+    
+    <li><a href="https://www.youtube.com/channel/UCstAS6IpgYgZ9Cvcag_YlCQ">YouTube</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+
+    <h1 class="article-title">Tidybiology: Class 5 Report Exercise</h1>
+
+    
+
+    <div class="article-content">
+      
+
+
+<pre class="r"><code>##### STUDENTS START HERE #####
+
+#Which tissue has the most unique mitochondrial proteins?
+mitocarta_class5 %&gt;% 
+  group_by(location) %&gt;% 
+  count(true_false, sort = TRUE)</code></pre>
+<pre><code>## # A tibble: 42 x 3
+## # Groups:   location [14]
+##    location       true_false     n
+##    &lt;chr&gt;          &lt;lgl&gt;      &lt;int&gt;
+##  1 placenta       TRUE         866
+##  2 adipose        TRUE         857
+##  3 testis         TRUE         853
+##  4 largeintestine TRUE         841
+##  5 spinalcord     TRUE         824
+##  6 cerebrum       TRUE         818
+##  7 cerebellum     TRUE         809
+##  8 brainstem      TRUE         804
+##  9 liver          TRUE         794
+## 10 stomach        TRUE         794
+## # … with 32 more rows</code></pre>
+<pre class="r"><code>#Store an object to call below
+top &lt;- mitocarta_class5 %&gt;% 
+  group_by(location) %&gt;% 
+  count(true_false, sort = TRUE) %&gt;% 
+  ungroup() %&gt;% 
+  slice(1)
+
+#Store favorite gene
+fav &lt;- mitocarta_class5 %&gt;% 
+  filter(symbol == &quot;MDH2&quot;) %&gt;%  #students: &lt;-- put your favorite mitochondrial gene here
+  arrange(desc(intensity)) %&gt;% 
+  slice(1)</code></pre>
+<p>The <strong>compartment</strong> has the highest number of unique mitochondrial proteins, with <strong>number</strong> annotated in this tissue. My favorite gene is <strong>favorite gene</strong>, which encodes a mitochondrial protein that is most abundant in the <strong>compartment</strong> and is <strong>length</strong> amino acids long.</p>
+<pre class="r"><code>mitocarta_class5 %&gt;% 
+  filter(true_false == TRUE) %&gt;% 
+  group_by(location) %&gt;% 
+  ggplot(aes(x = fct_rev(fct_infreq(location)))) +
+  geom_histogram(aes(fill = fct_rev(fct_infreq(location))), stat = &quot;count&quot;, show.legend = FALSE) +
+  coord_flip() +
+  labs(x = &quot;&quot;, y = &quot;Count&quot;, title = &quot;Number of mitochondrial proteins detected in each tissue&quot;) +
+  scale_fill_viridis(discrete = TRUE, direction = -1) +
+  theme_minimal() +
+  NULL</code></pre>
+<p><img src="/book/05_exercise_report_files/figure-html/graph-1.png" width="672" /></p>
+<pre class="r"><code>#change code chunks so only the report output and plot are shown on the knitted report</code></pre>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+
+    
+  </body>
+</html>
+

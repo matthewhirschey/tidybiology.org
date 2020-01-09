@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.60.1" />
+
+
+<title>Intro to Dplyr - A Tidybiology website</title>
+<meta property="og:title" content="Intro to Dplyr - A Tidybiology website">
+
+
+  <link href='/favicon.ico' rel='icon' type='image/x-icon'/>
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/tidybiology_hex.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="/book/">Book</a></li>
+    
+    <li><a href="https://github.com/hirscheylab/tidybiology">GitHub</a></li>
+    
+    <li><a href="/docs/">Package</a></li>
+    
+    <li><a href="https://twitter.com/matthewhirschey">Twitter</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+
+    <h1 class="article-title">Intro to Dplyr</h1>
+
+    
+
+    <div class="article-content">
+      
+
+
+<pre><code>## ── Attaching packages ──────────────────────────────────── tidyverse 1.3.0 ──</code></pre>
+<pre><code>## ✔ ggplot2 3.2.1     ✔ purrr   0.3.3
+## ✔ tibble  2.1.3     ✔ dplyr   0.8.3
+## ✔ tidyr   1.0.0     ✔ stringr 1.4.0
+## ✔ readr   1.3.1     ✔ forcats 0.4.0</code></pre>
+<pre><code>## ── Conflicts ─────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()</code></pre>
+<div id="loading-the-proteins-and-mitocarta-datasets-into-rstudio" class="section level2 build">
+<h2>Loading the <code>proteins</code> and <code>mitocarta</code> datasets into RStudio</h2>
+<p>The datasets can be found in the <code>proteins</code> and <code>mitocarta</code> packages on the Hirsheylab Github page</p>
+<p>To install and load the packages, run the following</p>
+<pre class="r"><code>devtools::install_github(&quot;hirscheylab/proteins&quot;)
+devtools::install_github(&quot;hirscheylab/mitocarta&quot;)
+library(proteins)
+library(mitocarta)</code></pre>
+</div>
+<div id="inspecting-the-proteins-dataset" class="section level2 build">
+<h2>Inspecting the <code>proteins</code> dataset</h2>
+<p>Use the <code>dim()</code> function to see how many rows (observations) and columns (variables) there are</p>
+<pre class="r"><code>dim(proteins)</code></pre>
+<pre><code>## [1] 20430     8</code></pre>
+</div>
+<div id="inspecting-the-proteins-dataset-1" class="section level2 build">
+<h2>Inspecting the <code>proteins</code> dataset</h2>
+<p>Use the <code>glimpse()</code> function to see what kinds of variables the dataset contains</p>
+<pre class="r"><code>glimpse(proteins)</code></pre>
+<pre><code>## Observations: 20,430
+## Variables: 8
+## $ uniprot_id       &lt;chr&gt; &quot;P04217&quot;, &quot;Q9NQ94&quot;, &quot;P01023&quot;, &quot;A8K2U0&quot;, &quot;U3KPV4&quot;, &quot;Q…
+## $ gene_name        &lt;chr&gt; &quot;A1BG&quot;, &quot;A1CF&quot;, &quot;A2M&quot;, &quot;A2ML1&quot;, &quot;A3GALT2&quot;, &quot;A4GALT&quot;,…
+## $ gene_name_alt    &lt;chr&gt; NA, &quot;ACF ASP&quot;, &quot;CPAMD5 FWP007&quot;, &quot;CPAMD9&quot;, &quot;A3GALT2P …
+## $ protein_name     &lt;chr&gt; &quot;Alpha-1B-glycoprotein &quot;, &quot;APOBEC1 complementation f…
+## $ protein_name_alt &lt;chr&gt; &quot;Alpha-1-B glycoprotein)&quot;, &quot;APOBEC1-stimulating prot…
+## $ sequence         &lt;chr&gt; &quot;MSMLVVFLLLWGVTWGPVTEAAIFYETQPSLWAESESLLKPLANVTLTCQA…
+## $ length           &lt;dbl&gt; 495, 594, 1474, 1454, 340, 353, 340, 546, 672, 399, …
+## $ mass             &lt;dbl&gt; 54254, 65202, 163291, 161107, 38754, 40499, 39497, 5…</code></pre>
+</div>
+<div id="basic-data-types-in-r" class="section level2 build">
+<h2>Basic Data Types in R</h2>
+<p>R has 6 basic data ypes -</p>
+<p><strong>character</strong> - <code>&quot;a&quot;</code>, <code>&quot;tidyverse&quot;</code></p>
+<p><strong>numeric</strong> - <code>2</code>, <code>11.5</code></p>
+<p><strong>integer</strong> - <code>2L</code> (the <code>L</code> tells R to store this as an integer)</p>
+<p><strong>logical</strong> - <code>TRUE</code>, <code>FALSE</code></p>
+<p><strong>complex</strong> - <code>1+4i</code></p>
+<p>(<strong>raw</strong>)</p>
+<p>You will also come across the <strong>double</strong> datatype. It is the same as <strong>numeric</strong></p>
+<p><strong>factor</strong>. A <strong>factor</strong> is a collection of <em>ordered</em> character variables</p>
+</div>
+<div id="basic-data-types-in-r-1" class="section level2 build">
+<h2>Basic Data Types in R</h2>
+<p>In addition to the <code>glimpse()</code> function, you can use the <code>class()</code> function to determine the data type of a specific column</p>
+<pre class="r"><code>class(proteins$length)</code></pre>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+</div>
+<div id="reintroducing" class="section level2 build">
+<h2>(Re)Introducing <code>%&gt;%</code></h2>
+<p>The <code>%&gt;%</code> operator is a way of “chaining” together strings of commands that make reading your code easy. The following code chunk illustrates how <code>%&gt;%</code> works</p>
+<pre class="r"><code>proteins %&gt;% 
+  select(uniprot_id, length) %&gt;% 
+  filter(length &gt; 500) %&gt;% 
+  head(1)</code></pre>
+<pre><code>## # A tibble: 1 x 2
+##   uniprot_id length
+##   &lt;chr&gt;       &lt;dbl&gt;
+## 1 Q9NQ94        594</code></pre>
+<p>The above code chunk does the following - it takes you dataset, <code>proteins</code>, and “pipes” it into <code>select()</code></p>
+</div>
+<div id="reintroducing-1" class="section level2 build">
+<h2>(Re)Introducing <code>%&gt;%</code></h2>
+<p>The second line selects just the columns named <code>uniprot_id</code> and <code>length</code> and “pipes” that into <code>filter()</code>. The final line selects proteins that are longer than 500 amino acids</p>
+<p>When you see <code>%&gt;%</code>, think “and then”</p>
+<p>The alternative to using <code>%&gt;%</code> is running the following code</p>
+<pre class="r"><code>filter(select(proteins, uniprot_id, length), length &gt; 500)</code></pre>
+<p>Although this is only one line as opposed to three, it’s both more difficult to write and more difficult to read</p>
+</div>
+<div id="introducing-the-main-dplyr-verbs" class="section level2 build">
+<h2>Introducing the main dplyr verbs</h2>
+<p>dplyr is a package that contains a suite of functions that allow you to easily manipulate a dataset</p>
+<p>Some of the things you can do are -</p>
+<ul>
+<li><p>select rows and columns that match specific criteria</p></li>
+<li><p>create new variables (columns)</p></li>
+<li><p>obtain summary statistics on individual groups within your datsets</p></li>
+</ul>
+<p>The main verbs we will cover are <code>select()</code>, <code>filter()</code>, <code>arrange()</code>, <code>mutate()</code>, and <code>summarise()</code>. These all combine naturally with <code>group_by()</code> which allows you to perform any operation “by group”</p>
+</div>
+<div id="select" class="section level2 build">
+<h2><code>select()</code></h2>
+<p>The <code>select()</code> verb allows you to extract specific columns from your dataset</p>
+<p>The most basic <code>select()</code> is one where you comma separate a list of columns you want included</p>
+<p>For example, if you only want to select the <code>uniprot_id</code> and <code>length</code> columns, run the following code chunk</p>
+<pre class="r"><code>proteins %&gt;% 
+  select(uniprot_id, length) %&gt;% 
+  head(1)</code></pre>
+<pre><code>## # A tibble: 1 x 2
+##   uniprot_id length
+##   &lt;chr&gt;       &lt;dbl&gt;
+## 1 P04217        495</code></pre>
+</div>
+<div id="select-1" class="section level2 build">
+<h2><code>select()</code></h2>
+<p>If you want to select all columns <em>except</em> <code>uniprot_id</code>, run the following</p>
+<pre class="r"><code>proteins %&gt;% 
+  select(-uniprot_id) %&gt;% 
+  head(1)</code></pre>
+<pre><code>## # A tibble: 1 x 7
+##   gene_name gene_name_alt protein_name  protein_name_alt sequence   length  mass
+##   &lt;chr&gt;     &lt;chr&gt;         &lt;chr&gt;         &lt;chr&gt;            &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt;
+## 1 A1BG      &lt;NA&gt;          &quot;Alpha-1B-gl… Alpha-1-B glyco… MSMLVVFLL…    495 54254</code></pre>
+</div>
+<div id="select-2" class="section level2 build">
+<h2><code>select()</code></h2>
+<p>Finally, you can provide a range of columns to return two columns and everything in between. For example</p>
+<pre class="r"><code>proteins %&gt;% 
+  select(uniprot_id:protein_name) %&gt;% 
+  head(1)</code></pre>
+<pre><code>## # A tibble: 1 x 4
+##   uniprot_id gene_name gene_name_alt protein_name            
+##   &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt;         &lt;chr&gt;                   
+## 1 P04217     A1BG      &lt;NA&gt;          &quot;Alpha-1B-glycoprotein &quot;</code></pre>
+<p>This code selects the following columns - <code>uniprot_id</code>, <code>gene_name</code>, <code>gene_name_alt</code>, and <code>protein_name</code></p>
+</div>
+<div id="select-exercise" class="section level2 build">
+<h2><code>select()</code> exercise</h2>
+<p>Select the following columns - <code>uniprot_id</code>, <code>sequence</code>, <code>length</code>, and <code>mass</code></p>
+<pre class="r"><code>proteins %&gt;% 
+  select(uniprot_id, sequence:mass)</code></pre>
+</div>
+<div id="filter" class="section level2 build">
+<h2><code>filter()</code></h2>
+<p>The <code>filter()</code> verb allows you to choose rows based on certain condition(s) and discard everything else</p>
+<p>All filters are performed on some logical statement</p>
+<p>If a row meets the condition of this statement (i.e. is true) then it gets chosen (or “filtered”). All other rows are discarded</p>
+</div>
+<div id="filter-1" class="section level2 build">
+<h2><code>filter()</code></h2>
+<p>Filtering can be performed on categorical data</p>
+<pre class="r"><code>mitocarta %&gt;% 
+  filter(mito_domain_score == &quot;MitoDomain&quot;) %&gt;% 
+  head(1)</code></pre>
+<pre><code>## # A tibble: 1 x 43
+##   training_dataset human_gene_id mouse_ortholog_… symbol synonyms description
+##   &lt;chr&gt;                    &lt;dbl&gt;            &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;      
+## 1 Tmito                       33            11363 ACADL  ACAD4|L… acyl-CoA d…
+## # … with 37 more variables: ensembl_gene_id &lt;chr&gt;, protein_length &lt;dbl&gt;,
+## #   target_p_score &lt;dbl&gt;, mito_domain_score &lt;chr&gt;,
+## #   coexpression_gnf_n50_score &lt;dbl&gt;, pgc_induction_score &lt;dbl&gt;,
+## #   yeast_mito_homolog_score &lt;chr&gt;, rickettsia_homolog_score &lt;chr&gt;,
+## #   msms_score &lt;chr&gt;, mcarta2_score &lt;dbl&gt;, mcarta2_fdr &lt;dbl&gt;,
+## #   mcarta2_list &lt;dbl&gt;, mcarta2_evidence &lt;chr&gt;, hg19_chromosome &lt;fct&gt;,
+## #   hg19_start &lt;dbl&gt;, hg19_stop &lt;dbl&gt;, msms_num_tissues &lt;dbl&gt;,
+## #   msms_num_peptides_unique &lt;dbl&gt;, msms_num_spectra &lt;dbl&gt;,
+## #   msms_total_intensity &lt;dbl&gt;, msms_percent_coverage &lt;dbl&gt;, tissues &lt;chr&gt;,
+## #   cerebrum_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   cerebellum_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   brainstem_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   spinalcord_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   kidney_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   liver_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   heart_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   skeletalmuscle_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   adipose_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   smallintestine_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   largeintestine_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   stomach_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   placenta_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   testis_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   hpa_primary_subcellular_localization_2015 &lt;chr&gt;</code></pre>
+<p>The code chunk above only shows you proteins with a mito domain score that is equal to MitoDomain</p>
+<p>Note that <code>filter()</code> only applies to rows, and has no effect on columns</p>
+</div>
+<div id="filter-2" class="section level2 build">
+<h2><code>filter()</code></h2>
+<p>Filtering can also be performed on numerical data</p>
+<p>For example, to select proteins with a <code>mcarta2_fdr</code> value that is less than 0.05, run the following code</p>
+<pre class="r"><code>mitocarta %&gt;% 
+  filter(mcarta2_fdr &lt; 0.05) %&gt;% 
+  head(1)</code></pre>
+<pre><code>## # A tibble: 1 x 43
+##   training_dataset human_gene_id mouse_ortholog_… symbol synonyms description
+##   &lt;chr&gt;                    &lt;dbl&gt;            &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;      
+## 1 Tmito                       18           268860 ABAT   GABA-AT… 4-aminobut…
+## # … with 37 more variables: ensembl_gene_id &lt;chr&gt;, protein_length &lt;dbl&gt;,
+## #   target_p_score &lt;dbl&gt;, mito_domain_score &lt;chr&gt;,
+## #   coexpression_gnf_n50_score &lt;dbl&gt;, pgc_induction_score &lt;dbl&gt;,
+## #   yeast_mito_homolog_score &lt;chr&gt;, rickettsia_homolog_score &lt;chr&gt;,
+## #   msms_score &lt;chr&gt;, mcarta2_score &lt;dbl&gt;, mcarta2_fdr &lt;dbl&gt;,
+## #   mcarta2_list &lt;dbl&gt;, mcarta2_evidence &lt;chr&gt;, hg19_chromosome &lt;fct&gt;,
+## #   hg19_start &lt;dbl&gt;, hg19_stop &lt;dbl&gt;, msms_num_tissues &lt;dbl&gt;,
+## #   msms_num_peptides_unique &lt;dbl&gt;, msms_num_spectra &lt;dbl&gt;,
+## #   msms_total_intensity &lt;dbl&gt;, msms_percent_coverage &lt;dbl&gt;, tissues &lt;chr&gt;,
+## #   cerebrum_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   cerebellum_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   brainstem_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   spinalcord_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   kidney_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   liver_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   heart_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   skeletalmuscle_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   adipose_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   smallintestine_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   largeintestine_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   stomach_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   placenta_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   testis_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   hpa_primary_subcellular_localization_2015 &lt;chr&gt;</code></pre>
+</div>
+<div id="filter-3" class="section level2 build">
+<h2><code>filter()</code></h2>
+<p>To filter on multiple conditions, you can write a sequence of <code>filter()</code> commands</p>
+<p>For example, to choose proteins with a mito domain score that is equal to MitoDomain <strong>and</strong> a <code>mcarta2_fdr</code> value that is less than 0.05</p>
+<pre class="r"><code>mitocarta %&gt;% 
+  filter(mito_domain_score == &quot;MitoDomain&quot;) %&gt;% 
+  filter(mcarta2_fdr &lt; 0.05) %&gt;% 
+  head(1)</code></pre>
+<pre><code>## # A tibble: 1 x 43
+##   training_dataset human_gene_id mouse_ortholog_… symbol synonyms description
+##   &lt;chr&gt;                    &lt;dbl&gt;            &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;      
+## 1 Tmito                       33            11363 ACADL  ACAD4|L… acyl-CoA d…
+## # … with 37 more variables: ensembl_gene_id &lt;chr&gt;, protein_length &lt;dbl&gt;,
+## #   target_p_score &lt;dbl&gt;, mito_domain_score &lt;chr&gt;,
+## #   coexpression_gnf_n50_score &lt;dbl&gt;, pgc_induction_score &lt;dbl&gt;,
+## #   yeast_mito_homolog_score &lt;chr&gt;, rickettsia_homolog_score &lt;chr&gt;,
+## #   msms_score &lt;chr&gt;, mcarta2_score &lt;dbl&gt;, mcarta2_fdr &lt;dbl&gt;,
+## #   mcarta2_list &lt;dbl&gt;, mcarta2_evidence &lt;chr&gt;, hg19_chromosome &lt;fct&gt;,
+## #   hg19_start &lt;dbl&gt;, hg19_stop &lt;dbl&gt;, msms_num_tissues &lt;dbl&gt;,
+## #   msms_num_peptides_unique &lt;dbl&gt;, msms_num_spectra &lt;dbl&gt;,
+## #   msms_total_intensity &lt;dbl&gt;, msms_percent_coverage &lt;dbl&gt;, tissues &lt;chr&gt;,
+## #   cerebrum_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   cerebellum_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   brainstem_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   spinalcord_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   kidney_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   liver_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   heart_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   skeletalmuscle_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   adipose_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   smallintestine_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   largeintestine_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   stomach_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   placenta_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   testis_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   hpa_primary_subcellular_localization_2015 &lt;chr&gt;</code></pre>
+</div>
+<div id="filter-4" class="section level2 build">
+<h2><code>filter()</code></h2>
+<p>To avoid writing multiple <code>filter()</code> commands, multiple logical statements can be put inside a single <code>filter()</code> command, separated by commas</p>
+<pre class="r"><code>mitocarta %&gt;% 
+  filter(mito_domain_score == &quot;MitoDomain&quot;,
+         mcarta2_fdr &lt; 0.05) %&gt;% 
+  head(1)</code></pre>
+<pre><code>## # A tibble: 1 x 43
+##   training_dataset human_gene_id mouse_ortholog_… symbol synonyms description
+##   &lt;chr&gt;                    &lt;dbl&gt;            &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;      
+## 1 Tmito                       33            11363 ACADL  ACAD4|L… acyl-CoA d…
+## # … with 37 more variables: ensembl_gene_id &lt;chr&gt;, protein_length &lt;dbl&gt;,
+## #   target_p_score &lt;dbl&gt;, mito_domain_score &lt;chr&gt;,
+## #   coexpression_gnf_n50_score &lt;dbl&gt;, pgc_induction_score &lt;dbl&gt;,
+## #   yeast_mito_homolog_score &lt;chr&gt;, rickettsia_homolog_score &lt;chr&gt;,
+## #   msms_score &lt;chr&gt;, mcarta2_score &lt;dbl&gt;, mcarta2_fdr &lt;dbl&gt;,
+## #   mcarta2_list &lt;dbl&gt;, mcarta2_evidence &lt;chr&gt;, hg19_chromosome &lt;fct&gt;,
+## #   hg19_start &lt;dbl&gt;, hg19_stop &lt;dbl&gt;, msms_num_tissues &lt;dbl&gt;,
+## #   msms_num_peptides_unique &lt;dbl&gt;, msms_num_spectra &lt;dbl&gt;,
+## #   msms_total_intensity &lt;dbl&gt;, msms_percent_coverage &lt;dbl&gt;, tissues &lt;chr&gt;,
+## #   cerebrum_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   cerebellum_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   brainstem_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   spinalcord_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   kidney_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   liver_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   heart_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   skeletalmuscle_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   adipose_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   smallintestine_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   largeintestine_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   stomach_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   placenta_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   testis_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   hpa_primary_subcellular_localization_2015 &lt;chr&gt;</code></pre>
+</div>
+<div id="filter-exercise" class="section level2 build">
+<h2><code>filter()</code> exercise</h2>
+<p>Filter all proteins with a mito domain score that is <strong>not</strong> equal to MitoDomain <strong>and</strong> a <code>mcarta2_fdr</code> value that is <strong>greater</strong> than 0.05</p>
+<p><code>!=</code> = “not equal to”</p>
+<p><code>&lt;=</code> = “less than or equal to”</p>
+<pre class="r"><code>mitocarta %&gt;% 
+  filter(mito_domain_score != &quot;MitoDomain&quot;,
+         mcarta2_fdr &gt; 0.05)</code></pre>
+</div>
+<div id="arrange" class="section level2 build">
+<h2><code>arrange()</code></h2>
+<p>You can use the <code>arrange()</code> verb to sort rows</p>
+<p>The input for arrange is one or many columns, and <code>arrange()</code> sorts the rows in ascending order i.e. from smallest to largest</p>
+<p>For example, to sort rows from smallest to largest protein, run the following</p>
+<pre class="r"><code>proteins %&gt;% 
+  arrange(length) %&gt;% 
+  head(3)</code></pre>
+<pre><code>## # A tibble: 3 x 8
+##   uniprot_id gene_name gene_name_alt protein_name protein_name_alt sequence
+##   &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt;         &lt;chr&gt;        &lt;chr&gt;            &lt;chr&gt;   
+## 1 P0DPR3     TRDD1     &lt;NA&gt;          T cell rece… &lt;NA&gt;             EI      
+## 2 P0DPI4     TRBD1     &lt;NA&gt;          T cell rece… &lt;NA&gt;             GTGG    
+## 3 P01858     &lt;NA&gt;      &lt;NA&gt;          &quot;Phagocytos… Tuftsin)         TKPR    
+## # … with 2 more variables: length &lt;dbl&gt;, mass &lt;dbl&gt;</code></pre>
+</div>
+<div id="arrange-1" class="section level2 build">
+<h2><code>arrange()</code></h2>
+<p>To reverse this order, use the <code>desc()</code> function within <code>arrange()</code></p>
+<pre class="r"><code>proteins %&gt;% 
+  arrange(desc(length)) %&gt;% 
+  head(3)</code></pre>
+<pre><code>## # A tibble: 3 x 8
+##   uniprot_id gene_name gene_name_alt protein_name protein_name_alt sequence
+##   &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt;         &lt;chr&gt;        &lt;chr&gt;            &lt;chr&gt;   
+## 1 Q8WZ42     TTN       &lt;NA&gt;          &quot;Titin &quot;     EC 2.7.11.1) (C… MTTQAPT…
+## 2 Q8WXI7     MUC16     CA125         &quot;Mucin-16 &quot;  MUC-16) (Ovaria… MLKPSGL…
+## 3 Q8NF91     SYNE1     C6orf98 KIAA… &quot;Nesprin-1 &quot; Enaptin) (KASH … MATSRGA…
+## # … with 2 more variables: length &lt;dbl&gt;, mass &lt;dbl&gt;</code></pre>
+</div>
+<div id="arrange-exercise" class="section level2 build">
+<h2><code>arrange()</code> exercise</h2>
+<p>What happens when you apply <code>arrange()</code> to a categorical variable?</p>
+<pre class="r"><code>proteins %&gt;% 
+  arrange(gene_name_alt) %&gt;% 
+  head(6)</code></pre>
+<pre><code>## # A tibble: 6 x 8
+##   uniprot_id gene_name gene_name_alt protein_name protein_name_alt sequence
+##   &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt;         &lt;chr&gt;        &lt;chr&gt;            &lt;chr&gt;   
+## 1 O14569     CYB561D2  101F6 LUCA12… &quot;Cytochrome… EC 7.2.1.3) (Pu… MALSAET…
+## 2 P18054     ALOX12    12LO LOG12    &quot;Arachidona… 12S-LOX) (12S-l… MGRYRIR…
+## 3 O43715     TRIAP1    15E1.1 HSPC1… &quot;TP53-regul… Protein 15E1.1)… MNSVGEA…
+## 4 O43716     GATC      15E1.2        Glutamyl-tR… Gln) amidotrans… MWSRLVW…
+## 5 Q14596     NBR1      1A13B KIAA00… &quot;Next to BR… Cell migration-… MEPQVTL…
+## 6 O14931     NCR3      1C7 LY117     &quot;Natural cy… Activating natu… MAWMLLL…
+## # … with 2 more variables: length &lt;dbl&gt;, mass &lt;dbl&gt;</code></pre>
+</div>
+<div id="mutate" class="section level2 build">
+<h2><code>mutate()</code></h2>
+<p>The <code>mutate()</code> verb, unlike the ones covered so far, creates new variable(s) i.e. new column(s). For example</p>
+<pre class="r"><code>proteins %&gt;% 
+  mutate(sqrt_length = sqrt(length)) %&gt;% 
+  head(1)</code></pre>
+<pre><code>## # A tibble: 1 x 9
+##   uniprot_id gene_name gene_name_alt protein_name protein_name_alt sequence
+##   &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt;         &lt;chr&gt;        &lt;chr&gt;            &lt;chr&gt;   
+## 1 P04217     A1BG      &lt;NA&gt;          &quot;Alpha-1B-g… Alpha-1-B glyco… MSMLVVF…
+## # … with 3 more variables: length &lt;dbl&gt;, mass &lt;dbl&gt;, sqrt_length &lt;dbl&gt;</code></pre>
+<p>The code chunk above takes all the elements of the column <code>length</code>, evaluates the square root of each element, and populates a new column called <code>sqrt_length</code> with these results</p>
+</div>
+<div id="mutate-1" class="section level2 build">
+<h2><code>mutate()</code></h2>
+<p>Multiple columns can be used as inputs. For example</p>
+<pre class="r"><code>proteins %&gt;% 
+  mutate(protein_length_mass = length/mass) %&gt;% 
+  head(1)</code></pre>
+<pre><code>## # A tibble: 1 x 9
+##   uniprot_id gene_name gene_name_alt protein_name protein_name_alt sequence
+##   &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt;         &lt;chr&gt;        &lt;chr&gt;            &lt;chr&gt;   
+## 1 P04217     A1BG      &lt;NA&gt;          &quot;Alpha-1B-g… Alpha-1-B glyco… MSMLVVF…
+## # … with 3 more variables: length &lt;dbl&gt;, mass &lt;dbl&gt;, protein_length_mass &lt;dbl&gt;</code></pre>
+<p>This code takes the length of each protein and divides it by its mass</p>
+<p>The results are stored in a new column called <code>protein_length_mass</code></p>
+</div>
+<div id="mutate-exercise" class="section level2 build">
+<h2><code>mutate()</code> exercise</h2>
+<p>Create a new column (give it any name you like) and fill it with protein lengths divided by 100</p>
+<pre class="r"><code>proteins %&gt;% 
+  mutate(protein_length_100 = length/100)</code></pre>
+</div>
+<div id="summarise" class="section level2 build">
+<h2><code>summarise()</code></h2>
+<p><code>summarise()</code> produces a new dataframe that aggregates that values of a column based on a certain condition.</p>
+<p>For example, to calculate the mean protein length and mass, run the following</p>
+<pre class="r"><code>proteins %&gt;% 
+  summarise(mean(length), mean(mass))</code></pre>
+<pre><code>## # A tibble: 1 x 2
+##   `mean(length)` `mean(mass)`
+##            &lt;dbl&gt;        &lt;dbl&gt;
+## 1           557.       62061.</code></pre>
+</div>
+<div id="summarise-1" class="section level2 build">
+<h2><code>summarise()</code></h2>
+<p>You can assign your own names by running the following</p>
+<pre class="r"><code>proteins %&gt;% 
+  summarise(mean_length = mean(length), 
+            mean_mass = mean(mass))</code></pre>
+<pre><code>## # A tibble: 1 x 2
+##   mean_length mean_mass
+##         &lt;dbl&gt;     &lt;dbl&gt;
+## 1        557.    62061.</code></pre>
+</div>
+<div id="summarise-exercise" class="section level2 build">
+<h2><code>summarise()</code> exercise</h2>
+<p>Make a new table that contains the mean, median and standard deviations of protein lengths</p>
+<p>Use the <code>median()</code> and <code>sd()</code> functions to calculate median and standard deviation</p>
+<pre class="r"><code>proteins %&gt;% 
+  summarise(protein_mean = mean(length), 
+            protein_median = median(length),
+            protein_sd = sd(length))</code></pre>
+<pre><code>## # A tibble: 1 x 3
+##   protein_mean protein_median protein_sd
+##          &lt;dbl&gt;          &lt;dbl&gt;      &lt;dbl&gt;
+## 1         557.            414       596.</code></pre>
+</div>
+<div id="group_by" class="section level2 build">
+<h2><code>group_by()</code></h2>
+<p><code>group_by()</code> and <code>summarise()</code> can be used in combination to summarise by groups</p>
+<p>For example, if you’d like to know the mean length of both mitochondrial and non mitochondrial proteins, run the following</p>
+<pre class="r"><code>mitocarta %&gt;% 
+  group_by(mcarta2_list) %&gt;% 
+  summarise(mean(protein_length)) </code></pre>
+<pre><code>## # A tibble: 2 x 2
+##   mcarta2_list `mean(protein_length)`
+##          &lt;dbl&gt;                  &lt;dbl&gt;
+## 1            0                   590.
+## 2            1                   400.</code></pre>
+</div>
+<div id="saving-a-new-dataset" class="section level2 build">
+<h2>Saving a new dataset</h2>
+<p>If you’d like to save the output of your wrangling, you will need to use the <code>&lt;-</code> or <code>-&gt;</code> operators</p>
+<pre class="r"><code>mito_new &lt;- mitocarta %&gt;% 
+              group_by(mcarta2_list) %&gt;% 
+              summarise(mean(protein_length))  </code></pre>
+<p>To save <code>mito_new</code> as a new file (e.g. csv)</p>
+<pre class="r"><code>write_csv(mito_new, &quot;mito_new.csv&quot;)</code></pre>
+</div>
+<div id="for-more-help" class="section level2 build">
+<h2>For more help</h2>
+<p>Run the following to access the Dplyr vignette</p>
+<pre class="r"><code>browseVignettes(&quot;dplyr&quot;)</code></pre>
+</div>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+<script src="/js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+    
+  </body>
+</html>
+

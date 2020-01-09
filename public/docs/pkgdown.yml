@@ -1,0 +1,9 @@
+pandoc: 2.3.1
+pkgdown: 1.4.1
+pkgdown_sha: ~
+articles:
+  intro: intro.html
+urls:
+  reference: https://github.com/hirscheylab/tidybiology/reference
+  article: https://github.com/hirscheylab/tidybiology/articles
+
