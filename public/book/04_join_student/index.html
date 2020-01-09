@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.60.1" />
+
+
+<title>04_student - A Tidybiology website</title>
+<meta property="og:title" content="04_student - A Tidybiology website">
+
+
+  <link href='/favicon.ico' rel='icon' type='image/x-icon'/>
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/tidybiology_hex.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="/book/">Book</a></li>
+    
+    <li><a href="https://github.com/hirscheylab/tidybiology">GitHub</a></li>
+    
+    <li><a href="/docs/">Package</a></li>
+    
+    <li><a href="https://akshay-bareja.shinyapps.io/Chromosome/#section-scratchpad">Quiz</a></li>
+    
+    <li><a href="https://twitter.com/matthewhirschey">Twitter</a></li>
+    
+    <li><a href="https://www.youtube.com/channel/UCstAS6IpgYgZ9Cvcag_YlCQ">YouTube</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+
+    <h1 class="article-title">04_student</h1>
+
+    
+
+    <div class="article-content">
+      
+
+
+<div id="importing-data-into-r" class="section level2">
+<h2>Importing data into R</h2>
+<p>The <code>readr</code> package (found in the <code>tidyverse</code> collection) contains a number of useful functions of the form<br />
+<code>read_*</code> to import data. For example, if you have a <code>.csv</code> file, you would use the <code>read_csv</code> function</p>
+<p>Download a file from uniprot.org</p>
+<p>After selecting some columns of interest, click the Download button and download as a compressed Text file</p>
+<p>Rename the file to something simple (yet informative!), like <code>uniprot</code> and make sure the extension is <code>.tsv</code></p>
+</div>
+<div id="importing-data-into-r-1" class="section level2">
+<h2>Importing data into R</h2>
+<p>To import into RStudio, run the following</p>
+<pre class="r"><code>uniprot &lt;- read_tsv(&quot;uniprot.tsv&quot;)</code></pre>
+<pre><code>## Parsed with column specification:
+## cols(
+##   Entry = col_character(),
+##   `Gene names` = col_character(),
+##   Length = col_double()
+## )</code></pre>
+</div>
+<div id="importing-data-into-r-2" class="section level2">
+<h2>Importing data into R</h2>
+<p>You can also use the <code>readr</code> package to import data from a URL</p>
+<p>For example, to load a dataset from the (very useful) Tidy Tuesday series, run the following</p>
+<pre class="r"><code>pizza &lt;- read_csv(&quot;https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-10-01/pizza_jared.csv&quot;)</code></pre>
+<p>This data set contains ratings of various pizzerias in Manhattan</p>
+</div>
+<div id="combining-datasets" class="section level2">
+<h2>Combining datasets</h2>
+<p>There are many times when you have two or more overlapping datasets that you would like to combine</p>
+<p>The <code>dplyr</code> package has a number of <code>*_join</code> functions for this purpose</p>
+</div>
+<div id="left_join" class="section level2">
+<h2><code>left_join</code></h2>
+<p>Returns all rows from a, and all columns from a and b</p>
+<p>Rows in a with no match in b will have NA values in the new columns</p>
+<p>If there are multiple matches between a and b, all combinations of the matches are returned</p>
+</div>
+<div id="left_join-example" class="section level2">
+<h2><code>left_join</code> example</h2>
+<p>First, load the two datasets needed for this example - <code>proteins</code> and <code>mitocarta</code></p>
+<pre class="r"><code>library(proteins)
+library(mitocarta)</code></pre>
+<p>Take a look at the variables in each dataset</p>
+<p><code>gene_name</code> in <code>proteins</code> and <code>symbol</code> in <code>mitocarta</code> contain the gene IDs for each gene. They can therefore serve as a common variable</p>
+<p>Let’s join on this</p>
+</div>
+<div id="left_join-example-1" class="section level2">
+<h2><code>left_join</code> example</h2>
+<p><code>left_join</code> <code>proteins</code> with <code>mitocarta</code> and assign the output to a new object called <code>pm_left</code></p>
+<pre class="r"><code>pm_left &lt;- left_join(proteins, mitocarta, by = c(&quot;gene_name&quot; = &quot;symbol&quot;))
+pm_left </code></pre>
+<pre><code>## # A tibble: 20,432 x 50
+##    uniprot_id gene_name gene_name_alt protein_name protein_name_alt sequence
+##    &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt;         &lt;chr&gt;        &lt;chr&gt;            &lt;chr&gt;   
+##  1 P04217     A1BG      &lt;NA&gt;          &quot;Alpha-1B-g… Alpha-1-B glyco… MSMLVVF…
+##  2 Q9NQ94     A1CF      ACF ASP       &quot;APOBEC1 co… APOBEC1-stimula… MESNHKS…
+##  3 P01023     A2M       CPAMD5 FWP007 &quot;Alpha-2-ma… Alpha-2-M) (C3 … MGKNKLL…
+##  4 A8K2U0     A2ML1     CPAMD9        &quot;Alpha-2-ma… C3 and PZP-like… MWAQLLL…
+##  5 U3KPV4     A3GALT2   A3GALT2P IGB… &quot;Alpha-1,3-… EC 2.4.1.87) (I… MALKEGL…
+##  6 Q9NPC4     A4GALT    A14GALT A4GA… &quot;Lactosylce… EC 2.4.1.228) (… MSKPPDL…
+##  7 Q9UNA3     A4GNT     &lt;NA&gt;          &quot;Alpha-1,4-… Alpha4GnT) (EC … MRKELQL…
+##  8 Q9NRG9     AAAS      ADRACALA GL0… &quot;Aladin &quot;    Adracalin)       MCSLGLF…
+##  9 Q86V21     AACS      ACSF1         &quot;Acetoacety… EC 6.2.1.16) (A… MSKEERP…
+## 10 P22760     AADAC     DAC           &quot;Arylacetam… EC 3.1.1.3)      MGRKSLY…
+## # … with 20,422 more rows, and 44 more variables: length &lt;dbl&gt;, mass &lt;dbl&gt;,
+## #   training_dataset &lt;chr&gt;, human_gene_id &lt;dbl&gt;, mouse_ortholog_gene_id &lt;dbl&gt;,
+## #   synonyms &lt;chr&gt;, description &lt;chr&gt;, ensembl_gene_id &lt;chr&gt;,
+## #   protein_length &lt;dbl&gt;, target_p_score &lt;dbl&gt;, mito_domain_score &lt;chr&gt;,
+## #   coexpression_gnf_n50_score &lt;dbl&gt;, pgc_induction_score &lt;dbl&gt;,
+## #   yeast_mito_homolog_score &lt;chr&gt;, rickettsia_homolog_score &lt;chr&gt;,
+## #   msms_score &lt;chr&gt;, mcarta2_score &lt;dbl&gt;, mcarta2_fdr &lt;dbl&gt;,
+## #   mcarta2_list &lt;dbl&gt;, mcarta2_evidence &lt;chr&gt;, hg19_chromosome &lt;fct&gt;,
+## #   hg19_start &lt;dbl&gt;, hg19_stop &lt;dbl&gt;, msms_num_tissues &lt;dbl&gt;,
+## #   msms_num_peptides_unique &lt;dbl&gt;, msms_num_spectra &lt;dbl&gt;,
+## #   msms_total_intensity &lt;dbl&gt;, msms_percent_coverage &lt;dbl&gt;, tissues &lt;chr&gt;,
+## #   cerebrum_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   cerebellum_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   brainstem_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   spinalcord_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   kidney_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   liver_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   heart_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   skeletalmuscle_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   adipose_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   smallintestine_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   largeintestine_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   stomach_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   placenta_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   testis_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   hpa_primary_subcellular_localization_2015 &lt;chr&gt;</code></pre>
+<p>Now you have one dataset with additional useful information</p>
+</div>
+<div id="right_join" class="section level2">
+<h2><code>right_join</code></h2>
+<p>Returns all rows from b, and all columns from a and b</p>
+<p>Rows in b with no match in a will have NA values in the new columns</p>
+<p>If there are multiple matches between a and b, all combinations of the matches are returned</p>
+</div>
+<div id="right_join-example" class="section level2">
+<h2><code>right_join</code> example</h2>
+<p><code>right_join</code> <code>proteins</code> with <code>mitocarta</code> and assign the output to a new object called <code>pm_right</code></p>
+<pre class="r"><code>pm_right &lt;- right_join(proteins, mitocarta, by = c(&quot;gene_name&quot; = &quot;symbol&quot;))
+pm_right </code></pre>
+<pre><code>## # A tibble: 19,356 x 50
+##    uniprot_id gene_name gene_name_alt protein_name protein_name_alt sequence
+##    &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt;         &lt;chr&gt;        &lt;chr&gt;            &lt;chr&gt;   
+##  1 P04217     A1BG      &lt;NA&gt;          &quot;Alpha-1B-g… Alpha-1-B glyco… MSMLVVF…
+##  2 P01023     A2M       CPAMD5 FWP007 &quot;Alpha-2-ma… Alpha-2-M) (C3 … MGKNKLL…
+##  3 P18440     NAT1      AAC1          &quot;Arylamine … EC 2.3.1.5) (Ar… MDIEAYL…
+##  4 P11245     NAT2      AAC2          &quot;Arylamine … EC 2.3.1.5) (Ar… MDIEAYF…
+##  5 P01011     SERPINA3  AACT GIG24 G… &quot;Alpha-1-an… ACT) (Cell grow… MERMLPL…
+##  6 P22760     AADAC     DAC           &quot;Arylacetam… EC 3.1.1.3)      MGRKSLY…
+##  7 Q13685     AAMP      &lt;NA&gt;          Angio-assoc… &lt;NA&gt;             MESESES…
+##  8 Q16613     AANAT     SNAT          &quot;Serotonin … Serotonin acety… MSTQSTH…
+##  9 P49588     AARS      &lt;NA&gt;          &quot;Alanine--t… EC 6.1.1.7) (Al… MDSTLTA…
+## 10 P80404     ABAT      GABAT         &quot;4-aminobut… EC 2.6.1.19) ((… MASMLLA…
+## # … with 19,346 more rows, and 44 more variables: length &lt;dbl&gt;, mass &lt;dbl&gt;,
+## #   training_dataset &lt;chr&gt;, human_gene_id &lt;dbl&gt;, mouse_ortholog_gene_id &lt;dbl&gt;,
+## #   synonyms &lt;chr&gt;, description &lt;chr&gt;, ensembl_gene_id &lt;chr&gt;,
+## #   protein_length &lt;dbl&gt;, target_p_score &lt;dbl&gt;, mito_domain_score &lt;chr&gt;,
+## #   coexpression_gnf_n50_score &lt;dbl&gt;, pgc_induction_score &lt;dbl&gt;,
+## #   yeast_mito_homolog_score &lt;chr&gt;, rickettsia_homolog_score &lt;chr&gt;,
+## #   msms_score &lt;chr&gt;, mcarta2_score &lt;dbl&gt;, mcarta2_fdr &lt;dbl&gt;,
+## #   mcarta2_list &lt;dbl&gt;, mcarta2_evidence &lt;chr&gt;, hg19_chromosome &lt;fct&gt;,
+## #   hg19_start &lt;dbl&gt;, hg19_stop &lt;dbl&gt;, msms_num_tissues &lt;dbl&gt;,
+## #   msms_num_peptides_unique &lt;dbl&gt;, msms_num_spectra &lt;dbl&gt;,
+## #   msms_total_intensity &lt;dbl&gt;, msms_percent_coverage &lt;dbl&gt;, tissues &lt;chr&gt;,
+## #   cerebrum_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   cerebellum_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   brainstem_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   spinalcord_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   kidney_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   liver_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   heart_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   skeletalmuscle_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   adipose_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   smallintestine_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   largeintestine_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   stomach_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   placenta_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   testis_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   hpa_primary_subcellular_localization_2015 &lt;chr&gt;</code></pre>
+</div>
+<div id="inner_join" class="section level2">
+<h2><code>inner_join</code></h2>
+<p>Returns all rows from a where there are matching values in b, and all columns from a and b</p>
+<p>If there are multiple matches between a and b, all combination of the matches are returned</p>
+</div>
+<div id="inner_join-example" class="section level2">
+<h2><code>inner_join</code> example</h2>
+<p><code>inner_join</code> <code>proteins</code> with <code>mitocarta</code> and assign the output to a new object called <code>pm_inner</code></p>
+<pre class="r"><code>pm_inner &lt;- inner_join(proteins, mitocarta, by = c(&quot;gene_name&quot; = &quot;symbol&quot;))
+pm_inner </code></pre>
+<pre><code>## # A tibble: 18,161 x 50
+##    uniprot_id gene_name gene_name_alt protein_name protein_name_alt sequence
+##    &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt;         &lt;chr&gt;        &lt;chr&gt;            &lt;chr&gt;   
+##  1 P04217     A1BG      &lt;NA&gt;          &quot;Alpha-1B-g… Alpha-1-B glyco… MSMLVVF…
+##  2 Q9NQ94     A1CF      ACF ASP       &quot;APOBEC1 co… APOBEC1-stimula… MESNHKS…
+##  3 P01023     A2M       CPAMD5 FWP007 &quot;Alpha-2-ma… Alpha-2-M) (C3 … MGKNKLL…
+##  4 A8K2U0     A2ML1     CPAMD9        &quot;Alpha-2-ma… C3 and PZP-like… MWAQLLL…
+##  5 U3KPV4     A3GALT2   A3GALT2P IGB… &quot;Alpha-1,3-… EC 2.4.1.87) (I… MALKEGL…
+##  6 Q9NPC4     A4GALT    A14GALT A4GA… &quot;Lactosylce… EC 2.4.1.228) (… MSKPPDL…
+##  7 Q9UNA3     A4GNT     &lt;NA&gt;          &quot;Alpha-1,4-… Alpha4GnT) (EC … MRKELQL…
+##  8 Q9NRG9     AAAS      ADRACALA GL0… &quot;Aladin &quot;    Adracalin)       MCSLGLF…
+##  9 Q86V21     AACS      ACSF1         &quot;Acetoacety… EC 6.2.1.16) (A… MSKEERP…
+## 10 P22760     AADAC     DAC           &quot;Arylacetam… EC 3.1.1.3)      MGRKSLY…
+## # … with 18,151 more rows, and 44 more variables: length &lt;dbl&gt;, mass &lt;dbl&gt;,
+## #   training_dataset &lt;chr&gt;, human_gene_id &lt;dbl&gt;, mouse_ortholog_gene_id &lt;dbl&gt;,
+## #   synonyms &lt;chr&gt;, description &lt;chr&gt;, ensembl_gene_id &lt;chr&gt;,
+## #   protein_length &lt;dbl&gt;, target_p_score &lt;dbl&gt;, mito_domain_score &lt;chr&gt;,
+## #   coexpression_gnf_n50_score &lt;dbl&gt;, pgc_induction_score &lt;dbl&gt;,
+## #   yeast_mito_homolog_score &lt;chr&gt;, rickettsia_homolog_score &lt;chr&gt;,
+## #   msms_score &lt;chr&gt;, mcarta2_score &lt;dbl&gt;, mcarta2_fdr &lt;dbl&gt;,
+## #   mcarta2_list &lt;dbl&gt;, mcarta2_evidence &lt;chr&gt;, hg19_chromosome &lt;fct&gt;,
+## #   hg19_start &lt;dbl&gt;, hg19_stop &lt;dbl&gt;, msms_num_tissues &lt;dbl&gt;,
+## #   msms_num_peptides_unique &lt;dbl&gt;, msms_num_spectra &lt;dbl&gt;,
+## #   msms_total_intensity &lt;dbl&gt;, msms_percent_coverage &lt;dbl&gt;, tissues &lt;chr&gt;,
+## #   cerebrum_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   cerebellum_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   brainstem_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   spinalcord_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   kidney_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   liver_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   heart_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   skeletalmuscle_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   adipose_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   smallintestine_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   largeintestine_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   stomach_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   placenta_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   testis_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   hpa_primary_subcellular_localization_2015 &lt;chr&gt;</code></pre>
+<p>Why might this type of join be useful?</p>
+</div>
+<div id="full_join" class="section level2">
+<h2><code>full_join</code></h2>
+<p>Returns all rows and all columns from both a and b</p>
+<p>Where there are no matching values, returns NA for the one missing</p>
+</div>
+<div id="full_join-example" class="section level2">
+<h2><code>full_join</code> example</h2>
+<p><code>full_join</code> <code>proteins</code> with <code>mitocarta</code> and assign the output to a new object called <code>pm_full</code></p>
+<pre class="r"><code>pm_full &lt;- full_join(proteins, mitocarta, by = c(&quot;gene_name&quot; = &quot;symbol&quot;))
+pm_full </code></pre>
+<pre><code>## # A tibble: 21,627 x 50
+##    uniprot_id gene_name gene_name_alt protein_name protein_name_alt sequence
+##    &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt;         &lt;chr&gt;        &lt;chr&gt;            &lt;chr&gt;   
+##  1 P04217     A1BG      &lt;NA&gt;          &quot;Alpha-1B-g… Alpha-1-B glyco… MSMLVVF…
+##  2 Q9NQ94     A1CF      ACF ASP       &quot;APOBEC1 co… APOBEC1-stimula… MESNHKS…
+##  3 P01023     A2M       CPAMD5 FWP007 &quot;Alpha-2-ma… Alpha-2-M) (C3 … MGKNKLL…
+##  4 A8K2U0     A2ML1     CPAMD9        &quot;Alpha-2-ma… C3 and PZP-like… MWAQLLL…
+##  5 U3KPV4     A3GALT2   A3GALT2P IGB… &quot;Alpha-1,3-… EC 2.4.1.87) (I… MALKEGL…
+##  6 Q9NPC4     A4GALT    A14GALT A4GA… &quot;Lactosylce… EC 2.4.1.228) (… MSKPPDL…
+##  7 Q9UNA3     A4GNT     &lt;NA&gt;          &quot;Alpha-1,4-… Alpha4GnT) (EC … MRKELQL…
+##  8 Q9NRG9     AAAS      ADRACALA GL0… &quot;Aladin &quot;    Adracalin)       MCSLGLF…
+##  9 Q86V21     AACS      ACSF1         &quot;Acetoacety… EC 6.2.1.16) (A… MSKEERP…
+## 10 P22760     AADAC     DAC           &quot;Arylacetam… EC 3.1.1.3)      MGRKSLY…
+## # … with 21,617 more rows, and 44 more variables: length &lt;dbl&gt;, mass &lt;dbl&gt;,
+## #   training_dataset &lt;chr&gt;, human_gene_id &lt;dbl&gt;, mouse_ortholog_gene_id &lt;dbl&gt;,
+## #   synonyms &lt;chr&gt;, description &lt;chr&gt;, ensembl_gene_id &lt;chr&gt;,
+## #   protein_length &lt;dbl&gt;, target_p_score &lt;dbl&gt;, mito_domain_score &lt;chr&gt;,
+## #   coexpression_gnf_n50_score &lt;dbl&gt;, pgc_induction_score &lt;dbl&gt;,
+## #   yeast_mito_homolog_score &lt;chr&gt;, rickettsia_homolog_score &lt;chr&gt;,
+## #   msms_score &lt;chr&gt;, mcarta2_score &lt;dbl&gt;, mcarta2_fdr &lt;dbl&gt;,
+## #   mcarta2_list &lt;dbl&gt;, mcarta2_evidence &lt;chr&gt;, hg19_chromosome &lt;fct&gt;,
+## #   hg19_start &lt;dbl&gt;, hg19_stop &lt;dbl&gt;, msms_num_tissues &lt;dbl&gt;,
+## #   msms_num_peptides_unique &lt;dbl&gt;, msms_num_spectra &lt;dbl&gt;,
+## #   msms_total_intensity &lt;dbl&gt;, msms_percent_coverage &lt;dbl&gt;, tissues &lt;chr&gt;,
+## #   cerebrum_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   cerebellum_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   brainstem_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   spinalcord_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   kidney_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   liver_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   heart_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   skeletalmuscle_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   adipose_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   smallintestine_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   largeintestine_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   stomach_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   placenta_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   testis_total_peak_intensity_log10 &lt;dbl&gt;,
+## #   hpa_primary_subcellular_localization_2015 &lt;chr&gt;</code></pre>
+</div>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+
+    
+  </body>
+</html>
+

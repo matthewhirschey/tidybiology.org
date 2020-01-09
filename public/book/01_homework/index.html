@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.60.1" />
+
+
+<title>Class 1 Project - A Tidybiology website</title>
+<meta property="og:title" content="Class 1 Project - A Tidybiology website">
+
+
+  <link href='/favicon.ico' rel='icon' type='image/x-icon'/>
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/tidybiology_hex.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="/book/">Book</a></li>
+    
+    <li><a href="https://github.com/hirscheylab/tidybiology">GitHub</a></li>
+    
+    <li><a href="/docs/">Package</a></li>
+    
+    <li><a href="https://akshay-bareja.shinyapps.io/Chromosome/#section-scratchpad">Quiz</a></li>
+    
+    <li><a href="https://twitter.com/matthewhirschey">Twitter</a></li>
+    
+    <li><a href="https://www.youtube.com/channel/UCstAS6IpgYgZ9Cvcag_YlCQ">YouTube</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+
+    <h1 class="article-title">Class 1 Project</h1>
+
+    
+
+    <div class="article-content">
+      
+
+
+<div id="load-libraries" class="section level2">
+<h2>Load libraries</h2>
+<pre class="r"><code>library(tidyverse)</code></pre>
+<pre><code>## ── Attaching packages ──────────────────────────────────────────────────────────────────────── tidyverse 1.3.0 ──</code></pre>
+<pre><code>## ✔ ggplot2 3.2.1     ✔ purrr   0.3.3
+## ✔ tibble  2.1.3     ✔ dplyr   0.8.3
+## ✔ tidyr   1.0.0     ✔ stringr 1.4.0
+## ✔ readr   1.3.1     ✔ forcats 0.4.0</code></pre>
+<pre><code>## ── Conflicts ─────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code>library(tidybiology)</code></pre>
+</div>
+<div id="import-data" class="section level2">
+<h2>Import data</h2>
+<p>This is the code chunk that imports data. We will discuss how this code works in the next few sessions. All you need to know for now is that this imports an <code>R object</code> into your environment. Look to the right at the “Environment” tab and see a new object called <code>chromosome</code>.</p>
+<pre class="r"><code>data(&quot;chromosome&quot;)</code></pre>
+</div>
+<div id="take-a-glimpse-into-the-kinds-of-data-in-the-dataframe" class="section level2">
+<h2>Take a <code>glimpse</code> into the kinds of data in the dataframe</h2>
+<p>The <code>chromosome</code> object is a table (also called a dataframe), that has a series of columns and rows. The function <code>glimpse()</code> perfroms a quick peek at the data. We can see that this table has 14 columns (called ‘Variables’), and 24 rows (called ‘Observations’). The name of each Variable is listed below (e.g. ‘id’, ‘length_mm’, etc.). Importantly, R cares about capitalization, so <code>id</code> is NOT the same as <code>ID</code>. The type of variable is listed next (e.g. <fct>, <dbl>, etc.), but you don’t need to worry about these yet. Lastly, the first few observations are listed.</p>
+<pre class="r"><code>glimpse(chromosome)</code></pre>
+<pre><code>## Observations: 24
+## Variables: 14
+## $ id                     &lt;fct&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,…
+## $ length_mm              &lt;dbl&gt; 85, 83, 67, 65, 62, 58, 54, 50, 48, 46, 46, 45…
+## $ basepairs              &lt;dbl&gt; 248956422, 242193529, 198295559, 190214555, 18…
+## $ variations             &lt;dbl&gt; 12151146, 12945965, 10638715, 10165685, 951999…
+## $ protein_codinggenes    &lt;int&gt; 2058, 1309, 1078, 752, 876, 1048, 989, 677, 78…
+## $ pseudo_genes           &lt;int&gt; 1220, 1023, 763, 727, 721, 801, 885, 613, 661,…
+## $ totallongnc_rna        &lt;int&gt; 1200, 1037, 711, 657, 844, 639, 605, 735, 491,…
+## $ totalsmallnc_rna       &lt;int&gt; 496, 375, 298, 228, 235, 234, 208, 214, 190, 2…
+## $ mi_rna                 &lt;int&gt; 134, 115, 99, 92, 83, 81, 90, 80, 69, 64, 63, …
+## $ r_rna                  &lt;int&gt; 66, 40, 29, 24, 25, 26, 24, 28, 19, 32, 24, 27…
+## $ sn_rna                 &lt;int&gt; 221, 161, 138, 120, 106, 111, 90, 86, 66, 87, …
+## $ sno_rna                &lt;int&gt; 145, 117, 87, 56, 61, 73, 76, 52, 51, 56, 76, …
+## $ miscnc_rna             &lt;int&gt; 192, 176, 134, 104, 119, 105, 143, 82, 96, 89,…
+## $ centromereposition_mbp &lt;dbl&gt; 125.0, 93.3, 91.0, 50.4, 48.4, 61.0, 59.9, 45.…</code></pre>
+<p>Another way to View the <code>chromosome</code> table object is to run the view function. This is one of the odd functions in R that starts with a capital letter. Viewing the table will open a new tab in Rstudio to see all the data. This works great for small tables (24x14), but will crash R with big tables (100,000 x 100,000). To view this table, type in the console below: View(chromosome)</p>
+<p>Understanding where your data come from, and how your data are structured is one of the most important things in Data Science. This table was scraped from: <a href="https://en.wikipedia.org/wiki/Human_genome" class="uri">https://en.wikipedia.org/wiki/Human_genome</a>. Go to a web browser to look at the original source.</p>
+</div>
+<div id="my-first-graph" class="section level2">
+<h2>My first graph</h2>
+<p>Now we will make your first graph. Run the code chunk below to generate the image, and then continue reading about what each part of the code does.<br />
+<code>ggplot</code> is the function<br />
+<code>geom_point</code> is the type of graph - scatterplot with points, in this case<br />
+<code>labs</code> is the layer for <strong>lab</strong>els<br />
+<code>theme_minimal</code> is an easy layer to change several of the visual features of the graph<br />
+<code>scale_y_continuous</code> allows me to change the scale to make it more readable<br />
+<code>NULL</code> doesn’t add anything to the graph, but allows you to comment out (#) layers without breaking the graph; if you break the graph and R is not responding, it’s likely that <code>R</code> is waiting for another command; just hit <code>esc</code> on your keyboard to start over.</p>
+<pre class="r"><code>ggplot(chromosome, aes(x = id, y = basepairs)) +
+  geom_point(color = &quot;darkblue&quot;, size = 3) +
+  labs(x = &quot;Chromosome&quot;, y = &quot;Basepairs (Millions)&quot;, title = &quot;Number of Basepairs for Each Human Chromosome&quot;, caption = &quot;Data from Wikipedia | Plot from @hirscheylab&quot;) +
+  theme_minimal() +
+  scale_y_continuous(labels = c(50, 100, 150, 200, 250)) +
+  NULL</code></pre>
+<p><img src="/book/01_homework_files/figure-html/first_graph-1.png" width="672" /></p>
+</div>
+<div id="this-project-has-two-final-parts" class="section level2">
+<h2>This project has two final parts:</h2>
+<ol style="list-style-type: decimal">
+<li>One-by-one, comment out lines in the code chunk above. Figure out what each line of code does.</li>
+</ol>
+<pre class="r"><code>#Q: Which line is responsible for plotting the data on the graph?  
+#A: </code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Make your own graph in the code chunk below. Use the code from the <code>{r first_graph}</code> code chunk. Copying and pasting is OK! Look at the different variables that are available for plotting by inspecting the <code>{r glimpse}</code> code chunk. Feel free to experiment and plot different information.<br />
+</li>
+</ol>
+<ul>
+<li>change the variable, if you’d like; the original plot compared chromosome id # vs. Basepairs, but 12 other variables are unused.<br />
+</li>
+<li>change the color of the points (be resourceful to find color names useable in <code>R</code>)<br />
+</li>
+<li>change the size of the points to something bigger</li>
+<li>finalize the labels (title, axes, caption) based on what you changed, and to reflect that you made it!<br />
+</li>
+<li>get creative; use cheatsheets or other resources to change other elements of this graph</li>
+</ul>
+<pre class="r"><code>#your code goes here</code></pre>
+</div>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+<script src="/js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+    
+  </body>
+</html>
+

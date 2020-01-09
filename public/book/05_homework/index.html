@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.60.1" />
+
+
+<title> - Class 5 homework  - A Tidybiology website</title>
+<meta property="og:title" content=" - A Tidybiology website">
+
+
+  <link href='/favicon.ico' rel='icon' type='image/x-icon'/>
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/tidybiology_hex.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="/book/">Book</a></li>
+    
+    <li><a href="https://github.com/hirscheylab/tidybiology">GitHub</a></li>
+    
+    <li><a href="/docs/">Package</a></li>
+    
+    <li><a href="https://akshay-bareja.shinyapps.io/Chromosome/#section-scratchpad">Quiz</a></li>
+    
+    <li><a href="https://twitter.com/matthewhirschey">Twitter</a></li>
+    
+    <li><a href="https://www.youtube.com/channel/UCstAS6IpgYgZ9Cvcag_YlCQ">YouTube</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+
+    <h1 class="article-title"></h1>
+
+    
+
+    <div class="article-content">
+      
+
+
+<div id="load-libraries" class="section level2">
+<h2>Load libraries</h2>
+<pre class="r"><code>knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+library(tidyverse)</code></pre>
+<pre><code>## ── Attaching packages ──────────────────────────────────────────────────────────────────────── tidyverse 1.3.0 ──</code></pre>
+<pre><code>## ✔ ggplot2 3.2.1     ✔ purrr   0.3.3
+## ✔ tibble  2.1.3     ✔ dplyr   0.8.3
+## ✔ tidyr   1.0.0     ✔ stringr 1.4.0
+## ✔ readr   1.3.1     ✔ forcats 0.4.0</code></pre>
+<pre><code>## ── Conflicts ─────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code>library(tidybiology)
+library(mitocarta)
+library(proteins)</code></pre>
+</div>
+<div id="explore" class="section level2">
+<h2>Explore</h2>
+<p>Before importing, view each dataframe available in the <code>tidybiology</code> package.</p>
+<pre class="r"><code>data(package = &quot;tidybiology&quot;)
+#Q: How many data sets are contained within?
+#A: </code></pre>
+</div>
+<div id="summarize-each-of-the-dataframes" class="section level2">
+<h2>Summarize each of the dataframes</h2>
+<div id="chromosome" class="section level3">
+<h3>Chromosome</h3>
+<p>24x14 data frame containing summary information of the human chromosome</p>
+<pre><code>## Observations: 24
+## Variables: 14
+## $ id                     &lt;fct&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,…
+## $ length_mm              &lt;dbl&gt; 85, 83, 67, 65, 62, 58, 54, 50, 48, 46, 46, 45…
+## $ basepairs              &lt;dbl&gt; 248956422, 242193529, 198295559, 190214555, 18…
+## $ variations             &lt;dbl&gt; 12151146, 12945965, 10638715, 10165685, 951999…
+## $ protein_codinggenes    &lt;int&gt; 2058, 1309, 1078, 752, 876, 1048, 989, 677, 78…
+## $ pseudo_genes           &lt;int&gt; 1220, 1023, 763, 727, 721, 801, 885, 613, 661,…
+## $ totallongnc_rna        &lt;int&gt; 1200, 1037, 711, 657, 844, 639, 605, 735, 491,…
+## $ totalsmallnc_rna       &lt;int&gt; 496, 375, 298, 228, 235, 234, 208, 214, 190, 2…
+## $ mi_rna                 &lt;int&gt; 134, 115, 99, 92, 83, 81, 90, 80, 69, 64, 63, …
+## $ r_rna                  &lt;int&gt; 66, 40, 29, 24, 25, 26, 24, 28, 19, 32, 24, 27…
+## $ sn_rna                 &lt;int&gt; 221, 161, 138, 120, 106, 111, 90, 86, 66, 87, …
+## $ sno_rna                &lt;int&gt; 145, 117, 87, 56, 61, 73, 76, 52, 51, 56, 76, …
+## $ miscnc_rna             &lt;int&gt; 192, 176, 134, 104, 119, 105, 143, 82, 96, 89,…
+## $ centromereposition_mbp &lt;dbl&gt; 125.0, 93.3, 91.0, 50.4, 48.4, 61.0, 59.9, 45.…</code></pre>
+</div>
+<div id="next-dataframe" class="section level3">
+<h3>Next dataframe</h3>
+<p>Summary sentence of the dataframe
+Insert code chunk that loads the data and takes a glimpse</p>
+</div>
+<div id="repeat-for-mitocarta-and-proteins" class="section level3">
+<h3>Repeat for mitocarta and proteins</h3>
+</div>
+<div id="if-youd-like-you-can-look-at-github.comhirscheylab-for-more-packages" class="section level3">
+<h3>If you’d like, you can look at github.com/hirscheylab for more packages!</h3>
+</div>
+</div>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+<script src="/js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+    
+  </body>
+</html>
+

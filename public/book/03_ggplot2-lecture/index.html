@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.60.1" />
+
+
+<title>Class3-ggplot walkthrough - A Tidybiology website</title>
+<meta property="og:title" content="Class3-ggplot walkthrough - A Tidybiology website">
+
+
+  <link href='/favicon.ico' rel='icon' type='image/x-icon'/>
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/tidybiology_hex.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="/book/">Book</a></li>
+    
+    <li><a href="https://github.com/hirscheylab/tidybiology">GitHub</a></li>
+    
+    <li><a href="/docs/">Package</a></li>
+    
+    <li><a href="https://akshay-bareja.shinyapps.io/Chromosome/#section-scratchpad">Quiz</a></li>
+    
+    <li><a href="https://twitter.com/matthewhirschey">Twitter</a></li>
+    
+    <li><a href="https://www.youtube.com/channel/UCstAS6IpgYgZ9Cvcag_YlCQ">YouTube</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+
+    <h1 class="article-title">Class3-ggplot walkthrough</h1>
+
+    
+
+    <div class="article-content">
+      
+
+
+<p>#lets glimpse at our data</p>
+<p>##Exercise 1- Run the presented code in your console</p>
+<p>#Basics of a ggplot code</p>
+<p>Below is an example of the most basic form of the ggplot code</p>
+<pre class="r"><code>ggplot(data)+ #this will generate a blank plot for your data. At this point, ggplot knows what to plot, but not how.
+  geom(mapping=aes(x, y)) #adding a geom tells ggplot how you would like to map your data</code></pre>
+<p>Take a moment to look back at the code you ran previously. You can see that in that code we assigned a dataset and the information we needed to map it to a scatterplot.</p>
+<pre class="r"><code>ggplot(data = chromosome) +
+     geom_point(mapping=aes(x = length_mm, y = protein_codinggenes))</code></pre>
+<p><img src="/book/03_ggplot2-lecture_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>A note on ggplot style: while you can put the + at the beginning of the next line, it is generally put at the end of the previous line.</p>
+<p>How does this chunk of code differ from the previous chunk?</p>
+<pre class="r"><code>ggplot(chromosome) +
+     geom_point(aes(x = length_mm, y = protein_codinggenes))</code></pre>
+<p><img src="/book/03_ggplot2-lecture_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>#Geoms</p>
+<p>When plotting your data, it is often helpful to take a glimpse at the data you intend to plot to know what kinds of variables you will be working with</p>
+<pre class="r"><code>glimpse(mitocarta)</code></pre>
+<pre><code>## Observations: 19,244
+## Variables: 43
+## $ training_dataset                          &lt;chr&gt; &quot;Tnon_mito&quot;, &quot;Tnon_mito&quot;, &quot;…
+## $ human_gene_id                             &lt;dbl&gt; 1, 2, 9, 10, 12, 13, 14, 15…
+## $ mouse_ortholog_gene_id                    &lt;dbl&gt; 117586, 232345, 17961, NA, …
+## $ symbol                                    &lt;chr&gt; &quot;A1BG&quot;, &quot;A2M&quot;, &quot;NAT1&quot;, &quot;NAT…
+## $ synonyms                                  &lt;chr&gt; &quot;A1B|ABG|GAB|HYST2477|P0421…
+## $ description                               &lt;chr&gt; &quot;alpha-1-B glycoprotein&quot;, &quot;…
+## $ ensembl_gene_id                           &lt;chr&gt; &quot;ENSG00000121410&quot;, &quot;ENSG000…
+## $ protein_length                            &lt;dbl&gt; 495, 1474, 352, 290, 423, 3…
+## $ target_p_score                            &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA,…
+## $ mito_domain_score                         &lt;chr&gt; NA, &quot;NonMitoDomain&quot;, &quot;NonMi…
+## $ coexpression_gnf_n50_score                &lt;dbl&gt; NA, 0, 4, NA, 1, 7, 3, NA, …
+## $ pgc_induction_score                       &lt;dbl&gt; NA, NA, -0.28, NA, NA, NA, …
+## $ yeast_mito_homolog_score                  &lt;chr&gt; &quot;NoMitoHomolog&quot;, &quot;NoMitoHom…
+## $ rickettsia_homolog_score                  &lt;chr&gt; &quot;NoHomolog&quot;, &quot;NoHomolog&quot;, &quot;…
+## $ msms_score                                &lt;chr&gt; &quot;50-75ambig&quot;, &quot;50-75ambig&quot;,…
+## $ mcarta2_score                             &lt;dbl&gt; -1.4533, -4.0790, -10.0112,…
+## $ mcarta2_fdr                               &lt;dbl&gt; 0.459, 0.679, 0.883, 0.924,…
+## $ mcarta2_list                              &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+## $ mcarta2_evidence                          &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA,…
+## $ hg19_chromosome                           &lt;fct&gt; 19, 12, 8, 8, 14, 3, 2, 17,…
+## $ hg19_start                                &lt;dbl&gt; 58858171, 9220303, 18027970…
+## $ hg19_stop                                 &lt;dbl&gt; 58864865, 9268558, 18081198…
+## $ msms_num_tissues                          &lt;dbl&gt; 1, 1, NA, NA, NA, 1, NA, NA…
+## $ msms_num_peptides_unique                  &lt;dbl&gt; 24, 67, NA, NA, NA, 9, NA, …
+## $ msms_num_spectra                          &lt;dbl&gt; 153, 326, NA, NA, NA, 11, N…
+## $ msms_total_intensity                      &lt;dbl&gt; 8.11e+09, 6.93e+09, NA, NA,…
+## $ msms_percent_coverage                     &lt;dbl&gt; 60, 55, NA, NA, NA, 33, NA,…
+## $ tissues                                   &lt;chr&gt; &quot;placenta&quot;, &quot;placenta&quot;, NA,…
+## $ cerebrum_total_peak_intensity_log10       &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA,…
+## $ cerebellum_total_peak_intensity_log10     &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA,…
+## $ brainstem_total_peak_intensity_log10      &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA,…
+## $ spinalcord_total_peak_intensity_log10     &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA,…
+## $ kidney_total_peak_intensity_log10         &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA,…
+## $ liver_total_peak_intensity_log10          &lt;dbl&gt; NA, NA, NA, NA, NA, 8.7, NA…
+## $ heart_total_peak_intensity_log10          &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA,…
+## $ skeletalmuscle_total_peak_intensity_log10 &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA,…
+## $ adipose_total_peak_intensity_log10        &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA,…
+## $ smallintestine_total_peak_intensity_log10 &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA,…
+## $ largeintestine_total_peak_intensity_log10 &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA,…
+## $ stomach_total_peak_intensity_log10        &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA,…
+## $ placenta_total_peak_intensity_log10       &lt;dbl&gt; 9.9, 9.8, NA, NA, NA, NA, N…
+## $ testis_total_peak_intensity_log10         &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA,…
+## $ hpa_primary_subcellular_localization_2015 &lt;chr&gt; NA, &quot;Nucleus (APE, Uncertai…</code></pre>
+<p>So now that you know your variable types, how do you know what geoms to use??
+Use the following resources!
+* <a href="https://rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf" class="uri">https://rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf</a>
+* <a href="https://www.data-to-viz.com/" class="uri">https://www.data-to-viz.com/</a></p>
+<p>##Exercise 2
+The following code generates a scatterplot of the mitocarta dataset. Change it to a boxplot</p>
+<pre class="r"><code>ggplot(mitocarta) +
+  geom_point(aes(x=hg19_chromosome,y=log(protein_length)))</code></pre>
+<p><img src="/book/03_ggplot2-lecture_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+Sometimes you will run into errors indicating more information is needed for a plot or that you do not have the correct variable types. For more in depth information on the geoms, I find the ggplot2 reference page more helpful than the built in help pages
+* <a href="https://ggplot2.tidyverse.org/reference/index.html" class="uri">https://ggplot2.tidyverse.org/reference/index.html</a></p>
+<p>Question- without running it, determine what the following code will do</p>
+<pre class="{r}#"><code>ggplot(mitocarta)+
+  geom_jitter(aes(x=hg19_chromosome, y=log(protein_length)))+
+  geom_boxplot(aes(x=hg19_chromosome, y=log(protein_length)))
+</code></pre>
+<p>#Aesthetics
+Everything up to this point gets you a basic graph- but what about colors, shapes and overal style?</p>
+<p>There are 5 basic aesthetics you can can change
+1. Color- changes the outline color of your datapoints
+2. size
+3. Shape
+4. alpha- changes the transparency of each point
+5. fill- changes the fill color of your points</p>
+<p>##Exercise 3
+Add some different aes values to this graph.</p>
+<pre class="r"><code>ggplot(mitocarta) + 
+    geom_point(aes(hg19_chromosome,log(protein_length)))</code></pre>
+<p><img src="/book/03_ggplot2-lecture_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>##Exercise 4
+How do these two plots differ visually?</p>
+<pre class="r"><code>ggplot(mitocarta) + 
+    geom_jitter(aes(hg19_chromosome,log(protein_length), color= rickettsia_homolog_score))</code></pre>
+<p><img src="/book/03_ggplot2-lecture_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<pre class="r"><code>ggplot(mitocarta) + 
+    geom_jitter(aes(hg19_chromosome,log(protein_length), color= rickettsia_homolog_score, alpha=0.5))</code></pre>
+<p><img src="/book/03_ggplot2-lecture_files/figure-html/unnamed-chunk-10-2.png" width="672" /></p>
+<p>#Global vs Local</p>
+<p>In ggplot2, we have the options to set mappings globally or locally. Setting a mapping globally means to set those values in the original ggplot function.</p>
+<p>Example:
+Earlier in class you made this graph:</p>
+<pre class="r"><code>ggplot(mitocarta)+
+  geom_jitter(aes(x=hg19_chromosome, y=log(protein_length)))+
+  geom_boxplot(aes(x=hg19_chromosome, y=log(protein_length)))</code></pre>
+<p><img src="/book/03_ggplot2-lecture_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p>However, if we map our x and y values in the ggplot function we find that we generate the same graph</p>
+<pre class="r"><code>ggplot(mitocarta, aes(x=hg19_chromosome, y=log(protein_length)))+
+  geom_jitter()+
+  geom_boxplot()</code></pre>
+<p><img src="/book/03_ggplot2-lecture_files/figure-html/unnamed-chunk-12-1.png" width="672" />
+This is because when you set the aes mappings in the orignal ggplot function you are setting the aes <strong>globally</strong>.
+This means all the functions afterwards will inherit that mapping. So in our Example this means that both the jitter and boxplot geoms know to graph Cell Region by Protein Length</p>
+<p>You can also set aes values <strong>locally</strong> within the geom function. Doing so will only change the values in that geom</p>
+<pre class="r"><code>ggplot(mitocarta, aes(x=hg19_chromosome, y=log(protein_length)))+
+  geom_jitter()+
+  geom_boxplot(aes(color=hg19_chromosome))</code></pre>
+<p><img src="/book/03_ggplot2-lecture_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p>Data can also be set locally or globally. For this example, let’s filter our original data first using the dplyr::filter function</p>
+<pre class="r"><code>large_prot&lt;- filter(mitocarta, protein_length &gt; 6000)</code></pre>
+<p>Now, let’s label only the proteins identified in our large_prot data by setting data locally in a new geom</p>
+<pre class="r"><code>ggplot(mitocarta, aes(x=hg19_chromosome, y=log(protein_length)))+
+  geom_jitter()+
+  geom_boxplot(aes(color=hg19_chromosome))+
+  geom_label(data=large_prot, aes(label= symbol))</code></pre>
+<p><img src="/book/03_ggplot2-lecture_files/figure-html/unnamed-chunk-15-1.png" width="672" />
+You notice we have to indicate the new dataset, but because it has the same x and y values, we did not need to set those mappings.</p>
+<p>#Labels and Legends
+You’ve likely noticed that up until this point ggplot has labeled axes, but not necessarily in a very pleasing manner.
+We can change these settings in our graph using the labs() function.</p>
+<p>Let’s start by simply changing the x-axis label</p>
+<pre class="r"><code>ggplot(mitocarta, aes(x=hg19_chromosome, y=log(protein_length)))+
+  geom_jitter()+
+  geom_boxplot(aes(color=hg19_chromosome))+
+    geom_label(data=large_prot, aes(label= symbol))+
+    labs(x= &quot;Chromosome&quot;)</code></pre>
+<p><img src="/book/03_ggplot2-lecture_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p>Now, seeing as we have a pretty explanatory legend, we could try to get rid of it. This becomes especially useful when ggplot gives you legends that don’t make sense to show</p>
+<pre class="r"><code>ggplot(mitocarta, aes(x=hg19_chromosome, y=log(protein_length)))+
+  geom_jitter()+
+  geom_boxplot(aes(color=hg19_chromosome))+
+    geom_label(data=large_prot, aes(label= symbol))+
+    labs(x= &quot;Chromosome&quot;)+
+  guides(color= &quot;none&quot;)</code></pre>
+<p><img src="/book/03_ggplot2-lecture_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p>##Exercise 5
+Add appropriate x and y axis titles to the graph, as well as a title</p>
+<pre class="r"><code>ggplot(mitocarta, aes(x=hg19_chromosome, y=log(protein_length)))+
+  geom_jitter()+
+  geom_boxplot(aes(color=hg19_chromosome))+
+    geom_label(data=large_prot, aes(label= symbol))</code></pre>
+<p><img src="/book/03_ggplot2-lecture_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p>#Other useful information
+##Faceting
+Faceting allows you to create multiple graphs side by side in one panel. Especially useful when you want to see the data together, but not on top of eachother</p>
+<p>For example</p>
+<pre class="r"><code>ggplot(mitocarta)+
+  geom_point(aes(x=hg19_chromosome, y=log(protein_length)))+
+  facet_grid(cols = vars(mito_domain_score))</code></pre>
+<p><img src="/book/03_ggplot2-lecture_files/figure-html/unnamed-chunk-19-1.png" width="672" />
+###Different types of facets</p>
+<p>##Exercise 6
+Run the following code to determine how they differ</p>
+<pre class="r"><code>q &lt;- ggplot(mitocarta) + geom_point(aes(x = hg19_chromosome, y = log(protein_length)))
+q + facet_grid(. ~ mito_domain_score)</code></pre>
+<p><img src="/book/03_ggplot2-lecture_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<pre class="r"><code>q + facet_grid(mito_domain_score~ .)</code></pre>
+<p><img src="/book/03_ggplot2-lecture_files/figure-html/unnamed-chunk-20-2.png" width="672" /></p>
+<pre class="r"><code>q + facet_wrap( ~ mito_domain_score)</code></pre>
+<p><img src="/book/03_ggplot2-lecture_files/figure-html/unnamed-chunk-20-3.png" width="672" /></p>
+<p>you can even add more information to your faceting by adding another variable to facet on</p>
+<pre class="r"><code>q + facet_wrap(rickettsia_homolog_score ~ mito_domain_score)</code></pre>
+<p><img src="/book/03_ggplot2-lecture_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p>##Coordinate Flipping</p>
+<p>Coordinate flipping is an especially useful tool when your x-axis includes characters that overlap. Coordinate flipping keeps your mappings and aes the same, but flips coordinates so that your x-axis displays on the Y-axis instead. This allows any names included in the x-axis titles to be read more easily</p>
+<pre class="r"><code>ggplot(mitocarta) + 
+    geom_jitter(aes(hg19_chromosome,log(protein_length), color= rickettsia_homolog_score))</code></pre>
+<p><img src="/book/03_ggplot2-lecture_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<pre class="r"><code>ggplot(mitocarta) + 
+    geom_jitter(aes(hg19_chromosome,log(protein_length), color= rickettsia_homolog_score))+
+  coord_flip()</code></pre>
+<p><img src="/book/03_ggplot2-lecture_files/figure-html/unnamed-chunk-22-2.png" width="672" /></p>
+<p>##Themes
+You can change almost everything you see on your chart, but a lot of the things you may look to change are part of the “theme”</p>
+<p>Here we are going to change some features about our title text</p>
+<pre class="r"><code>ggplot(mitocarta) + 
+    geom_jitter(aes(hg19_chromosome,log(protein_length), color= rickettsia_homolog_score))+
+  coord_flip()+
+  labs(x = &quot;Chromosome&quot;, y = &quot;Protein Length (log)&quot;, title = &quot;Lengths of proteins encoded by each Chromosome&quot;)+
+  theme(
+     plot.title = element_text(face = &quot;bold&quot;, size = 12)
+    ) </code></pre>
+<p><img src="/book/03_ggplot2-lecture_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p>Next, let’s change the aesthetics of our legend box</p>
+<pre class="r"><code>ggplot(mitocarta) + 
+    geom_jitter(aes(hg19_chromosome,log(protein_length), color= rickettsia_homolog_score))+
+  coord_flip()+
+  labs(x = &quot;Chromosome&quot;, y = &quot;Protein Length (log)&quot;, title = &quot;Lengths of proteins encoded by each Chromosome&quot;)+
+  theme(
+     plot.title = element_text(face = &quot;bold&quot;, size = 12),
+     legend.background = element_rect(fill=&quot;gray&quot;, colour=&quot;black&quot;)
+    ) </code></pre>
+<p><img src="/book/03_ggplot2-lecture_files/figure-html/unnamed-chunk-24-1.png" width="672" />
+Finally, let’s change the legend postion</p>
+<pre class="r"><code>ggplot(mitocarta) + 
+    geom_jitter(aes(hg19_chromosome,log(protein_length), color= rickettsia_homolog_score))+
+  coord_flip()+
+  labs(x = &quot;Chromosome&quot;, y = &quot;Protein Length (log)&quot;, title = &quot;Lengths of proteins encoded by each Chromosome&quot;)+
+  theme(
+     plot.title = element_text(face = &quot;bold&quot;, size = 12),
+     legend.background = element_rect(fill=&quot;gray&quot;, colour=&quot;black&quot;),
+     legend.position = &quot;bottom&quot;
+    ) </code></pre>
+<p><img src="/book/03_ggplot2-lecture_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<p>Pre-Set themes also exist as an easy way to change the entire theme of your graph quickly. They can also be combined with custome theme settings</p>
+<pre class="r"><code>ggplot(mitocarta) + 
+    geom_jitter(aes(hg19_chromosome,log(protein_length), color= rickettsia_homolog_score))+
+  coord_flip()+
+  labs(x = &quot;Chromosome&quot;, y = &quot;Protein Length (log)&quot;, title = &quot;Lengths of proteins encoded by each Chromosome&quot;)+
+  theme_bw()</code></pre>
+<p><img src="/book/03_ggplot2-lecture_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<p>##Saving plots using ggsave</p>
+<p>If you make a plot there are a few ways to save it, though the simplist is to use ggsave.</p>
+<p>For example, you made this plot earlier:</p>
+<pre class="r"><code>ggplot(mitocarta, aes(x=hg19_chromosome, y=log(protein_length)))+
+  geom_jitter()+
+  geom_boxplot(aes(color=hg19_chromosome))+
+  geom_label(data=large_prot, aes(label= symbol))</code></pre>
+<p><img src="/book/03_ggplot2-lecture_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<p>You got all the geoms and aesthetics right and now you want to save it. All you have to do is run the following code</p>
+<pre class="r"><code>ggsave(&quot;ggsaveexample.png&quot;)</code></pre>
+<pre><code>## Saving 7 x 5 in image</code></pre>
+<p>You can change the type of file you save or even the size in inches.
+example:</p>
+<pre class="r"><code>ggsave(&quot;ggsaveexample.pdf&quot;, width = 6, height = 6)</code></pre>
+<p>Where does it save??</p>
+<pre class="r"><code>getwd()</code></pre>
+<pre><code>## [1] &quot;/Users/akshaybareja/Desktop/R Stuff/Tidybiology Website - all versions/Tidybiology - lithium theme/content/book&quot;</code></pre>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+<script src="/js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+    
+  </body>
+</html>
+
