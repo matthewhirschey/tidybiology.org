@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 Introduction | Tidybology</title>
+  <meta name="description" content="Tidybiology textbook." />
+  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 Introduction | Tidybology" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Tidybiology textbook." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Introduction | Tidybology" />
+  
+  <meta name="twitter:description" content="Tidybiology textbook." />
+  
+
+<meta name="author" content="Allie Mills, Akshay Bareja, Matthew Hirschey" />
+
+
+<meta name="date" content="2020-01-25" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="dplyr.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Tidybiology textbook</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#tidybiology-package"><i class="fa fa-check"></i><b>1.1</b> Tidybiology Package</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a><ul>
+<li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#what-is-an-r-markdown-file"><i class="fa fa-check"></i><b>2.1</b> What is an R Markdown file?</a></li>
+<li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#adding-chunks"><i class="fa fa-check"></i><b>2.2</b> Adding chunks</a></li>
+<li class="chapter" data-level="2.3" data-path="intro.html"><a href="intro.html#text-formatting"><i class="fa fa-check"></i><b>2.3</b> Text formatting</a></li>
+<li class="chapter" data-level="2.4" data-path="intro.html"><a href="intro.html#reports"><i class="fa fa-check"></i><b>2.4</b> Reports</a></li>
+<li class="chapter" data-level="2.5" data-path="intro.html"><a href="intro.html#r-packages"><i class="fa fa-check"></i><b>2.5</b> R Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="dplyr.html"><a href="dplyr.html"><i class="fa fa-check"></i><b>3</b> Dplyr</a></li>
+<li class="chapter" data-level="4" data-path="ggplot.html"><a href="ggplot.html"><i class="fa fa-check"></i><b>4</b> ggplot</a></li>
+<li class="chapter" data-level="5" data-path="joins-and-regular-expressions.html"><a href="joins-and-regular-expressions.html"><i class="fa fa-check"></i><b>5</b> Joins and Regular Expressions</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Tidybology</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="intro" class="section level1">
+<h1><span class="header-section-number">Chapter 2</span> Introduction</h1>
+<div id="what-is-an-r-markdown-file" class="section level2">
+<h2><span class="header-section-number">2.1</span> What is an R Markdown file?</h2>
+<p>An R Markdown file contains plain text interspersed with grey chunks of code. You can use the file to take notes <em>and</em> run code. For example, when you run the following code chunk, R will load the <code>tidybiology</code> package and make a simple plot using the <code>simplechromosome</code> dataset from this package. To execute the code, click on the green play button on the top left-hand corner of this chunk.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">library</span>(tidybiology)</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="kw">plot</span>(simplechromosome)</a></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>The results of a code chunk will appear beneath the chunk. You can click the x above the results to make them go away, but let’s not do that.</p>
+<p>Sometimes you might want to run only some of the code in a code chunk. To do that, highlight the code to run and then press Cmd + Enter (Control + Enter on Windows). If you do not highlight any code, R will run the line of code that your cursor is on.</p>
+<p>You can open a new R Markdown file by going to <strong>File &gt; New File &gt; R Markdown…</strong>. Then click OK. But let’s not open a new file now —- keep reading this one!</p>
+</div>
+<div id="adding-chunks" class="section level2">
+<h2><span class="header-section-number">2.2</span> Adding chunks</h2>
+<p>To add a new code chunk, press <em>Cmd+Option+I</em> (<em>Ctrl+Alt+I</em> on Windows), or click the <em>Insert</em> button at the top of this document, then select <em>R</em>. R Markdown will add a new, empty chunk at your cursor’s location.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co"># You can click the downward facing arrow to the left of the play button to run</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="co"># every chunk above the current code chunk. This is useful if the code in your</span></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co"># chunk uses objects that you made in previous chunks.</span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co"># Sys.Date()</span></a></code></pre></div>
+<p>Did you notice the differently colored lines you were reading in the code chunk above? They are <em>code comments</em>, lines of text that R ignores when it runs the code. R will treat everything that appears after <code>#</code> on a line as a code comment. As a result, if you run the chunk above, nothing will happen—it is all code comments (and that’s fine)!</p>
+<p>Remove the <code>#</code> on the last line of the chunk above and then rerun the chunk. Can you tell what <code>Sys.Date()</code> does?</p>
+<p>By the way, you only need to use code comments <em>inside</em> of code chunks. R knows not to try to run the text that you write outside of code chunks.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="co"># I put this comment here to remind me to tell you about commenting your code. Was it successful? Did I remember what this comment was for? You can use comments in your code chunks to remind you what you did or why you did it. This comment is often for a future version of yourself.</span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span> <span class="co">#this is a lame example</span></a></code></pre></div>
+<pre><code>## [1] 2</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">exp</span>(<span class="dv">1</span>)<span class="op">^</span>(pi <span class="op">*</span><span class="st"> </span><span class="kw">sqrt</span>(<span class="op">-</span><span class="dv">1</span>)) <span class="co">#this is a better example, but R freaks out; sorry Euler</span></a></code></pre></div>
+<pre><code>## Warning in sqrt(-1): NaNs produced</code></pre>
+<pre><code>## [1] NaN</code></pre>
+</div>
+<div id="text-formatting" class="section level2">
+<h2><span class="header-section-number">2.3</span> Text formatting</h2>
+<p>Have you noticed the funny highlighting that appears in this document? R Markdown treats text surrounded by <em>asterisks</em>, <strong>double asterisks</strong>, and <code>backticks</code> in special ways. It is R Markdown’s way of saying that these words are in</p>
+<ul>
+<li><em>italics</em></li>
+<li><em>also italics</em></li>
+<li><strong>bold</strong>, and</li>
+<li><code>code font</code></li>
+</ul>
+<p><code>*</code>, <code>**</code>, and ` are signals used by a text editing format known as <code>markdown</code>. R Markdown uses <code>markdown</code> to turn your plain looking .Rmd documents into polished reports. Let’s give that a try.</p>
+</div>
+<div id="reports" class="section level2">
+<h2><span class="header-section-number">2.4</span> Reports</h2>
+<p>When you click the <code>knit</code> button at the top of an R Markdown file (like this one), R Markdown generates a polished copy of your report. R Markdown:</p>
+<ol style="list-style-type: decimal">
+<li>Transforms all of your markdown cues into actual formatted text (e.g. bold text, italic text, etc.)</li>
+<li>Reruns all of your code chunks in a clean R session and appends the results to the finished report.</li>
+<li>Saves the finished report alongside your .Rmd file</li>
+</ol>
+<p>Click the <em>knit</em> button at the top of this document or press <em>Cmd+Shift+K</em> (<em>Ctrl+Shift+K</em> on Windows) to render the finished report. The RStudio IDE will open the report so you can see its contents. Make sure your internet browser pop-up blocker is disabled. For now, our reports will be HTML files. Try clicking <em>Knit</em> now.</p>
+<p>Take a moment to compare the knitted document to the raw code. What is similar? What is different? Do you see places where <code>markdown</code> rendered the code into formatting?</p>
+<p>You’ll learn more about R Markdown in later classes, and all of your coding and asssignments will take place in R markdown documents.</p>
+</div>
+<div id="r-packages" class="section level2">
+<h2><span class="header-section-number">2.5</span> R Packages</h2>
+<p>Here is one last code chunk that we will use in the next exercise. If you uncomment the code and try to run it, it won’t work. If you don’t believe me try! Let’s figure out why after uncommenting the code it doesn’t run</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="co"># ggplot(data = chromosome) + geom_point(aes(x = id, y = basepairs))</span></a></code></pre></div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="dplyr.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/01-intro.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
