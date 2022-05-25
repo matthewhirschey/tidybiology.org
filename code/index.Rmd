@@ -1,12 +1,20 @@
+---
+title: " "
+output: html_document
+runtime: shiny_prerendered
+---
+
+```{r context="setup", include=FALSE}
 #install libraries
 library(tidyverse)
 library(shiny)
 library(learnr)
+knitr::opts_chunk$set(echo = FALSE)
+```
 
-#HOME PAGE----
-
+```{r, context="render"}
 # Create output for our router in main UI of Shiny app.
-ui <- shinyUI(
+shinyUI(
   fluidPage(
     tagList(
       #head_tags,
@@ -27,9 +35,10 @@ ui <- shinyUI(
   )
 )
 
-server <- shinyServer(function(input, output, session) {
-})
+```
 
+```{r, context="server"}
+# server <- shinyServer(function(input, output, session) {
+# })
+```
 
-# Run the application 
-shinyApp(ui = ui, server = server)

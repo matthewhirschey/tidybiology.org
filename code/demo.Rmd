@@ -9,6 +9,10 @@ library(learnr)
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
+```{r child='sample.Rmd'}
+
+```
+
 ```{r child='exercise1.Rmd'}
 
 ```
@@ -25,4 +29,12 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ```
 
+```{r echo=TRUE}
+next_topic <- function(){
+    glue::glue("## Next Glue")
+}
+next_topic()
+```
 
+## Next topic
+link to next topic?

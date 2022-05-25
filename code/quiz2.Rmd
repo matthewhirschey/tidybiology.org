@@ -4,7 +4,7 @@
 
 Some questions to verify that you understand the purposes of various base and recommended R packages:
 
-```{r quiz2}
+```{r superawesome}
 quiz(
   question("Which package contains functions for installing other R packages?",
     answer("base"),
