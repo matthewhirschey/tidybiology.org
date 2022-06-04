@@ -1,11 +1,15 @@
 ---
-title: "Introduction to Data Science"
+title: "Data visualization with ggplot"
 output: learnr::tutorial
 runtime: shiny_prerendered
 ---
 
 ```{r child='setup.Rmd'}
 ```
+
+
+
+
 
 ```{r child='objects/0-a-introduction_to_data_science-multiple-slides.Rmd'}
 ```
@@ -56,4 +60,4 @@ runtime: shiny_prerendered
 #record video walkthrough
 ```
 
-`r next_module("2-a-introduction_to_dplyr-r-module")`
+`r next_module("4-a-introduction_to_...-module")`
