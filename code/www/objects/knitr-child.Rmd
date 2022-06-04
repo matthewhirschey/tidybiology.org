@@ -1,7 +1,0 @@
-# Details from the child document
-
-Hi, there. I'm a child with a plot and as many details as necessary.
-
-```{r test-child}
-plot(trees)
-```

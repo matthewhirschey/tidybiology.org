@@ -1,0 +1,20 @@
+---
+title: "Visualizing data"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+```{r, include = FALSE}
+library(learnr)
+```
+
+## Visualizing data
+
+![](https://youtu.be/QUlHs6tGBHg){width="90%"}  
+  
+### Scratchpad  
+Use this console to follow along with the video  
+```{r visualizing_data_scratchpad, exercise = TRUE}
+library(ggplot2)
+ggplot()
+```
+

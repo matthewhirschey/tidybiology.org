@@ -209,8 +209,13 @@ object_table <- readRDS(here::here("data", "object_table.Rds"))
 observeEvent(input$search_click, {})   #event to store the 'click'
 
 output$object_table <- DT::renderDataTable({
-  DT::datatable(object_table %>%
-                  dplyr::select(Title = title, Level = level, Language = language, Type = type, 'Included in' = included_in),
+  table <- build_object_table()
+  DT::datatable(table %>%
+                  dplyr::select(Title = title, 
+                                Level = level, 
+                                Language = language, 
+                                Type = type, 
+                                'Included in' = included_in),
                 escape = FALSE,
                 options = list(pageLength = 10))
   

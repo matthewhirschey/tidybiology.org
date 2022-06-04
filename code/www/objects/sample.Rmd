@@ -1,7 +1,0 @@
-## Qmt cars
-
-### this is mt
-
-```{r}
-mtcars
-```
