@@ -1,0 +1,22 @@
+---
+title: "Parameterization exercise"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+```{r, include = FALSE}
+#load libraries
+library(learnr)
+```
+
+## Parameter exercise
+Using a similar dataset from the previous Rmarkdown activity, download this file for a parameterization activity.
+  
+1. Download the file below  
+2. Move it to your project directory  
+3. Open the file and knit the document  
+4. Then change the parameter values to match your age and gender, and re-knit.
+  
+```{r, echo = FALSE}
+HTML("<a href='www/objects/6-parameter_activity_file.Rmd'>Download Rmd</a>")
+```
+  

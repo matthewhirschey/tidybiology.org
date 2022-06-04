@@ -157,7 +157,9 @@ build_object_table <- function(){
   
   #censor these objects that you don't want to navigate to directly
   censor <- c("1-rmarkdown_activity_file.Rmd", 
-              "1-intro_exercise_file.Rmd")
+              "1-intro_exercise_file.Rmd", 
+              "6-rmarkdown_activity_file.Rmd", 
+              "6-rmarkdown_activity_file_answers.Rmd")
   
   object_table <- 
     object_table %>% 

@@ -16,8 +16,9 @@ library(viridis)
 #rm(list=ls()) 
 ```
 
-```{r import_data, include=FALSE, message=FALSE, warning=FALSE}
-source(here::here("code", "healthcare.R")) #loads dataset-specific variables
+```{r import_data, message=FALSE, echo=FALSE, warning=FALSE}
+heart_url <- "https://raw.githubusercontent.com/matthewhirschey/tidybiology-essentials/master/data/heart.csv"
+heart <-  read_csv(heart_url) #loads dataset-specific variables
 ```
 
 ```{r calculations, include=FALSE, message=FALSE, warning=FALSE}
@@ -27,13 +28,15 @@ source(here::here("code", "healthcare.R")) #loads dataset-specific variables
 heart %>% 
   count(sex, sort = TRUE)
 
-freq <- heart %>% 
+freq <- 
+  heart %>% 
   group_by(sex) %>% 
   summarize(n = n()) %>% 
   mutate(freq = n/sum(n))
 
 #What is the median age of patients
-median <- median(heart$age)
+median <- 
+  median(heart$age)
 
 #What is the average cholesterol level of patients at the median age?
 avg_chol <- heart %>% 
@@ -41,16 +44,21 @@ avg_chol <- heart %>%
   summarize(mean_cholesterol = mean(chol))
 
 #Store a new dataframe object that groups patients by sex and age, and then calculates the average cholesterol levels for patients in this group
-age_groups <- heart %>% 
+age_groups <- 
+  heart %>% 
   group_by(sex, age) %>% 
   summarize(mean_cholesterol = mean(chol))
 
-my_age_chol <- heart %>% 
+sex_var <- if_else(params$gender == "male", 0, 1)
+
+my_age_chol <- 
+  heart %>% 
   filter(between(age, params$age-2, params$age+2), 
-         sex == params$gender) %>% 
+         sex == sex_var) %>% 
   summarize(mean_cholesterol = mean(chol))
 
-older <- if_else(
+older <- 
+  if_else(
   params$age > median, "older", "younger"
 )
 
