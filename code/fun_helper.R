@@ -9,7 +9,7 @@ filename_splitter <- function(file_name,
                    level = filename_info[[1]][2],
                    title = filename_info[[1]][3] %>% 
                      stringr::str_replace_all(pattern = "_", replacement = " ") %>% 
-                     stringr::str_to_title(),
+                     str_to_title_special(),
                    language = filename_info[[1]][4],
                    type = filename_info[[1]][5], 
                    stop("variable not found"))
@@ -27,6 +27,22 @@ filename_splitter <- function(file_name,
 #testing
 # filename_splitter(file_name = "1-a-Introduction_to_Data_Science-multiple-module.Rmd")
 
+str_to_title_special <- function(string){
+  new_string <- stringr::str_to_title(string)
+  package_names <- c(
+    "Ggplot" = "ggplot", #omit 2
+    "Dplyr" = "dplyr",
+    "Tidyr" = "tidyr",
+    "Readr" = "readr",
+    "Purrr" = "purrr",
+    "Tibble" = "tibble",
+    "Stringr" = "stringr",
+    "Forcats" = "forcats"
+  )
+new_title <- stringr::str_replace_all(new_string, package_names)  
+return(new_title)
+}
+
 next_module <- function(module = "..."){
   if(module == "..."){
     
@@ -39,7 +55,7 @@ next_module <- function(module = "..."){
     module_title <- filename_splitter(file_name = module,
                                       var = "title")
     link <- glue::glue("## Continue... 
-                         \nThe next module in this {module_difficulty} track is 
+                         \nThe next module in this {module_difficulty} pathway is 
                          \n[{module_title}]({module}.html)")
   }
   return(link)
@@ -48,15 +64,6 @@ next_module <- function(module = "..."){
 #testing
 #next_module()
 #next_module(module = "1-a-Introduction_to_Data_Science-multiple-module")
-
-#copy files
-# ess_path <- "/Users/matthewhirschey/Dropbox/DUKE/z_archive/tidybiology-essentials"
-# 
-# rmd_files <- list.files(path = ess_path, pattern = "Rmd", recursive = TRUE)
-# rmd_files_short <- rmd_files[1:3]
-# 
-# file.copy(from = glue::glue("{ess_path}/{rmd_files}"), 
-#           to = here::here("code", "objects"))
 
 find_modules <- function(module_filename = "1-a-Introduction_to_Data_Science-multiple-module.Rmd"){ #this takes all modules and gets the child modules out
   lines <- readLines(here::here("code", "www", module_filename))
@@ -77,7 +84,7 @@ find_modules <- function(module_filename = "1-a-Introduction_to_Data_Science-mul
 }
 #tmp <- find_modules() %>% as_tibble()
 
-build_module_table <- function(){ #this find a list of module names and builds a table of them linked to objects
+build_module_table <- function(){ #this builds a list of modules and the objects they contain
   module_path <- here::here("code", "www")
   
   module_names <- list.files(path = module_path, 
@@ -100,21 +107,26 @@ build_module_table <- function(){ #this find a list of module names and builds a
   return(module_table)
 }
 
-module_linker <- function(module_filename){ #takes full file name in, returns markdown link out
+module_linker <- function(module_filename){ #takes full file name in, returns html link out
   title <- filename_splitter(module_filename)
   
   name <- stringr::str_remove(module_filename, "\\.Rmd")
   url <- glue::glue("/{name}.html")
   
-  markdown_final <- glue::glue("[{title}]({url})")
+  markdown_final <- glue::glue("<a href='www/{url}'>{title}</a>")
   return(markdown_final)
 }
+# mod_name <- "3-a-data_visualization_with_ggplot-r-module.Rmd"
+# module_linker(mod_name)
 
+#take object and returns html string of modules it in
 extract_module_table <- function(object_file){ #= "0-a-introduction_to_data_science-multiple-slides.Rmd"
+  module_table <- build_module_table()
+  
   module_files <- 
     module_table %>% #make using build_module_table() above
-    filter(object == object_file) %>% 
-    pull(module) 
+    dplyr::filter(object == object_file) %>% 
+    dplyr::pull(module) 
   
   if(is_empty(module_files) == TRUE){return("None")}
   
@@ -127,9 +139,6 @@ extract_module_table <- function(object_file){ #= "0-a-introduction_to_data_scie
 #extract_module_table()
 
 build_object_table <- function(){
-  #build module table
-  #module_table <- build_module_table()
-  
   #get files
   object_path <- here::here("code", "www", "objects")
   
@@ -147,11 +156,12 @@ build_object_table <- function(){
     )
   
   #censor these objects that you don't want to navigate to directly
-  censor <- c("1-rmarkdown_activity_file.Rmd")
+  censor <- c("1-rmarkdown_activity_file.Rmd", 
+              "1-intro_exercise_file.Rmd")
   
   object_table <- 
     object_table %>% 
-    filter(!object_file %in% censor, 
+    dplyr::filter(!object_file %in% censor, 
            !is.na(title))
   
   return(object_table)

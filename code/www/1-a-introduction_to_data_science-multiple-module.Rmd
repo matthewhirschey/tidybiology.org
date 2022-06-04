@@ -56,4 +56,7 @@ runtime: shiny_prerendered
 #record video walkthrough
 ```
 
+```{r child='objects/1-a-resources_and_cheatsheets-r-video.Rmd'}
+```
+
 `r next_module("2-a-introduction_to_dplyr-r-module")`
