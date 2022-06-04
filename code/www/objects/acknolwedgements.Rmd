@@ -1,0 +1,22 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+#make this a child chunk?
+
+## Acknowledgements {.build}
+**Teaching Assistants**  
+- Allie Mills, Ph.D.  
+- Akshay Bareja, D.Phil.  
+  
+**Inspiration, ideas, packages, code**  
+- R4DS (Garrett Grolemund and Hadley Wickham)  
+- Mine Çetinkaya-Rundel (datasciencebox.org)  
+- Chester Ismay and Albert Y. Kim (Modern Dive)  
+- Garrett Grolemund  (Remastering the Tidyverse)  
+- Tidyverse devs and community  
+- Rstudio  
+
+# Thank you
+Any questions?

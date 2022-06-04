@@ -1,0 +1,99 @@
+---
+title: "ggplot: putting it all together"
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+```
+
+```{r, include=FALSE}
+#Load datasets we will use for the lecture
+source(here::here("code", "healthcare.R")) #loads dataset-specific variables
+```
+
+# Lets take a glimpse at our dataset called `heart`
+```{r}
+glimpse(heart)
+```
+
+# Basics of a ggplot code
+Below is an example of the most basic form of the ggplot code
+```{r, eval=FALSE}
+ggplot(data)+ #this will generate a blank plot for your data. At this point, ggplot knows what to plot, but not how.
+  geom(mapping=aes(x, y)) #adding a geom tells ggplot how you would like to map your data
+```
+
+Use this template to make a simple ggplot.  
+  
+1. Use the `heart` dataset, 
+2. Make a scatterplot comparing age vs. maximum heart rate
+Recall that a "data dictionary" is located here: https://github.com/matthewhirschey/tidybiology-plusds
+
+```{r first_plot}
+ggplot(heart) +
+  geom_point(aes(x = age, y = thalach))
+```
+
+
+Next, fit a smooth line (linear regression) to these points
+*by adding another `geom`
+```{r}
+ggplot(heart, aes(x = age, y = thalach)) +
+  geom_point() +
+  geom_smooth(method = "lm")
+```
+  
+Next, color by whether the patient has exercise-induced angina
+```{r}
+ggplot(heart, aes(x = age, y = thalach, color = exang)) +
+  geom_point() +
+  geom_smooth(method = "lm")
+```
+
+The last plot probably has your color based on a continuous scale; now change color by sex (a discrete variable)
+```{r}
+ggplot(heart, aes(x = age, y = thalach, color = sex)) +
+  geom_point() +
+  geom_smooth(method = "lm")
+```
+
+Next, fix the labels to capitalize, and be more informative
+```{r}
+ggplot(heart, aes(x = age, y = thalach, color = sex)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  labs(x = "Patient Age", y = "HR Max during Exercise")
+```
+
+Next, give the plot a title, by calling `title = "title"` within `labs`
+And give the plot a caption, by calling `caption = "Plot by YOURNAME"` within `labs`
+```{r}
+ggplot(heart, aes(x = age, y = thalach, color = sex)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  labs(x = "Patient Age", y = "HR Max during Exercise", title = "Relationship between age and Max HR during exercise", caption = "Plot by Matt")
+```
+
+Next, use `facet_grid` to split this graph based on whether the pateint has exercise induced angina or not. Make sure to wrap your variable in `factor()` to convert the numeric into a factor variable. 
+```{r}
+ggplot(heart, aes(x = age, y = thalach, color = sex)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  labs(x = "Patient Age", y = "HR Max during Exercise", title = "Relationship between age and Max HR during exercise", caption = "Plot by Matt") +
+  facet_grid(cols = vars(factor(exang)))
+```
+
+Next, change the theme to `light`
+```{r}
+ggplot(heart, aes(x = age, y = thalach, color = sex)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  labs(x = "Patient Age", y = "HR Max during Exercise", title = "Relationship between age and Max HR during exercise", caption = "Plot by Matt") +
+  facet_grid(cols = vars(factor(exang))) +
+  theme_light()
+```
+
+Lastly, save the object as a png image using `ggsave`
+```{r}
+ggsave("ggplot_together.png")
+```

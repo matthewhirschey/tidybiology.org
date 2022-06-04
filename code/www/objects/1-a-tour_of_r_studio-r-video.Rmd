@@ -1,0 +1,5 @@
+## Tour of Rstudio
+
+Rstudio is a powerful environment for programming in R. In this video, you see a brief overview of how to use it.
+  
+![](https://youtu.be/QhmPrfleCx4){width="90%"}

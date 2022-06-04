@@ -1,0 +1,59 @@
+---
+title: "Introduction to Data Science"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+```{r child='setup.Rmd'}
+```
+
+```{r child='objects/0-a-introduction_to_data_science-multiple-slides.Rmd'}
+```
+
+```{r child='objects/0-a-what_is_data_dcience-multiple-video.Rmd'}
+```
+
+```{r child='objects/0-a-tools_of_data_science-multiple-video.Rmd'}
+```
+
+```{r child='objects/1-a-getting_started_with_r-r-video.Rmd'}
+```
+
+```{r child='objects/1-a-reviewing_data_types-r-quiz.Rmd'}
+```
+
+```{r child='objects/1-a-first_r_exercise-r-exercise.Rmd'}
+```
+
+```{r child='objects/1-a-installing_packages-r-video.Rmd'}
+```
+
+```{r child='objects/1-a-introduction_to_the_tidyverse-r-video.Rmd'}
+#split from current video
+#tidyverse
+```
+
+```{r child='objects/1-a-the_pipe_operator_in_r-r-video.Rmd'}
+#split from current video
+#pipes
+```
+
+```{r child='objects/1-a-installing_r_and_r_studio-r-video.Rmd'}
+```
+
+```{r child='objects/1-a-tour_of_r_studio-r-video.Rmd'}
+```
+
+```{r child='objects/1-a-organizing_projects_in_r_studio-r-video.Rmd'}
+#organizing your r projects
+```
+
+```{r child='objects/1-a-rmarkdown_activity-r-exercise.Rmd'}
+```
+
+```{r child='objects/1-a-introduction_to_data_science_exercise-r-exercise.Rmd'}
+#rmarkdown exercise
+#record video walkthrough
+```
+
+`r next_module("2-a-introduction_to_dplyr-multiple-module")`

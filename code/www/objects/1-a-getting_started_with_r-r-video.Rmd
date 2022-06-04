@@ -1,0 +1,17 @@
+---
+title: "Get Started with R"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+```{r, include = FALSE}
+library(learnr)
+```
+## Get Started with R
+
+![](https://youtu.be/wfshEa_F2FQ){width="90%"}
+
+### Scratchpad
+```{r getting_started_r_scratchpad, exercise=TRUE}
+
+```
+

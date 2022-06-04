@@ -1,0 +1,103 @@
+---
+title: "Tidybiology Tiny Lectures: ggplot "
+subtitle: "ggplot basics"
+author: "Matthew Hirschey, Ph.D."
+date: "April 2020"
+output: 
+  ioslides_presentation:
+    widescreen: true
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(tidyverse)
+library(knitr)
+library(here)
+library(rlang)
+library(patchwork)
+library(ggrepel)
+knitr::opts_chunk$set(echo = FALSE, 
+                      fig.align="center")
+source(here::here("code", "bespoke.R")) #loads custom objects
+```
+
+# Welcome back
+
+# "The simple graph has brought more information to the data analyst’s mind than any other device."  -- John Tukey
+
+## Visualize Data with
+```{r ggplot_logo, echo=FALSE, message=FALSE, warning=FALSE, fig.cap="", out.height = '100%'}
+url <- "https://github.com/tidyverse/ggplot2/raw/master/man/figures/logo.png"
+knitr::include_graphics(url)
+```
+<font size = "1">[https://ggplot2.tidyverse.org](https://ggplot2.tidyverse.org)</font>
+
+## A basic plot using `ggplot` in R
+We ended the last class with:
+
+```{r ggplot_basic, echo=TRUE, message=FALSE, warning=FALSE, eval=FALSE}
+ggplot(heart, aes(x = sex, y = chol)) +
+  geom_point(color = "darkblue", size = 3) +
+  labs(x = "sex", 
+       y = "Cholesterol", 
+       title = "Cholesterol values from the heart disease dataset", 
+       caption = "Data from Kaggle | Plot from @matthewhirschey") +
+  theme_minimal() +
+  NULL
+```
+
+## which built this...
+```{r ggplot_basic2, message=FALSE, warning=FALSE, echo=FALSE}
+#need to parameterize this; embed rmd here?; but still need to parameterize that doc.
+ggplot(heart, aes(x = sex, y = chol)) +
+  geom_point(color = "darkblue", size = 3) +
+  labs(x = "sex", y = "Cholesterol", title = "Cholesterol values from the heart disease dataset", caption = "Data from Kaggle | Plot from @matthewhirschey") +
+  theme_minimal() +
+  NULL
+```
+
+# Basic ggplot2
+Any questions from last week?
+
+## Basics of a ggplot code {.build}
+
+Below is an example of the most basic form of the ggplot code  
+  
+`ggplot(data = dataframe) +`   
+  `geom(mapping = aes(x, y))`  
+  
+Take a moment to look back at the code template.  You can see that in that code we assigned a `dataset` and the information we needed to `map` it to a type of plot
+
+## Basics of a ggplot code {.build}
+  
+`ggplot(data = `r dataframe_name`) +`  
+`geom_point(mapping=aes(x = `r df_numeric1_name`, y = `r df_numeric2_name`))`  
+  
+```{r simple_plot, echo = FALSE, warning = FALSE}
+df_input %>% 
+  ggplot(aes(!!sym(df_numeric1_name), !!sym(df_numeric2_name))) +
+  geom_point() 
+```
+
+## Build a `ggplot` {.build}
+- "Initialize" a plot with `ggplot()`  
+  
+`ggplot(data = `r dataframe_name`) +`  
+  
+- Add layers with `geom_functions`  
+  
+`geom_point(mapping=aes(x = `r df_numeric1_name`, y = `r df_numeric2_name`))`  
+
+## Notes on `ggplot` style {.build}
+- Generally, different people have **strong** opinions about style and data visualization  
+  
+- Data visualization is a rich and complex area of study and is beyond the scope of this introductory course  
+  
+**That being said, here are a few style tips:**    
+- While you can put the `+` at the beginning of the next line, it is generally put at the end of the previous line    
+  
+- Arguments do not need to be explicit: this chunk of code is equivalent to the previous chunk (w/ data, mappings)  
+`ggplot(`r dataframe_name`) +`    
+`geom_point(aes(x = `r df_numeric2_name`, y = `r df_numeric2_name`))`  
+

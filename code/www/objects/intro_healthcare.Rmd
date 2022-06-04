@@ -1,0 +1,46 @@
+---
+title: "Introduction to Data Science"
+output: 
+  ioslides_presentation:
+    widescreen: true
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(tidyverse)
+library(knitr)
+library(here)
+library(twitterwidget)
+library(rlang)
+knitr::opts_chunk$set(echo = FALSE, 
+                      fig.align="center")
+source(here::here("code", "bespoke.R")) #loads custom objects
+```
+
+## Doctors make decisions based on symptoms 
+```{r intro, echo=FALSE, fig.cap="", out.height = '100%'}
+url <- "https://source.unsplash.com/701-FJcjLAQ/500x500"
+knitr::include_graphics(url)
+```
+<font size = "1">Photo by [National Cancer Institute on Unsplash](https://unsplash.com/@nci)</font>
+
+## New digital healthcare era introduces new decision-making challenges {.build}
+**Volume**  
+- Data collection & storage allows access to huge amounts of medical information  
+  
+**Ubiquity**  
+- Data are available anywhere across geography, social, and economic classes   
+  
+**Latency**  
+- Technology facilitates no delay in access to data    
+  
+## How do you make better health care decisions? {.build}
+**Data-driven** decision making!  
+  
+```{r hierarchy, echo=FALSE, fig.cap="", out.height = '100%'}
+url <- "https://upload.wikimedia.org/wikipedia/commons/0/06/DIKW_Pyramid.svg"
+knitr::include_graphics(url)
+```
+<font size = "1">https://en.wikipedia.org/wiki/DIKW_pyramid</font>
+  

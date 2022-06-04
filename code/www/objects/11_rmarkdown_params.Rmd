@@ -1,0 +1,65 @@
+---
+title: "Assessing Cholesterol Levels in the Heart Study"
+subtitle: "Rmarkdown Parameter Exercise"
+output: html_document  
+params: 
+  age: 40
+  gender: "male"
+---
+
+```{r setup, include=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(tidybiology)
+library(viridis)
+
+#clear environment
+#rm(list=ls()) 
+```
+
+```{r import_data, include=FALSE, message=FALSE, warning=FALSE}
+source(here::here("code", "healthcare.R")) #loads dataset-specific variables
+```
+
+```{r calculations, include=FALSE, message=FALSE, warning=FALSE}
+##### START HERE #####
+
+#What percent of patients in this dataset are male v. female?
+heart %>% 
+  count(sex, sort = TRUE)
+
+freq <- heart %>% 
+  group_by(sex) %>% 
+  summarize(n = n()) %>% 
+  mutate(freq = n/sum(n))
+
+#What is the median age of patients
+median <- median(heart$age)
+
+#What is the average cholesterol level of patients at the median age?
+avg_chol <- heart %>% 
+  filter(age == median(heart$age)) %>% 
+  summarize(mean_cholesterol = mean(chol))
+
+#Store a new dataframe object that groups patients by sex and age, and then calculates the average cholesterol levels for patients in this group
+age_groups <- heart %>% 
+  group_by(sex, age) %>% 
+  summarize(mean_cholesterol = mean(chol))
+
+my_age_chol <- heart %>% 
+  filter(between(age, params$age-2, params$age+2), 
+         sex == params$gender) %>% 
+  summarize(mean_cholesterol = mean(chol))
+
+older <- if_else(
+  params$age > median, "older", "younger"
+)
+
+#store some of these values, so that you can call them inline below
+```
+
+In the heart study data set, the proportion of females is `r round(freq %>% filter(sex == "female") %>% select(freq) %>% pull(), 1)` and males is `r round(freq %>% filter(sex == "male") %>% select(freq) %>% pull(), 1)`. The median age of patients in this data set is `r median`, which have an average serum cholesterol level of `r round(avg_chol, 0)` mg/dl. I self-identify as a `r params$age` year old `r params$gender`, which is `r older` than the median age of patients in this data set. The average cholesterol for patients in this data set of someone my age is `r round(my_age_chol, 1)` mg/dl. 
+
+```{r provenance, include=FALSE}
+#Session information for provenance and reproducibility
+session_provenance()
+```

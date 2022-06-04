@@ -1,0 +1,57 @@
+---
+title: "(Re)Introducing %>%"
+output: 
+  ioslides_presentation:
+    widescreen: true
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(tidyverse)
+library(knitr)
+library(here)
+library(rlang)
+knitr::opts_chunk$set(echo = FALSE, 
+                      fig.align="center")
+source(here::here("code", "bespoke.R")) #loads custom objects
+```
+
+## (Re)Introducing `%>%` {.build}
+
+The `%>%` operator is a way of "chaining" together strings of commands that make reading your code easy.  
+The following code chunk illustrates how `%>%` works:  
+  
+``r dataframe_name` %>%`  
+    `select(`r colnames(df_character_select)`, `r colnames(df_numeric_select)`) %>%`   
+    `filter(`r colnames(df_character_select)` == "`r df_character_filter`") %>%`   
+    `head()`  
+
+```{r %>%, echo = FALSE, warning = FALSE}
+df_input %>%
+  select(colnames(df_character_select), colnames(df_numeric_select)) %>% 
+  filter(!!rlang::sym(colnames(df_character_select)) == as.character(df_character_filter)) %>% 
+  head()
+```
+
+## (Re)Introducing `%>%` {.build}
+
+The previous code chunk does the following - it takes your dataset and then "pipes" it into `select()`, and then applies a `filter()` to the data.
+  
+``r dataframe_name` %>%`  
+    `select(`r colnames(df_character_select)`, `r colnames(df_numeric_select)`) %>%`   
+    `filter(`r colnames(df_character_select)` == "`r df_character_filter`") %>%`   
+    `head()`  
+  
+*the `head` function lists only the top n results -- convenient for long variables*
+  
+  
+**When you see `%>%`, think "and then"**
+
+## (Re)Introducing `%>%` {.build}
+
+The alternative to using `%>%` is running the following code
+
+filter(select(`r dataframe_name`, `r colnames(df_character_select)`, `r colnames(df_numeric_select)`), `r colnames(df_character_select)` == "`r df_character_filter`")
+
+Although this is only one line as opposed to three, it's both more difficult to write and more difficult to read

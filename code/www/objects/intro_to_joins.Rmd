@@ -1,0 +1,90 @@
+---
+title: "Introduction to Joins"
+output: 
+  ioslides_presentation:
+    widescreen: true
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(tidyverse)
+library(knitr)
+library(here)
+library(rlang)
+knitr::opts_chunk$set(echo = FALSE, 
+                      fig.align="center")
+source(here::here("code", "bespoke.R")) #loads custom objects
+```
+
+## Combining datasets {.build}
+
+There are many times when you have two or more overlapping datasets that you would like to combine
+
+The `dplyr` package has a number of `*_join` functions for this purpose
+
+```{r left_join, echo=FALSE, fig.cap="", out.height='50%'}
+url <- "https://github.com/matthewhirschey/tidybiology-plusds/raw/master/media/dplyr-joins.png"
+knitr::include_graphics(url)
+```
+
+
+## `left_join` {.build}
+
+Returns all rows from a, and all columns from a and b
+
+Rows in a with no match in b will have NA values in the new columns
+
+If there are multiple matches between a and b, all combinations of the matches are returned
+
+## `left_join` example {.build}
+
+Take a look at the variables in each dataset - `r dataframe_name` and `r dataframe_join_name`  
+
+You will notice that both datasets contain common variable - `r df_id_name`. This can therefore serve as a common variable to join on. Let's join on this:  
+  
+`left_join` `r dataframe_name` with `r dataframe_join_name` and assign the output to a new object called ``r dataframe_name`_join_left`
+
+Go to code/  
+Open 08_import_and_join.Rmd  
+Complete the exercise to join the two datasets.  
+  
+Now you have one dataset with additional useful information
+
+## `right_join`
+```{r right_join, echo=FALSE, fig.cap="", out.height='66%'}
+url <- "https://github.com/matthewhirschey/tidybiology-plusds/raw/master/media/dplyr-joins.png"
+knitr::include_graphics(url)
+```
+
+
+## `right_join` {.build}
+Returns all rows from b, and all columns from a and b
+
+Rows in b with no match in a will have NA values in the new columns
+
+If there are multiple matches between a and b, all combinations of the matches are returned
+  
+This is conceptually equivalent to a `left_join`, but can be useful when stringing together multiple steps using %>% 
+
+## `inner_join`
+```{r inner_join, echo=FALSE, fig.cap="", out.height='66%'}
+url <- "https://github.com/matthewhirschey/tidybiology-plusds/raw/master/media/dplyr-joins.png"
+knitr::include_graphics(url)
+```
+
+## `inner_join` {.build}
+Returns all rows from a where there are matching values in b, and all columns from a and b
+
+If there are multiple matches between a and b, all combination of the matches are returned
+
+## `full_join`
+```{r full_join, echo=FALSE, fig.cap="", out.height='66%'}
+url <- "https://github.com/matthewhirschey/tidybiology-plusds/raw/master/media/dplyr-joins.png"
+knitr::include_graphics(url)
+```
+
+## `full_join` {.build}
+Returns all rows and all columns from both a and b  
+
+Where there are no matching values, returns NA for the one missing  

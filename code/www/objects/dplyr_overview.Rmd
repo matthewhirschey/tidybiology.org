@@ -1,0 +1,32 @@
+---
+title: "Dplyr Overview"
+output: 
+  ioslides_presentation:
+    widescreen: true
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(tidyverse)
+library(knitr)
+library(here)
+library(rlang)
+knitr::opts_chunk$set(echo = FALSE, 
+                      fig.align="center")
+source(here::here("code", "bespoke.R")) #loads custom objects
+```
+
+## Introducing `dplyr` {.build}
+  
+dplyr is a package that contains a suite of functions that allow you to easily manipulate a dataset  
+  
+Some of the things you can do are -  
+  
+- select rows and columns that match specific criteria  
+  
+- create new variables (columns)  
+  
+- obtain summary statistics on individual groups within your datasets  
+  
+The main verbs we will cover are `select()`, `filter()`, `arrange()`, `mutate()`, and `summarise()`. These all combine naturally with `group_by()` which allows you to perform any operation "by group"

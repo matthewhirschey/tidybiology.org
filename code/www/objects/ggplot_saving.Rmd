@@ -1,0 +1,40 @@
+---
+title: "Tidybiology Tiny Lectures: ggplot "
+subtitle: "ggplot: saving plots"
+author: "Matthew Hirschey, Ph.D."
+date: "April 2020"
+output: 
+  ioslides_presentation:
+    widescreen: true
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(tidyverse)
+library(knitr)
+library(here)
+library(rlang)
+library(patchwork)
+library(ggrepel)
+knitr::opts_chunk$set(echo = FALSE, 
+                      fig.align="center")
+source(here::here("code", "bespoke.R")) #loads custom objects
+```
+
+
+
+## Saving plots using `ggsave` {.build}
+
+If you make a plot there are a few ways to save it, though the simplest is to use `ggsave`  
+
+`ggsave("ggsaveexample.png", plot = last_plot())`  
+
+You can change the type of file you save or the size.  
+  
+`ggsave("ggsaveexample.pdf", plot = my_awesome_object, width = 6, height = 6, units = "cm")`  
+
+## Saving plots using ggsave
+Where does it save??  
+  
+`getwd()`

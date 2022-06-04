@@ -1,0 +1,63 @@
+---
+title: "Introduction to RegEx"
+output: 
+  ioslides_presentation:
+    widescreen: true
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(tidyverse)
+library(knitr)
+library(here)
+library(rlang)
+knitr::opts_chunk$set(echo = FALSE, 
+                      fig.align="center")
+source(here::here("code", "bespoke.R")) #loads custom objects
+```
+
+## Using Regular Expressions
+That solution worked in this case, but was not very elegant, and might not work for all cases (what if there was a 'great aunt' in the list?)  
+
+Or here is a more specific case for this data set.  
+  
+How many patients have a father with a history of disease? But we don't want to include grandfathers in the results. 
+  
+We can use something called **Regular Expressions**, aka **Regex**, to solve this
+
+## Using Regular Expressions {.build}
+Think of regex as a separate language, with it's own code, syntax, and rules.  
+  
+Regex rules allow complex matching patterns for strings, to ensure matching *exactly* the content desired
+  
+It is far too complex to cover in its entirely here, but here is one specific example.  
+  
+**GOAL**: identify all of the patients that have a father with a history of disease, but excluding grandfathers in the results. 
+  
+## Regular Expression Example {.build}
+<div class="red2"> Example </div>  
+We want to start with recognizing `father`.  
+
+But then we want to make sure that we capture both `Father` and `father`. To accept either case f in the first spot we add `(F|f)`, so now our regex looks like `(F|f)ather`  
+  
+Lastly, we want this pattern to appear at the beginning of the word, so we add the regex `^` symbol.  
+
+Our completed regex looks like:  
+  
+`str_count(heart_joined$family_history, "^(F|f)ather")` 
+
+```{r regex1, exercise=TRUE}
+
+
+```
+## Regex Exercise
+Go to code/  
+Open 09_stringr.Rmd  
+Complete the exercise to count mothers.    
+
+## Regex resources
+- The stringr cheatsheet shown above is a great resource  
+- Here the tidyverse website with a link to its vignette  
+  
+<center><iframe src="https://stringr.tidyverse.org/articles/regular-expressions.html"></iframe></center>  

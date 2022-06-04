@@ -1,0 +1,45 @@
+---
+title: "Counting COVID"
+subtitle: "Key elements of the analytical toolbox for understanding COVID-19"
+author: "Matthew Hirschey and Akshay Bareja"
+output: 
+  ioslides_presentation:
+    widescreen: true
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(tidyverse)
+library(knitr)
+library(here)
+library(rlang)
+knitr::opts_chunk$set(echo = FALSE, 
+                      fig.align="center")
+source(here::here("code", "bespoke.R")) #loads custom objects
+```
+
+## COVID-19 rapidly infected people across the US
+```{r covid, echo=FALSE, fig.cap="", out.height = '100%'}
+#covid map from AKSHAY
+```
+
+## Rapid emergence generated several healthcare decision-making challenges {.build}
+**Volume**  
+- Rapid data collection & storage allowed access to huge amounts of medical information  
+  
+**Ubiquity**  
+- Data became available anywhere across geography, social, and economic classes   
+  
+**Latency**  
+- Technology facilitates no delay in access to data    
+  
+## How do you make sense of COVID-19 data to make better health care decisions? {.build}
+**Data-driven** decision making!  
+  
+```{r hierarchy, echo=FALSE, fig.cap="", out.height = '100%'}
+url <- "https://upload.wikimedia.org/wikipedia/commons/0/06/DIKW_Pyramid.svg"
+knitr::include_graphics(url)
+```
+<font size = "1">https://en.wikipedia.org/wiki/DIKW_pyramid</font>
+  

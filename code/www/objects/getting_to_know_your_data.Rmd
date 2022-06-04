@@ -1,0 +1,87 @@
+---
+title: "Getting to know your data"
+output: 
+  ioslides_presentation:
+    widescreen: true
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(tidyverse)
+library(knitr)
+library(here)
+library(rlang)
+knitr::opts_chunk$set(echo = FALSE, 
+                      fig.align="center")
+source(here::here("code", "bespoke.R")) #loads custom objects
+```
+
+# R <br>Getting to know your data
+Any questions?
+
+## ``r dataframe_name`` dataset
+**`r dataframe_title`**  
+  
+- For this class, we will use a dataset called ``r dataframe_name``.  
+  
+- `r dataframe_source`  
+  
+- `r dataframe_desc`  
+  
+## Inspecting your dataframe: dimensions
+
+Use the `dim()` function to see how many rows (observations) and columns (variables) are in ``r dataframe_name``
+
+`dim(`r dataframe_name`)` 
+  
+Enter your function here:  
+```{r dim_exercise, exercise=TRUE}
+
+```
+
+## Inspecting your dataframe: glimpse
+
+Use the `glimpse()` function to see what kinds of variables the ``r dataframe_name`` dataset contains   
+  
+`glimpse(`r dataframe_name`)`  
+  
+Enter your function here:  
+```{r glimpse_exercise, exercise=TRUE}
+
+```
+  
+## Basic Data Types in R {.build}
+
+Recall that R has different data types -
+
+**character** - `"a"`, `"tidyverse"`  
+
+**numeric** - `2`, `11.5`  
+
+**integer** - `2L` (the `L` tells R to store this as an integer)  
+
+**logical** - `TRUE`, `FALSE`  
+
+**complex** - `1+4i`  
+
+(**raw**)
+
+You will also come across the **double** datatype. It is the same as **numeric**
+
+**factor**. A **factor** is a collection of *ordered* character variables
+
+## Basic Data Types in R
+
+In addition to the `glimpse()` function, you can use the `class()` function to determine the data type of a specific column
+
+`class(`r dataframe_name`$`r colnames(df_character_select)`)`
+
+```{r class, echo = FALSE, warning = FALSE}
+class(df_character_select[[1]])
+```
+  
+Try getting the `class` of a variable:  
+```{r class_exercise, exercise=TRUE}
+
+```

@@ -1,0 +1,63 @@
+---
+title: "Assessing Cholesterol Levels in the Heart Study"
+subtitle: "Rmarkdown Exercise"
+output: html_document  
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(tidybiology)
+library(viridis)
+
+#clear environment
+#rm(list=ls()) 
+```
+
+```{r import_data}
+source(here::here("code", "healthcare.R")) #loads dataset-specific variables
+```
+
+
+
+```{r calculations}
+##### START HERE #####
+
+#What percent of patients in this dataset are male v. female?
+
+#What is the median age of patients
+
+#What is the average cholesterol level of patients at the median age?
+
+#Store a new dataframe object that groups patients by sex and age, and then calculates the average cholesterol levels for patients in this group
+
+#store some of these values, so that you can call them inline below
+```
+
+  
+In the heart study data set, the proportion of females is **%** and males is **%**. The median age of patients in this data set is **median age**, which have an average serum cholesterol level of **chol level num** mg/dl.  
+
+```{r graph, warning=FALSE}
+heart %>% 
+  ggplot(aes(chol, fill = sex)) +
+  geom_density(alpha = 0.5) +
+  theme_bw() +
+  labs(
+    x = "Serum Cholesterol (mg/dl)",
+    y = "Density",
+    fill = "",
+    title = "Distribution of Serum Cholesterol in Men and Women"
+  ) +
+  scale_x_continuous(expand = c(0.005, 0.005)) +
+  scale_y_continuous(expand = c(0, 0)) +
+  geom_vline(data = filter(heart, sex == "male"), aes(xintercept = median(chol)), colour = "yellow", size = 1, linetype  = 2) +
+  geom_vline(data = filter(heart, sex == "female"), aes(xintercept = median(chol)), colour = "navy", size = 1, linetype = 2) +
+  scale_fill_viridis(discrete = TRUE, option = "E")
+
+#change code chunks so only the report output and plot are shown on the knitted report
+
+```
+
+```{r provenance, include=FALSE}
+#Session information for provenance and reproducibility
+session_provenance()
+```

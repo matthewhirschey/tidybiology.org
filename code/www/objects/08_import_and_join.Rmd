@@ -1,0 +1,40 @@
+---
+title: "Import"
+output: html_notebook
+---
+
+```{r setup}
+library(tidyverse)
+library(here)
+```
+
+#set-up dataset
+```{r}
+source(here::here("code", "healthcare.R"))
+```
+
+# A note about `here()`
+The `here` package is an easy, and reproducible way to set the path of your file.  
+For example, your code lives in the /code directory, so to point to it, you simply call the here function, and then put your destination(s) in quotes
+
+`here::here("my", "nested", "file", "lives", "in", "this", "directory", "file.Rmd)`  
+  
+# Import
+Use this code chunk to import the patient history dataset  
+* use `read_csv()`
+* make sure you point to the right folder
+* don't forget to assign it to an object
+
+```{r}
+
+```
+
+# Joins
+Remember the code: 
+Use `left_join` to combine `heart` with `patient_hx`, calling the new dataframe `heart_join_left`  
+*If needed you can `glimpse` each dataframe to find the name of the column in common
+
+```{r}
+
+```
+

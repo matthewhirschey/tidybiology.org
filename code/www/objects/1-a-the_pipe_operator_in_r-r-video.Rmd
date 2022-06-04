@@ -1,0 +1,14 @@
+---
+title: "The pipe operator"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+```{r, include = FALSE}
+library(learnr)
+```
+
+## The pipe operator
+
+The pipe operator is a way to string multiple data science steps together. In this video, you will learn about how this function can simplify your data science workflows.  
+  
+![](https://youtu.be/QkDFNwmwLZc){width="90%"}

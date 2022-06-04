@@ -1,0 +1,53 @@
+---
+title: "kaggle_heart_dataset_processing"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(here)
+```
+
+# Import data
+Data source: https://www.kaggle.com/johnsmith88/heart-disease-dataset  
+Data URL: https://www.kaggle.com/johnsmith88/heart-disease-dataset/download/8pepaA8ii6RBfo3Gf9e3%2Fversions%2FD7oXdBDP1xRBdoPj99Cm%2Ffiles%2Fheart.csv?datasetVersionNumber=2"  
+
+The data dictionary is on that website, and was copied here: https://github.com/matthewhirschey/tidybiology-plusds  
+  
+The `target` variable refers to the presence of heart disease in the patient. It is integer valued 0 = no disease and 1 = disease.
+
+# Import data
+```{r import heart.csv}
+heart_raw <- read_csv(here::here("data", "heart.csv"))
+```
+
+# Data cleaning
+```{r cleaning}
+#Turn `sex` variable into a factor
+heart %>% 
+  mutate(sex = case_when(
+    sex == 1 ~ "male",
+    sex == 0 ~ "female"
+  )) -> heart
+
+#patient IDs
+heart <- rowid_to_column(heart) %>% 
+  rename(patient_id = rowid)
+
+#second char variable
+heart <- heart %>% 
+  mutate(fbs = case_when(
+    fbs == 1 ~ "elevated",
+    fbs == 0 ~ "normal"
+  ))
+
+```
+
+# Save
+```{r}
+saveRDS(heart, file = here::here("data", "heart.Rds"))
+
+```
+
+

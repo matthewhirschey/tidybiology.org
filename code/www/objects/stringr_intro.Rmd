@@ -1,0 +1,32 @@
+---
+title: "Introduction to StringR"
+output: 
+  ioslides_presentation:
+    widescreen: true
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(tidyverse)
+library(knitr)
+library(here)
+library(rlang)
+knitr::opts_chunk$set(echo = FALSE, 
+                      fig.align="center")
+source(here::here("code", "bespoke.R")) #loads custom objects
+```
+
+
+## Dealing with strings {.build}
+Dealing with character strings is a bit different than dealing with numbers in R?   
+  
+* Sort?  
+* Select?  
+* Change?  
+  
+Fortunately, the `tidyverse` as a package called `stringr` for dealing with them. 
+
+## Stringr
+<center><iframe src = "https://stringr.tidyverse.org"></iframe></center>
+

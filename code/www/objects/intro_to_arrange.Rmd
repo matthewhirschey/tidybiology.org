@@ -1,0 +1,44 @@
+---
+title: "Introduction to Arrange"
+output: 
+  ioslides_presentation:
+    widescreen: true
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(tidyverse)
+library(knitr)
+library(here)
+library(rlang)
+knitr::opts_chunk$set(echo = FALSE, 
+                      fig.align="center")
+source(here::here("code", "bespoke.R")) #loads custom objects
+```
+
+## `arrange()` sorts rows {.build}
+
+The input for arrange is one or many columns, and `arrange()` sorts the rows in ascending order i.e. from smallest to largest
+
+For example, to sort rows from smallest to largest `r colnames(df_numeric_select)`, run the following
+
+``r dataframe_name` %>%`   
+  `arrange(`r colnames(df_numeric_select)`) %>%`   
+  `head(3)`  
+
+```{r arrange_exercise, exercise=TRUE}
+
+```
+
+## `arrange()` {.build}
+
+To reverse this order, use the `desc()` function within `arrange()`
+
+``r dataframe_name` %>%`  
+  `arrange(desc(`r colnames(df_numeric_select)`)) %>%`  
+  `head(3)`  
+
+```{r arrange_exercise2, exercise=TRUE}
+
+```

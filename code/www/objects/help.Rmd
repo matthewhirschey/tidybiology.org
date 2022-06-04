@@ -1,0 +1,16 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+#make this a child chunk?
+
+# R <br>Help
+Any questions?
+
+## Resources
+- Rstudio package 'cheatsheets'  
+- Package function help pages: `?mean`, or navigate to the Help tab and search there  
+- Run the following to access the Dplyr vignette: `browseVignettes("dplyr")`  
+- Stackoverflow: [https://stackoverflow.com](https://stackoverflow.com)
+- R for Data Science, by Grolemund & Wickham [https://r4ds.had.co.nz/index.html](https://r4ds.had.co.nz/index.html)  

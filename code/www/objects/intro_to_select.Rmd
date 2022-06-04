@@ -1,0 +1,55 @@
+---
+title: "Introduction to Select"
+output: 
+  ioslides_presentation:
+    widescreen: true
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(tidyverse)
+library(knitr)
+library(here)
+library(rlang)
+knitr::opts_chunk$set(echo = FALSE, 
+                      fig.align="center")
+source(here::here("code", "bespoke.R")) #loads custom objects
+```
+
+## `select()` specific columns from your dataset {.build}
+The most basic `select()` is one where you comma separate a list of columns you want included
+
+For example, if you only want to select the `r colnames(df_character_select)` and `r colnames(df_numeric_select)` columns, run the following code chunk
+
+``r dataframe_name` %>%`   
+    `select(`r colnames(df_character_select)`, `r colnames(df_numeric_select)`) %>%`  
+    `head()`
+    
+```{r select_exercise, exercise=TRUE}
+
+```
+
+## `select()` {.build}
+
+If you want to select all columns *except* `r colnames(df_character_select)`, run the following
+
+``r dataframe_name` %>%`  
+    `select(-`r colnames(df_character_select)`) %>%`  
+    `head(5)`
+
+```{r selectnot_exercise, exercise=TRUE}
+
+```
+
+## `select()` {.build}
+
+Finally, you can provide a range of columns to return two columns and everything in between. For example
+
+``r dataframe_name` %>%`   
+    `select(`r colnames(df_character_select)`:`r colnames(df_numeric_select)`) %>%`  
+    `head(5)`
+    
+```{r selectrange_exercise, exercise=TRUE}
+
+```

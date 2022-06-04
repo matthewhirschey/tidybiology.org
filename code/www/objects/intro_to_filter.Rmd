@@ -1,0 +1,79 @@
+---
+title: "Introduction to Filter"
+output: 
+  ioslides_presentation:
+    widescreen: true
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(tidyverse)
+library(knitr)
+library(here)
+library(rlang)
+knitr::opts_chunk$set(echo = FALSE, 
+                      fig.align="center")
+source(here::here("code", "bespoke.R")) #loads custom objects
+```
+
+## `filter()` rows based on certain condition(s) {.build}
+
+The `filter()` verb evalutes a logical statement, and if a row meets the condition of this statement (i.e. is true) then it gets chosen (or "filtered").  
+  
+  
+**All other rows are discarded**  
+
+## `filter()` {.build}
+
+Filtering can be performed on **categorical** data
+
+``r dataframe_name` %>%`     
+    `filter(`r colnames(df_character_select)` == "`r df_character_filter`") %>%`     
+    `head(3)`  
+
+```{r filter_exercise, exercise=TRUE}
+
+```
+
+Note that `filter()` only applies to rows, and has no effect on columns
+
+## `filter()` {.build}
+
+Filtering can also be performed on **numeric** data
+
+For example, if you wanted to choose `r colnames(df_numeric_select)` with a value greater than `r df_numeric_filter`, you would run the following. 
+
+``r dataframe_name` %>%`     
+    `filter(`r colnames(df_numeric_select)` > `r df_numeric_filter`) %>%`     
+    `head(3)`  
+
+```{r filter_exercise2, exercise=TRUE}
+
+```
+
+## `filter()` {.build}
+
+To filter on multiple conditions, you can write a sequence of `filter()` commands
+
+``r dataframe_name` %>%`       
+    `filter(`r colnames(df_character_select)` == "`r df_character_filter`") %>%`  
+    `filter(`r colnames(df_numeric_select)` > `r df_numeric_filter`) %>%`    
+    `head(3)`  
+
+```{r filter_exercise3, exercise=TRUE}
+
+```
+
+## `filter()` {.build}
+
+To avoid writing multiple `filter()` commands, multiple logical statements can be put inside a single `filter()` command, separated by commas
+
+``r dataframe_name` %>%`           
+    `filter(`r colnames(df_character_select)` == "`r df_character_filter`",`  
+           ` `r colnames(df_numeric_select)` > `r df_numeric_filter`) %>%`      
+    `head(3)`  
+
+```{r filter_exercise4, exercise=TRUE}
+
+```

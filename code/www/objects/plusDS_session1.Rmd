@@ -1,0 +1,31 @@
+---
+title: "Tidybiology +DS: Session 1 "
+subtitle: "Introduction to Data Science in Health Care using R"
+author: "Matthew Hirschey, Ph.D."
+date: "April 8-9, 2020"
+output: 
+  ioslides_presentation:
+    widescreen: true
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(tidyverse)
+library(knitr)
+library(here)
+library(twitterwidget)
+library(rlang)
+knitr::opts_chunk$set(echo = FALSE, 
+                      fig.align="center")
+source(here::here("code", "bespoke.R")) #loads custom objects
+```
+
+
+
+
+
+ 
+
+
+

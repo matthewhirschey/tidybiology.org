@@ -1,0 +1,5 @@
+## Install R and Rstudio
+
+In this video, you will learn the difference between R and Rstudio, and download R and Rstudio as a first step towards programming on your own computer  
+  
+![](https://youtu.be/IJc2J-qewiU){width="90%"}

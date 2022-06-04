@@ -1,0 +1,38 @@
+---
+title: "Introduction to Mutate"
+output: 
+  ioslides_presentation:
+    widescreen: true
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(tidyverse)
+library(knitr)
+library(here)
+library(rlang)
+knitr::opts_chunk$set(echo = FALSE, 
+                      fig.align="center")
+source(here::here("code", "bespoke.R")) #loads custom objects
+```
+
+## `mutate()` {.build}
+
+The `mutate()` verb, unlike the ones covered so far, creates new variable(s) i.e. new column(s). For example
+
+``r dataframe_name` %>%`    
+  `mutate(new_col = sqrt(`r colnames(df_numeric_select)`)) %>%`    
+  `head(1)`  
+  
+The code chunk above takes all the elements of the column `r colnames(df_numeric_select)`, evaluates the square root of each element, and populates a new column called `new_col` with these results
+  
+## Try `mutate()` to make a new column
+  
+``r dataframe_name` %>%`    
+  `mutate(new_col = sqrt(`r colnames(df_numeric_select)`)) %>%`    
+  `head(3)`  
+  
+```{r mutate_exercise, exercise=TRUE}
+
+```

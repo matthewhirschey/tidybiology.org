@@ -1,0 +1,51 @@
+---
+title: "Introduction to Rstudio"
+output: 
+  ioslides_presentation:
+    widescreen: true
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(tidyverse)
+library(knitr)
+library(here)
+library(rlang)
+knitr::opts_chunk$set(echo = FALSE, 
+                      fig.align="center")
+source(here::here("code", "bespoke.R")) #loads custom objects
+```
+
+# R <br>Integrated Development Environment
+Any questions?
+
+## R
+Statistical Programming Language
+```{r r_exercise, exercise=TRUE}
+
+```
+  
+```{r r_image, echo=FALSE, fig.cap="", out.height = '100%'}
+url <- "https://source.unsplash.com/Vb8pR6cKCRI/300×200"
+knitr::include_graphics(url)
+```
+<font size = "1">Photo by [Photo by Evan Hein on Unsplash](https://unsplash.com/@evanheinphoto)</font>
+
+## Rstudio
+Integrated Development Environment
+
+```{r r_de, echo=FALSE, fig.cap="", out.height = '100%'}
+url <- "https://source.unsplash.com/XuDPnpox8tc/300×200"
+knitr::include_graphics(url)
+```
+<font size = "1">[Photo by Jaromír Kavan on Unsplash](https://unsplash.com/@jerrykavan)</font>
+
+---
+[Open Rstudio](http://www.rstudio.cloud)  
+<iframe src="http://www.rstudio.cloud"></iframe>
+
+## Rstudio Demonstration
+Go to code/  
+Open 01_r_demo.Rmd  
+Follow along.  

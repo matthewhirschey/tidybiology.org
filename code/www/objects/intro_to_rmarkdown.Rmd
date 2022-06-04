@@ -1,0 +1,33 @@
+---
+title: "Introduction to Rmarkdown"
+output: 
+  ioslides_presentation:
+    widescreen: true
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(tidyverse)
+library(knitr)
+library(here)
+library(rlang)
+knitr::opts_chunk$set(echo = FALSE, 
+                      fig.align="center")
+source(here::here("code", "bespoke.R")) #loads custom objects
+```
+
+# R <br>Markdown
+Any questions?
+
+## R Markdown Introduction
+Go to code/  
+Open 02_rmd_exercise.Rmd  
+Read through the file and do everything it tells you to do.  
+
+## R Markdown
+An authoring format for Data Science.  
+```{r markdown, echo=FALSE, fig.cap="", out.width='66%'}
+url <- "https://github.com/matthewhirschey/tidybiology-plusds/raw/master/media/markdown.png"
+knitr::include_graphics(url)
+```

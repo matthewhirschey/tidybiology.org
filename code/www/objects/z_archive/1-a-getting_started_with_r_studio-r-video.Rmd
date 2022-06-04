@@ -1,0 +1,14 @@
+---
+title: "Introduction to Data Science"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+```{r, include = FALSE}
+library(learnr)
+```
+
+## Getting Started with Rstudio
+
+In this video, you will learn the difference between R and Rstudio, as a first step towards programming on your own computer  
+  
+![](https://youtu.be/IJc2J-qewiU){width="90%"}

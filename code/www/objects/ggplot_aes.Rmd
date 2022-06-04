@@ -1,0 +1,55 @@
+---
+title: "Tidybiology Tiny Lectures: ggplot "
+subtitle: "ggplot: aesthetics"
+author: "Matthew Hirschey, Ph.D."
+date: "April 2020"
+output: 
+  ioslides_presentation:
+    widescreen: true
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(tidyverse)
+library(knitr)
+library(here)
+library(rlang)
+library(patchwork)
+library(ggrepel)
+knitr::opts_chunk$set(echo = FALSE, 
+                      fig.align="center")
+source(here::here("code", "bespoke.R")) #loads custom objects
+```
+
+
+## Aesthetics
+Everything up to this point gets you a basic graph; but what about colors, shapes and overall style?  
+  
+You can change 5 basic aesthetics  
+1. **Color**- changes the outline color of your datapoints  
+2. **Size** - choose the size of the datapoint  
+3. **Shape** - choose a pre-defined shape  
+4. **Alpha**- changes the transparency of each point  
+5. **Fill**- changes the fill color of your points  
+  
+Go to code/  
+Open 04_ggplot2.Rmd  
+Complete the exercise.    
+  
+## Mapping these aesthetics to data
+Beyond simply changing the size or color of the variables in your plot, you can encode more information by mapping these values to data in your data set.  
+  
+Go to code/  
+Open 05_aes.Rmd  
+Complete the exercise.  
+  
+## Global vs Local {.build}
+In ggplot2, we have the options to set mappings globally or locally. Setting a mapping globally means to set those values in the original ggplot function.  
+  
+Example: Earlier in class you made this graph:
+
+`ggplot(`r dataframe_name`) +`  
+  `geom_jitter(aes(x=`r df_char1_name`, y=`r df_numeric1_name`))+`  
+  `geom_boxplot(aes(x=`r df_char1_name`, y=`r df_numeric1_name`))`  
+  

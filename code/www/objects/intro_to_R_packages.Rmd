@@ -1,0 +1,146 @@
+---
+title: "Introduction to R Packages"
+output: 
+  ioslides_presentation:
+    widescreen: true
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(tidyverse)
+library(knitr)
+library(here)
+library(rlang)
+knitr::opts_chunk$set(echo = FALSE, 
+                      fig.align="center")
+source(here::here("code", "bespoke.R")) #loads custom objects
+```
+
+# R <br>Packages
+Any questions?
+
+## R Packages
+The R language contains thousands of functions, data sets, and help pages.  
+- but only a few hundred are included when you download R  
+  
+**This is called 'Base R'**  
+  
+The other functions, data sets, and help pages are grouped into collections known as packages that you can choose to download or not download.  
+
+## “Verbs” (i.e. functions) act on data
+
+`do_this(to_that)`  
+  
+`do_this(to_that, using_these)`  
+   
+*We talked about functions before (e.g. `round(pi, 3)`)*  
+  
+  
+  
+  
+**Functions are the power of using R**
+
+## Packages contain functions, documentation, data
+  
+<center><iframe src="https://dplyr.tidyverse.org"></iframe></center>
+
+## CRAN
+- Most R packages are stored on CRAN, alongside R.  
+- Think of them as optional extensions of the R language.  
+  
+```{r cran, echo=FALSE, fig.cap="", out.height = '66%', out.width= '66%'}
+url <- "https://gist.githubusercontent.com/daroczig/3cf06d6db4be2bbe3368/raw/b66b0531fb1b86d3e04a003b2e105ad4f147900e/number-of-submitted-packages-to-CRAN.png"
+knitr::include_graphics(url)
+```
+<font size = "1">Image by [daroczig](https://gist.github.com/daroczig/3cf06d6db4be2bbe3368)</font>
+  
+## Using Packages (Part I)
+  
+1. `install.packages("tidyverse")`  
+  
+Do this 1 time per computer.  
+  
+This command will install the package into your instance of R, whether it is local, on a server, or in the cloud. This is required to use the functions in a package.  
+  
+## Tidyverse
+  
+<center><iframe src="https://www.tidyverse.org"></iframe></center>
+
+## Tidyverse Pop Quiz!
+
+The tidyverse contains the following packages (ggplot2, dplyr, tidyr, readr, purrr, tibble, hms, stringr, lubridate, forcats, DBI, haven, httr, jsonlite, readxl, rvest, xml2, modelr, tidyverse).   
+  
+  
+  
+  
+**How would you  install them?**
+
+## Tidyverse Pop Quiz! {.build}
+`install.packages("ggplot2")`
+`install.packages("dplyr")`
+`install.packages("tidyr")`
+`install.packages("readr")`
+`install.packages("purrr")`
+`install.packages("tibble")`
+`install.packages("hms")`
+`install.packages("stringr")`
+`install.packages("lubridate")`
+`install.packages("forcats")`
+`install.packages("DBI")`
+`install.packages("haven")`
+`install.packages("httr")`
+`install.packages("jsonlite")`
+`install.packages("readxl")`
+`install.packages("rvest")`
+`install.packages("xml2")`
+`install.packages("modelr")`
+`install.packages("broom")`  
+  
+  
+  
+Better:  
+`install.packages("tidyverse")`  
+An R package that serves as a short cut for installing and loading the components of the tidyverse.
+
+## Using Packages (Part II)
+  
+1.`install.packages("tidyverse")`  
+  
+Do this 1 time per *computer*.  
+  
+  
+2.`library(tidyverse)`  
+  
+Do this 1 time per *session*  
+  
+## Using Packages (Part II) {.build}
+**Downloading a package isn't the same as using it.**  
+  
+If you'd like to use an R package, you need to tell R.  
+You do that by running the command `library`, again followed by parentheses and the package name.  
+  
+`library(package_name)`  
+  
+This command loads all of the  functions, data sets, and help pages that come with the package into your R session, where you can use them.  
+  
+*If you close R, you'll need to reload the package with library() if you want to use it again.*  
+  
+  
+## Using Packages (Part III)
+The setup chunk is always run once before anything else  
+
+```{r setup_chunk, echo=FALSE, fig.cap="", out.width='66%'}
+url <- "https://github.com/matthewhirschey/tidybiology-plusds/raw/master/media/setup.png"
+knitr::include_graphics(url)
+```
+
+## Set-up Chunk Exercise
+Add a setup chunk (as shown below) to the top of `02_rmd_exercise.Rmd`.  
+Use it to load the tidyverse package (*remember to run this chunk*)  
+Then uncomment and run the final code chunk at the bottom of your file.  
+  
+```{r setup_chunk2, echo=FALSE, fig.cap="", out.width='66%'}
+url <- "https://github.com/matthewhirschey/tidybiology-plusds/raw/master/media/setup2.png"
+knitr::include_graphics(url)
+```

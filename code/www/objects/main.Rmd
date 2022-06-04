@@ -1,0 +1,10 @@
+---
+title: "Main report"
+output: html_document
+---
+# Summary 
+
+```{r test-main, child = 'knitr-child.Rmd'}
+```
+
+# Conclusion

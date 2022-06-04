@@ -1,0 +1,14 @@
+---
+title: "Installing Packages"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+```{r, include = FALSE}
+library(learnr)
+```
+
+## Installing Packages
+
+In this video, you will learn how to take advantage of a rich ecosystem of open source packages in R 
+  
+![](https://youtu.be/2bjeUV_ySyM){width="90%"}

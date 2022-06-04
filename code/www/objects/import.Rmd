@@ -1,0 +1,50 @@
+---
+title: "Importing data into R"
+output: 
+  ioslides_presentation:
+    widescreen: true
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(tidyverse)
+library(knitr)
+library(here)
+library(rlang)
+knitr::opts_chunk$set(echo = FALSE, 
+                      fig.align="center")
+source(here::here("code", "bespoke.R")) #loads custom objects
+```
+
+## Importing data into R {.build}
+
+The `readr` package (found in the `tidyverse` collection) contains a number of useful functions of the form `read_*` to import data. For example, if you have a `.csv` file, you would use the `read_csv` function  
+  
+The dataset provided to you is a cleaned R-specific document. But you will never find this in 'the wild'.  
+  
+Most often, you will need to find a data file (such as csv), and import it
+
+## Importing data into R {.build}
+For the purpose of this class, we have generated a **simulated** dataset of `r dataframe_join_about` to accompany the `r dataframe_name` dataset.  
+
+To import the `r dataframe_join_file_name` file into RStudio, run the following:  
+  
+``r dataframe_join_name` <- read_csv(here::here("data", "`r dataframe_join_file_name`"))`
+
+Go to code/  
+Open 08_import_and_join.Rmd  
+Complete the exercise to import this new dataset.  
+
+## Importing data into R {.build}
+
+You can also use the `readr` package to import data from a URL
+
+For example, to load a dataset from a URL, run the following
+
+```{r import_url, echo = TRUE, warning = FALSE, message = FALSE, eval = TRUE}
+path <- here::here("data", "phx.csv")
+url <- "https://raw.githubusercontent.com/matthewhirschey/tidybiology-plusds/master/data/phx.csv"
+patient_hx <- read_csv(url)
+
+```

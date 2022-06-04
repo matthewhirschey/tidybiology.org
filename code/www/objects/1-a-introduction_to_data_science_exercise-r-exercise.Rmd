@@ -1,0 +1,24 @@
+---
+title: "Final Exercise"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+```{r, include = FALSE}
+#load libraries
+library(learnr)
+```
+
+## Final Exercise
+
+Exercises are opportunities to practices several concepts from a module. Most will take 15-20 minutes to complete. In this video, the exercise tasks will be described for you to carry out.
+  
+![](https://youtu.be/XXXXXX){width="90%"}  
+  
+After watching the video, download the exercise Rmd file and move it to your project directory. Open it and follow the instructions.  
+  
+```{r, echo = FALSE}
+HTML("<a href='www/objects/1-intro_exercise_file.Rmd'>Download Rmd</a>")
+```
+
+
+

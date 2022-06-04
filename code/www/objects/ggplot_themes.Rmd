@@ -1,0 +1,112 @@
+---
+title: "Tidybiology Tiny Lectures: ggplot "
+subtitle: "ggplot: themes"
+author: "Matthew Hirschey, Ph.D."
+date: "April 2020"
+output: 
+  ioslides_presentation:
+    widescreen: true
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(tidyverse)
+library(knitr)
+library(here)
+library(rlang)
+library(patchwork)
+library(ggrepel)
+knitr::opts_chunk$set(echo = FALSE, 
+                      fig.align="center")
+source(here::here("code", "bespoke.R")) #loads custom objects
+```
+
+## Themes {.build}
+You can change almost everything you see on your chart, but a lot of the things you may look to change are part of the "theme"  
+  
+Here we are going to change some features about our title text:  
+  
+`ggplot(`r dataframe_name`, aes(x=`r df_char1_name`, y=`r df_numeric1_name`) +`  
+`geom_jitter() +`    
+`geom_boxplot(aes(color = `r df_char1_name`)) +`  
+`labs(title = "My first plot") +`  
+`theme(plot.title = element_text(face = "bold", size = 12))` 
+
+## Themes {.build}
+```{r themes, echo = FALSE, warning = FALSE}
+theme1 <- ggplot(df_input, aes(!!sym(df_char1_name), !!sym(df_numeric1_name))) +
+  geom_jitter() +
+  geom_boxplot(aes(color = !!sym(df_char1_name))) +
+  labs(title = "My first plot") +
+  theme(plot.title = element_text(face = "bold", size = 12)) 
+original_plot + theme1
+```
+
+## Themes {.build}
+Next, let's change the aesthetics of our legend box  
+  
+`ggplot(`r dataframe_name`, aes(x=`r df_char1_name`, y=`r df_numeric1_name`) +`  
+`geom_jitter() +`    
+`geom_boxplot(aes(color = `r df_char1_name`)) +`  
+`labs(title = "My first plot") +`  
+`theme(plot.title = element_text(face = "bold", size = 12),`  
+`legend.background = element_rect(fill="gray", colour="black"))`   
+
+## Themes {.build}
+```{r themes2, echo = FALSE, warning = FALSE}
+theme2 <- ggplot(df_input, aes(!!sym(df_char1_name), !!sym(df_numeric1_name))) +
+  geom_jitter() +
+  geom_boxplot(aes(color = !!sym(df_char1_name))) +
+  labs(title = "My first plot") +
+  theme(plot.title = element_text(face = "bold", size = 12), 
+        legend.background = element_rect(fill="gray", colour="black")
+  ) 
+theme1 + theme2
+```
+
+## Themes {.build}
+Finally, let's change the legend position  
+  
+`ggplot(`r dataframe_name`, aes(x=`r df_char1_name`, y=`r df_numeric1_name`) +`  
+`geom_jitter() +`    
+`geom_boxplot(aes(color = `r df_char1_name`)) +`  
+`labs(title = "My first plot") +`  
+`theme(plot.title = element_text(face = "bold", size = 12),`  
+`legend.background = element_rect(fill="gray", colour="black"),`  
+`legend.position = "bottom"))` 
+
+## Themes {.build}
+```{r themes3, echo = FALSE, warning = FALSE}
+theme3 <- ggplot(df_input, aes(!!sym(df_char1_name), !!sym(df_numeric1_name))) +
+  geom_jitter() +
+  geom_boxplot(aes(color = !!sym(df_char1_name))) +
+  labs(title = "My first plot") +
+  theme(plot.title = element_text(face = "bold", size = 12), 
+        legend.background = element_rect(fill="gray", colour="black"),
+        legend.position = "bottom"
+  ) 
+theme2 + theme3
+```
+
+## Themes {.build}
+Pre-set themes also exist as an easy way to change the entire theme of your graph quickly. They can also be combined with custom theme settings  
+
+`ggplot(`r dataframe_name`, aes(x=`r df_char1_name`, y=`r df_numeric1_name`) +`  
+`geom_jitter() +`    
+`geom_boxplot(aes(color = `r df_char1_name`)) +`  
+`labs(title = "My first plot") +`  
+`theme_minimal()`  
+
+## Themes {.build}
+```{r themes4, echo = FALSE, warning = FALSE}
+theme4 <- ggplot(df_input, aes(!!sym(df_char1_name), !!sym(df_numeric1_name))) +
+  geom_jitter() +
+  geom_boxplot(aes(color = !!sym(df_char1_name))) +
+  labs(title = "My first plot") +
+  theme_minimal()
+theme1 + theme4
+```
+
+
+

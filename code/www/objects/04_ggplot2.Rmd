@@ -1,0 +1,74 @@
+---
+title: "ggplot practice"
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+```
+
+```{r, include=FALSE}
+#Load datasets we will use for the lecture
+source(here::here("code", "healthcare.R")) #loads dataset-specific variables
+```
+
+# Lets take a glimpse at our dataset called `heart`
+```{r}
+
+```
+
+# Basics of a ggplot code
+Below is an example of the most basic form of the ggplot code
+```{r, eval=FALSE}
+ggplot(data)+ #this will generate a blank plot for your data. At this point, ggplot knows what to plot, but not how.
+  geom(mapping=aes(x, y)) #adding a geom tells ggplot how you would like to map your data
+```
+
+Take a moment to use this template to make a simple ggplot. The data `heart` is defined, but you can choose the variables you want to map to x and y. I would recommend using `geom_point`.  
+  
+Put your code in the code chunk here, run it by clicking the green arrow.  
+```{r}
+
+
+```
+
+# Aesthetics
+Everything up to this point gets you a basic graph; but what about colors, shapes and overall style?  
+  
+You can change 5 basic aesthetics  
+1. Color- changes the outline color of your datapoints  
+2. Size - choose the size of the datapoint  
+3. Shape - choose a pre-defined shape  
+4. Alpha- changes the transparency of each point  
+5. Fill- changes the fill color of your points  
+
+## Color- changes the outline color of your datapoints  
+Retype or paste the exact code from the last code chunk, then add a color aesthetic. In the template, it would go here:  
+`geom(mapping=aes(x, y), color = "my_favorite_color")`
+```{r}
+
+```
+
+## Size - choose the size of the datapoint  
+Retype or paste the exact code from the last code chunk, then add a size aesthetic. In the template, it would go in the same place as color. 
+```{r}
+
+```
+
+## Shape - choose a pre-defined shape  
+Retype or paste the exact code from the last code chunk, then add a shape aesthetic. In the help tab, type "shape" to learn more about the shape options available, and how to call them. 
+You can also look here: https://ggplot2.tidyverse.org/reference/aes_linetype_size_shape.html
+```{r}
+
+```
+
+## Alpha- changes the transparency of each point  
+Retype or paste the exact code from the last code chunk, then add an alpha aesthetic. In the template, it would go in the same place as color. Alpha is a scale from 0 to 1, similar to a percentage scale.
+```{r}
+
+```
+
+## Fill- changes the fill color of your points  
+Retype or paste the exact code from the last code chunk, then added a fill color aesthetic. In the template, it would go in the same place as color. How is fill different than color?
+```{r}
+
+```

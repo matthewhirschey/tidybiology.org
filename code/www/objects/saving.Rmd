@@ -1,0 +1,39 @@
+---
+title: "Saving Thing in R"
+output: 
+  ioslides_presentation:
+    widescreen: true
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(tidyverse)
+library(knitr)
+library(here)
+library(rlang)
+knitr::opts_chunk$set(echo = FALSE, 
+                      fig.align="center")
+source(here::here("code", "bespoke.R")) #loads custom objects
+```
+
+## Saving a new dataset as an object
+
+If you'd like to save the output of your wrangling as an object, you will need to use the `<-` operator
+
+``r dataframe_name`_new <- `r dataframe_name` %>%`  
+            `group_by(`r colnames(df_character_select)`) %>%`  
+            `summarise(mean(`r colnames(df_numeric_select)`))`  
+  
+*Assigning the object the same name (i.e. ``r dataframe_name``) will overwrite the object  
+  
+```{r df_object_exercise, exercise=TRUE}
+
+```
+  
+## Saving a new dataset as a file
+
+To save ``r dataframe_name`_new` as a new file (e.g. csv), run the following:  
+  
+`write_csv(`r dataframe_name`_new, "`r dataframe_name`_new.csv")`
+  

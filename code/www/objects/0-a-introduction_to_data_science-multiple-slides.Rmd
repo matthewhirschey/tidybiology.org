@@ -1,0 +1,39 @@
+---
+title: "Introduction to Data Science"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+```{r, include = FALSE}
+library(learnr)
+```
+
+<style>
+.background {
+    background-color: ghostwhite; 
+}
+</style>
+
+## Introduction to Data Science
+
+### More data are generated than ever before
+```{r intro, echo=FALSE, fig.cap="", out.width = '100%'}
+url <- "https://source.unsplash.com/yJVpnfqu8GY/512x384"
+knitr::include_graphics(url)
+```
+  
+<font size = "1">Photo by [SJ on Unsplash](https://unsplash.com/@sjjillan)</font>
+
+### A digital era introduces new decision-making challenges {.background}
+**Volume**  
+- Data collection & storage allows access to huge amounts of information  
+  
+**Ubiquity**  
+- Data are available anywhere across geography, social, and economic classes   
+  
+**Latency**  
+- Technology facilitates no delay in access to data    
+
+*** 
+  
+### How can you use data to make better decisions?  
+Data Science!  

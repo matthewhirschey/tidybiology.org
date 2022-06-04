@@ -1,0 +1,90 @@
+---
+title: "Tidybiology Tiny Lectures: ggplot "
+subtitle: "ggplot: geoms"
+author: "Matthew Hirschey, Ph.D."
+date: "April 2020"
+output: 
+  ioslides_presentation:
+    widescreen: true
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(tidyverse)
+library(knitr)
+library(here)
+library(rlang)
+library(patchwork)
+library(ggrepel)
+knitr::opts_chunk$set(echo = FALSE, 
+                      fig.align="center")
+source(here::here("code", "bespoke.R")) #loads custom objects
+```
+
+## How are these two plots similar?
+```{r double_plot, echo = FALSE, message=FALSE, warning=FALSE}
+plot1 <- df_input %>% 
+  ggplot(aes(!!sym(df_numeric1_name), !!sym(df_numeric2_name))) +
+  geom_point() 
+
+plot2 <- df_input %>% 
+  ggplot(aes(!!sym(df_numeric1_name), !!sym(df_numeric2_name))) +
+  geom_smooth() 
+
+plot1 + plot2
+```
+
+## The `geom` is different between these plots
+`geom` is short for geometric object, which is the visual object used to represent the data  
+    
+`plot1 <- ggplot(`r dataframe_name`) +`  
+  `geom_point(aes(`r df_numeric1_name`, `r df_numeric2_name`))`   
+  
+`plot2 <-  ggplot(`r df_numeric1_name`, `r df_numeric2_name`) +`  
+  `geom_smooth(aes(`r df_numeric1_name`, `r df_numeric2_name`))`   
+
+## Choosing your (geom)itries
+Different data types require different plot types.  
+  
+When plotting your data, it is often helpful to take a glimpse at the data you intend to plot to know what kinds of variables you will be working with
+
+`glimpse(`r dataframe_name`)`
+```{r glimpse_again, exercise=TRUE}
+
+```
+
+## Geoms 
+So now that you know your variable types, how do you know what geoms to use??  
+  
+Use the following resources to match your data type to the appropriate `geoms`
+
+----
+<a href="https://rstudio.com/resources/cheatsheets" target="_blank">https://rstudio.com/resources/cheatsheets/</a><br>
+<center><iframe src="https://rstudio.com/resources/cheatsheets"></iframe></center>
+
+----
+<a href="https://www.data-to-viz.com/" target="_blank">https://www.data-to-viz.com/</a><br>
+<center><iframe src="https://www.data-to-viz.com/"></iframe></center>
+
+## Change this scatterplot code to draw boxplots {.smaller} 
+`ggplot(`r dataframe_name`) + geom_point(aes(x=`r df_char1_name`,y=`r df_numeric1_name`))`  
+```{r boxplot_activity, exercise = TRUE}
+
+```
+  
+Use the cheatsheet. Try your best guess.  
+
+## What will this code do?
+  
+`ggplot(`r dataframe_name`) +`   
+`geom_boxplot(aes(x=`r df_char1_name`,y=`r df_numeric1_name`)) +`  
+`geom_point(aes(x=`r df_char1_name`,y=`r df_numeric1_name`))`  
+
+## Try including two `geoms` for yourself
+```{r 2geom_activity, exercise = TRUE}
+
+```
+  
+**Each new geom adds a new layer**  
+

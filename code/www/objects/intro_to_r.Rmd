@@ -1,0 +1,158 @@
+---
+title: "Introduction to R"
+output: 
+  ioslides_presentation:
+    widescreen: true
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(tidyverse)
+library(knitr)
+library(here)
+library(rlang)
+knitr::opts_chunk$set(echo = FALSE, 
+                      fig.align="center")
+source(here::here("code", "bespoke.R")) #loads custom objects
+```
+
+# R <br> language
+Any questions?
+
+## R is a language
+```{r language, echo=FALSE, fig.cap=""}
+url <- "https://source.unsplash.com/ZzWsHbu2y80/256x455"
+knitr::include_graphics(url)
+```
+<font size = "1">Photo by Hannah Wright on Unsplash</font>
+
+## R has values
+- 1
+- "North Carolina"
+- "2020-04-08"
+
+## R has objects
+- A name without quotes  
+- Assigned using `<-` (looks like an arrow pointing left)  
+- Can be a value, object, or function result  
+
+## Try assigning an object 
+1. Assign an object; **remember, no quotes on name**  
+`name <- 4`  
+  
+2. Return that object by typing its name  
+`name`  
+  
+Try this in the code chunk below, then hit "Run Code"  
+
+```{r my_first_object, exercise=TRUE}
+
+```
+
+## R has functions
+- A name without quotes  
+- Followed by () to run the function  
+- Optional arguements: values, objects, or function results  
+- `round(x, digits = 3)`
+
+Try this in the code chunk below, then hit "Run Code"  
+
+```{r my_first_fun, exercise=TRUE}
+round(pi, digits = 3)
+
+```
+
+## Which of these are numbers?
+
+```{r num_quiz, echo=FALSE}
+question("Which of these are numbers?",
+  answer("1", correct = TRUE),
+  answer('"1"', message = "Because it has quotes, it is an string"),
+  answer('"one"', message = "Because it has quotes, it is an string"),
+  answer("one",  message = "R recognizes this as an object"), 
+  allow_retry = TRUE, 
+  random_answer_order = TRUE
+)
+```
+
+## Which of these will work?
+Suppose `one <- 1`
+```{r one_quiz, echo=FALSE}
+question("Which of these will work?",
+  answer("log(1)", correct = TRUE),
+  answer('log("1")', message = "You cannot log transform a word (string)"),
+  answer('log("one")', message = "You cannot log transform a word (string)"),
+  answer("log(one)", correct = TRUE), 
+  allow_retry = TRUE, 
+  random_answer_order = TRUE
+)
+```
+Try it for yourself!  
+  
+```{r scratchpad, exercise=TRUE}
+one <- 1
+```
+
+## Data are stored in tables and dataframes
+Data stored in a dataframe are conceptually equivalent to a spreadsheet with rows and columns  
+  
+This is a sample from the ``r dataframe_name`` dataset  
+  
+```{r kable}
+df_input %>% 
+  select(1:5) %>% 
+  slice(1:5) %>% 
+  knitr::kable()
+```
+
+## Data are stored in tables and dataframes
+Data stored in a dataframe are conceptually equivalent to a spreadsheet with rows and columns  
+  
+This is a sample from the ``r dataframe_name`` dataset  
+  
+```{r tibble}
+df_input %>% 
+  select(1:5) %>% 
+  slice(1:5) %>% 
+  print(as_tibble())
+```
+
+## Extract or create new objects
+```{r extract_setup, include=FALSE}
+col <- sample(colnames(df_input), 1)
+```
+
+You can call a single part of the data frame  
+  
+`r dataframe_name`$`r col`
+
+```{r extract, echo = FALSE, warning = FALSE}
+df_input %>% 
+  select(!!col)
+```
+
+## Extract or create new objects 
+  
+Write the R code required to extract a variable from the `r dataframe_name` dataset:  
+  
+Remember, the format is: `r dataframe_name`$`r col`  
+  
+```{r extract_exercise, exercise=TRUE}
+
+```
+
+## Extract or create new objects 
+  
+You can also save a part of the dataframe as an object for later use  
+  
+``r col` <- `r dataframe_name`$`r col``  
+  
+In the code chunk below:  
+1. On the first line, write the R code to save a single column to a new object   
+2. On the second line, type the object name - this will print out the new object  
+3. Run the code  
+  
+```{r create_exercise, exercise=TRUE}
+
+```

@@ -1,0 +1,97 @@
+---
+title: "Tidybiology Tiny Lectures: ggplot "
+subtitle: "ggplot: global vs local"
+author: "Matthew Hirschey, Ph.D."
+date: "April 2020"
+output: 
+  ioslides_presentation:
+    widescreen: true
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(tidyverse)
+library(knitr)
+library(here)
+library(rlang)
+library(patchwork)
+library(ggrepel)
+knitr::opts_chunk$set(echo = FALSE, 
+                      fig.align="center")
+source(here::here("code", "bespoke.R")) #loads custom objects
+```
+
+
+## Global vs Local
+```{r global_v_local_concepts, echo = FALSE, warning = FALSE}
+ggplot(df_input) +
+  geom_jitter(aes(!!sym(df_char1_name), !!sym(df_numeric1_name))) +
+  geom_boxplot(aes(!!sym(df_char1_name), !!sym(df_numeric1_name)))
+```
+
+## Global vs Local
+However, if we map our x and y values in the ggplot function we find that we generate the same graph  
+  
+`ggplot(`r dataframe_name`, aes(x=`r df_char1_name`, y=`r df_numeric1_name`) +`  
+`geom_jitter() +`    
+`geom_boxplot()`  
+```{r global_v_local, echo = FALSE, warning = FALSE}
+ggplot(df_input, aes(!!sym(df_char1_name), !!sym(df_numeric1_name))) +
+  geom_jitter() +
+  geom_boxplot()
+```
+
+## Global vs Local {.build}
+This is because when you set the aes mappings in the original `ggplot` function you are setting the `aes` **globally**.  
+This means all the functions afterwards will inherit that mapping. So in our example, this means that both the jitter and boxplot geoms know to graph the same information  
+  
+You can also set aes values **locally** within the geom function. Doing so will only change the values in that geom
+
+## Global vs Local
+`ggplot(`r dataframe_name`, aes(x=`r df_char1_name`, y=`r df_numeric1_name`) +`  
+`geom_jitter() +`    
+`geom_boxplot(aes(color = `r df_char1_name`))`      
+```{r global_v_local1, echo = FALSE, warning = FALSE}
+ggplot(df_input, aes(!!sym(df_char1_name), !!sym(df_numeric1_name))) +
+  geom_jitter() +
+  geom_boxplot(aes(color = !!sym(df_char1_name)))
+```
+
+## Global vs Local {.build}
+```{r global_v_local2, echo=FALSE}
+mean <- mean(df_numeric2_vec)
+sd <- sd(df_numeric2_vec)
+```
+
+Data can also be set locally or globally. For this example, let's filter our original data first using the `dplyr::filter` function
+  
+`df_filter <- `r dataframe_name` %>% filter(`r df_numeric2_name` > `r round(mean + 2*sd)`)`  
+  
+*this number is two standard deviations above the `mean` value of `r df_numeric2_name`
+
+## Global vs Local {.build}
+Now, let's identify only the `r dataframe_about` in our data that are outliers, more than 2SD above the mean, by setting data locally in a new geom  
+  
+`ggplot(`r dataframe_name`, aes(x=`r df_char1_name`, y=`r df_numeric1_name`) +`  
+`geom_jitter() +`    
+`geom_boxplot(aes(color = `r df_char1_name`)) +`   
+`geom_label(data=df_filter, aes(label=`r df_id_name`))`  
+
+## Global vs Local {.build}
+```{r global_v_local3, echo = FALSE, warning = FALSE}
+df_filter <- df_input %>% filter(!!sym(df_numeric2_name) > round(mean + 2*sd))
+
+ggplot(df_input, aes(!!sym(df_char1_name), !!sym(df_numeric1_name))) +
+  geom_jitter() +
+  geom_boxplot(aes(color = !!sym(df_char1_name))) +
+  geom_label_repel(data = df_filter, aes(label = !!sym(df_id_name)))
+```
+
+## Global vs Local {.build}
+You notice we have to indicate the new dataset, but because it has the same x and y values, we did not need to set those mappings  
+  
+Go to code/  
+Open 06_global_v_local.Rmd  
+Complete the exercise to practice mapping locally and globally.   
+

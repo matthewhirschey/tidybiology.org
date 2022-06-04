@@ -1,0 +1,109 @@
+---
+title: "adding meds to phx"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(here)
+#library(babynames)
+```
+
+# Import heart data
+```{r}
+source(here::here("code", "healthcare.R")) #loads dataset-specific variables
+```
+
+# Family history
+```{r adding variables}
+# Create a "family_history" variable
+fam_hist <- c("Aunt", "aunt", "Auntie", "auntie", "Father", "father", "Uncle", "uncle", "Grandmother", "grandmother", "Grandfather", "grandfather", "Mother", "mother")
+
+heart$family_history <- sample(fam_hist, nrow(heart), replace = TRUE) # exercise idea: use Stringr to identify patients whose grandPARENTS have heart disease
+
+# You could also show how to clean up names by standardising
+```
+
+Making a new dataframe
+```{r new df}
+heart <- heart %>% 
+          mutate(health_status = case_when(
+            fbs == "elevated" & chol > 240 ~ "Diabetic & High Cholesterol",
+            fbs == "elevated" ~ "Diabetic",
+            chol > 240 ~ "High Cholesterol",
+            TRUE ~ "Normal blood sugar and cholesterol"
+          ))
+```
+
+# Define drugs & fun()
+```{r}
+#trestbps (high bp)
+high_trestbps <- c("felodipine", "isradipine", "amlodipine", NA)
+
+#chol (cholesterol)
+high_chol <- c("atorvastatin", "simvastatin", "lovastatin", NA)
+
+#fbs (diabetes)
+high_fbs <- c("insulin", "metformin", "glyburide", "glimepiride", "rosiglitazone", NA)
+
+#exang (angina)
+high_exang <- c("aspirin", "nitrates", "Metoprolol", "Acebutolol", NA)
+
+#target
+#3 of the above
+
+#functions
+fill_trestbps <- function(var) {
+  if (var > 120) {
+    sample(high_trestbps, 1)
+  } else {
+    NA
+  }
+}
+fill_chol <- function(var) {
+  if (var > 240) {
+    sample(high_chol, 1)
+  } else {
+    NA
+  }
+}
+fill_fbs <- function(var) {
+  if (var == "elevated") {
+    sample(high_fbs, 1)
+  } else {
+    NA
+  }
+}
+fill_exang <- function(var) {
+  if (var == 1) {
+    sample(high_exang, 1)
+  } else {
+    NA
+  }
+}
+
+heart <- heart %>% 
+   mutate(drug_trestpbs = map_chr(trestbps, fill_trestbps), 
+          drug_chol = map_chr(chol, fill_chol), 
+          drug_fbs = map_chr(fbs, fill_fbs), 
+          drug_exang = map_chr(exang, fill_exang)) %>% 
+   unite("medication_hx", starts_with("drug"), sep = ", ", remove = TRUE, na.rm = TRUE)
+```
+
+#Quick checks
+```{r}
+heart %>% count(health_status) 
+heart %>% count(medication_hx, sort = TRUE)
+
+```
+
+#make final df
+```{r}
+
+phx <- heart %>% 
+   select(patient_id, family_history, health_status, medication_hx)
+
+write_csv(phx, here::here("data", "phx.csv"))
+```
+

@@ -1,0 +1,23 @@
+---
+title: "Rmarkdown activity"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+```{r, include = FALSE}
+#load libraries
+library(learnr)
+```
+
+## Rmarkdown activity
+Data science projects in R can use a special data file type called an Rmarkdwon (Rmd) file. To learn more about this file type and how to use it in Rstudio,  
+  
+1. Create a new project in Rstudio  
+2. Download the file below  
+3. Move it to the project directory  
+4. Open the file and follow 
+
+```{r, echo = FALSE}
+HTML("<a href='www/objects/1-rmarkdown_activity_file.Rmd'>Download Rmd</a>")
+```
+
+

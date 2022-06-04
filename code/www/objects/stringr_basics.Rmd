@@ -1,0 +1,143 @@
+---
+title: "StringR Basics"
+output: 
+  ioslides_presentation:
+    widescreen: true
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(tidyverse)
+library(knitr)
+library(here)
+library(rlang)
+knitr::opts_chunk$set(echo = FALSE, 
+                      fig.align="center")
+source(here::here("code", "bespoke.R")) #loads custom objects
+```
+
+
+## Counting string {.build}
+```{r setup_count, include=FALSE}
+df_input2 %>% count(health_status, sort = TRUE) %>% slice(2) %>% select(1) %>% pull()
+#restart here
+```
+
+`str_count()` is a function we can use to count the number of rows that match a particular pattern.  
+  
+The output with either be 1 (match), or 0 (no match)  
+
+<div class= "red2"> Example </div>  
+In this code:  
+- string we want to evaluate is ``r dataframe_joined_name`$`r df_joined_string3_name``  
+- pattern we want to count `"High Cholesterol"`  
+
+`str_count(heart_joined$health_status, "High Cholesterol")`
+
+## Counting
+`str_count(heart_joined$health_status, "High Cholesterol")`
+
+```{r str_count example, echo= FALSE, warning = FALSE}
+str_count(heart_joined$health_status, "High Cholesterol")
+```
+
+## Summarizing our counts
+A bunch of 0 and 1 are not incredibly useful.
+
+But since R is good at adding, we can simply wrap the previous expression in `sum()`  
+
+Try it below:  
+```{r sum_string, exercise = TRUE}
+
+```
+
+## Matching subsets of strings {.build}
+
+We previously matched the entire string "High Cholesterol"  
+But we can use the same function to detect patterns within longer strings.  
+  
+Let's look for how many patients take a statin of any kind using
+`str_count(heart_joined$medication_hx, "statin")` 
+
+## What about subsets of strings?  
+`str_count(heart_joined$medication_hx, "statin")` 
+
+What does the ouput mean?  
+```{r str_count_exercise, exercise = TRUE}
+
+```
+
+## A note about string patterns
+
+When using a stringr function, you may get an output saying a string pattern doesn't exist. If you know for sure it does, <div class="blue"> double check capitalization </div>.  
+  
+**The string must match exactly, or it will not be found!**
+
+## stringr Exercise
+How many people having an `"auntie" or "aunt"` in their health history?  
+  
+Go to code/  
+Open 09_stringr.Rmd  
+Complete the exercise. 
+
+
+
+## Detecting strings {.build}
+In addition to counting, we can use another function `str_detect()` to logically evaluate a character string.  
+  
+Because this logically evaluates an expression, the output is either `TRUE or FALSE`  
+  
+Practially, `str_detect` is used to detect the presence or absence of a pattern in a string  
+
+## Logic Evaluation 
+<div class= "red2"> Example </div>  
+Find the patients with diabetes using the following code  
+  
+`str_detect(heart_joined$health_status, "Diabetic")`  
+  
+```{r strdetect, exercise=TRUE}
+
+```
+
+## Modifiying strings with `str_replace()` {.build}
+In the health_status column we have:  
+-`"Diabetic"`  
+-`"High Cholesterol"`  
+-`"Normal blood sugar and cholesterol"`  
+  
+But let's say we want to simplify healthy individuals to `"Normal"`
+
+`str_replace(heart_joined$health_status, "Normal blood sugar and cholesterol", "Normal")`
+
+```{r str_replace, exercise=TRUE}
+
+```
+
+## Modifiying strings with `str_replace()` {.build}
+We use this same code to  modify the `health_status` column by assigning it to the same variable     
+  
+`heart_joined$health_status <-`  
+       `str_replace(heart_joined$health_status, "Normal blood sugar and cholesterol", "normal")`
+
+```{r str_replace in col, warning = FALSE, echo=FALSE}
+heart_joined$health_status <- 
+  str_replace(heart_joined$health_status, "Normal blood sugar and cholesterol", "normal")
+
+head(heart_joined$health_status, n = 10)
+```
+
+## Using `stringr` with `dplyr` {.build}
+We can use `stringr` functions in tandem with `dplyr` functions.  
+  
+<div class= "red2"> Example </div>  
+We want to make a logical variable (`TRUE`/`FALSE`) that tells us if a patient has a normal health history using  
+
+`heart_joined2 <- heart_joined %>% mutate(healthy = str_detect(health_status, "normal"))` 
+
+```{r stringr with dplyr, echo=FALSE, warning=FALSE}
+heart_joined2 <- mutate(heart_joined, healthy = str_detect(health_status, "normal"))
+
+head(heart_joined2$healthy, n = 10)
+```
+ 

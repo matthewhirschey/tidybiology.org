@@ -1,0 +1,41 @@
+---
+title: "stringR"
+output: html_notebook
+---
+
+```{r setup}
+library(tidyverse)
+```
+
+#data import
+Running this script will import the datasets you need
+```{r}
+source(here::here("code", "healthcare.R"))
+```
+
+#take a glimpse at the `heart_joined` dataset to look for the variables we'll be searching within
+```{r}
+glimpse(heart_joined)
+```
+
+#How many people having an `"auntie" or "aunt"` in their health history?  
+```{r}
+sum(str_count(heart_joined$family_history, "unt"))
+```
+
+#how many people have Mother/mother but not grandmothers in their family history?
+```{r}
+sum(str_count(heart_joined$family_history, "^(M|m)other"))
+```
+
+#Beginning with `heart_joined`, create a new column called `statin` that detects whether or not a patient is on a statin, "and then" filter the dataset to contain only this subgroup of people. Call this new dataframe `statin_subgroup` 
+How many people are in this subgroup?
+```{r}
+statin_subgroup <- heart_joined %>% 
+  mutate(statin = str_detect(medication_hx, "statin")) %>% 
+  filter(statin == TRUE)
+
+#391 people
+```
+
+

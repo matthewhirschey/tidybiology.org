@@ -1,0 +1,63 @@
+---
+title: "aes practice"
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(patchwork)
+```
+
+```{r, include=FALSE}
+#Load datasets we will use for the lecture
+source(here::here("code", "healthcare.R")) #loads dataset-specific variables
+```
+
+# Lets take a glimpse at our dataset called `heart`
+```{r}
+
+```
+
+# Basics of a ggplot code
+Below is an example of the most basic form of the ggplot code
+```{r, eval=FALSE}
+ggplot(data)+ #this will generate a blank plot for your data. At this point, ggplot knows what to plot, but not how.
+  geom(mapping=aes(x, y)) #adding a geom tells ggplot how you would like to map your data
+```
+
+Take a moment to use this template to make a simple ggplot. The data `heart` is defined, but you can choose the variables you want to map to x and y. I would recommend using `geom_point`.  
+  
+Put your code in the code chunk here, run it by clicking the green arrow.  
+```{r}
+
+
+```
+  
+Compare the code for these two plots
+```{r}
+plot1 <- ggplot(heart) +
+  geom_point(aes(x = age, y = chol), color = "blue")
+
+plot2 <- ggplot(heart) +
+  geom_point(aes(x = age, y = chol, color = sex))
+
+plot1 + plot2
+```
+
+Of the 5 basic aesthetics, 4 can be mapped to variables in your data
+1. Color- changes the outline color of your datapoints  
+2. Size - choose the size of the datapoint  
+3. Shape - choose a pre-defined shape  
+4. Alpha- cCANNOT BE MAPPED TO A VARIABLE. 
+5. Fill- changes the fill color of your points  
+  
+In this code chunk, take either your plot from above, or the example I provided, and map your variables to the aesthetics. Make sure you map the variable *inside* the `aes()`. 
+```{r}
+
+```
+  
+Curious for more? Map more than two variables to two distinct aesthetics
+```{r}
+
+```
+
+

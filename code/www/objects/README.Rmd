@@ -1,0 +1,27 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+![tidybiology](README_files/figure-gfm/tidybiology_channel_art.png)
+  
+<!-- badges: start -->
+<!-- badges: end -->
+  
+# Tidybiology Essentials
+  
+The ability to make data-driven decisions is redefining fields as far-reaching as healthcare, science, technology, finance, and beyone. This project provides an introduction to the emerging field of health data science using the R software language, including data analysis and visualization, with a particular focus on its utility for decision making insight. No prior knowledge of data science or computer programming is assumed; computer access with install privileges is required. Learners will be provided with bespoke dataset examples, and introduced to R packages and code used to examine data. Particular attention will be paid to code interpretation and data provenance methods by learning to generate reproducible data output files. Although specific datasets will be used for analysis in class, this workshop will provide broadly applicable tools to reproducibly analyze and visualize data across a wide continuum.
+  
+
+## Links
+| Class  | Topic | Code | Recording |
+| ------------- | ------------- | --- | --- |
+
+  

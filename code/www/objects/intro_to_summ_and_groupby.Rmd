@@ -1,0 +1,45 @@
+---
+title: "Introduction to Summarise/Summarize and Group_By"
+output: 
+  ioslides_presentation:
+    widescreen: true
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(tidyverse)
+library(knitr)
+library(here)
+library(rlang)
+knitr::opts_chunk$set(echo = FALSE, 
+                      fig.align="center")
+source(here::here("code", "bespoke.R")) #loads custom objects
+```
+
+## `summarise()` and `summarize()` {.build}
+
+`summarize()` is one of the key functions in `dplyr`. It produces a new dataframe that aggregates that values of a column based on a certain condition.  
+  
+For example, to calculate the mean `r colnames(df_numeric_select)`, run the following
+
+``r dataframe_name` %>%`      
+  `summarise(mean(`r colnames(df_numeric_select)`))` 
+
+```{r summarize_exercise, exercise=TRUE}
+
+```
+
+## `group_by()` {.build}
+
+`group_by()` and `summarize()` are a powerful combination of functions to summarize by groups  
+  
+``r dataframe_name` %>%`  
+  `group_by(`r colnames(df_character_select)`) %>%`  
+  `summarise(mean(`r colnames(df_numeric_select)`))`  
+  
+```{r groupby_exercise, exercise=TRUE}
+
+```
+  
+*remember this pair! 

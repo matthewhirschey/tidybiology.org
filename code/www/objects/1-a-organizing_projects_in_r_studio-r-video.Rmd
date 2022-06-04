@@ -1,0 +1,5 @@
+## Organizing projects in Rstudio
+
+Rstudio uses projects as a top-level organization for code, documentation, and data files related to a data science task. In this video, you learn how to set-up your first Rstudio project.
+  
+![](https://youtu.be/XXXXXX{width="90%"}

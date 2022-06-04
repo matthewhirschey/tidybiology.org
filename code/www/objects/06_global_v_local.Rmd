@@ -1,0 +1,39 @@
+---
+title: "Global v. Local practice"
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+```
+
+```{r, include=FALSE}
+#Load datasets we will use for the lecture
+source(here::here("code", "healthcare.R")) #loads dataset-specific variables
+```
+
+# Lets take a glimpse at our dataset called `heart`
+```{r}
+
+```
+
+# Basics of a ggplot code
+Below is an example of the most basic form of the ggplot code
+```{r, eval=FALSE}
+ggplot(data)+ #this will generate a blank plot for your data. At this point, ggplot knows what to plot, but not how.
+  geom(mapping=aes(x, y)) #adding a geom tells ggplot how you would like to map your data
+```
+
+Take a moment to use this template to make a simple ggplot. The data `heart` is defined, but you can choose the variables you want to map to x and y. Add a second geom. 
+  
+Put your code in the code chunk here, with LOCAL variables for each geom; run it by clicking the green arrow.  
+```{r}
+
+
+```
+  
+Put your code in the code chunk here, with GLOBAL variables for each geom; run it by clicking the green arrow.  
+```{r}
+
+```
+
+The `geoms` are hierarchical, so they will inhert the data from the step above, unless you specficy differently. 

@@ -1,0 +1,75 @@
+---
+title: "Tidybiology Tiny Lectures: ggplot "
+subtitle: "ggplot: labels and legends"
+author: "Matthew Hirschey, Ph.D."
+date: "April 2020"
+output: 
+  ioslides_presentation:
+    widescreen: true
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(tidyverse)
+library(knitr)
+library(here)
+library(rlang)
+library(patchwork)
+library(ggrepel)
+knitr::opts_chunk$set(echo = FALSE, 
+                      fig.align="center")
+source(here::here("code", "bespoke.R")) #loads custom objects
+```
+
+
+## Labels and Legends
+Several options exist to change the default labels and legends. Recall, this code:  
+  
+`ggplot(`r dataframe_name`, aes(x=`r df_char1_name`, y=`r df_numeric1_name`) +`  
+`geom_jitter() +`    
+`geom_boxplot(aes(color = `r df_char1_name`))`   
+
+## Labels and Legends {.build}
+```{r labs, echo = FALSE, warning = FALSE}
+original_plot <- ggplot(df_input, aes(!!sym(df_char1_name), !!sym(df_numeric1_name))) +
+  geom_jitter() +
+  geom_boxplot(aes(color = !!sym(df_char1_name)))
+original_plot
+```
+  
+But it has two problems:  
+1. The x-axis label is redundant  
+2. The figure legend is also redundant  
+
+## Change labels using `labs`
+`ggplot(`r dataframe_name`, aes(x=`r df_char1_name`, y=`r df_numeric1_name`) +`  
+`geom_jitter() +`    
+`geom_boxplot(aes(color = `r df_char1_name`)) +`  
+`labs(x ="") #blank quotes removes the label`
+
+## Change labels using `labs`
+Gave us this plot:  
+```{r labs_fix, echo = FALSE, warning = FALSE}
+ggplot(df_input, aes(!!sym(df_char1_name), !!sym(df_numeric1_name))) +
+  geom_jitter() +
+  geom_boxplot(aes(color = !!sym(df_char1_name))) +
+  labs(x = "")
+```
+
+## Change legend using `guides`
+`ggplot(`r dataframe_name`, aes(x=`r df_char1_name`, y=`r df_numeric1_name`) +`  
+`geom_jitter() +`    
+`geom_boxplot(aes(color = `r df_char1_name`)) +`  
+`labs(x ="") #blank quotes removes the label +`  
+`guides(color = "none")`
+
+## Change legend using `guides` 
+```{r guides, echo = FALSE, warning = FALSE}
+lab_plot <- ggplot(df_input, aes(!!sym(df_char1_name), !!sym(df_numeric1_name))) +
+  geom_jitter() +
+  geom_boxplot(aes(color = !!sym(df_char1_name))) +
+  labs(x = "") + 
+  guides(color = "none")
+original_plot + lab_plot
+```

@@ -1,0 +1,43 @@
+---
+title: "Tidybiology Tiny Lectures: ggplot "
+subtitle: "ggplot: faceting"
+author: "Matthew Hirschey, Ph.D."
+date: "April 2020"
+output: 
+  ioslides_presentation:
+    widescreen: true
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(tidyverse)
+library(knitr)
+library(here)
+library(rlang)
+library(patchwork)
+library(ggrepel)
+knitr::opts_chunk$set(echo = FALSE, 
+                      fig.align="center")
+source(here::here("code", "bespoke.R")) #loads custom objects
+```
+
+
+## Faceting {.build}
+Faceting allows you to create multiple graphs side by side in one panel. Especially useful when you want to see the data together, but not on top of each other  
+  
+For example:  
+  
+`ggplot(`r dataframe_name`) +`  
+`geom_point(aes(x=`r df_char1_name`, y=`r df_numeric1_name`)) +`  
+`facet_grid(cols = vars(`r df_char2_name`))`
+
+## Faceting
+```{r facetting, echo = FALSE, warning = FALSE}
+ggplot(df_input, aes(!!sym(df_char1_name), !!sym(df_numeric1_name))) +
+  geom_point() +
+  facet_grid(cols = vars(!!sym(df_char2_name)))
+```
+  
+*This is especially useful for exploratory data analysis
+

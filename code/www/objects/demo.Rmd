@@ -6,7 +6,11 @@ runtime: shiny_prerendered
 
 ```{r setup, include=FALSE}
 library(learnr)
+library(here)
 knitr::opts_chunk$set(echo = FALSE)
+
+#load data
+source(here::here("code", "fun_helper.R"))
 ```
 
 ```{r child='sample.Rmd'}
@@ -29,12 +33,4 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ```
 
-```{r echo=TRUE}
-next_topic <- function(){
-    glue::glue("## Next Glue")
-}
-next_topic()
-```
-
-## Next topic
-link to next topic?
+`r next_module()`

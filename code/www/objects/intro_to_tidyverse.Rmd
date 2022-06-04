@@ -1,0 +1,132 @@
+---
+title: "Introduction to Tidyverse"
+output: 
+  ioslides_presentation:
+    widescreen: true
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(tidyverse)
+library(knitr)
+library(here)
+library(rlang)
+knitr::opts_chunk$set(echo = FALSE, 
+                      fig.align="center")
+source(here::here("code", "bespoke.R")) #loads custom objects
+```
+## Tidyverse 
+Tidyverse is one suite of tools for data science  
+  
+<center><iframe src="https://www.tidyverse.org"></iframe></center>
+
+## Exploratory Data Analysis
+```{r r4ds, echo=FALSE, fig.cap="", out.width='66%'}
+url <- "https://github.com/hadley/r4ds/raw/master/diagrams/data-science.png"
+knitr::include_graphics(url)
+```
+
+## Tidyverse Basic Principles
+**IMPORT** (readr):  
+- `read_csv()`  
+- `read_delim()`  
+  
+**TIDY & TRANSFORM** (dplyr):  
+- `mutate()` adds new variables that are functions of existing variables  
+- `select()` picks variables based on their names.  
+- `filter()` picks cases based on their values.  
+- `summarise()` reduces multiple values down to a single summary.  
+- `arrange()` changes the ordering of the rows.  
+  
+**VISUALISE** (ggplot): creating graphics, based on ‘The Grammar of Graphics’  
+- `aes()`  
+- `geom_x()` + layers   
+  
+**MODEL** (broom):   
+- `tidy()`, `glance()`, `augment()`  
+
+----
+```{r pipe, echo=FALSE, fig.cap="", out.width='77%'}
+url <- "https://s3-us-west-2.amazonaws.com/collections.lacma.org-images/remote_images/ma-150089-WEB.jpg"
+knitr::include_graphics(url)
+```
+
+## `magrittr` package
+```{r magrittr, echo=FALSE, fig.cap="", out.width='40%'}
+url <- "https://github.com/tidyverse/magrittr/raw/master/man/figures/logo.png"
+knitr::include_graphics(url)
+```
+
+## `magrittr` package
+`magrittr` package by Stefan Milton Bache developed the concept of the pipe, which is used heavily in the `tidyverse`  
+  
+  
+```{r magrittr2, echo=FALSE, fig.cap="", out.width='40%'}
+url <- "https://github.com/tidyverse/magrittr/raw/master/vignettes/magrittr.jpg"
+knitr::include_graphics(url)
+```
+<br>  
+<center><font size = "10">"and then"</font></center>
+
+## The Pipe {.build}
+  The “pipe” is a sequence of functions, that are sequentially applied to an object  
+```{r wakeup, echo=TRUE, eval=FALSE}
+wakeup(self) %>%
+  put_on("clothes") %>%
+  eat("breakfast") %>%
+  go(to = "work")
+```
+  
+  Alternative nested code:  
+```{r wakeup_nested, echo=TRUE, eval=FALSE}
+go(eat(put_on(wakeup(self), "clothes"), "breakfast"), to = "work")
+```
+
+## The Pipe (Quiz I)
+What does this code do? 
+  
+```{r wakeup_quiz, echo=TRUE, eval=FALSE}
+wakeup(self) %>%
+  put_on("clothes") %>%
+  eat("breakfast") %>%
+  fmk() %>% 
+  go(to = "work")
+```
+  
+## The Pipe (Quiz II)
+What does this code do? 
+  
+```{r wakeup_quiz2, echo=TRUE, eval=FALSE}
+morning_routine <- wakeup(self) %>%
+  put_on("clothes") %>%
+  eat("breakfast") %>%
+  fmk() %>% 
+  go(to = "work")
+```
+
+## The Pipe (Quiz III)
+What does this code do? 
+
+``r dataframe_name` %>%`  
+`select(`r colnames(df_input)[2]`, `r colnames(df_input)[3]`) %>%`  
+`group_by(`r colnames(df_input)[3]`) %>%`  
+`summarize(mean(`r colnames(df_input)[2]`))`  
+  
+Try it out here!
+```{r pipe_ex, exercise=TRUE}
+
+```
+## Writing code IS NOT like drawing an owl
+```{r owl, echo=FALSE, fig.cap="", out.width='50%'}
+url <- "https://66.media.tumblr.com/tumblr_l7iwzq98rU1qa1c9eo1_500.jpg"
+knitr::include_graphics(url)
+```
+
+## Writing code IS a step-wise process
+```{r lego, echo=FALSE, fig.cap="", out.width='70%'}
+#change this to a good "and then" example
+url <- "https://github.com/rstudio-education/datascience-box/raw/master/slides/u1_d01-meet-the-toolkit/img/lego-steps.png"
+knitr::include_graphics(url)
+```
+<font size = "1">https://datasciencebox.org</font>
