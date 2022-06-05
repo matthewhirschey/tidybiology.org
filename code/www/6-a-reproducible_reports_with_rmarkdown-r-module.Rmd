@@ -10,9 +10,6 @@ runtime: shiny_prerendered
 ```{r child='objects/6-a-introduction_to_reproducible_reports-r-slides.Rmd'}
 ```
 
-```{r child='objects/6-a-introduction_to_rmarkdown-r-video.Rmd'}
-```
-
 ```{r child='objects/6-a-generating_reproducible_reports-r-video.Rmd'}
 ```
 
@@ -25,8 +22,8 @@ runtime: shiny_prerendered
 ```{r child='objects/6-a-parameter_activity-r-exercise.Rmd'}
 ```
 
-```{r child='objects/6-a-concluding_thoughts-multiple-video.Rmd'}
+```{r child='objects/6-a-concluding_thoughts-r-video.Rmd'}
 ```
   
-`r next_module("4-a-introduction_to_...-module")`
+`r next_module("7-a-introduction_to_...-module")`
   

@@ -1,3 +1,0 @@
-## Introduction to Rmarkdown
-
-![](https://youtu.be/PvfFr-eY77E){width="90%"}

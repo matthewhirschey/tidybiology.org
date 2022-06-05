@@ -11,14 +11,18 @@ library(learnr)
 ## Rmarkdown activity
 Data science projects in R can use a special data file type called an Rmarkdwon (Rmd) file. To learn more about this file type and how to use it in Rstudio,  
   
-1. Download the file below  
-2. Move it to your project directory  
-3. Open the file and follow the instructions
+1. Download the [rmarkdown activity file](www/objects/6-rmarkdown_activity_file.Rmd)  
+2. Move it to an Rstudio project directory  
+3. Open the file and follow the instructions  
+-- Inspect the code starting with the set-up chunk. Below it, you’ll see code that imports data, stores objects, and creates a graph.  
+-- Knit the document and see the results; pretty messy, huh?  
+-- Use what you've learn to execute the code, but not include the results of the set-up chunk and data import chunk.  
+-- Replace every **BOLD** with inline R code  
+-- Remove the {calculations} chunk so it is not included with the output  
+-- Change the {graph} chunk so that only the output of the plot is shown, but not the code.  
+-- Re-Knit the document  
+-- **Beautiful!**  
 4. If you get stuck, or want to check your answers, download the answer file below
-
-```{r, echo = FALSE}
-HTML("<a href='www/objects/6-rmarkdown_activity_file.Rmd'>Download Rmd</a>")
-```
   
 ```{r, echo = FALSE}
 HTML("<a href='www/objects/6-rmarkdown_activity_file_answers.Rmd'>Check your answers</a>")

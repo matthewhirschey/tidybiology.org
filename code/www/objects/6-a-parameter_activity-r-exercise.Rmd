@@ -9,14 +9,11 @@ library(learnr)
 ```
 
 ## Parameter exercise
-Using a similar dataset from the previous Rmarkdown activity, download this file for a parameterization activity.
+Parameters of a document are defined in the YAML header, and can pre-populate an Rmarkdown document. To see this in action, download this file for a parameterization activity.
   
-1. Download the file below  
-2. Move it to your project directory  
-3. Open the file and knit the document  
-4. Then change the parameter values to match your age and gender, and re-knit.
-  
-```{r, echo = FALSE}
-HTML("<a href='www/objects/6-parameter_activity_file.Rmd'>Download Rmd</a>")
-```
+1. Download the [parameter activity file](www/objects/6-parameter_activity_file.Rmd)  
+2. Move it to an Rstudio project directory  
+3. Open the file, and follow these instructions  
+-- Click the dropdown menu next to Knit and use Knit with Parameters to render the document  
+-- Change the parameter values to match your age and gender, and re-knit.
   
