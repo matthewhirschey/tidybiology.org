@@ -1,0 +1,19 @@
+---
+title: "Introduction to Projects"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+```{r, include = FALSE}
+#load libraries
+library(learnr)
+```
+
+## Introduction to Projects  
+![](https://youtu.be/xxxxx){width="90%"}  
+  
+At the end of each module, we present a choice of projects for completion. Choose one or many projects to practice the skills learned in this module. 
+  
+1. Navigate to the desired project and watch the introduction to the video, then pause when directed.  
+2. Download the pre-populated file and move it to your working project directory  
+3. Do your best to carry-out the project tasks
+4. If you get stuck at anytime, unpause the video for a demonstration of one possible solution

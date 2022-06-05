@@ -41,7 +41,7 @@ ggplot(heart, aes(x = sex, y = chol)) +
   NULL
 ```
 
-## This project has two final parts:  
+## This exercise has two final parts:  
 1. One-by-one, comment out lines in the code chunk above (remember that # placed before a line of code comments it out). Figure out what each line of code does.
   
 ```{r quiz}

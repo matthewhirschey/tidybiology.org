@@ -1,0 +1,19 @@
+---
+title: "Project: Title goes here"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+```{r, include = FALSE}
+#load libraries
+library(learnr)
+```
+
+## Project: Title goes here
+![](https://youtu.be/xxxxx){width="90%"}  
+  
+Short project description
+  
+1. Download the [rmarkdown activity file](www/objects/1-rmarkdown_activity_file.Rmd)  
+2. Move it to an Rstudio project directory  
+3. Open the file and follow the instructions
+4. If you get stuck at anytime, unpause the video above for a walkthrough

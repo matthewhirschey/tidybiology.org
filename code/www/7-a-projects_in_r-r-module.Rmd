@@ -1,0 +1,17 @@
+---
+title: "Projects in R"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+```{r child='setup.Rmd'}
+```
+
+```{r child='objects/7-a-introduction_to_projects-multiple-video.Rmd'}
+```
+
+```{r child='objects/7-a-title_goes_here-r-project.Rmd'}
+```
+
+`r next_module("2-b-introduction_to_...-module")`
+  
