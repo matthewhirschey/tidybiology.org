@@ -1,0 +1,13 @@
+---
+title: "Introduction to stringr"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+```{r child='setup.Rmd'}
+```
+
+```{r child='4-objects/4-a-introduction_to_stringr-r-video.Rmd'}
+```
+
+`r next_module("5-a-introduction_to_conditionals-r-module.Rmd")`

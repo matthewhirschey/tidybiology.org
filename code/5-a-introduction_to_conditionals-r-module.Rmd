@@ -1,0 +1,13 @@
+---
+title: "Introduction to Conditionals"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+```{r child='setup.Rmd'}
+```
+
+```{r child='5-objects/5-a-introduction_to_conditionals-r-video.Rmd'}
+```
+
+`r next_module("6-a-reproducible_reports_with_rmarkdown-r-module.Rmd")`

@@ -1,0 +1,25 @@
+---
+title: "Data visualization with ggplot"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+```{r child='setup.Rmd'}
+```
+
+```{r child='3-objects/3-a-introduction_to_data_visualization-r-slides.Rmd'}
+```
+
+```{r child='3-objects/3-a-visualizing_your_data_in_r-r-video.Rmd'}
+```
+
+```{r child='3-objects/3-a-creating_geoms_using_ggplot-r-video.Rmd'}
+```
+
+```{r child='3-objects/3-a-exploring_aesthetics_using_ggplot-r-video.Rmd'}
+```
+
+```{r child='3-objects/3-a-customizing_themes_and_labels_in_ggplot-r-video.Rmd'}
+```
+
+`r next_module("4-a-text_as_data_with_stringr-r-module.Rmd")`

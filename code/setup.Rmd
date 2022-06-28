@@ -1,0 +1,16 @@
+---
+title: "setup"
+output: html_notebook
+---
+
+```{r setup, include=FALSE}
+#load libraries
+library(tidyverse)
+library(shiny)
+library(learnr)
+
+#load helper funs
+source("fun_helper.R")
+
+knitr::opts_chunk$set(echo = FALSE)
+```

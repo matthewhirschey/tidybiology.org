@@ -1,0 +1,42 @@
+---
+title: "First r exercise"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+```{r, include = FALSE}
+#load libraries
+library(learnr)
+library(tidyverse)
+```
+
+## R Exercise
+### Activity 1
+This code computes the answer to one plus one.  
+1. Run the code by clicking the button and watch for the answer to appear below.  
+2. Next, change it so it computes two plus two, and check your answer:  
+
+```{r addition, exercise=TRUE}
+1 + 1
+```
+  
+### Activity 2
+This box is called a Console and you can run R code within it. Try a few other simple math operations.
+
+```{r addition2, exercise=TRUE}
+
+```
+  
+### Activity 3
+Console are powerful and can run any R code within it. We've populated the console below with some code. Run the code to see what it does.
+
+```{r advanced_example, exercise=TRUE}
+#view the first 5 rows of the 'mtcars' dataset
+head(mtcars, n = 5)
+
+#build a plot from the 'mtcars' dataset
+ggplot(mtcars, aes(x = mpg, y = hp, color = as_factor(cyl))) + 
+geom_point() +
+labs(color = "Cylinders") +
+theme_minimal()
+```
+
