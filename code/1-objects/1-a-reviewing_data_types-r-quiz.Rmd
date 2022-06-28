@@ -1,0 +1,59 @@
+---
+title: "Reviewing data types"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+```{r, include = FALSE}
+library(learnr)
+```
+
+## Quiz
+### Reviewing data types
+
+Two quick questions to test your understanding of R object types:
+
+```{r reviewing_data_types, echo=FALSE}
+#question 1 vars
+four_numbers <- sample(1:100, 4)
+number <- glue::glue("{four_numbers[1]}") #right answer
+number_character <- glue::glue("'{four_numbers[2]}'")
+character <- glue::glue("'{number_to_word(four_numbers[3])}'")
+object <- glue::glue("{number_to_word(four_numbers[4])}")
+number_object <- glue::glue("{number_to_word(four_numbers[1])}") #right answer
+
+#question 2 vars
+question_text <- glue::glue("Suppose {number_to_word(four_numbers[1])} <- {four_numbers[1]}; which of these will work?")
+
+log_number <- glue::glue("log({number})")
+log_character <- glue::glue("log({number_character})")
+log_character2 <- glue::glue("log({character})")
+log_object <- glue::glue("log({number_object})")
+
+#questions
+quiz(caption = "",
+  question("Which of these are numbers?",
+    answer(number, correct = TRUE),
+    answer(number_character),
+    answer(character),
+    answer(object),
+    type = "single", 
+    random_answer_order = TRUE
+  ),
+  question(question_text,
+    answer(log_number, correct = TRUE),
+    answer(log_character),
+    answer(log_character2),
+    answer(log_object, correct = TRUE),
+    type = "multiple", 
+    random_answer_order = TRUE, 
+    allow_retry = TRUE
+  )
+)
+```
+
+### Use this scratchpad to check your work
+```{r reviewing_data_types_scratchpad, exercise=TRUE}
+
+```
+
+

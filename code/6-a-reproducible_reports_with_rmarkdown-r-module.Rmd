@@ -1,0 +1,31 @@
+---
+title: "Reproducible reports with rmarkdown"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+```{r child='setup.Rmd'}
+#to do
+#add quizzes
+```
+
+```{r child='6-objects/6-a-introduction_to_reproducible_reports-r-slides.Rmd'}
+```
+
+```{r child='6-objects/6-a-generating_reproducible_reports-r-video.Rmd'}
+```
+
+```{r child='6-objects/6-a-rmarkdown_activity-r-exercise.Rmd'}
+```
+
+```{r child='6-objects/6-a-parameterizing_reports_with_yaml-r-video.Rmd'}
+```
+
+```{r child='6-objects/6-a-parameter_activity-r-exercise.Rmd'}
+```
+
+```{r child='6-objects/6-a-concluding_thoughts-r-slides.Rmd'}
+```
+  
+`r next_module("7-a-projects_in_r-r-module.Rmd")`
+  
