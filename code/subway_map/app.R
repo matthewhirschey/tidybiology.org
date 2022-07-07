@@ -4,9 +4,6 @@ library(ggiraph)
 library(tidyverse)
 
 ui <- fluidPage(
-
-    # Application title
-    titlePanel(""),
         mainPanel(
            girafeOutput("gg_subway")
         )
@@ -16,113 +13,125 @@ server <- function(input, output) {
 
     output$gg_subway <- renderGirafe({
         subway <- tribble(
-            ~station, ~x, ~y, ~onclick, ~type, 
-            "Intro to Data Science (tutorial)", 0, 1, 'window.open("https://akshay-bareja.shinyapps.io/ds_intro_track/")', "tutorial",
-            "Intro to Data Science (video)", 0, 0.99, 'window.open("https://youtu.be/TnPlET9mk0s")', "video",
-            "Intro to Data Science (tutorial)", 0, 0.98, 'window.open("https://akshay-bareja.shinyapps.io/ds_intro_track/")', "tutorial",
-            "Intro to Data Science (video)", 0, 0.97, 'window.open("https://youtu.be/TnPlET9mk0s")', "video",
-            "Intro to Dplyr (tutorial)", 0.2, 1, 'window.open("https://bespokds.netlify.app/xaringan_intro_to_dplyr/#1")', "tutorial",
-            "Intro to Dplyr (video)", 0.2, 0.99, 'window.open("https://youtu.be/W3D-JSPExXo")', "video",
-            "Intro to Pandas (tutorial)", 0.2, 0.75, '', "tutorial",
-            "Intro Pandas (video)", 0.2, 0.74, '', "video",
-            "Selecting Variables Using Dplyr (tutorial)", 0.4, 1, 'window.open("https://bespokds.netlify.app/xaringan_select/#1")', "tutorial",
-            "Selecting Variables Using Dplyr (video)", 0.4, 0.99, 'window.open("https://youtu.be/vDgP7J1qMCI")', "video",
-            "Selecting Variables Using Pandas (tutorial)", 0.4, 0.75, '', "tutorial",
-            "Selecting Variables Using Pandas (video)", 0.4, 0.74, '', "video"
+            ~station, ~x, ~y, ~onclick, ~track, 
+            "Introduction to Data Science", 0, 1, 'window.open("https://computationalthinking.shinyapps.io/tidybiology-1/#section-introduction-to-data-science")', "intro",
+            "What is Data Science?", 0.2, 1, 'window.open("https://computationalthinking.shinyapps.io/tidybiology-1/#section-what-is-data-science")', "intro",
+            "Tools of Data Science", 0.4, 1, 'window.open("https://computationalthinking.shinyapps.io/tidybiology-1/#section-tools-of-data-science")', "intro",
+            "Get Started With R", 0.6, 1, 'window.open("https://computationalthinking.shinyapps.io/tidybiology-1/#section-get-started-with-r")', "intro",
+            "Quiz", 0.8, 1, 'window.open("https://computationalthinking.shinyapps.io/tidybiology-1/#section-quiz")', "intro",
+            "R Exercise", 1.0, 1, 'window.open("https://computationalthinking.shinyapps.io/tidybiology-1/#section-r-exercise")', "intro",
+            "Installing Packages", 1.2, 1, 'window.open("https://computationalthinking.shinyapps.io/tidybiology-1/#section-installing-packages")', "intro",
+            "Introduction to the tidyverse", 1.4, 1, 'window.open("https://computationalthinking.shinyapps.io/tidybiology-1/#section-introduction-to-the-tidyverse")', "intro",
+            "The pipe operator", 1.6, 1, 'window.open("https://computationalthinking.shinyapps.io/tidybiology-1/#section-the-pipe-operator")', "intro",
+            "Install R and RStudio", 1.8, 1, 'window.open("https://computationalthinking.shinyapps.io/tidybiology-1/#section-install-r-and-rstudio")', "intro",
+            "Tour of RStudio", 2.0, 1, 'window.open("https://computationalthinking.shinyapps.io/tidybiology-1/#section-tour-of-rstudio")', "intro",
+            "Organizing projects in RStudio", 2.2, 1, 'window.open("https://computationalthinking.shinyapps.io/tidybiology-1/#section-organizing-projects-in-rstudio")', "intro",
+            "R Markdown Activity", 2.4, 1, 'window.open("https://computationalthinking.shinyapps.io/tidybiology-1/#section-rmarkdown-activity")', "intro",
+            "Final Exercise", 2.6, 1, 'window.open("https://computationalthinking.shinyapps.io/tidybiology-1/#section-final-exercise")', "intro",
+            "Resources", 2.8, 1, 'window.open("https://computationalthinking.shinyapps.io/tidybiology-1/#section-resources")', "intro",
+            "Introduction to Visualization", 3.0, 1, 'window.open("https://computationalthinking.shinyapps.io/tidybiology-3/#section-introduction-to-visualization")', "ggplot",
+            "Visualizing Data", 3.2, 1, 'window.open("https://computationalthinking.shinyapps.io/tidybiology-3/#section-visualizing-data")', "ggplot",
+            "Creating Geoms", 3.4, 1, 'window.open("https://computationalthinking.shinyapps.io/tidybiology-3/#section-creating-geoms")', "ggplot",
+            "Exploring aesthetics", 3.6, 1, 'window.open("https://computationalthinking.shinyapps.io/tidybiology-3/#section-exploring-aesthetics")', "ggplot",
+            "Custom themes & labels", 3.8, 1, 'window.open("https://computationalthinking.shinyapps.io/tidybiology-3/#section-custom-themes-labels")', "ggplot",
+            "Getting to Know Your Data", 3.0, 0.75, 'window.open("")', "dplyr",
+            "My First Dplyr Exercise", 3.2, 0.75, 'window.open("")', "dplyr",
+            "Double Data Type?", 3.4, 0.75, 'window.open("")', "dplyr",
+            "Selecting Variables", 3.6, 0.75, 'window.open("")', "dplyr",
+            "Select exercises", 3.8, 0.75, 'window.open("")', "dplyr"
         )
         
-        gg_subway <- ggplot(subway, aes(x = x, y = y)) +
+        subway_segment <- subway %>% 
+                            dplyr::mutate(y_label_pos = y,
+                                          x_end = x + 0.2)
+        subway_upper <- subway_segment %>% 
+                        dplyr::filter(y == max(y))
+        subway_lower <- subway_segment %>% 
+                            dplyr::filter(y == min(y))
+        subway_upper[nrow(subway_upper), ncol(subway_upper)] <- subway_upper$x_end[nrow(subway_upper) - 1]
+        subway_lower[nrow(subway_lower), ncol(subway_lower)] <- subway_lower$x_end[nrow(subway_lower) - 1]
+        
+        subway_segment <- bind_rows(subway_upper, subway_lower)
+        
+        gg_subway <- ggplot(subway_segment, aes(x = x, y = y)) +
             # tracks
-            geom_segment(x = 0, xend = 0.2, y = 1, yend = 1, size = 5, colour = "blue") +
-            geom_segment(x = 0, xend = 0.2, y = 0.99, yend = 0.99, size = 5, colour = "red") +
-            geom_curve(x = 0, xend = 0.2, y = 0.98, yend = 0.75, size = 5, colour = "orange",
-                       curvature = 0.05) +
-            geom_curve(x = 0, xend = 0.2, y = 0.97, yend = 0.74, size = 5, colour = "darkgreen",
-                       curvature = 0.05) +
-            geom_segment(x = 0.2, xend = 0.2, y = 0.99, yend = 0.75, linetype = 2) +
-            geom_segment(x = 0.2, xend = 0.4, y = 1, yend = 1, size = 5, colour = "blue") +
-            geom_segment(x = 0.2, xend = 0.4, y = 0.99, yend = 0.99, size = 5, colour = "red") +
-            geom_segment(x = 0.2, xend = 0.4, y = 0.75, yend = 0.75, size = 5, colour = "orange") +
-            geom_segment(x = 0.2, xend = 0.4, y = 0.74, yend = 0.74, size = 5, colour = "darkgreen") +
-            geom_segment(x = 0.4, xend = 0.4, y = 0.99, yend = 0.75, linetype = 2) +
+            # geom_segment(x = 0, xend = 0.2, y = 1, yend = 1, size = 5, colour = "blue") +
+            # geom_segment(x = 0.2, xend = 0.4, y = 1, yend = 1, size = 5, colour = "blue") +
+            
+            # intro track
+            geom_segment(data = subway_segment,
+                         aes(x = x,
+                             xend = x_end,
+                             y = y,
+                             yend = y),
+                         size = 5, colour = "blue") +
+            # ggplot track
+            geom_segment(x = 2.8, xend = 3.0, y = 1, yend = 1, 
+                         size = 5,
+                         colour = "green") + # "connecting" track
+            geom_segment(data = filter(subway_segment, track == "ggplot"),
+                         aes(x = x,
+                             xend = x_end,
+                             y = y,
+                             yend = y),
+                         size = 5, colour = "green") +
+            # dplyr track 
+            geom_curve(x = 2.8, xend = 3.0, y = 1, yend = 0.75, size = 5, colour = "red",
+                       curvature = -0.05) + # "connecting" track
+            geom_segment(data = filter(subway_segment, track == "dplyr"),
+                         aes(x = x,
+                             xend = x_end,
+                             y = y,
+                             yend = y),
+                         size = 5, colour = "red") +
+            
+            # track legend (place below map or on the right)
             # stations
             geom_point(colour = "black", size = 2.5, stroke = 2) +
             geom_point_interactive(aes(tooltip = station, onclick = onclick), size = 1.9, colour = "white") +
-            # track legend
-            annotate("segment",
-                     x = 0.05, xend = 0.1,
-                     y = 1.06, yend = 1.06,
-                     size = 1,
-                     colour = "blue") +
-            annotate("segment",
-                     x = 0.05, xend = 0.1,
-                     y = 1.04, yend = 1.04,
-                     size = 1,
-                     colour = "red") +
-            annotate("text", 
-                     label = "R track (tutorial)",
-                     x = 0.135, y = 1.06,
-                     size = 3,
-                     fontface = "bold") +
-            annotate("text",
-                     label = "R track (video)",
-                     x = 0.131, y = 1.04,
-                     size = 3,
-                     fontface = "bold") +
-            annotate("segment",
-                     x = 0.25, xend = 0.3,
-                     y = 1.06, yend = 1.06,
-                     size = 1,
-                     colour = "orange") +
-            annotate("segment",
-                     x = 0.25, xend = 0.3,
-                     y = 1.04, yend = 1.04,
-                     size = 1,
-                     colour = "darkgreen") +
-            annotate("text", 
-                     label = "Python track (tutorial)",
-                     x = 0.347, y = 1.06,
-                     size = 3,
-                     fontface = "bold") +
-            annotate("text",
-                     label = "Python track (video)",
-                     x = 0.345, y = 1.04,
-                     size = 3,
-                     fontface = "bold") +
+            
             # station names
-            annotate("text",
-                     label = "Intro",
-                     x = 0, y = 1.025,
-                     size = 3,
-                     angle = 35,
-                     fontface = "bold") +
-            annotate("text",
-                     label = "Dplyr",
-                     x = 0.2, y = 1.025,
-                     size = 3,
-                     angle = 35,
-                     fontface = "bold") +
-            annotate("text",
-                     label = "Pandas",
-                     x = 0.2, y = 0.71,
-                     size = 3,
-                     angle = 35,
-                     fontface = "bold") +
-            annotate("text",
-                     label = "Select",
-                     x = 0.4, y = 1.025,
-                     size = 3,
-                     angle = 35,
-                     fontface = "bold") +
-            annotate("text",
-                     label = "Select",
-                     x = 0.4, y = 0.71,
-                     size = 3,
-                     angle = 35,
-                     fontface = "bold") +
+            # upper subway
+            geom_text(data = filter(subway_segment, y == max(y)), 
+                      aes(x = x,
+                          y = y_label_pos - 0.055,
+                          label = station),
+                      angle = 75) +
+            # lower subway
+            geom_text(data = filter(subway_segment, y == min(y)), 
+                      aes(x = x,
+                          y = y_label_pos + 0.055,
+                          label = station),
+                      angle = 75) +
+            # annotate("text",
+            #          label = subway$station[1],
+            #          x = 0, y = 1.025,
+            #          size = 3,
+            #          angle = 35,
+            #          fontface = "bold") +
+            # annotate("text",
+            #          label = subway$station[2],
+            #          x = 0.2, y = 1.025,
+            #          size = 3,
+            #          angle = 35,
+            #          fontface = "bold") +
+            # annotate("text",
+            #          label = subway$station[3],
+            #          x = 0.4, y = 1.025,
+            #          size = 3,
+            #          angle = 35,
+            #          fontface = "bold") +
+            # annotate("text",
+            #          label = subway$station[3],
+            #          x = 0.4, y = 1.025,
+            #          size = 3,
+            #          angle = 35,
+            #          fontface = "bold") +
             theme_void()
         
-        girafe(ggobj = gg_subway)
+        x <- girafe(ggobj = gg_subway,
+               width_svg = 10,
+               height_svg = 5)
     })
 }
 
