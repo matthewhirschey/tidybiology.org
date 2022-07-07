@@ -45,6 +45,8 @@ fluidPage(
     HTML("<a href='http://module.tidybiology.org/1'>Get Started</a>"),
     ", ", 
     HTML("<a href='www/browse_tracks.Rmd'>browse the tracks</a>"),
+    ", ",
+    HTML("<a href='https://akshay-bareja.shinyapps.io/flashcard/'>test yourself</a>"), # placeholder
     ", or",
     actionLink(inputId = "search_click", "search the learning materials"),
     HTML("</center>"),
