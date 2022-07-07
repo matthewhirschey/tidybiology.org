@@ -1,0 +1,69 @@
+---
+title: "Selecting Variables Exercise"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+```{r, include = FALSE}
+library(learnr)
+gradethis::gradethis_setup()
+
+happy_full <- read_csv("https://raw.githubusercontent.com/BAREJAA/website_for_john/master/datasets/world-happiness-report-2021.csv") %>% clean_names() %>% rename(region = regional_indicator)
+```
+## Select exercises
+
+The `happy_full` dataset contains many variables. This gives us the chance to practice our `select()`-ing skills!
+
+### Simple selects
+
+Let's warm up by performing some basic select operations  
+
+How would you select just the columns `region` and `ladder_score`?  
+
+```{r simple-select, exercise = TRUE, exercise.eval = FALSE, exercise.cap = "A simple selection"}
+
+```
+
+```{r simple-select-solution}
+happy_full %>% 
+  select(region, ladder_score)
+```
+
+```{r simple-select-code-check}
+grade_code()
+```
+
+Now select everything between (and including) `social_support` and `generosity`
+
+```{r select-between, exercise = TRUE, exercise.eval = FALSE, exercise.cap = "Selecting multiple columns"}
+
+```
+
+```{r select-between-solution}
+happy_full %>% 
+  select(social_support:generosity)
+```
+
+```{r select-between-code-check}
+grade_code()
+```
+
+### Slightly-more-difficult selects  
+
+Let's try something more challenging now. Select all variables that **do not** have underscores in their names
+
+```{r no-underscore, exercise = TRUE, exercise.eval = FALSE, exercise.cap = "No underscores"}
+
+```
+
+<div id="no-underscore-hint">
+**Hint:** You'll need a helper function. Also, don't forget `!`
+</div>
+
+```{r no-underscore-solution}
+happy_full %>% 
+  select(!contains("_"))
+```
+
+```{r no-underscore-code-check}
+grade_code()
+```

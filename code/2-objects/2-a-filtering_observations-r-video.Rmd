@@ -1,0 +1,16 @@
+---
+title: "Filtering Observations"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+```{r, include = FALSE}
+library(learnr)
+```
+## Filtering Observations
+
+![](https://youtu.be/KWs8VNeWlbE){width="90%"}
+
+### Scratchpad
+```{r filtering_observations_r_scratchpad, exercise=TRUE}
+
+```

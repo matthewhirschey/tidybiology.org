@@ -1,0 +1,16 @@
+---
+title: "Adding New Columns"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+```{r, include = FALSE}
+library(learnr)
+```
+## Adding New Columns
+
+![](https://youtu.be/stNOP4B1aGE){width="90%"}
+
+### Scratchpad
+```{r adding_new_columns_r_scratchpad, exercise=TRUE}
+
+```

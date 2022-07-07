@@ -7,7 +7,38 @@ runtime: shiny_prerendered
 ```{r child='setup.Rmd'}
 ```
 
-```{r child='2-objects/2-a-introduction_to_dplyr-r-video.Rmd'}
+```{r child='2-objects/2-a-getting_to_know_your_data-r-video.Rmd'}
+```
+
+```{r child='2-objects/2-a-getting_to_know_your_data-r-exercise.Rmd'}
+```
+
+```{r child='2-objects/2-a-getting_to_know_your_data-r-quiz.Rmd'}
+```
+
+```{r child='2-objects/2-a-selecting_variables-r-video.Rmd'}
+```
+
+```{r child='2-objects/2-a-selecting_variables-r-exercise.Rmd'}
+```
+
+```{r child='2-objects/2-a-filtering_observations-r-video.Rmd'}
+```
+
+```{r child='2-objects/2-a-filtering_observations-r-exercise.Rmd'}
+```
+
+```{r child='2-objects/2-a-arranging_your_data-r-video.Rmd'}
+```
+
+```{r child='2-objects/2-a-adding_new_columns-r-video.Rmd'}
+```
+
+```{r child='2-objects/2-a-mutating_joins-r-video.Rmd'}
+```
+
+```{r child='2-objects/2-a-saving_your_work-r-video.Rmd'}
+#no scratchpad
 ```
 
 `r next_module("3-a-data_visualization_with_ggplot-r-module.Rmd")`

@@ -1,0 +1,16 @@
+---
+title: "Selecting Variables"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+```{r, include = FALSE}
+library(learnr)
+```
+## Selecting Variables
+
+![](https://youtu.be/vDgP7J1qMCI){width="90%"}
+
+### Scratchpad
+```{r selecting_variables_r_scratchpad, exercise=TRUE}
+
+```

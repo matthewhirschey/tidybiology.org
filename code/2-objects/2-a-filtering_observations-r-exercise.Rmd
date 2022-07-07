@@ -1,0 +1,77 @@
+---
+title: "Filtering Observations"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+```{r, include = FALSE}
+library(learnr)
+gradethis::gradethis_setup()
+
+happy_full <- read_csv("https://raw.githubusercontent.com/BAREJAA/website_for_john/master/datasets/world-happiness-report-2021.csv") %>% clean_names() %>% rename(region = regional_indicator)
+```
+## Filtering exercises
+
+`happy_select` contains both numeric and character variables, with lots and lots of observations (rows). This gives us a great opportunity to practice our filtering skills!
+
+### Simple filters
+
+Say we're only interested in looking at data for countries in East Asia. How would we do this?
+
+```{r simple-filter, exercise = TRUE, exercise.eval = FALSE, exercise.cap = "Simple filter"}
+
+```
+
+<div id="simple-filter-hint">
+**Hint:** To see which major regions are in this dataset, run `unique(happy_select$region)`
+</div>
+
+```{r simple-filter-solution}
+happy_select %>% 
+  filter(region == "East Asia")
+```
+
+```{r simple-filter-code-check}
+grade_code()
+```
+
+### Filter%in%g
+
+Now use `filter()` to only keep data for the following countries - Algeria, Belgium, India, Tunisia, and Uganda. Try to do this without writing multiple filter statements  
+
+```{r multiple-filter, exercise = TRUE, exercise.eval = FALSE, exercise.cap = ""}
+
+```
+
+<div id="multiple-filter-hint">
+**Hint:** Try the `%in%` operator
+</div>
+
+```{r multiple-filter-solution}
+happy_select %>% 
+  filter(country_name %in% c("Algeria", "Belgium", "India", "Tunisia", "Uganda"))
+```
+
+```{r multiple-filter-code-check}
+grade_code()
+```
+
+### Numeric filtering
+
+Finally, let's filter out information for countries that have a **below average** ladder score
+
+```{r num-filter, exercise = TRUE, exercise.eval = FALSE, exercise.cap = ""}
+
+```
+
+<div id="num-filter-hint">
+**Hint:** Use the base R `mean()` function
+</div>
+
+```{r num-filter-solution}
+happy_select %>% 
+  filter(ladder_score > mean(ladder_score))
+```
+
+```{r num-filter-code-check}
+grade_code()
+```

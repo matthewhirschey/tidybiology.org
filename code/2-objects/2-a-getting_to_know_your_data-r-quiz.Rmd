@@ -1,0 +1,22 @@
+---
+title: "Getting to Know Your Data Quiz"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+```{r, include = FALSE}
+library(learnr)
+gradethis::gradethis_setup()
+```
+## Double Data Type?
+
+We can see that `happy_full` contains many variables that are of type double. 
+
+```{r quiz-double, echo = FALSE}
+quiz(
+  question("The `double` data type refers to which of the following?",
+    answer("A string"),
+    answer("An integer"),
+    answer("A number with a decimal point", correct = TRUE),
+    answer("A factor"))
+)
+```

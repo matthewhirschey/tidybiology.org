@@ -1,0 +1,16 @@
+---
+title: "Arranging Your Data"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+```{r, include = FALSE}
+library(learnr)
+```
+## Arranging Your Data
+
+![](https://youtu.be/BN9-zPuM-2g){width="90%"}
+
+### Scratchpad
+```{r arranging_your_data_r_scratchpad, exercise=TRUE}
+
+```

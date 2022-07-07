@@ -1,0 +1,36 @@
+---
+title: "Getting to Know Your Data Exercise"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+```{r, include = FALSE}
+library(learnr)
+gradethis::gradethis_setup()
+
+happy_full <- read_csv("https://raw.githubusercontent.com/BAREJAA/website_for_john/master/datasets/world-happiness-report-2021.csv") %>% clean_names() %>% rename(region = regional_indicator)
+```
+## My First Dplyr Exercise
+
+What does the `happy_full` dataset look like?
+
+A couple of useful things to know about your dataset are -  
+- The number of rows and columns
+- The types of variables the dataset contains  
+
+What function can you use to get this information?
+
+```{r glimpse, exercise = TRUE, exercise.eval = FALSE, exercise.cap = "Take a glimpse at your data"}
+
+```
+
+<div id="glimpse-hint">
+**Hint:** Try the dplyr `glimpse()` function.
+</div>
+
+```{r glimpse-solution}
+glimpse(happy_full)
+```
+
+```{r glimpse-code-check}
+grade_code()
+```

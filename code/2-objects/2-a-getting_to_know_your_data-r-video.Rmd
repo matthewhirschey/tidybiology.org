@@ -1,0 +1,16 @@
+---
+title: "Getting to Know Your Data"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+```{r, include = FALSE}
+library(learnr)
+```
+## Getting to Know Your Data `r fa("lightbulb")`
+
+![](https://youtu.be/W3D-JSPExXo){width="90%"}
+
+### Scratchpad
+```{r getting_to_know_your_data_r_scratchpad, exercise=TRUE}
+
+```
