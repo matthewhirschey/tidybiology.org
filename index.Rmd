@@ -44,9 +44,9 @@ fluidPage(
     HTML("<center>"),
     HTML("<a href='http://module.tidybiology.org/1'>Get Started</a>"),
     ", ", 
-    HTML("<a href='www/browse_tracks.Rmd'>browse the tracks</a>"),
+    HTML("<a href='http://module.tidybiology.org/map'>browse the tracks</a>"),
     ", ",
-    HTML("<a href='https://akshay-bareja.shinyapps.io/flashcard/'>test yourself</a>"), # placeholder
+    HTML("<a href='http://module.tidybiology.org/quiz'>test yourself</a>"), # placeholder
     ", or",
     actionLink(inputId = "search_click", "search the learning materials"),
     HTML("</center>"),
@@ -64,8 +64,7 @@ fluidPage(
 observeEvent(input$search_click, {})   #event to store the 'click'
 
 output$object_table <- DT::renderDataTable({
-  table <- readRDS("object_table.Rds")
-  DT::datatable(table %>%
+  DT::datatable(object_table %>%
                   dplyr::select(Title = title, 
                                 Level = level, 
                                 Language = language, 

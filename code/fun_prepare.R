@@ -120,12 +120,58 @@ build_object_table <- function(){
 
 #https://github.com/ateucher/useful_code/blob/master/R/numbers2words.r
 
+#BUILD MAP-----
+make_onclick <- function(module_filename){ #makes url from module_filename, = "1-a-Introduction_to_Data_Science-multiple-module.Rmd"
+  
+  module_num <- filename_splitter(file_name = module_filename, 
+                                  var = "module")
+  module_section <- filename_splitter(file_name = module_filename, 
+                                      var = "section")
+  onclick <- glue::glue('window.open("http://module.tidybiology.org/{module_num}#section-{module_section}")')
+  return(onclick)
+}
+
+#update object table with map stuff
+build_map <- function(){
+  if(!exists("object_table")){object_table <- readRDS(here::here("object_table.Rds"))}
+  object_table <-
+    object_table %>%
+    mutate(station = title, 
+           x = row_number()/5,
+           y = 1,
+           onclick = map_chr(.x = object_file, .f = make_onclick),
+           track = map_chr(.x = object_file, .f = filename_splitter, var = "module"))
+  
+  #update object table
+  saveRDS(object_table, here::here("object_table.Rds"))
+  return(object_table)
+}
+
+# build_map()
+
+
 #PUBLISH-----
 #prepare files before publishing
 publish_tidybiology_index <- function(){
   build_object_table()
   rsconnect::deployApp(account = "computationalthinking", 
-                       appFiles = c("index.Rmd", "object_table.Rds", "www/tidybiology_hex.png"), 
+                       appFiles = c("index.Rmd", 
+                                    "object_table.Rds", 
+                                    "www/tidybiology_hex.png"), 
+                       forceUpdate = TRUE)
+  build_map()
+  rsconnect::deployApp(account = "computationalthinking", 
+                       appDir = here::here("code"), 
+                       appPrimaryDoc = "map.Rmd",
+                       appName = glue::glue("tidybiology-map"),
+                       appFiles = c("map.Rmd", "object_table.Rds"), 
+                       forceUpdate = TRUE)
+  
+  rsconnect::deployApp(account = "computationalthinking", 
+                       appDir = here::here("code"), 
+                       appPrimaryDoc = "quiz",
+                       appName = glue::glue("tidybiology-quiz"),
+                       appFiles = c("quiz"), 
                        forceUpdate = TRUE)
   
 }

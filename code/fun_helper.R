@@ -7,6 +7,9 @@ filename_splitter <- function(file_name,
   output <- switch(var, 
                    module = filename_info[[1]][1], 
                    level = filename_info[[1]][2],
+                   section = filename_info[[1]][3] %>% 
+                     stringr::str_replace_all(pattern = "_", replacement = "-") %>% 
+                     str_to_lower(),
                    title = filename_info[[1]][3] %>% 
                      stringr::str_replace_all(pattern = "_", replacement = " ") %>% 
                      str_to_title_special(),
@@ -26,6 +29,7 @@ filename_splitter <- function(file_name,
 }
 #testing
 # filename_splitter(file_name = "1-a-Introduction_to_Data_Science-multiple-module.Rmd")
+# filename_splitter(file_name = "1-a-Introduction_to_Data_Science-multiple-module.Rmd", var = "section")
 
 str_to_title_special <- function(string){
   new_string <- stringr::str_to_title(string)
