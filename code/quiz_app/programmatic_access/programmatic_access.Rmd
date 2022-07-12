@@ -1,0 +1,59 @@
+---
+title: "Programmatic Access"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Objective
+
+Is there a way to programmatically access the help pages for functions?
+Why do this? To build up a question bank for the quiz app
+
+From - https://community.rstudio.com/t/programmatically-accessing-param-fields-values-of-functions-from-installed-package/14731
+
+Q - "is there a way to assign to a global environment variable the @param field value of a function in an installed package, via ({tools} or {utils})?"
+
+```{r}
+package_docs <- function(pkg) {
+  help_dir <- system.file("help", package = pkg)
+  db_path <- file.path(help_dir, pkg)
+  tools:::fetchRdDB(db_path)
+}
+
+# e.g.
+rdb <- package_docs("ggplot2")
+# rdb is a large list
+names(rdb) # 193 entries, corresponding to 193 functions
+
+rdb[[2]][[2]][[1]][1] # this is how you get the function name
+rdb[[2]][[1]][[1]][1] # this is how you get the function description
+
+# url
+# https://www.rdocumentation.org/packages/ggplot2/versions/3.3.6/topics/add_theme
+
+# to get package version number - 
+packageVersion("ggplot2")
+```
+
+Detecting parts of speech
+
+Goal - only select functions whose descriptions begin with a verb so that you can have questions of the form - 
+"How would you..."
+```{r}
+library(udpipe)
+ud_model <- udpipe_download_model(language = "english")
+ud_model <- udpipe_load_model(ud_model$file_model)
+x <- as.data.frame(udpipe_annotate(ud_model, x = "summarise"))
+x # this doesn't work so well...
+
+word_list <- c()
+for(i in 1:length(rdb)){
+  word_list[i] <- word(rdb[[i]][[1]][[1]][1])
+}
+
+unique(word_list)
+```
+

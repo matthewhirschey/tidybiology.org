@@ -1,0 +1,14 @@
+name: programmatic_access_tidybio_quiz
+title: programmatic_access_tidybio_quiz
+username:
+account: akshay-bareja
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 6631085
+bundleId: 6091856
+url: https://akshay-bareja.shinyapps.io/programmatic_access_tidybio_quiz/
+when: 1657641762.34548
+lastSyncTime: 1657641762.34551
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: programmatic_access.Rmd
