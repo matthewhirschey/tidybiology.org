@@ -121,7 +121,7 @@ numbers2words <- function(x){
   helper(x)
 }
 number_to_word <- function(x){
-  wordy_num <- stringr::str_replace_all(numbers2words(x), " ", "-")
+  wordy_num <- stringr::str_replace_all(numbers2words(x), " ", "_")
   return(wordy_num)
 }
 

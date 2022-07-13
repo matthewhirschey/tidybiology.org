@@ -2,9 +2,30 @@
 title: "Introduction to dplyr"
 output: learnr::tutorial
 runtime: shiny_prerendered
+editor_options: 
+  chunk_output_type: inline
 ---
 
 ```{r child='setup.Rmd'}
+```
+
+```{r, context="data", include=FALSE}
+#download and prep data
+set.seed(42)
+
+happy <- read_csv("https://raw.githubusercontent.com/BAREJAA/website_for_john/master/datasets/happy_small.csv")
+happy_full <- read_csv("https://raw.githubusercontent.com/BAREJAA/website_for_john/master/datasets/world-happiness-report-2021.csv") %>% clean_names() %>% rename(region = regional_indicator)
+
+happy %>% 
+  inner_join(happy_full, by = "country_name") %>% 
+  select(country_name, healthy_life_expectancy) -> happy_join_one
+
+happy_full %>% 
+  filter(!(country_name %in% happy$country_name)) %>% 
+  slice_sample(n = 5) %>% 
+  select(country_name, healthy_life_expectancy) %>%
+  bind_rows(happy_join_one) %>% 
+  .[-10 ,] -> happy_join
 ```
 
 ```{r child='2-objects/2-a-getting_to_know_your_data-r-video.Rmd'}
