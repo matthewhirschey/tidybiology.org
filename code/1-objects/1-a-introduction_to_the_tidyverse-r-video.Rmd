@@ -11,4 +11,4 @@ library(learnr)
 
 In this video, you will learn about a set of packages collectively called the tidyverse, and how these packages work together to carry out the steps of data science.  
   
-![](https://youtu.be/QkDFNwmwLZc){width="90%"}
+![](https://youtu.be/q0uGggl3RbM){width="90%"}

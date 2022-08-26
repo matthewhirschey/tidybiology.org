@@ -1,5 +1,6 @@
 #these functions are used to prepare files for serving, but not used in the apps
 #LIBRARIES-----
+library(tidyverse)
 library(here)
 source(here::here("code", "fun_helper.R")) #needed for filename splitter
 
@@ -169,9 +170,9 @@ publish_tidybiology_index <- function(){
   
   rsconnect::deployApp(account = "computationalthinking", 
                        appDir = here::here("code"), 
-                       appPrimaryDoc = "quiz",
+                       appPrimaryDoc = "quiz.Rmd",
                        appName = glue::glue("tidybiology-quiz"),
-                       appFiles = c("quiz"), 
+                       appFiles = c("quiz.Rmd"), 
                        forceUpdate = TRUE)
   
 }
@@ -201,7 +202,7 @@ publish_tidybiology<- function(module_name){
   
 }
 # publish_tidybiology(module_name = "1-a-introduction_to_data_science-multiple-module.Rmd")
-# publish_tidybiology(module_name = "2-a-introduction_to_dplyr-r-module.Rmd")
+# publish_tidybiology(module_name = "6-a-reproducible_reports_with_rmarkdown-r-module.Rmd")
 # publish_tidybiology(7)
 
 #republish all

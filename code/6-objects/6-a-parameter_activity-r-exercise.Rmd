@@ -6,14 +6,34 @@ runtime: shiny_prerendered
 ```{r, include = FALSE}
 #load libraries
 library(learnr)
+library(downloadthis)
 ```
 
 ## Parameter exercise
 Parameters of a document are defined in the YAML header, and can pre-populate an Rmarkdown document. To see this in action, download this file for a parameterization activity.
   
-1. Download the [parameter activity file](www/objects/6-parameter_activity_file.Rmd)  
+1. Download the parameter activity file below    
 2. Move it to an Rstudio project directory  
 3. Open the file, and follow these instructions  
 -- Click the dropdown menu next to Knit and use Knit with Parameters to render the document  
 -- Change the parameter values to match your age and gender, and re-knit.
   
+```{r, echo = FALSE}
+#make temp file
+temp_rmd <- tempfile(pattern = "6-parameter_activity_file_", 
+                     fileext = ".Rmd")
+#download file to temp file
+download.file(url = "https://raw.githubusercontent.com/matthewhirschey/tidybiology.org/master/code/6-objects/6-parameter_activity_file.Rmd", 
+              destfile = temp_rmd)
+
+#download button
+downloadthis::download_file(
+  path = temp_rmd,
+  button_label = "Download Rmd",
+  button_type = "danger",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = TRUE
+)
+```
+
