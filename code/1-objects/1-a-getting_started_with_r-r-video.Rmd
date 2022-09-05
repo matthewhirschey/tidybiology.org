@@ -8,7 +8,7 @@ library(learnr)
 ```
 ## Get Started with R
 
-![](https://youtu.be/wfshEa_F2FQ){width="90%"}
+![](https://youtu.be/Ld_JZNNahbQ){width="90%"}
 
 ### Scratchpad
 ```{r getting_started_r_scratchpad, exercise=TRUE}

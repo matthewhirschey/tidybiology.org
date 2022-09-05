@@ -29,13 +29,9 @@ runtime: shiny_prerendered
 ```
 
 ```{r child='1-objects/1-a-introduction_to_the_tidyverse-r-video.Rmd'}
-#split from current video
-#tidyverse
 ```
 
 ```{r child='1-objects/1-a-the_pipe_operator_in_r-r-video.Rmd'}
-#split from current video
-#pipes
 ```
 
 ```{r child='1-objects/1-a-installing_r_and_r_studio-r-video.Rmd'}

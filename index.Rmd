@@ -42,9 +42,14 @@ fluidPage(
       tags$br(),
       tags$br()),
     HTML("<center>"),
-    HTML("<a href='http://module.tidybiology.org/1'>Get Started</a>"),
-    ", ", 
-    HTML("<a href='http://module.tidybiology.org/map'>browse the tracks</a>"),
+    shiny::actionButton(inputId='start', 
+                        label="Get Started", 
+                        icon = NULL, #icon("th"), 
+                        onclick ="window.open('http://module.tidybiology.org/1', '_blank')", 
+                        class = "btn-success"), #this makes the button green; use CSS to modify later
+    HTML("<br>"), 
+    HTML("<br>"), 
+    HTML("<a href='http://module.tidybiology.org/map'>Browse the tracks</a>"),
     ", ",
     HTML("<a href='http://module.tidybiology.org/quiz'>test yourself</a>"), # placeholder
     ", or",

@@ -11,4 +11,4 @@ library(learnr)
 
 The pipe operator is a way to string multiple data science steps together. In this video, you will learn about how this function can simplify your data science workflows.  
   
-![](https://youtu.be/QkDFNwmwLZc){width="90%"}
+![](https://youtu.be/Stt3qEuIeso){width="90%"}
