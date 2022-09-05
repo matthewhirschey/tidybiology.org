@@ -1,0 +1,50 @@
+---
+title: "Advanced Filter"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+```{r, include = FALSE}
+library(learnr)
+gradethis::gradethis_setup()
+```
+## Advanced Filter Exercise
+
+We will use the `happy_full` data set for these exercises
+
+Choose countries that are NOT in Europe i.e. countries that have a `region` entry that is NOT equal to either "Western Europe" or "Central and Eastern Europe"
+```{r filter-in, exercise = TRUE, exercise.eval = FALSE, exercise.cap = "Boxplot"}
+
+```
+
+<div id="filter-in-hint">
+You can use the `%in%` symbol
+</div>
+
+```{r filter-in-solution}
+happy_full %>% 
+  filter(!region %in% c("Western Europe", "Central and Eastern Europe")) 
+```
+
+```{r filter-in-code-check}
+grade_code()
+```
+
+Choose countries that do NOT have an above average `healthy_life_expectancy` or above average `generosity` score
+
+```{r filter-or, exercise = TRUE, exercise.eval = FALSE, exercise.cap = ""}
+
+```
+
+<div id="filter-or-hint">
+Use the `|` operator
+</div>
+
+```{r filter-or-solution}
+happy_full %>% 
+  filter(!(healthy_life_expectancy > mean(healthy_life_expectancy)|
+         generosity > mean(generosity))) 
+```
+
+```{r filter-or-code-check}
+grade_code()
+```

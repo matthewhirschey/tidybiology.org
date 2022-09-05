@@ -38,8 +38,8 @@ Select fruits that end with the letter "a"
 
 ```
 
-<div id="boxplot-red-hint">
-The additional code goes into one of the two geoms
+<div id="regex-end-hint">
+You will need to use the `$` symbol
 </div>
 
 ```{r regex-end-solution}

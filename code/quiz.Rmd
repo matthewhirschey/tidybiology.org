@@ -30,6 +30,12 @@ df <- tribble(
     "In a tidy dataset, what's another term for rows?", "Observations", "easy",
     "In a tidy dataset, what's another term for columns?", "Variables", "easy",
     "Which function can we use to assign a title to a plot?", "labs()", "easy",
+    "Which function can we use to determine if a string contains a particular pattern?", "str_detect()", "easy",
+    "Which symbol would you use to add layers in ggplot?", "+", "easy",
+    "Which helper function can we use to select variables that begin with a particular pattern?", "starts_with()", "easy",
+    "What is considered to be the most complete join?", "full_join()", "easy",
+    "Which regular expression means 'start of string'", "^", "easy",
+    "Which regular expression means 'end of string'", "$", "easy",
     "What kind of join is a semi-join?", "Filtering Join", "hard",
     "What are the two main parameters of pivot_wider()?", "names_from and values_from", "hard",
     "What are the two main parameters of across()?", ".cols and .fns", "hard",
@@ -58,7 +64,7 @@ fluidPage(
                    tags$style(HTML('#question{background-color:blue;
                                 color:white}'))
                ),
-               actionButton("question", "Next Question", width = '150px', icon = icon('refresh')),
+               actionButton("question", "Next Question", width = '150px', icon = icon('sync')),
                tags$head(
                    tags$style(HTML('#answer{background-color:blue;
                                     color:white}'))

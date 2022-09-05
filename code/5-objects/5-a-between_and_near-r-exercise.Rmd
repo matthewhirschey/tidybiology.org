@@ -1,0 +1,45 @@
+---
+title: "Between and Near"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+```{r, include = FALSE}
+library(learnr)
+gradethis::gradethis_setup()
+```
+## Between and Near Exercise
+
+We will again use the `happy_full` data set for these exercises
+
+Choose countries that have a `generosity` score that is between the median and mean `generosity` scores (inclusive) across all countries
+```{r filter-between, exercise = TRUE, exercise.eval = FALSE, exercise.cap = "Boxplot"}
+
+```
+
+```{r filter-between-solution}
+happy_full %>% 
+  filter(between(generosity, median(generosity), mean(generosity)))
+```
+
+```{r filter-between-code-check}
+grade_code()
+```
+
+Choose countries whose `ladder_score` is equal to the mean `ladder_score` +/- the standard error of `ladder_score` across all countries
+
+```{r filter-near, exercise = TRUE, exercise.eval = FALSE, exercise.cap = ""}
+
+```
+
+<div id="filter-near">
+Standard error formula - sd/sqrt(n)
+</div>
+
+```{r filter-near-solution}
+happy_full %>% 
+  filter(near(ladder_score, mean(ladder_score), tol = sd(ladder_score)/sqrt(rows))) 
+```
+
+```{r filter-near-code-check}
+grade_code()
+```
