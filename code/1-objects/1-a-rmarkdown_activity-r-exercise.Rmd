@@ -25,7 +25,7 @@ Data science projects in R can use a special data file type called an Rmarkdown 
 temp_rmd <- tempfile(pattern = "1-rmarkdown_activity_file_", 
                      fileext = ".Rmd")
 #download file to temp file
-download.file(url = "https://raw.githubusercontent.com/matthewhirschey/tidybiology.org/master/code/1-objects/1-rmarkdown_activity_file.Rmd", 
+download.file(url = "https://raw.githubusercontent.com/matthewhirschey/tidybiology.org/main/code/1-objects/1-rmarkdown_activity_file.Rmd", 
               destfile = temp_rmd)
 
 #download button

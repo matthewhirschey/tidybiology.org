@@ -18,7 +18,7 @@ Click the following button to download an R markdown file that contains ggplot e
 temp_rmd <- tempfile(pattern = "3-ggplot_activity_file_", 
                      fileext = ".Rmd")
 #download file to temp file
-download.file(url = "https://raw.githubusercontent.com/matthewhirschey/tidybiology.org/master/code/3-objects/3-ggplot_activity.Rmd", 
+download.file(url = "https://raw.githubusercontent.com/matthewhirschey/tidybiology.org/main/code/3-objects/3-ggplot_activity.Rmd", 
               destfile = temp_rmd)
 
 #download button
@@ -39,7 +39,7 @@ And here's another R markdown file with the answers
 temp_rmd_answer <- tempfile(pattern = "3-ggplot_activity_answers_file_", 
                      fileext = ".Rmd")
 #download file to temp file
-download.file(url = "https://raw.githubusercontent.com/matthewhirschey/tidybiology.org/master/code/3-objects/3-ggplot_activity_answers.Rmd", 
+download.file(url = "https://raw.githubusercontent.com/matthewhirschey/tidybiology.org/main/code/3-objects/3-ggplot_activity_answers.Rmd", 
               destfile = temp_rmd_answer)
 
 #download button
