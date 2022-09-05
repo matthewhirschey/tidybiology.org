@@ -1,0 +1,20 @@
+---
+title: "Manipulating Strings using Stringr"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+```{r, include = FALSE}
+library(learnr)
+gradethis::gradethis_setup()
+```
+## Stringr Quiz
+
+```{r str-detect, echo = FALSE}
+quiz(
+  question("Which function would you use to find out if a given string contains a particular pattern?",
+    answer("`str_count()`"),
+    answer("`str_subset()`"),
+    answer("`str_c()`"),
+    answer("`str_detect()`", correct = TRUE))
+)
+```

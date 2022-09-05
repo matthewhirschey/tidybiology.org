@@ -7,7 +7,7 @@ runtime: shiny_prerendered
 library(learnr)
 gradethis::gradethis_setup()
 ```
-## Exploring Aesthetics
+## Exploring Aesthetics Exercise
 
 We will continue to use the `midwest` data set for this series of exercises
 

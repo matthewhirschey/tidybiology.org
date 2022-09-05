@@ -1,0 +1,51 @@
+---
+title: "Working With Regex using Stringr"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+```{r, include = FALSE}
+library(learnr)
+gradethis::gradethis_setup()
+```
+## Regex Exercise
+
+We will use the `fruit` data set for these exercises. Regex is kind of its own language, so please use this cheatsheet if you get stuck - https://github.com/rstudio/cheatsheets/blob/main/strings.pdf
+
+### Starts with
+
+Select fruits that begin with the letter "c"
+```{r regex-start, exercise = TRUE, exercise.eval = FALSE, exercise.cap = "Boxplot"}
+
+```
+
+<div id="regex-start-hint">
+You will need to use the `^` symbol
+</div>
+
+```{r regex-start-solution}
+str_subset(fruit, "^c")
+```
+
+```{r regex-start-code-check}
+grade_code()
+```
+
+### Ends with
+
+Select fruits that end with the letter "a"
+
+```{r regex-end, exercise = TRUE, exercise.eval = FALSE, exercise.cap = ""}
+
+```
+
+<div id="boxplot-red-hint">
+The additional code goes into one of the two geoms
+</div>
+
+```{r regex-end-solution}
+str_subset(fruit, "a$")
+```
+
+```{r regex-end-code-check}
+grade_code()
+```

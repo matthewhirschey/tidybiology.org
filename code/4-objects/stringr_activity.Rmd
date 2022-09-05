@@ -1,0 +1,66 @@
+---
+title: "Stringr Exercises"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+install.packages("tidyverse")
+library(tidyverse)
+```
+
+## Required packages and datasets
+
+Run the code in the code chunk below to load the necessary dataset -  `proteins`
+
+```{r}
+install.packages("remotes")
+remotes::install_github("matthewhirschey/tidybiology", force = TRUE)
+library(tidybiology)
+data(proteins)
+```
+
+## Please answer the following questions
+
+How would you get the sequence lengths for all the entries in the `proteins` dataframe? Hint: first take a `glimpse()` at this dataframe to see which column would be relevant to this question
+
+```{r}
+
+```
+
+Count the number of lysines in each sequence
+
+```{r}
+
+```
+
+For each sequence, how many times does an arginine follow a lysine?
+
+```{r}
+
+```
+
+How would you test if the following motif - "RCP.L" - was in a particular sequence? How many proteins contain this motif? What does the "." mean?
+
+```{r}
+
+```
+
+How would you create a new dataframe that only contains proteins that contain the "RCP.L" motif?
+
+```{r}
+
+```
+
+Identify proteins that contain the E-box motif - "CANNTG". Create a new column called `e_box` that contains a `TRUE` if a sequence has this motif and a `FALSE` otherwise
+
+```{r}
+
+```
+
+What are the mean protein lengths for proteins that contain an E-box versus proteins that do not?
+
+```{r}
+
+```
+

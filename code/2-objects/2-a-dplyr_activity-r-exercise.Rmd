@@ -1,5 +1,5 @@
 ---
-title: "ggplot activity"
+title: "dplyr activity"
 output: learnr::tutorial
 runtime: shiny_prerendered
 ---
@@ -9,16 +9,16 @@ library(learnr)
 library(downloadthis)
 ```
 
-## ggplot activity  
+## Dplyr activity  
   
-Click the following button to download an R markdown file that contains ggplot exercises
+Click the following button to download an R markdown file that contains dplyr exercises
 
 ```{r, echo = FALSE}
 #make temp file
-temp_rmd <- tempfile(pattern = "3-ggplot_activity_file_", 
+temp_rmd <- tempfile(pattern = "2-dplyr_activity_file_", 
                      fileext = ".Rmd")
 #download file to temp file
-download.file(url = "https://raw.githubusercontent.com/matthewhirschey/tidybiology.org/main/code/3-objects/ggplot_activity.Rmd", 
+download.file(url = "https://raw.githubusercontent.com/matthewhirschey/tidybiology.org/main/code/2-objects/dplyr_activity.Rmd", 
               destfile = temp_rmd)
 
 #download button
@@ -36,10 +36,10 @@ And here's another R markdown file with the answers
 
 ```{r, echo = FALSE}
 #make temp file
-temp_rmd_answer <- tempfile(pattern = "3-ggplot_activity_answers_file_", 
+temp_rmd_answer <- tempfile(pattern = "2-dplyr_activity_answers_file_", 
                      fileext = ".Rmd")
 #download file to temp file
-download.file(url = "https://raw.githubusercontent.com/matthewhirschey/tidybiology.org/main/code/3-objects/ggplot_activity_answers.Rmd", 
+download.file(url = "https://raw.githubusercontent.com/matthewhirschey/tidybiology.org/main/code/2-objects/dplyr_activity_answers.Rmd", 
               destfile = temp_rmd_answer)
 
 #download button

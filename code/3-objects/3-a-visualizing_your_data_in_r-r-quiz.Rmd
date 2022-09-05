@@ -12,9 +12,9 @@ gradethis::gradethis_setup()
 ```{r quiz-layer, echo = FALSE}
 quiz(
   question("Which symbol do we use to add a layer in ggplot?",
-    answer("."),
-    answer("+", correct = TRUE),
-    answer("++"),
-    answer("%>%"))
+    answer("`.`"),
+    answer("`+`", correct = TRUE),
+    answer("`++`"),
+    answer("`%>%`"))
 )
 ```

@@ -1,0 +1,174 @@
+---
+title: "Tidybiology: dplyr"
+author: "Devang Thakkar"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+```
+
+## Loading the `scRNAseq` dataset into RStudio 
+
+The datasets can be found in the `scRNAseq` package
+
+To install and load the packages, run the following
+
+```{r install tidybiology, echo = TRUE, warning = FALSE, message = FALSE, eval = TRUE}
+devtools::install_github("devangthakkar/scRNAseq")
+library(scRNAseq)
+```
+
+## Inspecting the `scRNAseq` dataset 
+
+Use the `dim()` function to see how many rows (observations) and columns (variables) there are
+
+```{r dim, echo = TRUE, warning = FALSE}
+
+```
+
+## Inspecting the `scRNAseq` dataset 
+
+Use the `glimpse()` function to see what kinds of variables the dataset contains
+```{r glimpse, echo = TRUE, warning = FALSE}
+
+```
+
+
+
+## Selecting variables
+
+Select the `gene_name` and `transcript_length` columns
+
+```{r select simple, eval = TRUE, echo = TRUE, output.lines=11}
+
+```
+
+Select all columns *except* `transcript_length`
+
+```{r select exclude, eval = TRUE, echo = FALSE, output.lines=11}
+
+```
+
+Select all variables between (and including) `chromosome_scaffold` and `transcript_length`
+
+```{r select range, eval = TRUE, echo = TRUE, output.lines=11}
+
+```
+
+Select the following columns - `chromosome_scaffold_name`, `strand`, `transcript_start_bp`, `transcript_end_bp`, and `transcript_length`.
+
+```{r select helper, eval = TRUE, echo = TRUE, output.lines=11}
+
+```
+
+## `select()` exercise 
+
+Select the following columns - `gene_name`, `organ`, `cell_1`, `cell_2`, `cell_3`, `cell_4`, `cell_5`, `cell_6`, `cell_7`, `cell_8`, `cell_9`, and `cell_10`
+
+```{r select solution, eval = TRUE, echo = TRUE}
+
+```
+
+## `filter()`
+
+Only keep those rows that correspond to "heart"
+
+```{r filter categorical, eval = TRUE, echo = TRUE}
+
+```
+
+Only keep genes whose `transcript_length` value that is greater than 50000
+
+```{r filter numerical, eval = TRUE, echo = TRUE}
+
+```
+
+Choose genes that are expressed in the brain **and** a have a `transcript_length` value that is less than 1000 bp
+
+```{r filter both, eval = TRUE, echo = TRUE}
+
+```
+
+## `filter()` exercise
+
+Filter all genes specifically expressed in either the heart **or** the brain **and** a `gene_percent_gc_content` value that is **greater** than 50
+
+`|` = "or"
+
+`>` = "greater than"
+
+```{r filter exercise, eval = TRUE, echo = TRUE}
+
+```
+
+## `arrange()`
+
+Sort rows from smallest to largest gene
+
+```{r arrange, eval = TRUE, echo = TRUE, output.lines=11}
+
+```
+
+## `mutate()`
+
+Create a new variable called `sqrt_length` that contains the square root of transcript lengths
+
+```{r mutate simple, eval = TRUE, echo = TRUE, output.lines=11}
+
+```
+
+Create a new variable called `gene_length` that contains gene lengths
+
+```{r mutate multiple, eval = TRUE, echo = TRUE, output.lines=11}
+
+```
+
+This code takes the end position and start position of each gene and calculates its gene length (which is different from its `transcript_length`)
+
+## `mutate()` exercise
+
+Create a new column (give it any name you like) and fill it with the intronic lengths. Remember, introns are genic regions that are not transcribed.
+
+```{r mutate exercise, eval = TRUE, echo = TRUE}
+
+```
+
+## `summarise()`
+
+Calculate the mean transcript length and percent gc content
+
+```{r summarise, eval = TRUE, echo = TRUE}
+
+```
+
+## `group_by()`
+
+Compute the mean transcript length of genes associated with heart, brain, and other organs
+
+```{r group_by and summarise, eval = TRUE, echo = TRUE}
+
+```
+
+## Saving a new dataset
+
+Save the output of the previous code in a new object called `output`
+
+```{r all together now save, eval = TRUE, echo = TRUE}
+
+```
+
+Save this as a .csv file
+
+```{r csv save, eval = FALSE, echo = TRUE}
+
+```
+
+## For more help
+
+Run the following to access the Dplyr vignette
+
+```{r Dplyr vignette, eval = FALSE, echo = TRUE}
+browseVignettes("dplyr")
+```

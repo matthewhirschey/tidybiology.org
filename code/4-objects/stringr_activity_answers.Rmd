@@ -1,0 +1,75 @@
+---
+title: "Stringr Exercises"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+install.packages("tidyverse")
+library(tidyverse)
+```
+
+## Required packages and datasets
+
+Run the code in the code chunk below to load the necessary dataset -  `proteins`
+
+```{r}
+install.packages("remotes")
+remotes::install_github("matthewhirschey/tidybiology", force = TRUE)
+library(tidybiology)
+data(proteins)
+```
+
+## Please answer the following questions
+
+How would you get the sequence lengths for all the entries in the `proteins` dataframe? Hint: first take a `glimpse()` at this dataframe to see which column would be relevant to this question
+
+```{r}
+glimpse(proteins)
+str_count(proteins$sequence)
+```
+
+Count the number of lysines in each sequence
+
+```{r}
+str_count(proteins$sequence, "K")
+```
+
+For each sequence, how many times does an arginine follow a lysine?
+
+```{r}
+str_count(proteins$sequence, "KR")
+```
+
+How would you test if the following motif - "RCP.L" - was in a particular sequence? How many proteins contain this motif? What does the "." mean?
+
+```{r}
+str_detect(proteins$sequence, "RCP.L")
+sum(str_detect(proteins$sequence, "RCP.L"))
+# "." represents any character
+```
+
+How would you create a new dataframe that only contains proteins that contain the "RCP.L" motif?
+
+```{r}
+proteins %>% 
+  filter(str_detect(sequence, "RCP.L"))
+```
+
+Identify proteins that contain the E-box motif - "CANNTG". Create a new column called `e_box` that contains a `TRUE` if a sequence has this motif and a `FALSE` otherwise
+
+```{r}
+proteins %>% 
+  mutate(e_box = str_detect(sequence, "CA..TG")) %>% 
+  relocate(e_box) # this moves the named column to the start of the data frame
+```
+
+What are the mean protein lengths for proteins that contain an E-box versus proteins that do not?
+
+```{r}
+proteins %>% 
+  mutate(e_box = str_detect(sequence, "CA..TG")) %>% 
+  group_by(e_box) %>% 
+  summarise(mean_length = mean(length))
+```
+

@@ -7,7 +7,7 @@ runtime: shiny_prerendered
 library(learnr)
 gradethis::gradethis_setup()
 ```
-## Customizing Themes and Labels
+## Customizing Themes and Labels Exercise
 
 We will continue to use the `midwest` data set for this series of exercises
 
