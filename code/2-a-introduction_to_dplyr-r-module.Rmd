@@ -55,8 +55,8 @@ happy_full %>%
 ```{r child='2-objects/2-a-adding_new_columns-r-video.Rmd'}
 ```
 
-```{r child='2-objects/2-a-mutating_joins-r-video.Rmd'}
-```
+# ```{r child='2-objects/2-a-mutating_joins-r-video.Rmd'}
+# ```
 
 ```{r child='2-objects/2-a-saving_your_work-r-video.Rmd'}
 #no scratchpad

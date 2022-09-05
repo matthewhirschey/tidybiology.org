@@ -1,3 +1,16 @@
-## Exploring aesthetics
+---
+title: "Exploring aesthetics"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+```{r, include = FALSE}
+library(learnr)
+```
+## Exploring Aesthetics
 
 ![](https://youtu.be/hVU6Q4NdoAs){width="90%"}
+
+### Scratchpad
+```{r creating_geoms_r_scratchpad, exercise=TRUE}
+
+```

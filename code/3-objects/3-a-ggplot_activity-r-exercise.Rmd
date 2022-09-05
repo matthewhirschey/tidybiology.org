@@ -1,0 +1,54 @@
+---
+title: "ggplot activity"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+```{r, include = FALSE}
+#load libraries
+library(learnr)
+library(downloadthis)
+```
+
+## ggplot activity  
+  
+Click the following button to download an R markdown file that contains ggplot exercises
+
+```{r, echo = FALSE}
+#make temp file
+temp_rmd <- tempfile(pattern = "3-ggplot_activity_file_", 
+                     fileext = ".Rmd")
+#download file to temp file
+download.file(url = "https://raw.githubusercontent.com/matthewhirschey/tidybiology.org/master/code/3-objects/3-ggplot_activity.Rmd", 
+              destfile = temp_rmd)
+
+#download button
+downloadthis::download_file(
+  path = temp_rmd,
+  button_label = "Download Rmd",
+  button_type = "danger",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = TRUE
+)
+```
+
+And here's another R markdown file with the answers  
+
+```{r, echo = FALSE}
+#make temp file
+temp_rmd_answer <- tempfile(pattern = "3-ggplot_activity_answers_file_", 
+                     fileext = ".Rmd")
+#download file to temp file
+download.file(url = "https://raw.githubusercontent.com/matthewhirschey/tidybiology.org/master/code/3-objects/3-ggplot_activity_answers.Rmd", 
+              destfile = temp_rmd_answer)
+
+#download button
+downloadthis::download_file(
+  path = temp_rmd_answer,
+  button_label = "Download Rmd",
+  button_type = "danger",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = TRUE
+)
+```

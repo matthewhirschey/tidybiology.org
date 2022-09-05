@@ -1,0 +1,81 @@
+---
+title: "Creating Geometric Objects using ggplot"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+```{r, include = FALSE}
+library(learnr)
+gradethis::gradethis_setup()
+```
+## Let's make some plots!
+
+The `midwest` data set contains multiple variables. For these exercises will just be using `state` and `area`
+
+### A boxplot
+
+Make a boxplot to plot the distribution of land area for each state  
+
+NOTE: Use the verbose form of ggplot code i.e. Remember to include `data = ` and `mapping = `
+
+```{r boxplot, exercise = TRUE, exercise.eval = FALSE, exercise.cap = "Boxplot"}
+
+```
+
+<div id="boxplot-hint">
+Don't forget about `aes()`!!
+</div>
+
+```{r boxplot-solution}
+ggplot(data = midwest, mapping = aes(state, area)) +
+  geom_boxplot()
+```
+
+```{r boxplot-code-check}
+grade_code()
+```
+
+### Adding layers
+
+Now, add the individual data point on top of your boxplot
+
+```{r jitter-boxplot, exercise = TRUE, exercise.eval = FALSE, exercise.cap = ""}
+
+```
+
+<div id="jitter-boxplot-hint">
+**Dad joke:** Which geom is the most nervous?
+</div>
+
+```{r jitter-boxplot-solution}
+ggplot(data = midwest, mapping = aes(state, area)) +
+  geom_boxplot() +
+  geom_jitter()
+```
+
+```{r jitter-boxplot-code-check}
+grade_code()
+```
+
+### Add colour
+
+Finally, let's add some color to our plot! How would ensure that ONLY the boxplots and NOT the individual data points are colored by according to which state they correspond to?  
+
+Don't worry about the specific colors, just make sure that each state has its own color  
+
+```{r add-color, exercise = TRUE, exercise.eval = FALSE, exercise.cap = ""}
+
+```
+
+<div id="add-color-hint">
+**Hint:** Think local, not global
+</div>
+
+```{r add-color-solution}
+ggplot(data = midwest, mapping = aes(state, area)) +
+  geom_boxplot(aes(colour = state)) +
+  geom_jitter()
+```
+
+```{r add-color-code-check}
+grade_code()
+```
