@@ -5,7 +5,7 @@ account: computationalthinking
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 6557047
-bundleId: 6314258
+bundleId: 6314304
 url: https://computationalthinking.shinyapps.io/tidybiology-1/
-when: 1663528293.40429
-lastSyncTime: 1663528293.40431
+when: 1663529768.66276
+lastSyncTime: 1663529768.66277
