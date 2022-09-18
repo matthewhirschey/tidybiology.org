@@ -19,7 +19,10 @@ runtime: shiny_prerendered
 ```{r child='4-objects/4-a-working_with_regex_using_stringr-r-exercise.Rmd'}
 ```
 
+```{r child='4-objects/4-a-mutating_joins-r-video.Rmd'}
+```
+
 ```{r child='4-objects/4-a-stringr_activity-r-exercise.Rmd'}
 ```
 
-`r next_module("5-a-introduction_to_conditionals-r-module.Rmd")`
+`r next_module("6-a-reproducible_reports_with_rmarkdown-r-module.Rmd")`

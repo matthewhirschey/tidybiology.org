@@ -24,7 +24,7 @@ download.file(url = "https://raw.githubusercontent.com/matthewhirschey/tidybiolo
 #download button
 downloadthis::download_file(
   path = temp_rmd,
-  button_label = "Download Rmd",
+  button_label = "Questions",
   button_type = "danger",
   has_icon = TRUE,
   icon = "fa fa-save",
@@ -45,8 +45,8 @@ download.file(url = "https://raw.githubusercontent.com/matthewhirschey/tidybiolo
 #download button
 downloadthis::download_file(
   path = temp_rmd_answer,
-  button_label = "Download Rmd",
-  button_type = "danger",
+  button_label = "Answers",
+  button_type = "warning",
   has_icon = TRUE,
   icon = "fa fa-save",
   self_contained = TRUE
