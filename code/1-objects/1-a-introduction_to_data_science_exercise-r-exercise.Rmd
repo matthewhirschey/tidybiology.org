@@ -10,12 +10,12 @@ library(learnr)
 # put back down below
 # ![](https://youtu.be/XXXXXX){width="90%"}  
 #   
-# After watching the video, download the exercise Rmd file and move it to your project directory. Open it and follow the instructions. 
+# After watching the video, download the exercise Rmd file and move it to your project directory. Open it and follow the instructions. In this video, the exercise tasks will be described for you to carry out.
 ```
 
 ## Final Exercise
 
-Exercises are opportunities to practices several concepts from a module. Most will take 15-20 minutes to complete. In this video, the exercise tasks will be described for you to carry out.
+Exercises are opportunities to practices several concepts from a module. Most will take 15-20 minutes to complete. 
 
 ```{r, echo = FALSE}
 #make temp file
