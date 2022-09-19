@@ -1,0 +1,20 @@
+---
+title: "Visualizing Your Data in R"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+```{r, include = FALSE}
+library(learnr)
+gradethis::gradethis_setup()
+```
+## Layering in ggplot
+
+```{r quiz-layer, echo = FALSE}
+quiz(
+  question("Which symbol do we use to add a layer in ggplot?",
+    answer("`.`"),
+    answer("`+`", correct = TRUE),
+    answer("`++`"),
+    answer("`%>%`"))
+)
+```

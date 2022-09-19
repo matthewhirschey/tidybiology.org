@@ -1,0 +1,11 @@
+name: tidybiology-quiz
+title:
+username:
+account: computationalthinking
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 6637008
+bundleId: 6314255
+url: https://computationalthinking.shinyapps.io/tidybiology-quiz/
+when: 1663528158.13734
+lastSyncTime: 1663528158.13735

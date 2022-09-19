@@ -1,0 +1,16 @@
+---
+title: "Working With Regular Expressions using Stringr"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+```{r, include = FALSE}
+library(learnr)
+```
+## Regex
+
+![](https://youtu.be/_DXSHUN0Vcc){width="90%"}
+
+### Scratchpad
+```{r regex_r_scratchpad, exercise=TRUE}
+
+```

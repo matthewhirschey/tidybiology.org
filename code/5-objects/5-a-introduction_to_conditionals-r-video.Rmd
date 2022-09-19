@@ -1,3 +1,0 @@
-## Conditional logic
-
-![](https://youtu.be/xxxxxx){width="90%"}

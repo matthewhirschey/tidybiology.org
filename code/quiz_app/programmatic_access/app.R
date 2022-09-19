@@ -104,8 +104,8 @@ server <- function(input, output) {
         url <- a("Link", 
                  href= paste0("https://www.rdocumentation.org/packages/",
                               input$package,
-                              "/versions/",
-                              packageVersion(input$package),
+                              # "/versions/",
+                              # packageVersion(input$package),
                               "/topics/",
                               fn_name
                               ))

@@ -1,0 +1,86 @@
+---
+title: "Customizing Themes and Labels using ggplot"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+```{r, include = FALSE}
+library(learnr)
+gradethis::gradethis_setup()
+```
+## Customizing Themes and Labels Exercise
+
+We will continue to use the `midwest` data set for this series of exercises
+
+### Adding labels our boxplot
+
+Again, make a boxplot to plot the distribution of land area for each state, and then add the individual data points  
+
+Then, add labels to the x- and y-axes -  
+"State" (x-axis label)  
+"Land Area" (y-axis label)  
+
+```{r boxplot-label, exercise = TRUE, exercise.eval = FALSE, exercise.cap = "Boxplot"}
+
+```
+
+<div id="boxplot-label-hint">
+Use the `labs()` function
+</div>
+
+```{r boxplot-label-solution}
+ggplot(data = midwest, mapping = aes(state, area)) +
+  geom_boxplot() +
+  geom_jitter() +
+  labs(x = "State",
+       y = "Land Area")
+```
+
+```{r boxplot-label-code-check}
+grade_code()
+```
+
+### Add Color 
+
+Now give all the boxplots and data points different colors depending on which state they correspond to  
+
+```{r boxplot-color, exercise = TRUE, exercise.eval = FALSE, exercise.cap = ""}
+
+```
+
+<div id="boxplot-color-hint">
+Use the `color =` parameter
+</div>
+
+```{r boxplot-color-solution}
+ggplot(data = midwest, mapping = aes(state, area, color = state)) +
+  geom_boxplot() +
+  geom_jitter()
+```
+
+```{r boxplot-color-code-check}
+grade_code()
+```
+
+### Remove the Legend
+
+Finally, let's remove the color legend. This one is a bit tricky, and you will need to use the `theme()` function. Here's the (extensive!) documentation for this function -  
+https://ggplot2.tidyverse.org/reference/theme.html
+
+```{r remove-legend, exercise = TRUE, exercise.eval = FALSE, exercise.cap = ""}
+
+```
+
+<div id="remove-legend-hint">
+Use the `legend.position` parameter
+</div>
+
+```{r remove-legend-solution}
+ggplot(data = midwest, mapping = aes(state, area, color = state)) +
+  geom_boxplot() +
+  geom_jitter() +
+  theme(legend.position = "none")
+```
+
+```{r remove-legend-code-check}
+grade_code()
+```

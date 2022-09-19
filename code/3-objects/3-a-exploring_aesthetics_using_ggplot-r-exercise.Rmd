@@ -1,0 +1,80 @@
+---
+title: "Exploring Aesthetics using ggplot"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+```{r, include = FALSE}
+library(learnr)
+gradethis::gradethis_setup()
+```
+## Exploring Aesthetics Exercise
+
+We will continue to use the `midwest` data set for this series of exercises
+
+### Improving our boxplot
+
+Again, make a boxplot to plot the distribution of land area for each state, and then add the individual data points  
+
+NOTE: From now on, use the "concise" form of ggplot code i.e. Drop `data = ` and `mapping = `
+
+```{r boxplot-redux, exercise = TRUE, exercise.eval = FALSE, exercise.cap = "Boxplot"}
+
+```
+
+<div id="boxplot-redux-hint">
+You will need to two geoms for this
+</div>
+
+```{r boxplot-redux-solution}
+ggplot(data = midwest, mapping = aes(state, area)) +
+  geom_boxplot() +
+  geom_jitter()
+```
+
+```{r boxplot-redux-code-check}
+grade_code()
+```
+
+### Adding Color
+
+Make all the individual data points red
+
+```{r boxplot-red, exercise = TRUE, exercise.eval = FALSE, exercise.cap = ""}
+
+```
+
+<div id="boxplot-red-hint">
+The additional code goes into one of the two geoms
+</div>
+
+```{r boxplot-red-solution}
+ggplot(data = midwest, mapping = aes(state, area)) +
+  geom_boxplot() +
+  geom_jitter(color = "red")
+```
+
+```{r boxplot-red-code-check}
+grade_code()
+```
+
+### Adjust Transparency
+
+Notice that the points obscure the boxplots. Reduce the opacity of these points by 50%
+
+```{r transparency, exercise = TRUE, exercise.eval = FALSE, exercise.cap = ""}
+
+```
+
+<div id="transparency-hint">
+Adjust the alpha parameter
+</div>
+
+```{r transparency-solution}
+ggplot(data = midwest, mapping = aes(state, area)) +
+  geom_boxplot() +
+  geom_jitter(color = "red", alpha = 0.5)
+```
+
+```{r transparency-code-check}
+grade_code()
+```

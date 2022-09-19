@@ -55,11 +55,11 @@ happy_full %>%
 ```{r child='2-objects/2-a-adding_new_columns-r-video.Rmd'}
 ```
 
-```{r child='2-objects/2-a-mutating_joins-r-video.Rmd'}
-```
-
 ```{r child='2-objects/2-a-saving_your_work-r-video.Rmd'}
 #no scratchpad
+```
+
+```{r child='2-objects/2-a-dplyr_activity-r-exercise.Rmd'}
 ```
 
 `r next_module("3-a-data_visualization_with_ggplot-r-module.Rmd")`

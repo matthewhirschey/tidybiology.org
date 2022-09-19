@@ -1,0 +1,16 @@
+---
+title: "Mutating Joins"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+```{r, include = FALSE}
+library(learnr)
+```
+## Mutating Joins
+
+![](https://youtu.be/kLgZYO3tcYA){width="90%"}
+
+### Scratchpad
+```{r mutating_joins_r_scratchpad, exercise=TRUE}
+
+```

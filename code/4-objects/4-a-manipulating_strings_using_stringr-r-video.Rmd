@@ -1,0 +1,16 @@
+---
+title: "Manipulating Strings using Stringr"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+```{r, include = FALSE}
+library(learnr)
+```
+## Manipulating Strings
+
+![](https://youtu.be/UFEmYyJuwoI){width="90%"}
+
+### Scratchpad
+```{r manipulating_strings_r_scratchpad, exercise=TRUE}
+
+```

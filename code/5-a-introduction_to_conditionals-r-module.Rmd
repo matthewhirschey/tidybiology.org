@@ -7,7 +7,22 @@ runtime: shiny_prerendered
 ```{r child='setup.Rmd'}
 ```
 
-```{r child='5-objects/5-a-introduction_to_conditionals-r-video.Rmd'}
+```{r, context="data", include=FALSE}
+library(tidybiology)
+data(happy_full)
 ```
+
+```{r child='5-objects/5-a-advanced_filter-r-video.Rmd'}
+```
+
+```{r child='5-objects/5-a-advanced_filter-r-exercise.Rmd'}
+```
+
+```{r child='5-objects/5-a-between_and_near-r-video.Rmd'}
+```
+
+```{r child='5-objects/5-a-between_and_near-r-exercise.Rmd'}
+```
+
 
 `r next_module("6-a-reproducible_reports_with_rmarkdown-r-module.Rmd")`

@@ -1,0 +1,11 @@
+name: tidybiology-map
+title:
+username:
+account: computationalthinking
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 6636761
+bundleId: 6314248
+url: https://computationalthinking.shinyapps.io/tidybiology-map/
+when: 1663527888.38589
+lastSyncTime: 1663527888.38591
