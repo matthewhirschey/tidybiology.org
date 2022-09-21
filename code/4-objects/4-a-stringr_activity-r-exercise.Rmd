@@ -52,11 +52,3 @@ downloadthis::download_file(
   self_contained = TRUE
 )
 ```
-
-----
-```{r echo=FALSE}
-rmd_files <- list.files(here::here("code/4-objects"), "activity.+Rmd$")[-1]
-links <- xfun::embed_files(rmd_files, text = "Download all exercise files (and answers)")
-links
-```
----- 
