@@ -8,7 +8,7 @@ library(tidyverse)
 
 ```{r, include=FALSE}
 #Load datasets we will use for the lecture
-source(here::here("code", "healthcare.R")) #loads dataset-specific variables
+#source(here::here("code", "healthcare.R")) #loads dataset-specific variables
 ```
 
 # Lets take a glimpse at our dataset called `heart`
