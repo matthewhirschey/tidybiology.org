@@ -7,6 +7,10 @@ runtime: shiny_prerendered
 #load libraries
 library(learnr)
 library(downloadthis)
+library(xfun)
+library(DT)
+library(tidyverse)
+xfun::pkg_load2(c("htmltools", "mime"))
 ```
 
 ## ggplot activity  
@@ -52,3 +56,12 @@ downloadthis::download_file(
   self_contained = TRUE
 )
 ```
+
+----
+```{r echo=FALSE}
+rmd_files <- list.files(here::here("code/3-objects"), "activity.+Rmd$")[-1]
+links <- xfun::embed_files(rmd_files, text = "Download all exercise files (and answers)")
+links
+```
+----  
+
