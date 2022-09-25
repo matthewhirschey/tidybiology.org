@@ -142,7 +142,7 @@ ggplot(chromosome, aes(x = percent_var, y = fct_rev(id))) +
 #https://ggplot2.tidyverse.org/reference/element.html
 
 #save your new plot to have an image for your final presentation
-ggsave(here::here("6_final", "variation.png"), plot = last_plot(), height = 5, width = 7, units = "in", dpi = 300) #plan on changing the width:height ratio for your own plot
+# ggsave(here::here("6_final", "variation.png"), plot = last_plot(), height = 5, width = 7, units = "in", dpi = 300) #plan on changing the width:height ratio for your own plot
 ```
 
 ## Conclusions
