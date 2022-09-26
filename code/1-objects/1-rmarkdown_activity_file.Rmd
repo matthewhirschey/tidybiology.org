@@ -95,5 +95,5 @@ You'll learn more about R Markdown in later classes, and all of your coding and 
 Here is one last code chunk that we will use in the next exercise. If you uncomment the code and try to run it, it won't work. If you don't believe me try! Let's figure out why after uncommenting the code it doesn't run
 
 ```{r}
-ggplot(data = chromosome) + geom_point(aes(x = id, y = basepairs))
+#ggplot(data = chromosome) + geom_point(aes(x = id, y = basepairs))
 ```

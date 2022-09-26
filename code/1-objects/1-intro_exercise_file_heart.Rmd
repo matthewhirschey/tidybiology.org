@@ -12,7 +12,11 @@ library(tidyverse)
 This is the code chunk that imports data. We will discuss how this code works in the next few sessions. All you need to know for now is that this imports an `R object` into your environment. Look to the right at the "Environment" tab and see a new object called `heart`. 
 ```{r import}
 heart_url <- "https://github.com/dukecct/tidybiology-plusds/blob/master/data/heart.Rds?raw=true"
-heart <- readRDS(gzcon(url(heart_url)))
+# heart <- readRDS(gzcon(url(heart_url)))
+heart <- 
+  url(heart_url) %>% 
+  gzcon() %>% 
+  readRDS()
 ```
 
 ## Take a `glimpse` into the kinds of data in the dataframe
