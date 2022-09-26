@@ -2,10 +2,6 @@
 title: "dplyr Exercise: scrnaseq"
 output: html_document
 ---
----
-title: "dplyr Exercise: scrnaseq"
-output: html_document
----
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
@@ -14,10 +10,9 @@ library(tidyverse)
 
 ## Loading the `scRNAseq` dataset into RStudio 
 
-The datasets can be found in the `scRNAseq` package
+For this exercise, the datasets can be found in the `scRNAseq` package
 
 To install and load the packages, run the following
-
 ```{r install, echo = TRUE, warning = FALSE, message = FALSE, eval = TRUE}
 #devtools::install_github("devangthakkar/scRNAseq")
 library(scRNAseq)

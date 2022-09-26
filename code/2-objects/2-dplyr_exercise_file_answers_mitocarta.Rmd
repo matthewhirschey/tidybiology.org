@@ -1,0 +1,239 @@
+---
+title: "dplyr Exercise: mitocarta"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+```
+
+## Loading the `mitocarta` dataset into RStudio 
+The dataset can be found in the `mitocarta` package on the Hirscheylab Github page
+  
+To install and load the packages, uncomment the install code, run the install command, and then re-comment out. Make sure you have `devtools` installed, and if not, install that one first from CRAN.  
+```{r install, echo = TRUE, warning = FALSE, message = FALSE, eval = TRUE}
+# devtools::install_github("hirscheylab/mitocarta")
+library(mitocarta)
+```
+
+## Inspecting the dataset
+Use the `dim()` function to see how many rows (observations) and columns (variables) there are
+```{r dim, echo = TRUE, warning = FALSE}
+dim(mitocarta)
+```
+
+## Inspecting the dataset
+Use the `glimpse()` function to see what kinds of variables the dataset contains
+```{r glimpse, echo = TRUE, warning = FALSE}
+glimpse(mitocarta)
+```
+
+## Basic Data Types in R 
+R has 6 basic data types -
+
+**character** - `"a"`, `"tidyverse"`  
+
+**numeric** - `2`, `11.5`  
+
+**integer** - `2L` (the `L` tells R to store this as an integer)  
+
+**logical** - `TRUE`, `FALSE`  
+
+**complex** - `1+4i`  
+
+(**raw**)
+
+You will also come across the **double** datatype. It is the same as **numeric**
+
+**factor**. A **factor** is a collection of *ordered* character variables
+
+In addition to the `glimpse()` function, you can use the `class()` function to determine the data type of an object or of part of an object (like a specific column). Try calling `class` on mitocarta or one of its vectors.
+```{r class, echo = TRUE, warning = FALSE}
+class(mitocarta)
+class(mitocarta$symbol) #one possibility
+```
+
+## (Re)Introducing `%>%` 
+The `%>%` operator is a way of "chaining" together strings of commands that make reading your code easy. To practice how the pipe works, start with the proteins dataframe, "and then" select `symbol` and `protein_length`, "and then" filter `protein_length` greater than 500
+```{r pipe, eval = TRUE, echo = TRUE}
+mitocarta %>% 
+  select(symbol, protein_length) %>% 
+  filter(protein_length > 500) 
+```
+
+What would the nested alternative to using `%>%` be? 
+```{r alternative, eval = FALSE, echo = TRUE}
+filter(select(mitocarta, symbol, protein_length), protein_length > 500)
+```
+
+Although this is only one line as opposed to three, it's both more difficult to write and more difficult to read
+
+## Introducing the main dplyr verbs
+dplyr is a package that contains a suite of functions that allow you to easily manipulate a dataset. Some of the things you can do are:  
+- select rows and columns that match specific criteria  
+- create new variables (columns)  
+- obtain summary statistics on individual groups within your datsets  
+  
+The main verbs we will review in this exercise are `select()`, `filter()`, `arrange()`, `mutate()`, and `summarise()`. These all combine naturally with `group_by()` which allows you to perform any operation "by group"
+
+## `select()` 
+The `select()` verb allows you to extract specific columns from your dataset. The most basic `select()` is one where you comma separate a list of columns you want included. For example, try to select the `uniprot_id` and `length` columns
+```{r select_simple, eval = TRUE, echo = TRUE}
+mitocarta %>% 
+  select(symbol, protein_length)
+```
+
+If you want to select all columns *except* `protein_length`, how would you do that?
+```{r select_exclude, eval = TRUE, echo = TRUE}
+mitocarta %>% 
+  select(-protein_length)
+```
+
+Finally, you can provide a range of columns to return two columns and everything in between. For example, try using the proteins dataframe and selecting `human_gene_id`, `description`, and everything in-between
+```{r select_range, eval = TRUE, echo = TRUE}
+mitocarta %>% 
+  select(human_gene_id:description) 
+```
+
+From proteins, select the following columns - `uniprot_id`, `sequence`, `length`, and `mass`
+```{r select_solution, eval = TRUE, echo = TRUE}
+mitocarta %>% 
+  select(c("symbol", "description", "mito_domain_score", "tissues"))
+```
+
+## `filter()` 
+The `filter()` verb allows you to choose rows based on certain condition(s) and discard everything else. All filters are performed on some logical statement. If a row meets the condition of this statement (i.e. is true) then it gets chosen (or "filtered"). All other rows are discarded. Remember, `filter()` only applies to rows, and has no effect on columns.
+
+Filtering can be performed on categorical data, such as "MitoDomain" within the `mitocarta` dataframe. Try that here.
+```{r filter_categorical, eval = TRUE, echo = TRUE}
+mitocarta %>% 
+  filter(mito_domain_score == "MitoDomain") 
+```
+
+Filtering can also be performed on numerical data. For example, try to select proteins with a `mcarta2_fdr` value that is less than 0.05
+```{r filter_numerical, eval = TRUE, echo = TRUE}
+mitocarta %>% 
+  filter(mcarta2_fdr < 0.05) 
+```
+
+To filter on multiple conditions, you can write a sequence of `filter()` commands. For example, to choose proteins with a mito domain score that is equal to MitoDomain **and** a `mcarta2_fdr` value that is less than 0.05
+```{r filter_both, eval = TRUE, echo = TRUE}
+mitocarta %>% 
+  filter(mito_domain_score == "MitoDomain") %>% 
+  filter(mcarta2_fdr < 0.05) 
+```
+
+To avoid writing multiple `filter()` commands, multiple logical statements can be put inside a single `filter()` command, separated by commas. Try rewriting the same code from the chunk above and placing it here.
+```{r filter_both_efficient, eval = TRUE, echo = TRUE}
+mitocarta %>% 
+  filter(mito_domain_score == "MitoDomain",
+         mcarta2_fdr < 0.05) 
+```
+
+Filter all proteins with a mito domain score that is **not** equal to MitoDomain **and** a `mcarta2_fdr` value that is **greater** than or equal to 0.05
+
+`!=` = "not equal to"
+
+`>=` = "less than or equal to"
+```{r filter_exercise, eval = TRUE, echo = TRUE}
+mitocarta %>% 
+  filter(mito_domain_score != "MitoDomain",
+         mcarta2_fdr >= 0.05) 
+```
+
+## `arrange()` 
+You can use the `arrange()` verb to sort rows. The input for arrange is one or many columns, and `arrange()` sorts the rows in ascending order i.e. from smallest to largest. Sort rows from smallest to largest protein length.
+```{r arrange, eval = TRUE, echo = TRUE}
+mitocarta %>% 
+  arrange(protein_length) 
+```
+
+To reverse this order, use the `desc()` function within `arrange()`. Try arranging the protein lengths from largest to smallest now.
+```{r arrange_desc, eval = TRUE, echo = TRUE}
+mitocarta %>% 
+  arrange(desc(protein_length))
+```
+
+What happens when you apply `arrange()` to a categorical variable? Try arranging on one of the categorical variables withing `proteins`
+```{r arrange_exercise, eval = TRUE, echo = TRUE}
+mitocarta %>% 
+  arrange(symbol)  #only one example, could have chosen any character variable
+```
+
+## `mutate()` 
+The `mutate()` verb, unlike the ones covered so far, creates new variable(s) i.e. new column(s). For example, try taking all the elements of the column `protein_length`, evaluate the square root of each element, and populates a new column called `sqrt_length` with these results
+```{r mutate_simple, eval = TRUE, echo = TRUE}
+mitocarta %>% 
+  mutate(sqrt_length = sqrt(protein_length)) 
+```
+
+Multiple columns can be used as inputs. For example, try subtracting the `hg19_start` from `hg19_stop` to get the transcript length, and storing the results in a new column called `transcript_length` and then selecting only `symbol` and your new column.
+```{r mutate_multiple, eval = TRUE, echo = TRUE}
+mitocarta %>% 
+  mutate(transcript_length = hg19_stop-hg19_start) %>% 
+  select(symbol, transcript_length)
+```
+
+Create a new column (give it any name you like) and fill it with protein lengths divided by 100, and then selecting only `symbol` and your new column.
+```{r mutate_exercise, eval = TRUE, echo = TRUE}
+mitocarta %>% 
+  mutate(protein_100 = protein_length/100) %>% 
+  select(symbol, protein_100)
+```
+
+## `summarise()` 
+`summarise()` produces a new dataframe that aggregates that values of a column based on a certain condition. For example,  calculate the mean protein_length and transcript_length. Note, you're going to have to grab the code you wrote above for transcript length, because we didn't store that object.
+```{r summarise, eval = TRUE, echo = TRUE}
+mitocarta %>% 
+  mutate(transcript_length = hg19_stop-hg19_start) %>% 
+  summarise(mean(protein_length), mean(transcript_length))
+```
+
+You can assign your own names by using the same code organization we saw in `mutate()`. Try taking the same code you wrote above to summarize the mean(protein_length) and mean(transcript_length), but set these results to equal `mean_length` and `mean_mass`, respectively.
+```{r summarise_name, eval = TRUE, echo = TRUE}
+mitocarta %>% 
+  mutate(transcript_length = hg19_stop-hg19_start) %>% 
+  summarise(mean_protein_length = mean(protein_length),
+            mean_transcript_length = mean(transcript_length))
+```
+
+Now make a new table that contains the mean, median and standard deviations of transcript_length. Use the `median()` and `sd()` functions to calculate median and standard deviation
+```{r summarise_exercise, eval = TRUE, echo = TRUE}
+proteins %>% 
+  mutate(transcript_length = hg19_stop-hg19_start) %>% 
+  summarise(mean_transcript_length = mean(transcript_length), 
+            median_transcript_length = median(transcript_length),
+            sd_transcript_length = sd(transcript_length))
+```
+
+## `group_by()` 
+Let's practice `group_by()` and `summarise()`. These functions are most often used in combination to summarise by groups. For example, if you'd like to know the average length of both mitochondrial and non mitochondrial proteins, you would first `group_by()` the `mcarta2_list` variable (0 indicating it is not in the mitocarta list and a 1 indicating it is), and then calculating the mean length. 
+
+```{r group_by_and_summarise, eval = TRUE, echo = TRUE}
+mitocarta %>% 
+  group_by(mcarta2_list) %>% 
+  summarise(protein_length = mean(protein_length)) 
+```
+
+## Saving a new dataset 
+If you'd like to save the output of your wrangling, you will need to use the `<-` or `=` operators. Try taking the code you wrote in the last code chunk and now modify it here to create a new object called `mito_new`
+```{r save, eval = TRUE, echo = TRUE}
+mito_new <- mitocarta %>% 
+              group_by(mcarta2_list) %>% 
+              summarise(mean(protein_length))  
+```
+
+Finally, save `mito_new` as a new file (e.g. csv)
+```{r csv_save, eval = FALSE, echo = TRUE}
+write_csv(mito_new, "mito_new.csv")
+```
+
+## For continued learning
+Run the following to access the `dplyr` vignette for more examples
+```{r Dplyr vignette, eval = FALSE, echo = TRUE}
+browseVignettes("dplyr")
+```
+
+
+
