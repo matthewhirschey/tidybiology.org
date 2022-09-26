@@ -7,7 +7,7 @@ runtime: shiny_prerendered
 ```{r child='setup.Rmd'}
 ```
 
-```{r child='3-objects/3-a-data_visualization-r-slides.Rmd'}
+```{r child='3-objects/3-a-what_is_data_visualization-r-slides.Rmd'}
 ```
 
 ```{r child='3-objects/3-a-introduction_to_ggplot-r-video.Rmd'}
@@ -31,7 +31,7 @@ runtime: shiny_prerendered
 ```{r child='3-objects/3-a-customizing_themes_and_labels_in_ggplot-r-video.Rmd'}
 ```
 
-```{r child='3-objects/3-a-customizing_themes_and_labels_in_ggplot-r-exercise.Rmd'}
+```{r child='3-objects/3-a-themes_and_labels_activity-r-activity.Rmd'}
 ```
 
 ```{r child='3-objects/3-a-ggplot_final_exercise-r-exercise.Rmd'}

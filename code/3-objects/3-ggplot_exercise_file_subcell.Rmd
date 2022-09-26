@@ -1,0 +1,179 @@
+---
+title: "Exercise: Subcellular Data"
+output: html_notebook
+---
+
+## Load libraries
+You're going to need a few more packages, so make sure to download them before trying to load the libraries; each of these is on CRAN, so you should be able to get them easily. You'll need: tidyverse, janitor, viridis, ggridges.
+```{r load_block, warning=FALSE, echo=TRUE}
+
+```
+
+## Import data
+The raw data were originally downloaded from [here](https://www.uniprot.org). But now, they are on the tidybiology website, so we can grab from there. The URL is provided below, so take this URL and import the dataset using readr::read_tsv, and then use janitor::clean_names to clean the column names, and then finally select all of the columns except `status` and `entry_name`. Assign this new object to `proteins_raw`.  
+```{r}
+proteins_url <- "https://github.com/matthewhirschey/tidybiology.org/raw/main/data/uniprot-filtered-reviewed%253Ayes%2BAND%2Borganism%253A%2522Homo%2Bsapiens%2B%2528Human%2529%2B%255B96--.tab"
+
+```
+
+## Get to know your dataset
+The `proteins_raw` object is a table (also called a dataframe), that has a series of columns and rows. The function `glimpse()` performs a quick peek at the data. Take a `glimpse` into the kinds of data in the proteins_raw dataframe. How many columns (called 'Variables') and rows (called 'Observations') does it have?
+```{r glimpse}
+
+```
+
+## Add subcellular data
+One of the biggest challenges when working with new data is to "clean" it, which means get it into a state that you can use it for something useful...like visualization! The overall goal is to clean-up a super messy column called `subcellular_location_cc`. We've already performed some cleaning steps for you below. While you might not understand everystep, read the comments to see what the code is doing. We are going to save this "cleaned" dataframe as a new object called 'subcell', which is short-hand for subcellular location. 
+```{r}
+#the overall goal is to clean-up a super messy column called "subcellular_location_cc"
+subcell <- 
+  proteins_raw %>%
+  #looks for the word SUBCELLULAR, and filters to include only those
+  filter(str_detect(subcellular_location_cc, "SUBCELLULAR")) %>% 
+  #removes the word SUBCELLULAR
+  mutate(subcellular_location_cc = str_remove_all(subcellular_location_cc, "SUBCELLULAR LOCATION\\: ")) %>%
+  #this is a trick to use separate() to split the text (sep = ...) and then drops the split
+  separate(subcellular_location_cc, into = c("subcellular_location_cc"), sep = "Note") %>% 
+  separate(subcellular_location_cc, into = c("subcellular_location_cc"), sep = "\\;") %>% 
+  separate(subcellular_location_cc, into = c("subcellular_location_cc"), sep = "\\{") %>% 
+  separate(subcellular_location_cc, into = c("subcellular_location_cc"), sep = "\\,") %>% 
+  separate(subcellular_location_cc, into = c("subcellular_location_cc"), sep = "\\.") %>% 
+  separate(subcellular_location_cc, into = c("temp", "subcellular_location_cc"), sep = "\\:", fill = "left") %>% 
+  #we add a temp column in this last separate(), so we remove it here
+  dplyr::select(-temp)
+
+#because of cleaning, some locations were listed as gene names; easy way to omit is if they are a single instance
+omit <- 
+  subcell %>% 
+  count(subcellular_location_cc, sort = TRUE) %>% 
+  filter(n == 1) %>% 
+  pull(subcellular_location_cc)
+
+#this then filters out the omitted locations
+subcell <- 
+  subcell %>% 
+  #single instances
+  filter(!subcellular_location_cc %in% omit) %>% 
+  #length is 0 for a few instance; omit
+  filter(str_length(subcellular_location_cc) > 0) 
+
+#make it so that white space does not make separate categories
+subcell$subcellular_location_cc <- str_trim(subcell$subcellular_location_cc, side = "both") 
+```
+
+## Exploratory Data Analysis (EDA)
+We are now left with a 'clean' data frame, with a new column called "subcellular_location_cc" which has a simple description of where a protein is annotated to be within the cell. Let's explore the dataset now. Take a glimpse into the clean dataset.
+```{r}
+
+```
+
+The function `distinct` is used to find unique values in a column of a dataframe. Use it to find out how many subcellular locations there are. 
+```{r}
+
+```
+
+Let's do some more counting.  
+1. Which subcellular locations have the most annotated proteins?  
+2. Which subcellular locations have the fewest annotated proteins? 
+3. How many proteins are annotated in mitochondria? (hint: these are in a subcellular location called "Mitochondrion")  
+4. What's the longest protein in each subcellular compartment?  
+```{r}
+#Which subcellular locations have the most annotated proteins?
+
+#Which subcellular locations have the fewest annotated proteins? 
+
+#How many proteins are annotated in mitochondria?
+
+#What's the longest protein in each subcellular compartment?
+
+```
+
+#Visualize
+Let's perform some visualizations now. We are practicing ggplot in this exericse, so let's practice dplyr and ggplot skills.
+
+1. Let's start with a simple visualization to view a histogram of all proteins binned by their length  
+```{r}
+subcell %>% 
+  ggplot(aes(x = length)) + #this indicates we want to look at length
+  geom_histogram(bins = 100) #this indicates we want 100 bins
+```
+  
+2. Copy and paste the above code into this code chunk. But we want to filter out the outlier proteins with very long lengths. Add 'filter(length < 10000)' after subcell, but before ggplot.  
+```{r}
+
+```
+
+3. Copy and paste the above code into this code chunk. Now, we want to focus on only one subcellular location. Add 'filter(subcellular_location_cc %in% "Mitochondrion")' after filtering on length to get only mitochondrial proteins. 
+```{r}
+
+```
+
+4. Again, copy and paste the above code into this code chunk. It turns out, that Mitochondrion is not the only location annotated for mitochondrial proteins. we want to focus on only one subcellular location. Replace 'filter(subcellular_location_cc %in% c("Mitochondrion", "Mitochondrion inner membrane"))' to get all mitochodnrial proteins.  
+```{r}
+
+```
+  
+5. While this visual shows the distribution of two sets of proteins that are both mitochondrial, we might want to color the different compartments differently. Using the code you wrote in the last chunk, replace 'ggplot(aes(x = length))' with 'ggplot(aes(x = length, fill = subcellular_location_cc))' to fill the histograms with different colors.  
+```{r}
+
+```
+  
+6. It turns out, that there are more than two sub-populations of proteins annotated as mitochondrial. First, run the code chunk below to see how many different groups there are. Then, copy and paste the code from the last code chunk underneath the comment to '#make a plot with all mito proteins'. Finally, replace the filtering you did in the code from last plot with the filtering you did to '#explore all mitochondrial proteins' below. You should now have a plot with a layered histogram of protein length for mitochondrial proteins from each of the different annotated compartments. Hint: use the code provided for exploring below to help you build your plot.
+```{r}
+#explore all mitochondrial proteins
+subcell %>% 
+  filter(str_detect(subcellular_location_cc, "Mito")) %>% 
+  count(subcellular_location_cc, sort = TRUE)
+
+#make a plot with all mito proteins
+
+```
+  
+7. Using any one of the six plots you made above, copy and paste into the code chunk below. Then explore some different subcellular compartments and remake the plot by replacing mitochondrial proteins with your compartment of interest. If you don't remember how to find the other compartments, go back up to the EDA step to explore the dataset again.  
+```{r}
+#put one of the six plots here, then replace mitochondrial proteins with one of the other categories from 'subcellular_location_cc'.
+
+```
+
+8. Let's clean up this last and final plot by giving it:  
+- labeled axes  
+- titles  
+- a theme_minimal() layer  
+```{r}
+
+```
+  
+9. This is a nice looking plot, but it still has one problem: the distribution of nuclear proteins makes it hard to see the different categories. Let's keep the plot we made above, but we'll facet_wrap. Hint: make sure to set the scales = "free" so that the distribution of your your plots can all be seen.
+```{r}
+
+```    
+  
+Well done! You just completed a multi-step analysis. 
+
+## Bonus
+10. Bonus Challenge! If you're up for it, here is a more challenging bonus visualization based on the plots and data you've made above. I've pre-defined the steps you'll need. The overall goal is to make a plot of *all* subcellular locations, considering some of the challenges we've had above with outliers, wide distributions, and overplotting. Are you ready? Under each comment below, progressively add code to build out a new plot.  
+```{r}
+#simple histogram plot of protein length of the whole subcell data set, colored/filled by subcellular_location_cc. Again, let's start with 100 bins in your histogram
+
+#Let's remove the legend by adding "show.legend = FALSE" inside of the geom_histogram function
+
+#Another approach is to use a new function that lumps together all of the locations except for the top 10. Try wrapping your fill = subcellular_location_cc, with an fct_lump_n(). Look at the documentation for this function to guide you.
+
+#Pretty wide range of protein lengths. Let's try wrapping our x = length in a log() function
+
+#Looking better. Let's add some x and y labels
+
+#There is a popular color-blind-friendly palette called 'viridis'. You loaded it in the setup chunk above. Let's add a scale_fill_viridis() layer to use it, and since our data are categorical (the top 10 subcellular compartments), we can add an argument of discrete=TRUE.
+
+#Let's try 'smoothening out' the blocky geom_histogram. geom_density computes and draws kernel density estimate, which is a smoothed version of the histogram. Swap out this geom.
+
+#To compare these 10 locations more easily, we can add a 'scaled' argument to the ggplot function. This scales the maximum to 1, which in this case, might help visualize the distribution in protein length. The way we call scaled is a bit unusual, so here's a hint: add `, ..scaled..` inside the aes() of the ggplot function
+
+#This allows comparison of distributions better, but also over plots. Add some `alpha` to lighten it up, so we can see the overlapping curves
+
+#Better, but not great. Let's try a new geom from the `ggridges` package, which you also loaded in the setup chunk. This package has a great `geom_density_ridges` geom that will allow us to split out the 10 plots into a 'ridgeline' plot, still computing the density estimate for us. 
+
+```
+  
+You did it!  
+  

@@ -11,8 +11,10 @@ library(learnr)
 
 ## Optional Exercises
 
-Exercises are opportunities to practices several concepts from a module. Most will take 15-20 minutes to complete. These exercises below are roughly equivalent. Choose one and work through it, downloading the answers if needed. Then, try the other example and see if you can complete it without looking at the answer file. To begin, click the download button and then drag the exercise file to your working project directory. Again, the "answer" file shows you one way that you can accomplish the task.   
-
+Exercises are opportunities to practices several concepts from a module. These should take 20-30 minutes to complete. The `mtcars` and `mitocarta` exercises below are roughly equivalent. Choose one and work through it, downloading the answers if needed. Then, try the other example and see if you can complete it without looking at the answer file. To challenge yourself, try the `subcell` example.  
+  
+To begin, click the download button and then drag the exercise file to your working project directory. Again, the "answer" file shows you one way that you can accomplish the task.   
+  
 ```{r}
 h4("mtcars Example")
 make_button(file_name = "ggplot_exercise_file_mtcars", 
@@ -23,17 +25,28 @@ make_button(file_name = "ggplot_exercise_file_answers_mtcars",
             module = "3",
             file_suffix = "answers",
             button_style = "default")
-# br()
-# br()
-# h4("Mitocarta Example")
-# make_button(file_name = "dplyr_exercise_file_mitocarta", 
-#             module = "2", 
-#             file_suffix = "mitocarta",
-#             button_style = "primary")
-# make_button(file_name = "dplyr_exercise_file_answers_mitocarta",
-#             module = "2",
-#             file_suffix = "answers",
-#             button_style = "default")
+br()
+br()
+h4("mitocarta Example")
+make_button(file_name = "ggplot_exercise_file_mitocarta", 
+            module = "3", 
+            file_suffix = "mitocarta",
+            button_style = "primary")
+make_button(file_name = "ggplot_exercise_file_answers_mitocarta",
+            module = "3",
+            file_suffix = "answers",
+            button_style = "default")
+br()
+br()
+h4("Subcell Example")
+make_button(file_name = "ggplot_exercise_file_subcell",
+            module = "3",
+            file_suffix = "subcell",
+            button_style = "primary")
+make_button(file_name = "ggplot_exercise_file_answers_subcell",
+            module = "3",
+            file_suffix = "answers",
+            button_style = "default")
 actionLink("class3_exercise", "", icon = icon("bug"))
 
 conditionalPanel(
@@ -48,6 +61,7 @@ conditionalPanel(
   h4("In-class Example"),
   make_button(file_name = "ggplot_exercise_file_scrnaseq",
               module = "3",
+              file_suffix = "scrnaseq",
               button_style = "danger"), 
   make_button(file_name = "ggplot_exercise_file_answers_scrnaseq",
               module = "3",
