@@ -2,4 +2,22 @@
 
 In this video, you will learn the difference between R and Rstudio, and download R and Rstudio as a first step towards programming on your own computer  
   
-![](https://youtu.be/IJc2J-qewiU){width="90%"}
+![](https://youtu.be/IJc2J-qewiU){width="90%"}  
+  
+## Instructions
+Watch the video above to see a walk through of installing R and RStudio. Because most data science is carried out on your local machine, you'll want to install:  
+- A recent version of R  which is available for free at [cran.r-project.org](cran.r-project.org)  
+- A recent version of RStudio Desktop, available for free at [www.rstudio.com/download](www.rstudio.com/download) (use the RStudio Desktop Open Source License version)  
+- R packages that you will use. Typically, you will install packages as you need them, but feel free to install a few now that are required for tidybiology. From within your console in Rstudio, type the following commands:  
+  
+`install.packages("tidyverse")`  
+and then type  
+`library(tidyverse)`  
+  
+If this loads the tidyverse suite of packages, then it was a success!  
+  
+  
+Next, install a few more packages. You can either do these one at a time, or you can combine them together using the `c()` function.  
+  
+`install.package(c("devtools", "rmarkdown"))`  
+  

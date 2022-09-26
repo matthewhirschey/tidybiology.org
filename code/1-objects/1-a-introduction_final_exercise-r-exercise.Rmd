@@ -1,0 +1,56 @@
+---
+title: "Final Exercise"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+```{r, include = FALSE}
+#load libraries
+library(learnr)
+
+# put back down below
+# ![](https://youtu.be/XXXXXX){width="90%"}  
+#   
+# After watching the video, download the exercise Rmd file and move it to your project directory. Open it and follow the instructions. In this video, the exercise tasks will be described for you to carry out.
+```
+
+## Optional Exercises
+
+Exercises are opportunities to practices several concepts from a module. Most will take 15-20 minutes to complete.  
+  
+```{r}
+h4("Cars Example")
+make_button(file_name = "intro_exercise_file_mtcars", 
+            module = "1", 
+            file_suffix = "mtcars",
+            button_style = "primary")
+br()
+br()
+h4("Heart Example")
+make_button(file_name = "intro_exercise_file_heart", 
+            module = "1", 
+            file_suffix = "heart",
+            button_style = "primary")
+br()
+br()
+h4("Subcell Example")
+make_button(file_name = "intro_exercise_file_subcell", 
+            module = "1", 
+            file_suffix = "subcell",
+            button_style = "primary")
+actionLink("class1_exercise", "", icon = icon("bug"))
+
+conditionalPanel(
+          condition = "input.class1_exercise != 0",
+          hr(),
+          p("If you are participating in tidybiology live, then this is the file we will use in class. If you are not in a synchronous class, then feel free to use this additional file for practice."), 
+          h4("In-class Example"),
+          make_button(file_name = "intro_exercise_file_chromosome",
+            module = "1",
+            button_style = "danger"), 
+          hr()
+        )
+```
+
+
+
+

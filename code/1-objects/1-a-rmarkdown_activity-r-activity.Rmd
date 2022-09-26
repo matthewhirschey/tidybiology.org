@@ -11,31 +11,18 @@ library(downloadthis)
 
 ## Rmarkdown activity  
 ![](https://youtu.be/PvfFr-eY77E){width="90%"}  
-  
+
 Data science projects in R can use a special data file type called an Rmarkdown (Rmd) file. To learn more about this file type and how to use it in Rstudio,  
-  
-1. Create a new project in Rstudio  
+
+1. Create a new project in Rstudio, if you didn't do this in the previous step  
 2. Download the rmarkdown activity file (click below)  
 3. Move it to an Rstudio project directory  
 4. Open the file and follow the instructions
 5. If you get stuck at anytime, unpause the video above for a walkthrough
 
 ```{r, echo = FALSE}
-#make temp file
-temp_rmd <- tempfile(pattern = "1-rmarkdown_activity_file_", 
-                     fileext = ".Rmd")
-#download file to temp file
-download.file(url = "https://raw.githubusercontent.com/matthewhirschey/tidybiology.org/main/code/1-objects/1-rmarkdown_activity_file.Rmd", 
-              destfile = temp_rmd)
-
-#download button
-downloadthis::download_file(
-  path = temp_rmd,
-  button_label = "Download Rmd",
-  button_type = "danger",
-  has_icon = TRUE,
-  icon = "fa fa-save",
-  self_contained = TRUE
-)
+make_button(file_name = "rmarkdown_activity_file", 
+            module = "1", 
+            button_style = "danger")
 ```
 

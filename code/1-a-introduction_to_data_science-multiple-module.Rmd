@@ -22,7 +22,7 @@ runtime: shiny_prerendered
 ```{r child='1-objects/1-a-reviewing_data_types-r-quiz.Rmd'}
 ```
 
-```{r child='1-objects/1-a-first_r_exercise-r-exercise.Rmd'}
+```{r child='1-objects/1-a-first_practice_with_r-r-activity.Rmd'}
 ```
 
 ```{r child='1-objects/1-a-installing_packages-r-video.Rmd'}
@@ -44,15 +44,12 @@ runtime: shiny_prerendered
 #organizing your r projects
 ```
 
-```{r child='1-objects/1-a-rmarkdown_activity-r-exercise.Rmd'}
+```{r child='1-objects/1-a-rmarkdown_activity-r-activity.Rmd'}
 ```
 
-```{r child='1-objects/1-a-introduction_to_data_science_exercise-r-exercise.Rmd'}
+```{r child='1-objects/1-a-introduction_final_exercise-r-exercise.Rmd'}
 #rmarkdown exercise
 #record video walkthrough
-```
-
-```{r child='1-objects/1-a-resources_and_cheatsheets-r-video.Rmd'}
 ```
 
 `r next_module("2-a-introduction_to_dplyr-r-module.Rmd")`

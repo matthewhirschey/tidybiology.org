@@ -1,63 +1,79 @@
 ---
-title: "Tidybiology: Class 1"
+title: "Exercise: Subcellular Data"
 output: html_notebook
 ---
 
 ##Load libraries
 ```{r load_block, warning=FALSE, echo=TRUE}
 library(tidyverse)
+
+#you're going to need a few more packages, so make sure to download them before trying to load the libraries; each of these is on CRAN, so you should be able to get them easily
 library(janitor)
 library(viridis)
 library(ggridges)
-
-#clear environment
-rm(list=ls()) 
-
-#print Session information for provenance and reproducibility
-utils:::print.sessionInfo(sessionInfo()[-7]) 
-#You can remove an item from sessionInfo(), which is a list with a class attribute, by printing the resulting object omitting one of the list items (omitted list of packages installed, but not loaded)
-
-#Set theme
-theme_set(theme_light())
 ```
 
-#import
-Go [here](https://www.uniprot.org/uniprot/?query=*&fil=reviewed%3ayes+AND+organism%3a%22Homo+sapiens+(Human)+%5b9606%5d%22&offset=525#) for raw data
+#import data
+The raw data were originally downloaded from [here](https://www.uniprot.org). But now, they are on the tidybiology website, so we can grab from there.  
 ```{r}
-raw <- read_tsv("raw/uniprot-filtered-reviewed%3Ayes+AND+organism%3A%22Homo+sapiens+%28Human%29+%5B96--.tab", col_names = TRUE) %>% 
+proteins_url <- "https://github.com/matthewhirschey/tidybiology.org/raw/main/data/uniprot-filtered-reviewed%253Ayes%2BAND%2Borganism%253A%2522Homo%2Bsapiens%2B%2528Human%2529%2B%255B96--.tab"
+proteins_raw <- 
+  read_tsv(proteins_url, col_names = TRUE) %>% 
   clean_names() %>% 
   dplyr::select(-status, -entry_name)
 ```
+
+## Get to know your dataset
+The `proteins_raw` object is a table (also called a dataframe), that has a series of columns and rows. The function `glimpse()` perfroms a quick peek at the data. We can see that this table has 7 columns (called 'Variables'), and 20431 rows (called 'Observations'). The name of each Variable is listed below (e.g. 'id', etc.). Importantly, R cares about capitalization, so `entry` is NOT the same as `ENTRY`. The type of variable is listed next (e.g. <fct>, <dbl>, etc.), as we discussed. Lastly, the first few observations are listed.  
+  
+```{r glimpse}
+#Take a `glimpse` into the kinds of data in the proteins_raw dataframe
+```
+
 #clean
+One of the biggest challenges when working with new data is to "clean" it, which means get it into a state that you can use it for something useful...like visualization! The overall goal is to clean-up a super messy column called `subcellular_location_cc`. We've already performed some cleaning steps for you below. While you might not understand everystep, read the comments to see what the code is doing.  
+  
+We are going to save this "cleaned" dataframe as a new object called 'subcell', which is short-hand for subcellular location. 
 ```{r}
-subcell <- raw %>%
+#the overall goal is to clean-up a super messy column called "subcellular_location_cc"
+subcell <- 
+  proteins_raw %>%
+  #looks for the word SUBCELLULAR, and filters ot include only those
   filter(str_detect(subcellular_location_cc, "SUBCELLULAR")) %>% 
+  #removes the word SUBCELLULAR
   mutate(subcellular_location_cc = str_remove_all(subcellular_location_cc, "SUBCELLULAR LOCATION\\: ")) %>%
+  #this is a trick to use separate() to split the text (sep = ...) and then drops the split
   separate(subcellular_location_cc, into = c("subcellular_location_cc"), sep = "Note") %>% 
   separate(subcellular_location_cc, into = c("subcellular_location_cc"), sep = "\\;") %>% 
   separate(subcellular_location_cc, into = c("subcellular_location_cc"), sep = "\\{") %>% 
   separate(subcellular_location_cc, into = c("subcellular_location_cc"), sep = "\\,") %>% 
   separate(subcellular_location_cc, into = c("subcellular_location_cc"), sep = "\\.") %>% 
   separate(subcellular_location_cc, into = c("temp", "subcellular_location_cc"), sep = "\\:", fill = "left") %>% 
+  #we add a temp column in this last separate(), so we remove it here
   dplyr::select(-temp)
 
 #because of cleaning, some locations were listed as gene names; easy way to omit is if they are a single instance
-omit <- subcell %>% 
+omit <- 
+  subcell %>% 
   count(subcellular_location_cc, sort = TRUE) %>% 
   filter(n == 1) %>% 
   pull(subcellular_location_cc)
 
-'%ni%' <- Negate('%in%') #negate 'in' operator
+#this then filters out the omitted locations
+subcell <- 
+  subcell %>% 
+  #single instances
+  filter(!subcellular_location_cc %in% omit) %>% 
+  #length is 0 for a few instance; omit
+  filter(str_length(subcellular_location_cc) > 0) 
 
-subcell <- subcell %>% 
-  filter(subcellular_location_cc %ni% omit) %>% #single instances
-  filter(str_length(subcellular_location_cc) > 0) #length is 0 for a few instance; omit
-
-subcell$subcellular_location_cc <- str_trim(subcell$subcellular_location_cc, side = "both") #make it so that white space does not make separate categories
+#make it so that white space does not make separate categories
+subcell$subcellular_location_cc <- str_trim(subcell$subcellular_location_cc, side = "both") 
 ```
 
 
-#eda
+#Exploratory Data Analysis (EDA)
+We are now left with a 'clean' data frame, with a new column called "subcellular_location_cc" which has a simple
 ```{r}
 #What are some of the characteristics of the human protein lengths?
 subcell %>% 

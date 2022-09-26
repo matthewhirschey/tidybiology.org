@@ -1,5 +1,5 @@
 ---
-title: "First r exercise"
+title: "First practice with R"
 output: learnr::tutorial
 runtime: shiny_prerendered
 ---
@@ -9,7 +9,7 @@ library(learnr)
 library(tidyverse)
 ```
 
-## R Exercise
+## Practice R
 ### Activity 1
 This code computes the answer to one plus one.  
 1. Run the code by clicking the button and watch for the answer to appear below.  
