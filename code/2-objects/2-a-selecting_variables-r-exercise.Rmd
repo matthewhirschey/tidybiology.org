@@ -5,17 +5,18 @@ runtime: shiny_prerendered
 ---
 ```{r, include = FALSE}
 library(learnr)
+library(gradethis)
 gradethis::gradethis_setup()
 
 happy_full <- read_csv("https://raw.githubusercontent.com/BAREJAA/website_for_john/master/datasets/world-happiness-report-2021.csv") %>% clean_names() %>% rename(region = regional_indicator)
 ```
 ## Select exercises
 
-The `happy_full` dataset contains many variables. This gives us the chance to practice our `select()`-ing skills!
+We have preloaded a dataset for you called `happy_full`. This dataset contains many variables. This gives us the chance to practice our `select()`-ing skills!
 
 ### Simple selects
 
-Let's warm up by performing some basic select operations  
+Let's warm up by performing some basic select operations. The coding console below is the same type as you'll find in Rstudio. Because the data are already loaded, you can explore it.    
 
 How would you select just the columns `region` and `ladder_score`?  
 

@@ -16,7 +16,7 @@ The datasets can be found in the `scRNAseq` package
 To install and load the packages, run the following
 
 ```{r install tidybiology, echo = TRUE, warning = FALSE, message = FALSE, eval = TRUE}
-devtools::install_github("devangthakkar/scRNAseq")
+#devtools::install_github("devangthakkar/scRNAseq")
 library(scRNAseq)
 ```
 

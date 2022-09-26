@@ -5,6 +5,7 @@ runtime: shiny_prerendered
 ---
 ```{r, include = FALSE}
 library(learnr)
+library(gradethis)
 gradethis::gradethis_setup()
 ```
 ## Double Data Type?
