@@ -9,7 +9,7 @@ library(gradethis)
 gradethis::gradethis_setup()
 
 happy_full <- 
-  read_csv("https://raw.githubusercontent.com/matthewhirschey/tidybiology.org/main/data/world-happiness-report-2021.csv") %>% 
+  readr::read_csv("https://raw.githubusercontent.com/matthewhirschey/tidybiology.org/main/data/world-happiness-report-2021.csv") %>% 
   janitor::clean_names() %>% 
   dplyr::rename(region = regional_indicator)
 ```
