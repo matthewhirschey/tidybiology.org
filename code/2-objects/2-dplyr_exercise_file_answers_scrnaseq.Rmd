@@ -1,0 +1,178 @@
+---
+title: "dplyr Exercise: scrnaseq"
+output: html_document
+---
+---
+title: "dplyr Exercise: scrnaseq"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+```
+
+## Loading the `scRNAseq` dataset into RStudio 
+
+The datasets can be found in the `scRNAseq` package
+
+To install and load the packages, run the following
+
+```{r install, echo = TRUE, warning = FALSE, message = FALSE, eval = TRUE}
+#devtools::install_github("devangthakkar/scRNAseq")
+library(scRNAseq)
+```
+
+## Inspecting the `scRNAseq` dataset 
+
+Use the `dim()` function to see how many rows (observations) and columns (variables) there are
+```{r dim, echo = TRUE, warning = FALSE}
+dim(scRNAseq)
+```
+
+## Inspecting the `scRNAseq` dataset 
+
+Use the `glimpse()` function to see what kinds of variables the dataset contains
+```{r glimpse, echo = TRUE, warning = FALSE}
+glimpse(scRNAseq)
+```
+
+## Selecting variables
+
+Select the `gene_name` and `transcript_length` columns
+```{r select_simple, eval = TRUE, echo = TRUE, output.lines=11}
+scRNAseq %>% 
+  select(gene_name, transcript_length) 
+```
+
+Select all columns *except* `transcript_length`
+```{r select_exclude, eval = TRUE, echo = FALSE, output.lines=11}
+scRNAseq %>% 
+  select(!transcript_length)
+```
+
+Select all variables between (and including) `chromosome_scaffold` and `transcript_length`
+```{r select_range, eval = TRUE, echo = TRUE, output.lines=11}
+scRNAseq %>% 
+  select(chromosome_scaffold_name:transcript_length) 
+```
+
+Select the following columns: `transcript_start_bp`, `transcript_end_bp`, and `transcript_length`.
+```{r select_helper, eval = TRUE, echo = TRUE, output.lines=11}
+scRNAseq %>% 
+  select(contains("transcript"))
+```
+
+## `select()` exercise 
+
+Select the following 12 columns: `gene_name`, `organ`, `cell_1`, `cell_2`, `cell_3`, `cell_4`, `cell_5`, `cell_6`, `cell_7`, `cell_8`, `cell_9`, and `cell_10`
+
+```{r select_solution, eval = TRUE, echo = TRUE}
+scRNAseq %>% 
+  select(c("gene_name", "organ", contains("cell")))
+```
+
+## `filter()`
+  
+Only keep those rows that correspond to "heart"  
+```{r filter_categorical, eval = TRUE, echo = TRUE}
+scRNAseq %>%
+  filter(organ == "heart")
+```
+
+Only keep genes whose `transcript_length` value that is greater than 50000  
+```{r filter_numerical, eval = TRUE, echo = TRUE}
+scRNAseq %>%
+  filter(transcript_length > 50000)
+```
+
+Choose genes that are expressed in the brain **and** a have a `transcript_length` value that is less than 1000 bp
+```{r filter_both, eval = TRUE, echo = TRUE}
+scRNAseq %>%
+  filter(organ == "brain") %>%
+  filter(transcript_length < 1000)
+```
+
+## `filter()` exercise
+
+Filter all genes specifically expressed in either the heart **or** the brain **and** a `gene_percent_gc_content` value that is **greater** than 50
+
+`|` = "or"
+
+`>` = "greater than"
+```{r filter_exercise, eval = TRUE, echo = TRUE}
+scRNAseq %>%
+  filter(organ == "brain" | organ == "heart") %>%
+  filter(gene_percent_gc_content > 50)
+```
+
+## `arrange()`
+
+Sort rows from smallest to largest gene
+```{r arrange, eval = TRUE, echo = TRUE, output.lines=11}
+scRNAseq %>%
+  arrange(transcript_length)
+```
+
+## `mutate()`
+
+Create a new variable called `sqrt_length` that contains the square root of transcript lengths
+```{r mutate_simple, eval = TRUE, echo = TRUE, output.lines=11}
+scRNAseq %>%
+  mutate(sqrt_length = sqrt(transcript_length))
+```
+
+Create a new variable called `gene_length` that contains gene lengths
+```{r mutate_multiple, eval = TRUE, echo = TRUE, output.lines=11}
+scRNAseq %>%
+  mutate(gene_length = gene_end_bp-gene_start_bp)
+```
+
+This code takes the end position and start position of each gene and calculates its gene length (which is different from its `transcript_length`)
+
+## `mutate()` exercise
+
+Create a new column (give it any name you like) and fill it with the introns_length. Remember, introns are gene regions that are not transcribed.
+```{r mutate_exercise, eval = TRUE, echo = TRUE}
+scRNAseq %>%
+  mutate(gene_length = gene_end_bp-gene_start_bp, 
+         introns_length = gene_length-transcript_length)
+```
+
+## `summarise()`
+
+Calculate the mean transcript length and percent gc content
+```{r summarise, eval = TRUE, echo = TRUE}
+scRNAseq %>%
+  summarise(mean(transcript_length), mean(gene_percent_gc_content))
+```
+
+## `group_by()`
+
+Compute the mean transcript length of genes associated with heart, brain, and other organs
+```{r group_by and summarise, eval = TRUE, echo = TRUE}
+scRNAseq %>%
+  group_by(organ) %>%
+  summarise(mean(transcript_length))
+```
+
+## Saving a new dataset
+
+Save the output of the previous code in a new object called `output`
+```{r altogether_now_save, eval = TRUE, echo = TRUE}
+output <- scRNAseq %>%
+              group_by(organ) %>%
+              summarise(mean(transcript_length))
+```
+
+Save this as a .csv file
+```{r csv_save, eval = FALSE, echo = TRUE}
+write_csv(output, "dplyr_output.csv")
+```
+
+## For more help
+
+Run the following to access the Dplyr vignette
+```{r Dplyr vignette, eval = FALSE, echo = TRUE}
+browseVignettes("dplyr")
+```
