@@ -1,0 +1,58 @@
+---
+title: "ggplot Final Exercise"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+```{r, include = FALSE}
+#load libraries
+library(learnr)
+
+```
+
+## Optional Exercises
+
+Exercises are opportunities to practices several concepts from a module. Most will take 15-20 minutes to complete. These exercises below are roughly equivalent. Choose one and work through it, downloading the answers if needed. Then, try the other example and see if you can complete it without looking at the answer file. To begin, click the download button and then drag the exercise file to your working project directory. Again, the "answer" file shows you one way that you can accomplish the task.   
+
+```{r}
+h4("mtcars Example")
+make_button(file_name = "ggplot_exercise_file_mtcars", 
+            module = "3", 
+            file_suffix = "mtcars",
+            button_style = "primary")
+make_button(file_name = "ggplot_exercise_file_answers_mtcars",
+            module = "3",
+            file_suffix = "answers",
+            button_style = "default")
+# br()
+# br()
+# h4("Mitocarta Example")
+# make_button(file_name = "dplyr_exercise_file_mitocarta", 
+#             module = "2", 
+#             file_suffix = "mitocarta",
+#             button_style = "primary")
+# make_button(file_name = "dplyr_exercise_file_answers_mitocarta",
+#             module = "2",
+#             file_suffix = "answers",
+#             button_style = "default")
+actionLink("class3_exercise", "", icon = icon("bug"))
+
+conditionalPanel(
+  condition = "input.class3_exercise != 0",
+  hr(),
+  p("If you are participating in tidybiology live, then this is the file we will use in class. If you are not in a synchronous class, then feel free to use this additional file for practice."), 
+  tags$ol(
+    tags$li("Create a new project in Rstudio (optional)"), 
+    tags$li("Download the project Rmd file (big red button)"), 
+    tags$li("Follow along with the exercise")
+  ),
+  h4("In-class Example"),
+  make_button(file_name = "ggplot_exercise_file_scrnaseq",
+              module = "3",
+              button_style = "danger"), 
+  make_button(file_name = "ggplot_exercise_file_answers_scrnaseq",
+              module = "3",
+              file_suffix = "answers",
+              button_style = "default"), 
+  hr()
+)
+```

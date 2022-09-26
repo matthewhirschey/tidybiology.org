@@ -1,5 +1,5 @@
 ---
-title: "Customizing Themes and Labels using ggplot"
+title: "Themes and Labels Activity"
 output: learnr::tutorial
 runtime: shiny_prerendered
 ---
@@ -7,11 +7,11 @@ runtime: shiny_prerendered
 library(learnr)
 gradethis::gradethis_setup()
 ```
-## Customizing Themes and Labels Exercise
+## Themes and Labels Activity
 
-We will continue to use the `midwest` data set for this series of exercises
+We will continue to use the `midwest` data set for this series of exercises. If you need a scratchpad, feel free to use any of the consoles below.
 
-### Adding labels our boxplot
+### Activity 1: Adding labels our boxplot
 
 Again, make a boxplot to plot the distribution of land area for each state, and then add the individual data points  
 
@@ -39,7 +39,7 @@ ggplot(data = midwest, mapping = aes(state, area)) +
 grade_code()
 ```
 
-### Add Color 
+### Activity 2: Add Color 
 
 Now give all the boxplots and data points different colors depending on which state they correspond to  
 
@@ -61,7 +61,7 @@ ggplot(data = midwest, mapping = aes(state, area, color = state)) +
 grade_code()
 ```
 
-### Remove the Legend
+### Activity 3: Remove the Legend
 
 Finally, let's remove the color legend. This one is a bit tricky, and you will need to use the `theme()` function. Here's the (extensive!) documentation for this function -  
 https://ggplot2.tidyverse.org/reference/theme.html

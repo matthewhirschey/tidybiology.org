@@ -1,13 +1,12 @@
 ---
-title: "Visualizing Your Data in R"
+title: "Layering quiz"
 output: learnr::tutorial
 runtime: shiny_prerendered
 ---
 ```{r, include = FALSE}
 library(learnr)
-gradethis::gradethis_setup()
 ```
-## Layering in ggplot
+## Layering quiz
 
 ```{r quiz-layer, echo = FALSE}
 quiz(
@@ -15,6 +14,7 @@ quiz(
     answer("`.`"),
     answer("`+`", correct = TRUE),
     answer("`++`"),
-    answer("`%>%`"))
+    answer("`%>%`"), 
+    random_answer_order = TRUE)
 )
 ```

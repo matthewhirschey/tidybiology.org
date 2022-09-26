@@ -6,7 +6,7 @@ runtime: shiny_prerendered
 ```{r, include = FALSE}
 library(learnr)
 ```
-## Creating Geometric Objects
+## Creating `geoms`
 
 ![](https://youtu.be/y1NjU_zDfpo){width="90%"}
 

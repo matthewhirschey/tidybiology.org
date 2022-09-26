@@ -1,5 +1,5 @@
 ---
-title: "Creating Geometric Objects using ggplot"
+title: "ggplot Activity"
 output: learnr::tutorial
 runtime: shiny_prerendered
 ---
@@ -7,11 +7,16 @@ runtime: shiny_prerendered
 library(learnr)
 gradethis::gradethis_setup()
 ```
-## Let's make some plots!
+## ggplot Activity
 
-The `midwest` data set contains multiple variables. For these exercises will just be using `state` and `area`
+The `midwest` data set contains multiple variables. For these exercises will just be using `state` and `area`. If you want to `glimpse` at the data again, here is an extra scratchpad.
 
-### A boxplot
+### Scratchpad
+```{r ggplot_activity_scratchpad, exercise=TRUE}
+
+```
+
+### Activity 1: A boxplot
 
 Make a boxplot to plot the distribution of land area for each state  
 
@@ -34,7 +39,7 @@ ggplot(data = midwest, mapping = aes(state, area)) +
 grade_code()
 ```
 
-### Adding layers
+### Activity 2: Adding layers
 
 Now, add the individual data point on top of your boxplot
 
@@ -56,7 +61,7 @@ ggplot(data = midwest, mapping = aes(state, area)) +
 grade_code()
 ```
 
-### Add colour
+### Activity 3: Add colour
 
 Finally, let's add some color to our plot! How would ensure that ONLY the boxplots and NOT the individual data points are colored by according to which state they correspond to?  
 

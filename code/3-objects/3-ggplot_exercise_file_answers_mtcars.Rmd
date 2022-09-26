@@ -1,0 +1,115 @@
+---
+title: "ggplot Exercise: mtcars"
+output: html_document
+---
+
+## Set-up your space
+Add a setup chunk that loads the tidyverse packages.
+
+```{r}
+library(tidyverse)
+```
+
+## Load the mpg dataset
+```{r}
+mpg
+```
+
+## First plot
+Make a ggplot using the mpg dataset, and compare displacement (x) to miles per gallon (y)
+```{r}
+ggplot(mpg) +
+  geom_point(aes(x = displ, y = hwy))
+```
+
+## Enhance your plot
+Add `color`, `size`, `alpha`, or `shape` aesthetics to your graph. Experiment.  
+```{r}
+ggplot(mpg) +
+  geom_point(aes(x = displ, y = hwy, color = as_factor(year)), shape = 3, size = 6) #one example
+```
+
+## Facet
+What do `facet_grid()` and `facet_wrap()` do? To figure this out, make a simple plot, such as the one you ran above. Then, you can assign this simple plot to an object, and finally add additional layers (such as your `facets`) to that ggplot object. 
+```{r}
+# Makes a plot that the commands below will modify
+q <- ggplot(mpg) + geom_point(aes(x = displ, y = hwy))
+
+# One way to test it is to assign the plot to an object, and then simply add another layer
+q + facet_grid(cols = vars(cyl))
+q + facet_grid(rows = vars(cyl))
+q + facet_grid(rows = vars(drv))
+q + facet_grid(vars(drv), vars(cyl))
+q + facet_wrap(vars(cyl))
+q + facet_wrap(vars(class))
+
+#facet_grid() forms a matrix of panels defined by row and column faceting variables. It is most useful when you have two discrete variables, and all combinations of the variables exist in the data. If you have only one variable with many levels, try facet_wrap().
+
+#facet_wrap() wraps a 1d sequence of panels into 2d. This is generally a better use of screen space than facet_grid() because most displays are roughly rectangular.
+```
+
+## Add another variable
+Often, data visualizations are rich with information. You previously wrote a ggplot function to only include two variables (x and y). Add a third variable to color
+```{r}
+ggplot(data = mpg) +
+  geom_point(mapping = aes(displ, hwy, color = class)) #one example
+```
+
+## Change the geom
+Replace this scatterplot with one that draws boxplots. Use the cheatsheet or the internet. Try your best guess.
+```{r}
+#old
+ggplot(mpg) + 
+  geom_point(aes(class, hwy))
+#new
+ggplot(mpg) + 
+  geom_boxplot(aes(class, hwy))
+```
+
+## Histograms
+Make a histogram of the `hwy` variable from `mpg`. Hint: do not supply a y variable.
+```{r}
+ggplot(mpg) + 
+  geom_histogram(aes(hwy))
+```
+
+Use the help page for `geom_histogram` to make the bins 2 units wide.
+```{r}
+ggplot(mpg) + 
+  geom_histogram(aes(hwy), binwidth = 2)
+```
+
+Taking the code from the above histogram, make a bar chart for `hwy` colored by `class`. Use the help page for `geom_bar` to choose a "color" aesthetic for class.
+```{r}
+ggplot(mpg) + 
+  geom_bar(aes(hwy, fill = class), binwidth = 2)
+```
+
+## Final plot
+Go back to the beginning to look at the simple plot for the relationship between engine size and mile per gallon. Make a plot that has a scatter plot, and a best fit line using a loess model
+```{r}
+ggplot(mpg) + 
+  geom_point(aes(displ, hwy)) +
+  geom_smooth(aes(displ, hwy))
+```
+
+## Make it interactive
+Plotly is a package that can take a ggplot and wrap it in a layer of interactivity. Download the plotly package adn then take the last plot you made (scatter plot + fit)  and make an interactive version of it. *Don't forget to load the library after you download it. 
+
+```{r}
+#install.package("plotly")
+library(plotly)
+
+p <- ggplot(mpg) + #easy to make a ggplot object, and then pass that to ggplotly
+  geom_point(aes(displ, hwy)) +
+  geom_smooth(aes(displ, hwy))
+
+ggplotly(p)
+```
+
+## Take aways
+You can use this code template to make thousands of graphs with **ggplot2**.
+```{r eval = FALSE}
+ggplot(data = <DATA>) +
+  <GEOM_FUNCTION>(mapping = aes(<MAPPINGS>))
+```

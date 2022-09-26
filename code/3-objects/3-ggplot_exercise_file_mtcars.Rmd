@@ -1,0 +1,83 @@
+---
+title: "ggplot Exercise: mtcars"
+output: html_document
+---
+
+## Set-up your space
+Add a setup chunk that loads the tidyverse packages.
+
+```{r}
+```
+
+## Load the mpg dataset
+```{r}
+```
+
+## First plot
+Make a ggplot using the mpg dataset, and compare displacement (x) to miles per gallon (y)
+```{r}
+
+```
+
+## Enhance your plot
+Add `color`, `size`, `alpha`, or `shape` aesthetics to your graph. Experiment.  
+```{r}
+
+```
+
+## Facet
+What do `facet_grid()` and `facet_wrap()` do? To figure this out, make a simple plot, such as the one you ran above. Then, you can assign this simple plot to an object, and finally add additional layers (such as your `facets`) to that ggplot object. 
+```{r}
+
+```
+
+## Add another variable
+Often, data visualizations are rich with information. You previously wrote a ggplot function to only include two variables (x and y). Add a third variable to color
+```{r}
+
+```
+
+## Change the geom
+Replace this scatterplot with one that draws boxplots. Use the cheatsheet or the internet. Try your best guess.
+```{r}
+#old
+
+#new
+
+```
+
+## Histograms
+Make a histogram of the `hwy` variable from `mpg`. Hint: do not supply a y variable.
+```{r}
+
+```
+
+Use the help page for `geom_histogram` to make the bins 2 units wide.
+```{r}
+
+```
+
+Taking the code from the above histogram, make a bar chart for `hwy` colored by `class`. Use the help page for `geom_bar` to choose a "color" aesthetic for class.
+```{r}
+
+```
+
+## Final plot
+Go back to the beginning to look at the simple plot for the relationship between engine size and mile per gallon. Make a plot that has a scatter plot, and a best fit line using a loess model
+```{r}
+
+```
+
+## Make it interactive
+Plotly is a package that can take a ggplot and wrap it in a layer of interactivity. Download the plotly package adn then take the last plot you made (scatter plot + fit)  and make an interactive version of it. *Don't forget to load the library after you download it. 
+
+```{r}
+
+```
+
+## Take aways
+You can use this code template to make thousands of graphs with **ggplot2**.
+```{r eval = FALSE}
+ggplot(data = <DATA>) +
+  <GEOM_FUNCTION>(mapping = aes(<MAPPINGS>))
+```

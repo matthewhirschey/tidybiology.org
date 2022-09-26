@@ -12,9 +12,8 @@ library(learnr)
 ![](https://youtu.be/QUlHs6tGBHg){width="90%"}  
   
 ### Scratchpad  
-Use this console to follow along with the video  
+Use this console to follow along with the video. For `data`, try `iris` (a built in dataset in R). For x and y variables, try `glimpse`-ing the data to see what options are available. Any of these can then be used.
 ```{r visualizing_data_scratchpad, exercise = TRUE}
-library(ggplot2)
-ggplot()
+glimpse(iris)
 ```
 

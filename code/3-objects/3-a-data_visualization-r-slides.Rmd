@@ -1,5 +1,5 @@
 ---
-title: "Introduction to Visualization"
+title: "Data Visualization"
 output: learnr::tutorial
 runtime: shiny_prerendered
 ---
@@ -13,7 +13,7 @@ library(learnr)
 }
 </style>
 
-## Introduction to Visualization
+## Data Visualization
 
 ### "The simple graph has brought more information to the data analyst’s mind than any other device."  -- John Tukey {.background}
 
