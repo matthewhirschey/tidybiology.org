@@ -26,8 +26,7 @@ data(scRNAseq)
 Take a quick look at the contents of this dataset before attempting the questions below
 
 ```{r}
-glimpse(scRNAseq)
-head(scRNAseq)
+
 ```
 
 *WARNING*: These data are MADE UP. Please therefore only use this dataset for this exercise!
@@ -37,14 +36,13 @@ head(scRNAseq)
 What is the distribution of transcript lengths for the genes in this dataset? Hint - the relevant variable is `transcript_length`
 
 ```{r}
-ggplot(scRNAseq, aes(transcript_length)) +
-  geom_density()
+
 ```
 
 How many *unique* organs are represented in this dataset?
 
 ```{r}
-unique(scRNAseq$organ)
+
 ```
 
 Create a new data frame that only contains genes whose transcript length is less that 7500 bp long. Also discard all rows that contain "other" in the `organ` column.
@@ -52,50 +50,31 @@ Create a new data frame that only contains genes whose transcript length is less
 Call this new data frame `three_organ_df`
 
 ```{r}
-three_organ_df <- scRNAseq %>% 
-                    filter(transcript_length < 7500,
-                           organ != 'other')
+
 ```
 
 Create boxplots for transcript lengths for each organ type. Overlay the individual points on top of these boxplots
 
 ```{r}
-ggplot(three_organ_df, aes(x = organ, y = transcript_length)) +
-  geom_boxplot() +
-  geom_point()
+
 ```
 
 Give the previous plot appropriate labels for the x- and y-axes, and a title
 
 ```{r}
-ggplot(three_organ_df, aes(x = organ, y = transcript_length)) +
-  geom_boxplot() +
-  geom_point() +
-  labs(x = "Organ names",
-       y = "Transcript Length",
-       title = "Distribution of Transcript Length for Genes in each Organ")
+
 ```
 
 Many of the points are obscuring each other. What's one way to "fix" this?
 
 ```{r}
-ggplot(three_organ_df, aes(x = organ, y = transcript_length)) +
-  geom_boxplot() +
-  geom_jitter() +
-  labs(x = "Organ names",
-       y = "Transcript Length",
-       title = "Distribution of Transcript Length for Genes in each Organ")
+
 ```
 
 How would you make all the black points red?
 
 ```{r}
-ggplot(three_organ_df, aes(x = organ, y = transcript_length)) +
-  geom_boxplot() +
-  geom_jitter(colour = 'red') +
-  labs(x = "Organ names",
-       y = "Transcript Length",
-       title = "Distribution of Transcript Length for Genes in each Organ")
+
 ```
 
 Plot the gene expression values for `cell_1` against `cell_2`. Make the points blue, change their size to 1.5, and adjust the transparency to 0.3
@@ -103,74 +82,29 @@ Plot the gene expression values for `cell_1` against `cell_2`. Make the points b
 Also, add a diagonal reference line (45 degrees) that intersects with the intercept. Set the colour of this line to green
 
 ```{r}
-ggplot(three_organ_df, aes(x = cell_1, y = cell_2)) +
-  geom_point(colour = 'blue',
-             size = 1.5,
-             alpha = 0.3) +
-  geom_abline(intercept = 0,
-              colour = 'green')
+
 ```
 
 Change the plot above so that data points corresponding to different organ types have different colours
 
 ```{r}
-ggplot(three_organ_df, aes(x = cell_1, y = cell_2)) +
-  geom_point(aes(colour = organ),
-             size = 1.5,
-             alpha = 0.3) +
-  geom_abline(intercept = 0,
-              colour = 'green')
+
 ```
 
 Split the plot above into three plots that correspond to the three organ types. Bonus: Have the label of each plot be in this format - organ: organ_name e.g. "organ: brain"
 
 ```{r}
-ggplot(three_organ_df, aes(x = cell_1, y = cell_2)) +
-  geom_point(aes(colour = organ),
-             size = 1.5,
-             alpha = 0.3) +
-  facet_wrap(vars(organ), labeller = label_both, scales = "free_x") # ~organ also works in place of vars(organ)
+
 ```
 
 Using the un-split version of the previous plot, add marginal histograms above and to the right of this plot. Hint - use the `ggMarginal()` function from the `ggExtra()` package
 
 ```{r}
-p1 <- ggplot(three_organ_df, aes(x = cell_2, y = cell_1)) +
-  geom_point(
-    aes(colour = organ),
-    size = 1.5,
-    alpha = 0.3
-  ) +
-  geom_abline(intercept = 0,
-              color = 'green') 
 
-ggExtra::ggMarginal(
-  p = p1,
-  type = 'histogram', #You can use other types of marginal plots here
-  fill = 'gray'
-)
 ```
 
 Give the previous plot appropriate labels for the x- and y-axes, and a title. Also make the x- and y-axis text bold, and remove the colour legend
 
 ```{r}
-p1 <- ggplot(three_organ_df, aes(x = cell_1, y = cell_2)) +
-  geom_point(
-    aes(colour = organ),
-    size = 1.5,
-    alpha = 0.3
-  ) +
-  geom_abline(intercept = 0,
-              color = 'green') +
-  labs(x = "Cell 1 Transcriptome",
-       y = "Cell 2 Transcriptome",
-       title = "Comparing the Transcriptomes of Cell 1 and Cell 2") +
-  theme(axis.text = element_text(face = "bold"),
-        legend.position = "none")
 
-ggExtra::ggMarginal(
-  p = p1,
-  type = 'histogram', #You can use other type of marginal plots here
-  fill = 'gray'
-)
 ```
