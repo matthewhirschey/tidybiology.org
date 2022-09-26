@@ -103,14 +103,15 @@ build_object_table <- function(){
     )
   
   #censor these objects that you don't want to navigate to directly
-  censor <- c("1-rmarkdown_activity_file.Rmd", 
-              "1-intro_exercise_file.Rmd", 
-              "6-rmarkdown_activity_file.Rmd", 
-              "6-rmarkdown_activity_file_answers.Rmd")
+  # censor <- c("1-rmarkdown_activity_file.Rmd", 
+  #             "1-intro_exercise_file.Rmd", 
+  #             "6-rmarkdown_activity_file.Rmd", 
+  #             "6-rmarkdown_activity_file_answers.Rmd")
   
   object_table <- 
     object_table %>% 
-    dplyr::filter(!object_file %in% censor, 
+    #censor these words so it doesn't get objects that contain them
+    dplyr::filter(str_detect(object_file, pattern = "file", negate = TRUE), #!object_file %in% censor, 
                   !is.na(title))
   saveRDS(object_table, here::here("object_table.Rds"))
   return(object_table)
@@ -158,7 +159,7 @@ publish_tidybiology_index <- function(){
   rsconnect::deployApp(account = "computationalthinking", 
                        appFiles = c("index.Rmd", 
                                     "object_table.Rds", 
-                                    "www/tidybiology_hex.png"), 
+                                    "www/"), 
                        forceUpdate = TRUE)
   build_map()
   rsconnect::deployApp(account = "computationalthinking", 
@@ -175,6 +176,19 @@ publish_tidybiology_index <- function(){
                        appFiles = c("quiz.Rmd"), 
                        forceUpdate = TRUE)
   
+  rsconnect::deployApp(account = "computationalthinking", 
+                       appDir = here::here("code"), 
+                       appPrimaryDoc = "example.Rmd",
+                       appName = glue::glue("tidybiology-example"),
+                       appFiles = c("example.Rmd", "final_project.Rmd", "final_project_template.Rmd"), 
+                       forceUpdate = TRUE)
+  
+  rsconnect::deployApp(account = "computationalthinking", 
+                       appDir = here::here("code"), 
+                       appPrimaryDoc = "feedback.Rmd",
+                       appName = glue::glue("tidybiology-feedback"),
+                       appFiles = c("feedback.Rmd", "fun_helper.R", ".Renviron"), 
+                       forceUpdate = TRUE)
 }
 # publish_tidybiology_index()
 
@@ -202,7 +216,8 @@ publish_tidybiology<- function(module_name){
   
 }
 # publish_tidybiology(module_name = "1-a-introduction_to_data_science-multiple-module.Rmd")
-# publish_tidybiology(module_name = "6-a-reproducible_reports_with_rmarkdown-r-module.Rmd")
+# publish_tidybiology(module_name = "2-a-introduction_to_dplyr-r-module.Rmd")
+# publish_tidybiology(module_name = "3-a-data_visualization_with_ggplot-r-module.Rmd")
 # publish_tidybiology(7)
 
 #republish all

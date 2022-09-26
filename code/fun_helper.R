@@ -60,9 +60,9 @@ next_module <- function(module_name = "..."){
                                       var = "title")
     module_num <- stringr::str_extract(module_name, pattern = "[[:digit:]]+")
     
-    link <- glue::glue("## Continue... 
-                         \nThe next module in this {module_difficulty} pathway is 
-                         \n[{module_title}](http://module.tidybiology.org/{module_num})")
+    link <- glue::glue("## Continue...
+    <br>The next module in this {module_difficulty} pathway is<br>
+    <br><a href = 'http://module.tidybiology.org/{module_num}' class='btn btn-primary btn-default' role='button'>{module_title}</a>")
   }
   return(link)
 }
@@ -125,3 +125,62 @@ number_to_word <- function(x){
   return(wordy_num)
 }
 
+make_button <- function(file_name, 
+                        module, 
+                        file_suffix = "Rmd",
+                        button_style = "danger"){
+  base_dir <- getwd()
+  #make temp file
+  temp_rmd <- tempfile(pattern = glue::glue('{module}-{file_name}_'), 
+                       fileext = ".Rmd")
+  #check for internet connection
+  if(curl::has_internet() == TRUE){ 
+    #download file to temp file
+    download.file(url = glue::glue('https://raw.githubusercontent.com/matthewhirschey/tidybiology.org/main/code/{module}-objects/{module}-{file_name}.Rmd'), 
+                  destfile = temp_rmd)
+  } else {
+    file.copy(from = glue::glue('code/{module}-{file_name}.Rmd'), 
+              to = temp_rmd)
+  }
+  
+  #button sytles
+  #https://fmmattioni.github.io/downloadthis/articles/button_types.html
+  
+  #download button
+  button <- 
+    downloadthis::download_file(
+      path = temp_rmd,
+      button_label = glue::glue("Download {file_suffix}"),
+      button_type = button_style,
+      has_icon = TRUE,
+      icon = "fa fa-save",
+      self_contained = TRUE
+    )
+  return(button)
+}
+
+#make_button()
+
+get_names <- function(class_dir){
+  url <- paste0("https://raw.githubusercontent.com/matthewhirschey/tidybiology_admin/main/alumni.csv?token=", Sys.getenv("GITHUB_TOKEN"))
+  full_names <- 
+    readr::read_csv(url) %>% 
+    dplyr::filter(class == class_dir) %>% 
+    dplyr::arrange(full_name) %>% 
+    dplyr::pull(full_name)
+  return(full_names)
+}
+
+#get_names(class_dir = "2022_duke-nus")
+
+get_sessions <- function(){
+  url <- paste0("https://raw.githubusercontent.com/matthewhirschey/tidybiology_admin/main/alumni.csv?token=", Sys.getenv("GITHUB_TOKEN"))
+  session <- 
+    readr::read_csv(url) %>% 
+    dplyr::distinct(class) %>% 
+    dplyr::arrange(desc(class)) %>% 
+    dplyr::pull(class)
+  return(session)
+}
+
+#get_sessions()

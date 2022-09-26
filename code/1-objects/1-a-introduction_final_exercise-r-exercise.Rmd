@@ -1,5 +1,5 @@
 ---
-title: "Final Exercise"
+title: "Introduction Final Exercise"
 output: learnr::tutorial
 runtime: shiny_prerendered
 ---
@@ -15,7 +15,7 @@ library(learnr)
 
 ## Optional Exercises
 
-Exercises are opportunities to practices several concepts from a module. Most will take 15-20 minutes to complete.  
+Exercises are opportunities to practices several concepts from a module. Most will take 15-20 minutes to complete. These exercises below become progressively more challenging. Choose the one that suits your experience level, or work through them in order. Click the download button and then drag the exercise file to your working project directory.   
   
 ```{r}
 h4("Cars Example")
@@ -40,15 +40,21 @@ make_button(file_name = "intro_exercise_file_subcell",
 actionLink("class1_exercise", "", icon = icon("bug"))
 
 conditionalPanel(
-          condition = "input.class1_exercise != 0",
-          hr(),
-          p("If you are participating in tidybiology live, then this is the file we will use in class. If you are not in a synchronous class, then feel free to use this additional file for practice."), 
-          h4("In-class Example"),
-          make_button(file_name = "intro_exercise_file_chromosome",
-            module = "1",
-            button_style = "danger"), 
-          hr()
-        )
+  condition = "input.class1_exercise != 0",
+  hr(),
+  p("If you are participating in tidybiology live, then this is the file we will use in class. If you are not in a synchronous class, then feel free to use this additional file for practice."), 
+  tags$ol(
+    tags$li("Create a new project in Rstudio"), 
+    tags$li("Download the project Rmd file (big red button)"), 
+    tags$li("Follow along with the exercise")
+  ),
+  h4("In-class Example"),
+  make_button(file_name = "intro_exercise_file_chromosome",
+              module = "1",
+              file_suffix = "chromosome",
+              button_style = "danger"), 
+  hr()
+)
 ```
 
 

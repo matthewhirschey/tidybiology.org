@@ -7,25 +7,34 @@ editor_options:
 ---
 
 ```{r child='setup.Rmd'}
+#specific libraries
 ```
 
 ```{r, context="data", include=FALSE}
 #download and prep data
+library(BiocManager)
+library(scRNAseq)
 set.seed(42)
 
-happy <- read_csv("https://raw.githubusercontent.com/BAREJAA/website_for_john/master/datasets/happy_small.csv")
-happy_full <- read_csv("https://raw.githubusercontent.com/BAREJAA/website_for_john/master/datasets/world-happiness-report-2021.csv") %>% clean_names() %>% rename(region = regional_indicator)
+happy <- readr::read_csv("https://raw.githubusercontent.com/matthewhirschey/tidybiology.org/main/data/world-happiness-report-2021.csv")
 
-happy %>% 
-  inner_join(happy_full, by = "country_name") %>% 
-  select(country_name, healthy_life_expectancy) -> happy_join_one
+happy_full <- 
+  readr::read_csv("https://raw.githubusercontent.com/matthewhirschey/tidybiology.org/main/data/world-happiness-report-2021.csv") %>% 
+  janitor::clean_names() %>% 
+  dplyr::rename(region = regional_indicator)
 
-happy_full %>% 
-  filter(!(country_name %in% happy$country_name)) %>% 
-  slice_sample(n = 5) %>% 
-  select(country_name, healthy_life_expectancy) %>%
-  bind_rows(happy_join_one) %>% 
-  .[-10 ,] -> happy_join
+# happy_join_one <- 
+#   happy %>% 
+#   inner_join(happy_full, by = "country_name") %>% 
+#   select(country_name, healthy_life_expectancy)
+# 
+# happy_join <- 
+#   happy_full %>% 
+#   filter(!(country_name %in% happy$country_name)) %>% 
+#   slice_sample(n = 5) %>% 
+#   select(country_name, healthy_life_expectancy) %>%
+#   bind_rows(happy_join_one) %>% 
+#   .[-10 ,]
 ```
 
 ```{r child='2-objects/2-a-getting_to_know_your_data-r-video.Rmd'}
@@ -59,7 +68,10 @@ happy_full %>%
 #no scratchpad
 ```
 
-```{r child='2-objects/2-a-dplyr_activity-r-exercise.Rmd'}
+```{r child='2-objects/2-a-resources_and_cheatsheets-r-video.Rmd'}
+```
+
+```{r child='2-objects/2-a-dplyr_final_exercise-r-exercise.Rmd'}
 ```
 
 `r next_module("3-a-data_visualization_with_ggplot-r-module.Rmd")`

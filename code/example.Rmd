@@ -1,0 +1,44 @@
+---
+title: " "
+output: html_document
+runtime: shiny_prerendered
+---
+```{r child='final_project.Rmd'}
+```
+
+```{r, echo = FALSE}
+#make temp file
+temp_rmd <- tempfile(pattern = "final_project_",
+                     fileext = ".Rmd")
+#download file to temp file
+download.file(url = "https://raw.githubusercontent.com/matthewhirschey/tidybiology.org/main/code/final_project.Rmd", 
+              destfile = temp_rmd)
+
+#download button
+downloadthis::download_file(
+  path = temp_rmd,
+  button_label = "Download Rmd",
+  button_type = "danger",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = TRUE
+)
+
+#make temp file
+temp_rmd2 <- tempfile(pattern = "final_project_template_",
+                     fileext = ".Rmd")
+
+#download file to temp file
+download.file(url = "https://raw.githubusercontent.com/matthewhirschey/tidybiology.org/main/code/final_project_template.Rmd", 
+              destfile = temp_rmd2)
+
+#download button
+downloadthis::download_file(
+  path = temp_rmd2,
+  button_label = "Download Template",
+  button_type = "info",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = TRUE
+)
+```

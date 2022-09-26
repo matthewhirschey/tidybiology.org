@@ -1,0 +1,81 @@
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+![tidybiology](README_files/figure-gfm/tidybiology_channel_art.png)
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+## About
+
+This workshop-style module provides an introduction to the emerging
+field of Data Science in R, including data analysis and visualization,
+with a particular focus on its utility for biological insight. Students
+will be provided with biological datasets, and introduced to R packages
+and code used to examine data. In the first half of each class, students
+will be lectured on methods and shown demonstrations; in the second half
+of each class, students will use tools to analyze real data; laptop
+computers are required. Methods for filtering, sorting, and transforming
+data will be discussed along with visualization tools and options.
+Particular attention will be paid to code interpretation and data
+provenance methods by learning to generate reproducible data output
+files. For a final project, students will be given a new dataset to
+analyze using the tools learned during the course, and will share
+findings with the class in a short oral presentation. Although specific
+datasets will be used for analysis in class, this workshop will provide
+broadly applicable tools to reproducibly analyze and visualize data
+across the biological sciences.
+
+**This repository serves a website with an integrated learning
+experience that you can access freely at
+[www.tidybiology.org](http://www.tidybiology.org)**
+
+## Admin
+
+For contributors, here are few notes to make it easier to create
+materials to embed within this learning platform
+
+#### App organization
+
+This repository serves several shinyapps.io containers. For example, the
+landing site is a single shiny app, each module is a single shiny app,
+the map and quiz pages are shiny apps. In this way, we can both prevent
+too many users at one time from slowing a single system (performance),
+and we can make sure this doesn’t grow into a monolithic unnavigable
+mess (organization).
+
+#### File organization
+
+The top level index page lives at the root. All other module pages (and
+auxillary map and quiz pages) live in the `code` dir. Within `code`, a
+single module.Rmd page for the entire module calls objects within the
+corresponding `num-objects` dir (e.g. 1-objects, 7-objects). The
+module.Rmd file and the object directory are then uploaded to shinyapps
+to serve that page in its own container.
+
+#### Parent/Child chunks
+
+All of the single module.Rmd pages are considered ‘parent’ pages, and
+call ‘child’ chunks/pages which live in the `num-objects` dir. The
+reason for this organizations is that these child chunks are designed to
+be re-used and re-mixed across different modules. If we want to make a
+new module, or a new track with new modules, then we can simply re-use
+some of the child chunks.
+
+#### File Naming
+
+Modules are given random, but unique numbers. They are based on the
+original tidybiology organization, based on “class 1”, “class 2”, etc.
+
+#### Types of files (child chunks)
+
+-   Slides: make some slides to show content  
+-   Video: embed video from YouTube link to deliver material  
+-   Activity: something you do in the flow of learning to reinforce it
+    (feel free to pre-populate inline-chunks)  
+-   Quiz: just like an activity, something you do in the flow of
+    learning  
+-   Exercise: integrates all of the activities from a module (it’s the
+    final…it’s also what you do “in class”)  
+-   Project = integrates all of the learning from a track (it’s a change
+    to practice everything)

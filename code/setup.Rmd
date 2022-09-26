@@ -13,7 +13,7 @@ library(janitor)
 library(fontawesome)  # to see all options, run - fa_metadata()$icon_names %>% as_tibble() %>% View()
 
 #load helper funs
-source("fun_helper.R")
+source("fun_helper.R", local = TRUE)
 
 knitr::opts_chunk$set(echo = FALSE)
 ```

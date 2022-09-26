@@ -31,6 +31,9 @@ HTML("<center><br><br><img src='www/tidybiology_hex.png', width ='338'></center>
 # Create output for our router in main UI of Shiny app.
 fluidPage(
   tagList(
+    tags$style(type = 'text/css', 
+               "footer{position: absolute; bottom:5%; left: 10%; padding:5px;}"
+    ),
     tags$head(
       tags$meta(charset="UTF-8"),
       tags$meta(name="title", content="tidybiology.org"),
@@ -58,8 +61,10 @@ fluidPage(
     conditionalPanel(condition = paste0("input['search_click'] != 0"), 
                      tags$br(),
                      h4("Learning Materials"),
-                     DT::dataTableOutput(outputId = "object_table"))
-    
+                     DT::dataTableOutput(outputId = "object_table")),
+    HTML('<footer>
+    <a href="http://module.tidybiology.org/example" target="_blank"><img src="https://raw.githubusercontent.com/matthewhirschey/tidybiology.org/main/www/butterfly.png" height="3%" width="3%"></a>
+    </footer>')
   )
 )
 ```

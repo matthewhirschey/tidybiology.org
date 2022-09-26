@@ -27,7 +27,7 @@ br()
 br()
 h4("Mitocarta Example")
 make_button(file_name = "dplyr_exercise_file_mitocarta", 
-            module = "1", 
+            module = "2", 
             file_suffix = "mitocarta",
             button_style = "primary")
 make_button(file_name = "dplyr_exercise_file_answers_mitocarta",
@@ -48,6 +48,7 @@ conditionalPanel(
   h4("In-class Example"),
   make_button(file_name = "dplyr_exercise_file_scrnaseq",
               module = "2",
+              file_suffix = "scrnaseq",
               button_style = "danger"), 
   make_button(file_name = "dplyr_exercise_file_answers_scrnaseq",
               module = "2",

@@ -25,14 +25,15 @@ proteins_raw <-
 
 ## Get to know your dataset
 The `proteins_raw` object is a table (also called a dataframe), that has a series of columns and rows. The function `glimpse()` perfroms a quick peek at the data. We can see that this table has 7 columns (called 'Variables'), and 20431 rows (called 'Observations'). The name of each Variable is listed below (e.g. 'id', etc.). Importantly, R cares about capitalization, so `entry` is NOT the same as `ENTRY`. The type of variable is listed next (e.g. <fct>, <dbl>, etc.), as we discussed. Lastly, the first few observations are listed.  
-  
+
 ```{r glimpse}
 #Take a `glimpse` into the kinds of data in the proteins_raw dataframe
+
 ```
 
 #clean
 One of the biggest challenges when working with new data is to "clean" it, which means get it into a state that you can use it for something useful...like visualization! The overall goal is to clean-up a super messy column called `subcellular_location_cc`. We've already performed some cleaning steps for you below. While you might not understand everystep, read the comments to see what the code is doing.  
-  
+
 We are going to save this "cleaned" dataframe as a new object called 'subcell', which is short-hand for subcellular location. 
 ```{r}
 #the overall goal is to clean-up a super messy column called "subcellular_location_cc"
@@ -73,7 +74,7 @@ subcell$subcellular_location_cc <- str_trim(subcell$subcellular_location_cc, sid
 
 
 #Exploratory Data Analysis (EDA)
-We are now left with a 'clean' data frame, with a new column called "subcellular_location_cc" which has a simple
+We are now left with a 'clean' data frame, with a new column called "subcellular_location_cc" which has a simple annotation of where the protein is located in the cell.
 ```{r}
 #What are some of the characteristics of the human protein lengths?
 subcell %>% 
@@ -93,91 +94,26 @@ subcell %>%
   summarize(longest = max(length))
 
 ```
-#viz
+
+## First Visualization
+The reason we spend so much time 'cleaning' data is so that we can use it for visualization and insight. The goal below is to take the code and progressively build it into a visual. The code for the first visual is given. Your task is to take your knowledge of pipes and enhance the visual.
 ```{r}
-#first visualization
+#first visualization that shows a histogram of protein lengths
 subcell %>% 
   ggplot(aes(x = length)) +
   geom_histogram(bins = 100)
+```
 
+Copy and paste the first visualization code from the last code chunk into this one. Next, you want to filter out the outlier protein lengths, so you call the `subcell` object, but before you pass to `ggplot`, add a step to `filter(length < 10000)`.
+```{r}
 #filter outlier
-subcell %>% 
-  filter(length < 10000) %>% 
-  ggplot(aes(x = length)) +
-  geom_histogram(bins = 100)
 
-#focus on one place
-subcell %>% 
-  filter(length < 10000) %>% 
-  filter(subcellular_location_cc %in% "Mitochondrion") %>% 
-  ggplot(aes(x = length)) +
-  geom_histogram(bins = 100)
-
-#more than one mito location
-subcell %>% 
-  filter(length < 10000) %>% 
-  filter(subcellular_location_cc %in% c("Mitochondrion", "Mitochondrion inner membrane")) %>% 
-  ggplot(aes(x = length)) +
-  geom_histogram(bins = 100)
-
-#color by place
-subcell %>% 
-  filter(length < 10000) %>% 
-  filter(subcellular_location_cc %in% c("Mitochondrion", "Mitochondrion inner membrane")) %>% 
-  ggplot(aes(x = length, fill = subcellular_location_cc)) +
-  geom_histogram(bins = 100)
-
-#get all mito proteins
-subcell %>% 
-  filter(length < 10000) %>% 
-  filter(str_detect(subcellular_location_cc, "Mito")) %>% 
-  ggplot(aes(x = length, fill = subcellular_location_cc)) +
-  geom_histogram(bins = 100)
 ```
 
-#viz all
+Again, start with the code from the last chunk and paste into this one. Now, we want to add another filter step, where we want to `filter(subcellular_location_cc == "Nucleus")`. Do you think it will matter if you filter the length first or the subcellular location first? Try both and see if they are different.
 ```{r}
-ggplot(data = subcell, aes(x = length, fill = subcellular_location_cc)) +
-  geom_histogram(bins = 100) 
+#focus on one place
 
-ggplot(data = subcell, aes(x = length, fill = subcellular_location_cc)) +
-  geom_histogram(bins = 100, show.legend = FALSE) 
-
-ggplot(data = subcell, aes(x = length, fill = fct_lump(subcellular_location_cc, 10))) +
-  geom_histogram(bins = 100, show.legend = TRUE)
-
-ggplot(data = subcell, aes(x = log(length), fill = fct_lump(subcellular_location_cc, 10))) +
-  geom_histogram(bins = 100, show.legend = TRUE)
-
-ggplot(data = subcell, aes(x = log(length), fill = fct_lump(subcellular_location_cc, 10))) +
-  geom_histogram(bins = 100, show.legend = TRUE) +
-  labs(x = "AA length(log10)", y = "Count")
-
-ggplot(data = subcell, aes(x = log(length), fill = fct_lump(subcellular_location_cc, 10))) +
-  geom_histogram(bins = 100, show.legend = TRUE) +
-  labs(x = "AA length(log10)", y = "Count") +
-  scale_fill_viridis(discrete = TRUE)
-
-ggplot(data = subcell, aes(x = log(length), fill = fct_lump(subcellular_location_cc, 10))) +
-  geom_density(show.legend = TRUE) +
-  labs(x = "AA length(log10)", y = "Count") +
-  scale_fill_viridis(discrete = TRUE)
-
-ggplot(data = subcell, aes(x = log(length), ..scaled.., fill = fct_lump(subcellular_location_cc, 10))) +
-  geom_density(show.legend = TRUE) +
-  labs(x = "AA length(log10)", y = "Count") +
-  scale_fill_viridis(discrete = TRUE)
-
-ggplot(data = subcell, aes(x = log(length), ..scaled.., fill = fct_lump(subcellular_location_cc, 10))) +
-  geom_density(show.legend = TRUE, alpha = 0.7) +
-  labs(x = "AA length(log10)", y = "Count") +
-  scale_fill_viridis(discrete = TRUE)
-
-ggplot(data = subcell, aes(x = log(length), y = fct_lump(subcellular_location_cc, 10),  fill = fct_lump(subcellular_location_cc, 10))) +
-  geom_density_ridges(show.legend = FALSE, alpha = 0.7) +
-  labs(x = "AA length(log10)", y = "", title = "Distribution of Protein length in subcellular compartments") +
-  scale_fill_viridis(discrete = TRUE)
-
-#I'd probably refactor/regroup the compartments to make them larger classes (think mito), and I'd also probably rank the visualization by the mean for each (high to low...it's current ranked by number of proteins in the compartment)
 ```
 
+Great job!
