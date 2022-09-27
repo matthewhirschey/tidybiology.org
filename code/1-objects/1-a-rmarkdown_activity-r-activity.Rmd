@@ -21,8 +21,7 @@ Data science projects in R can use a special data file type called an Rmarkdown 
 5. If you get stuck at anytime, unpause the video above for a walkthrough
 
 ```{r, echo = FALSE}
-make_button(file_name = "rmarkdown_activity_file", 
-            module = "1", 
+make_button(file_name = "1-rmarkdown_activity_file.Rmd", 
             button_style = "danger")
 ```
 

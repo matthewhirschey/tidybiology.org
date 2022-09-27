@@ -17,35 +17,23 @@ To begin, click the download button and then drag the exercise file to your work
   
 ```{r}
 h4("mtcars Example")
-make_button(file_name = "ggplot_exercise_file_mtcars", 
-            module = "3", 
-            file_suffix = "mtcars",
+make_button(file_name = "3-ggplot_exercise_file_mtcars.Rmd", 
             button_style = "primary")
-make_button(file_name = "ggplot_exercise_file_answers_mtcars",
-            module = "3",
-            file_suffix = "answers",
+make_button(file_name = "3-ggplot_exercise_file_mtcars_answers.Rmd",
             button_style = "default")
 br()
 br()
 h4("mitocarta Example")
-make_button(file_name = "ggplot_exercise_file_mitocarta", 
-            module = "3", 
-            file_suffix = "mitocarta",
+make_button(file_name = "3-ggplot_exercise_file_mitocarta.Rmd", 
             button_style = "primary")
-make_button(file_name = "ggplot_exercise_file_answers_mitocarta",
-            module = "3",
-            file_suffix = "answers",
+make_button(file_name = "3-ggplot_exercise_file_mitocarta_answers.Rmd",
             button_style = "default")
 br()
 br()
 h4("Subcell Example")
-make_button(file_name = "ggplot_exercise_file_subcell",
-            module = "3",
-            file_suffix = "subcell",
+make_button(file_name = "3-ggplot_exercise_file_subcell.Rmd",
             button_style = "primary")
-make_button(file_name = "ggplot_exercise_file_answers_subcell",
-            module = "3",
-            file_suffix = "answers",
+make_button(file_name = "3-ggplot_exercise_files_subcell_answer.Rmd",
             button_style = "default")
 actionLink("class3_exercise", "", icon = icon("bug"))
 
@@ -59,13 +47,9 @@ conditionalPanel(
     tags$li("Follow along with the exercise")
   ),
   h4("In-class Example"),
-  make_button(file_name = "ggplot_exercise_file_scrnaseq",
-              module = "3",
-              file_suffix = "scrnaseq",
+  make_button(file_name = "3-ggplot_exercise_file_scrnaseq.Rmd",
               button_style = "danger"), 
-  make_button(file_name = "ggplot_exercise_file_answers_scrnaseq",
-              module = "3",
-              file_suffix = "answers",
+  make_button(file_name = "3-ggplot_exercise_file_scrnaseq_answers.Rmd",
               button_style = "default"), 
   hr()
 )

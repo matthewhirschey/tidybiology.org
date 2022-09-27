@@ -19,23 +19,17 @@ Exercises are opportunities to practices several concepts from a module. Most wi
   
 ```{r}
 h4("Cars Example")
-make_button(file_name = "intro_exercise_file_mtcars", 
-            module = "1", 
-            file_suffix = "mtcars",
+make_button(file_name = "1-intro_exercise_file_mtcars.Rmd", 
             button_style = "primary")
 br()
 br()
 h4("Heart Example")
-make_button(file_name = "intro_exercise_file_heart", 
-            module = "1", 
-            file_suffix = "heart",
+make_button(file_name = "1-intro_exercise_file_heart.Rmd", 
             button_style = "primary")
 br()
 br()
 h4("Subcell Example")
-make_button(file_name = "intro_exercise_file_subcell", 
-            module = "1", 
-            file_suffix = "subcell",
+make_button(file_name = "1-intro_exercise_file_subcell.Rmd", 
             button_style = "primary")
 actionLink("class1_exercise", "", icon = icon("bug"))
 
@@ -49,9 +43,7 @@ conditionalPanel(
     tags$li("Follow along with the exercise")
   ),
   h4("In-class Example"),
-  make_button(file_name = "intro_exercise_file_chromosome",
-              module = "1",
-              file_suffix = "chromosome",
+  make_button(file_name = "1-intro_exercise_file_chromosome.Rmd",
               button_style = "danger"), 
   hr()
 )

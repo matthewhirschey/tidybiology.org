@@ -125,22 +125,26 @@ number_to_word <- function(x){
   return(wordy_num)
 }
 
-make_button <- function(file_name, 
-                        module, 
-                        file_suffix = "Rmd",
+make_button <- function(file_name = "1-intro_exercise_file_subcell.Rmd", 
+                        label = NULL,
                         button_style = "danger"){
-  base_dir <- getwd()
-  #make temp file
-  temp_rmd <- tempfile(pattern = glue::glue('{module}-{file_name}_'), 
-                       fileext = ".Rmd")
+  #get module from file name
+  module <- stringr::str_extract(file_name, pattern = "[[:digit:]]+")
+  #get label from file name, can override
+  if(is.null(label)){label <- stringr::str_extract(file_name, pattern = "[[:alpha:]]+(?=\\.Rmd)")}
+  
+  #the file you want to attach is in a different repo, so this grabs it
+  temp_dir <- tempdir()
+  file_path <- glue::glue('{temp_dir}/{file_name}')
+  
   #check for internet connection
   if(curl::has_internet() == TRUE){ 
     #download file to temp file
-    download.file(url = glue::glue('https://raw.githubusercontent.com/matthewhirschey/tidybiology.org/main/code/{module}-objects/{module}-{file_name}.Rmd'), 
-                  destfile = temp_rmd)
+    download.file(url = glue::glue('https://raw.githubusercontent.com/matthewhirschey/tidybiology.org/main/code/{module}-objects/{file_name}'), 
+                  destfile = file_path)
   } else {
-    file.copy(from = glue::glue('code/{module}-{file_name}.Rmd'), 
-              to = temp_rmd)
+    file.copy(from = glue::glue('code/{module}-objects/{file_name}'), 
+              to = file_path)
   }
   
   #button sytles
@@ -149,8 +153,8 @@ make_button <- function(file_name,
   #download button
   button <- 
     downloadthis::download_file(
-      path = temp_rmd,
-      button_label = glue::glue("Download {file_suffix}"),
+      path = file_path,
+      button_label = glue::glue("Download {label}"),
       button_type = button_style,
       has_icon = TRUE,
       icon = "fa fa-save",

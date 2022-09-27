@@ -15,24 +15,16 @@ Exercises are opportunities to practices several concepts from a module. Most wi
 
 ```{r}
 h4("Proteins Example")
-make_button(file_name = "dplyr_exercise_file_proteins", 
-            module = "2", 
-            file_suffix = "proteins",
+make_button(file_name = "2-dplyr_exercise_file_proteins.Rmd", 
             button_style = "primary")
-make_button(file_name = "dplyr_exercise_file_answers_proteins",
-            module = "2",
-            file_suffix = "answers",
+make_button(file_name = "2-dplyr_exercise_file_proteins_answers.Rmd",
             button_style = "default")
 br()
 br()
 h4("Mitocarta Example")
-make_button(file_name = "dplyr_exercise_file_mitocarta", 
-            module = "2", 
-            file_suffix = "mitocarta",
+make_button(file_name = "2-dplyr_exercise_file_mitocarta.Rmd", 
             button_style = "primary")
-make_button(file_name = "dplyr_exercise_file_answers_mitocarta",
-            module = "2",
-            file_suffix = "answers",
+make_button(file_name = "2-dplyr_exercise_file_mitocarta_answers.Rmd",
             button_style = "default")
 actionLink("class2_exercise", "", icon = icon("bug"))
 
@@ -46,13 +38,9 @@ conditionalPanel(
     tags$li("Follow along with the exercise")
   ),
   h4("In-class Example"),
-  make_button(file_name = "dplyr_exercise_file_scrnaseq",
-              module = "2",
-              file_suffix = "scrnaseq",
+  make_button(file_name = "2-dplyr_exercise_file_scrnaseq.Rmd",
               button_style = "danger"), 
-  make_button(file_name = "dplyr_exercise_file_answers_scrnaseq",
-              module = "2",
-              file_suffix = "answers",
+  make_button(file_name = "2-dplyr_exercise_file_scrnaseq_answers.Rmd",
               button_style = "default"), 
   hr()
 )
