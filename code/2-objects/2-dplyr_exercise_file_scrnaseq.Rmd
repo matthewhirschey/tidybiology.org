@@ -49,7 +49,7 @@ Select all variables between (and including) `chromosome_scaffold` and `transcri
 
 ```
 
-Select the following columns: `transcript_start_bp`, `transcript_end_bp`, and `transcript_length`.
+Select the following columns: `gene_start_bp`, `gene_end_bp`, and `transcript_length`.
 ```{r select_helper, eval = TRUE, echo = TRUE, output.lines=11}
 
 ```
