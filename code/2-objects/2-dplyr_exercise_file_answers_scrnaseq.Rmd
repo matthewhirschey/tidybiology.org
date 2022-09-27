@@ -52,7 +52,7 @@ scRNAseq %>%
   select(chromosome_scaffold_name:transcript_length) 
 ```
 
-Select the following columns: `gene_start_bp`, `gene_end_bp`, and `transcript_length`.
+Select the following columns: `transcript_stable_id` and `transcript_length`, using a select helper.
 ```{r select_helper, eval = TRUE, echo = TRUE, output.lines=11}
 scRNAseq %>% 
   select(contains("transcript"))
