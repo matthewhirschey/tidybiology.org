@@ -1,0 +1,158 @@
+---
+title: "stringr Exercise: heart"
+output: html_document
+---
+
+#Stringr 
+Q: What is a string?  
+A: a "string" is just a character variable that contains one or more characters.  
+
+Often we need to extract information from or wrangle strings them to get the data we need from them, but this can be difficult. To help with this process we will be using stringr, a package that allows you to work with strings in R in a relatively simple manner. Let's start with an example.
+
+## Load packages
+Let's load the tidyverse. Remember, `stringr` is part of the tidyverse, so no need to load separately.
+```{r setup, include=FALSE}
+library(tidyverse)
+# library(stringr) #<- this is part of the tidyverse, so no need to load separately
+```
+
+## Import data 1
+For the first dataset, we will use a **synthetic** datset that was prepared only for teaching. This datseta represents patients and their family history. The URL where to find the dataset is provided. Use readr to read in this csv and save the object as `patient_hx`. 
+```{r}
+phx_url <- "https://raw.githubusercontent.com/matthewhirschey/tidybiology.org/main/data/phx.csv"
+patient_hx <- readr::read_csv(phx_url)
+```
+
+## EDA
+As is always good practice, take a glimpse at the data
+```{r}
+glimpse(patient_hx)
+```
+
+## Counting strings
+`str_count()` is a function we can use to count the number of rows that match a particular pattern. The output with either be 1 (match), or 0 (no match)  
+  
+In this code:  
+- string we want to evaluate is `patient_hx$health_status`  
+- pattern we want to count `"High Cholesterol"`  
+  
+Try using str_count to count how many patients have "High Cholesterol".
+```{r str_count example, echo= FALSE, warning = FALSE}
+str_count(patient_hx$health_status, "High Cholesterol")
+```
+
+## Summarizing our counts
+A bunch of 0 and 1 are not incredibly useful. But since R is good at adding, we can simply wrap the previous expression in `sum()` Try it again, but wrap the whole function in sum():  
+```{r sum_string}
+sum(str_count(patient_hx$health_status, "High Cholesterol"))
+```
+
+## Matching subsets of strings
+We previously matched the entire string "High Cholesterol". But we can use the same function to detect patterns within longer strings. Let's look for how many patients take a statin of any kind using. Write a str_count function that will count for anyone taking any kind of statin. What does the ouput mean?  
+```{r str_count_exercise, exercise = TRUE}
+sum(str_count(patient_hx$medication_hx, "statin")) #this doesn't work because of NAs
+sum(str_count(patient_hx$medication_hx, "statin"), na.rm = TRUE)
+#391 are taking some type of statin drug
+```
+
+## A note about string patterns
+When using a stringr function, you may get an output saying a string pattern doesn't exist. If you know for sure it does, double check capitalization. The string must match exactly, or it will not be found!  
+  
+How many people having an `"auntie" or "aunt"` in their health history?  
+```{r}
+sum(str_count(patient_hx$family_history, "auntie"))
+sum(str_count(patient_hx$family_history, "aunt"))
+sum(str_count(patient_hx$family_history, "Auntie"))
+sum(str_count(patient_hx$family_history, "Aunt"))
+
+sum(str_count(patient_hx$family_history, "unt")) #need to be certain that unt won't be included anywhere else
+#279 patients
+```
+
+## Detecting strings
+In addition to counting, we can use another function `str_detect()` to logically evaluate a character string. Because this logically evaluates an expression, the output is either `TRUE or FALSE`. Practially, `str_detect` is used to detect the presence or absence of a pattern in a string.  
+  
+Find the patients with diabetes using `str_detect()`  
+```{r strdetect}
+str_detect(patient_hx$health_status, "Diabetic")
+```
+
+## Modifiying strings with `str_replace()`
+In the `health_status` column we have:  
+-`"Diabetic"`  
+-`"High Cholesterol"`  
+-`"Normal blood sugar and cholesterol"`  
+  
+But let's say we want to simplify healthy individuals to Normal. Use `str_replace` to replace each. Note, don't overwrite the health_status or save it to a new object; just practice the stringr functions.
+```{r str_replace}
+str_replace(patient_hx$health_status, "Normal blood sugar and cholesterol", "Normal")
+```
+
+If we wanted to use this same code to modify the `health_status` column, we would then assigning it to the same variable. Try that here. 
+```{r str_replace in col, warning = FALSE, echo=FALSE}
+patient_hx$health_status <- 
+  str_replace(patient_hx$health_status, "Normal blood sugar and cholesterol", "Normal")
+
+head(patient_hx$health_status, n = 10) #easy way to check your work
+```
+
+## Using `stringr` with `dplyr`
+We can use `stringr` functions in tandem with `dplyr` functions. If we wanted to make a logical variable (`TRUE`/`FALSE`) that tells us if a patient has a normal health history, we need to use `dplyr::mutate()` to create a new column called `healthy`. Then, we can use a str_detect function to provide either a TRUE or FALSE depending on what it is detecting. Try that here.   
+
+```{r stringr with dplyr, echo=FALSE, warning=FALSE}
+patient_hx %>% 
+  mutate(healthy = str_detect(health_status, "Normal")) %>% 
+  head(n = 10) #easy way to check your work
+```
+ 
+
+Beginning with `patient_hx`, create a new column called `statin` that detects whether or not a patient is on a statin, "and then" filter the dataset to contain only this subgroup of people. Call this new dataframe `statin_subgroup` 
+How many people are in this subgroup?
+```{r}
+statin_subgroup <- 
+  patient_hx %>% 
+  mutate(statin = str_detect(medication_hx, "statin")) %>% 
+  filter(statin == TRUE)
+
+nrow(statin_subgroup) #nrow() is a great function to count rows in a dataframe
+#391 people
+```
+
+## Using Regular Expressions
+Think of regex as a separate language, with it's own code, syntax, and rules. Regex rules allow complex matching patterns for strings, to ensure matching *exactly* the content desired. It is far too complex to cover in its entirely here, but here is one specific example.  
+
+## Revisiting Regular Expressions
+In an exmample above, you counted many people having an `"auntie" or "aunt"` in their health history? One solution would be to count each one individually. That solution worked in this case. Instead, you can also use an "or" symbol, designed by "|" (a striaight line, the key just above the return key).  
+  
+Using some simple regex, how many people having an "auntie" or "aunt" in their health history? hint: watch out for capital and lowercases!  
+```{r}
+sum(str_count(patient_hx$family_history, "auntie|aunt|Auntie|Aunt"))
+#279 patients
+```
+
+## Regular Expression Example
+What if there was a 'great aunt' in the list? You would need a different approach. Here is a more specific case for this data set. How many patients have a father with a history of disease? But we don't want to include grandfathers in the results. We can use something called **Regular Expressions**, aka **Regex**, to solve this  
+  
+**GOAL**: identify all of the patients that have a father with a history of disease, but excluding grandfathers in the results. 
+  
+We want to start with recognizing `father`. But then we want to make sure that we capture both `Father` and `father`. To accept either case f in the first spot we add `(F|f)`, so now our regex looks like `(F|f)ather`. Lastly, we want this pattern to appear at the beginning of the word, so we add the regex `^` symbol.  
+  
+Our completed regex looks like:  
+  
+`str_count(patient_hx$family_history, "^(F|f)ather")` 
+  
+Drop it into the code chunk below, and wrap it in sum() to count how many Fathers/fathers, but not Grandfathers are in the patients family history. 
+```{r regex1}
+sum(str_count(patient_hx$family_history, "^(F|f)ather"))
+#161
+```
+
+How many people have Mother/mother but not grandmothers in their family history?
+```{r}
+sum(str_count(patient_hx$family_history, "^(M|m)other"))
+#134
+```
+
+## Regex resources
+- The stringr cheatsheet
+- [The tidyverse website](https://stringr.tidyverse.org/articles/regular-expressions.html)

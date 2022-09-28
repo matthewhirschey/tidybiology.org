@@ -33,7 +33,7 @@ br()
 h4("Subcell Example")
 make_button(file_name = "3-ggplot_exercise_file_subcell.Rmd",
             button_style = "primary")
-make_button(file_name = "3-ggplot_exercise_files_subcell_answer.Rmd",
+make_button(file_name = "3-ggplot_exercise_file_subcell_answers.Rmd",
             button_style = "default")
 actionLink("class3_exercise", "", icon = icon("bug"))
 

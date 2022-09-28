@@ -16,7 +16,7 @@ runtime: shiny_prerendered
 ```{r child='4-objects/4-a-working_with_regex_using_stringr-r-video.Rmd'}
 ```
 
-```{r child='4-objects/4-a-working_with_regex_using_stringr-r-exercise.Rmd'}
+```{r child='4-objects/4-a-working_with_regex_using_stringr-r-activity.Rmd'}
 ```
 
 ```{r child='4-objects/4-a-mutating_joins-r-video.Rmd'}

@@ -1,0 +1,77 @@
+---
+title: "stringr Exercise: mitocarta"
+output: html_document
+---
+
+## Load package
+For this activity, you'll need the following packages: tidyverse, tidybiology, and mitocarta. The last two are on github, so you'll need to install from there. Hint: devtools::github_install()
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+
+## Required packages and datasets
+Load the datasets called proteins and mitocarta, and then take a quick glimpse to remind yourself what they look like. 
+```{r}
+
+```
+
+## Clean the datasets
+From the proteins dataset, keep only the `gene_name` and `sequence` columns. From the mitocarta dataset, keep only the `symbol` and `mito_domain_score` columns. Also, the tidyr (part of the tidyverse) package has a function called drop_na(), which will remove NAs from an indicated column. Use this function to drop NAs from `mito_domain_score`. Finally, save these new objects as the same name as the original datasets, thereby over-writing them in your environment. 
+```{r}
+
+```
+
+## Sequence Lengths
+Let's practice some of the stringr functions. How would you get the sequence lengths for all the entries in the `proteins` dataframe? Tip: first take another `glimpse()` at this dataframe to see which column would be relevant to this question
+```{r}
+
+```
+
+Next, let's count the number of lysines in each sequence. Instead of using str_length, which essentially counts everything, we want to use str_count. This is going to count only the things that match a pattern argument. 
+```{r}
+
+```
+
+For each sequence, how many times does an arginine follow a lysine?
+
+```{r}
+
+```
+
+How would you test if the following motif - "RCP.L" - was in a particular sequence? How many proteins contain this motif? What does the "." mean?
+```{r}
+
+```
+
+How would you create a new dataframe that only contains proteins that contain the "RCP.L" motif?
+```{r}
+
+```
+
+Identify proteins that contain the E-box motif - "CANNTG". Create a new column called `e_box` that contains a `TRUE` if a sequence has this motif and a `FALSE` otherwise
+```{r}
+
+```
+
+What are the mean protein lengths for proteins that contain an E-box versus proteins that do not? Hint: use the code you wrote in the last code chunk and build upon it.
+```{r}
+
+```
+
+Which columns in `proteins` and `mitocarta` can we use to join on?
+```{r}
+
+```
+
+Combine `proteins` and `mitocarta`, ensuring that there are no missing values in the `mito_domain_score` column of the resulting dataframe (call this new dataframe `mito_proteins`)
+```{r}
+
+```
+
+Combine `proteins` and `mitocarta` in such a way that the resulting dataframe contains no missing values. Do not save the output but do confirm that there are no missing values in the output
+```{r}
+
+```
+
+Great job!
