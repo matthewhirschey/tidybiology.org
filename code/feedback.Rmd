@@ -1,0 +1,244 @@
+---
+title: "Feedback"
+output: html_document
+runtime: shiny_prerendered
+---
+```{r, echo=FALSE}
+#https://deanattali.com/shinyjs/advanced#usage-tabbed
+shiny::addResourcePath("shinyjs", system.file("srcjs", package = "shinyjs"))
+```
+
+```{r, context="server"}
+shinyjs::useShinyjs(html = TRUE)
+```
+<script src="shinyjs/inject.js"></script>
+
+```{r context="setup", include=FALSE}
+#guide is here
+# https://rmarkdown.rstudio.com/authoring_shiny_prerendered.html
+# https://pkgs.rstudio.com/learnr/articles/publishing.html
+
+#install libraries
+library(shiny)
+library(tidyverse)
+library(googlesheets4)
+library(shinyjs)
+
+knitr::opts_chunk$set(echo = FALSE)
+
+source("fun_helper.R", local = TRUE)
+current_session <- "2022_duke-nus"
+participant_names <- get_names(class_dir = current_session)
+session <- get_sessions()
+```
+
+```{r, context="render"}
+# Create output for our router in main UI of Shiny app.
+iframe_height <- 600
+fluidPage(
+  shinyjs::useShinyjs(),
+  tabsetPanel(
+    #STUDENT UI----
+    tabPanel('Student',
+             div(id = "student",
+                 fluidRow(
+                   column(width = 3),
+                   column(width = 6, 
+                          br(),
+                          h5("Student name"),
+                          HTML('<center>'),
+                          selectInput(inputId = "name", label = " ", selected = "Registered Name", choices = c("Registered Name", participant_names)),
+                          HTML('</center>')
+                   ), 
+                   column(width = 3)),
+                 hr(),
+                 fluidRow(
+                   column(width = 12, 
+                          br(),
+                          p("Please provide feedback on specific parts of the student's final presentation"),
+                          HTML('<center>'),
+                          br(),
+                          sliderInput(inputId = "content", label = "Content", min = 0, max = 7, value = 0),
+                          sliderInput(inputId = "visuals", label = "Visuals", min = 0, max = 7, value = 0),
+                          sliderInput(inputId = "mechanics", label = "Mechanics of the presentation", min = 0, max = 7, value = 0),
+                          sliderInput(inputId = "overall", label = "Overall", min = 0, max = 7, value = 0),
+                          HTML('</center>'),
+                          hr(), 
+                          textAreaInput(inputId = "best", label = "What was best about the presentation?", width = "100%", height = "200px"),
+                          hr(),
+                          textAreaInput(inputId = "improve", label = "What could the presenter improve upon?", width = "100%", height = "200px"),
+                          br(),
+                          HTML('<center>'),
+                          actionButton("submit_student", "Submit"),
+                          HTML('</center>')
+                   ) #end column
+                 ) #end row
+             ) #end div
+    ), #end tabpanel
+    #SELF UI----
+    tabPanel('Self',
+             div(id = "self",
+                 fluidRow(br(),
+                          p("A final grade is an important metric summarizing your fluency and aptitude with the concepts presented in class. In this course, each student is asked to be the judge of these
+criteria and submit their proposed grade and a justification for it below. The following
+metrics should be considered when proposing a grade:")),
+fluidRow(br(),
+         p("45% Code, R markdown file, and summary interpretation of findings"),
+         p("45% In-class presentation of above findings"),
+         p("5% Attendance"),
+         p("5% Participation")),
+hr(),
+fluidRow(
+  column(width = 3),
+  column(width = 6, 
+         br(),
+         h5("Select name"),
+         HTML('<center>'),
+         selectInput(inputId = "name_grade", label = " ", selected = "Registered Name", choices = c("Registered Name", participant_names)),
+         HTML('</center>'),
+         br(),
+         h5("Proposed final grade:"),
+         HTML('<center>'),
+         sliderInput(inputId = "grade", label = " ", min = 0, max = 100, value = 80),
+         HTML('</center>'),
+         br(),
+         h5("Please provide justification for your grade, specifically mentioning the metrics above:"),
+         textAreaInput(inputId = "justification", label = " ", width = "100%", height = "200px"),
+         br(),
+         HTML('<center>'),
+         actionButton("submit_self", "Submit"),
+         HTML('</center>')),
+  column(width = 3, " ")
+) #end fluidRow
+             ) #end the div
+    ), #end tabPanel,
+#COURSE UI----
+tabPanel('Course',
+         div(id = "course",
+             fluidRow(br(),
+                      p("The Tidybiology course is designed with the following five objectives. Please indicate how well this course achieved each, on a scale of 1 (poor) to 7 (excellent)")),
+             fluidRow(
+               column(width = 3),
+               column(width = 6, 
+                      br(),
+                      h5("Introduction to R packages and code"),
+                      HTML('<center>'),
+                      sliderInput(inputId = "intro", label = " ", min = 1, max = 7, value = 4),
+                      HTML('</center>'),
+                      h5("Methods for filtering, sorting, and transforming data"),
+                      HTML('<center>'),
+                      sliderInput(inputId = "transform", label = " ", min = 1, max = 7, value = 4), 
+                      HTML('</center>'),
+                      h5("Visualization tools & options"),
+                      HTML('<center>'),
+                      sliderInput(inputId = "viz", label = " ", min = 1, max = 7, value = 4),
+                      HTML('</center>'),
+                      h5("Data provenance and reproducibility"),
+                      HTML('<center>'),
+                      sliderInput(inputId = "repro", label = " ", min = 1, max = 7, value = 4), 
+                      HTML('</center>'),
+                      h5("Final project and presentation"),
+                      HTML('<center>'),
+                      sliderInput(inputId = "project", label = " ", min = 1, max = 7, value = 4),
+                      HTML('</center>'),
+                      br(),
+                      h5("Most enjoyable part(s) of the course"),
+                      textAreaInput(inputId = "positive", label = " ", width = "100%", height = "150px"),
+                      br(),
+                      h5("Something you wish the course had or did differently"),
+                      textAreaInput(inputId = "negative", label = " ", width = "100%", height = "150px"),
+                      br(),
+                      HTML('<center>'),
+                      actionButton("submit_course", "Submit"),
+                      HTML('</center>')
+               ),
+               column(width = 3, " ")
+             )
+         ) #end div
+) #end tabPanel
+  ) #end tabsetPanel
+) #end page
+```
+
+
+```{r, context="server"}
+course_sheet_url <- 'https://docs.google.com/spreadsheets/d/1uRqB42XRtnfmnuO6qUiiDaezgDvt54rbtT0NQz1hw8M/edit?usp=sharing'
+
+#STUDENT SERVER----
+student_feedback <- reactive({
+  tibble::tibble(date = Sys.Date(),
+                 name = input$name,
+                 content = input$content, 
+                 visuals = input$visuals,
+                 mechanics = input$mechanics, 
+                 overall = input$overall, 
+                 best = input$best, 
+                 improve = input$improve)
+})
+
+observeEvent(input$submit_student, {
+  course_sheet <- googlesheets4::gs4_get(course_sheet_url)
+  googlesheets4::sheet_append(course_sheet, 
+                              data = student_feedback(),
+                              sheet = "student")
+})
+
+observeEvent(input$submit_student, {
+  shinyjs::alert("Thank you for submitting student feedback")
+})
+
+observeEvent(input$submit_student, {
+  shinyjs::reset("student")
+}) 
+
+#SELF SERVER----
+self_feedback <- reactive({
+  tibble::tibble(date = Sys.Date(),
+                 name = input$name_grade,
+                 grade = input$grade, 
+                 justification = input$justification)
+})
+
+observeEvent(input$submit_self, {
+  course_sheet <- googlesheets4::gs4_get(course_sheet_url)
+  googlesheets4::sheet_append(course_sheet, 
+                              data = self_feedback(),
+                              sheet = "self")
+})
+
+observeEvent(input$submit_self, {
+  shinyjs::alert("Thank you for your self evaluation")
+})
+
+observeEvent(input$submit_self, {
+  shinyjs::reset("self")
+}) 
+
+#COURSE SERVER----
+course_feedback <- reactive({
+  tibble::tibble(date = Sys.Date(),
+                 session = current_session,
+                 intro = input$intro, 
+                 transform = input$transform, 
+                 viz = input$viz, 
+                 repro = input$repro, 
+                 project = input$project,
+                 positive = input$positive,
+                 negative = input$negative)
+})
+
+observeEvent(input$submit_course, {
+  course_sheet <- googlesheets4::gs4_get(course_sheet_url)
+  googlesheets4::sheet_append(course_sheet, 
+                              data = course_feedback(),
+                              sheet = "course")
+})
+
+observeEvent(input$submit_course, {
+  shinyjs::alert("Thank you for your course feedback")
+})
+
+observeEvent(input$submit_course, {
+  shinyjs::reset("course")
+}) 
+```
