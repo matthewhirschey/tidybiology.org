@@ -183,12 +183,12 @@ publish_tidybiology_index <- function(){
                        appFiles = c("example.Rmd", "final_project.Rmd", "final_project_template.Rmd"), 
                        forceUpdate = TRUE)
   
-  rsconnect::deployApp(account = "computationalthinking", 
-                       appDir = here::here("code"), 
-                       appPrimaryDoc = "feedback.Rmd",
-                       appName = glue::glue("tidybiology-feedback"),
-                       appFiles = c("feedback.Rmd", "fun_helper.R", ".Renviron"), 
-                       forceUpdate = TRUE)
+  # rsconnect::deployApp(account = "computationalthinking", 
+  #                      appDir = here::here("code"), 
+  #                      appPrimaryDoc = "feedback.Rmd",
+  #                      appName = glue::glue("tidybiology-feedback"),
+  #                      appFiles = c("feedback.Rmd", "fun_helper.R", ".Renviron"), 
+  #                      forceUpdate = TRUE)
 }
 # publish_tidybiology_index()
 
