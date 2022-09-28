@@ -1,0 +1,30 @@
+---
+title: "Rmarkdown activity"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+```{r, include = FALSE}
+#load libraries
+library(learnr)
+```
+
+## Rmarkdown activity
+Many of the activities to practice data science can be done directly in a console. However, the "markdown" part of "Rmarkdown" is a language that gets rendered, and therefore needs to be done in Rstudio. So for this module, you will download Rmd files, place them in your project folder, and open them in Rstudio to follow the instructions.  
+  
+1. To begin, inspect the code starting with the set-up chunk. Below it, you’ll see code that imports data, stores objects, and creates a graph.  
+2. Knit the document and see the results; pretty messy, huh?  
+3. Use what you've learn to execute the code, but not include the results of the set-up chunk and data import chunk.  
+4. Replace every **BOLD** with inline R code  
+5. Remove the {calculations} chunk so it is not included with the output  
+6. Change the {graph} chunk so that only the output of the plot is shown, but not the code.  
+7. Re-Knit the document. **Beautiful!**  
+  
+Remember, if you get stuck, or want to check your answers, you can always download the answer file below  
+```{r, echo = FALSE}
+make_button(file_name = "6-rmarkdown_activity_file.Rmd", 
+            button_style = "danger")
+
+make_button(file_name = "6-rmarkdown_activity_file_answers.Rmd", 
+            button_style = "default")
+```
+  

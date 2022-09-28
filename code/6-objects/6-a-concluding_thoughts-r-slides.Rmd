@@ -15,7 +15,7 @@ library(learnr)
 
 ## Concluding Thoughts
 
-### Data science enables {.build}
+### Data science enables  
 - Data science enables data-driven information gathering and hypothesis generation  
 -- Scientific Research  
 -- Reviews  
@@ -34,7 +34,7 @@ library(learnr)
 - <a href="https://r4ds.had.co.nz" target="_blank">R for Data Science</a><br>  
 - <a href="https://github.com/rfordatascience/tidytuesday" target="_blank">Tidytuesday</a><br>  
   
-### Acknowledgements {.build}
+### Acknowledgements 
 **Inspiration, ideas, packages, code**  
 - R4DS (Garrett Grolemund and Hadley Wickham)  
 - Mine Çetinkaya-Rundel (datasciencebox.org)  

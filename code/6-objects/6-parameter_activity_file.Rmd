@@ -1,6 +1,6 @@
 ---
 title: "Assessing Cholesterol Levels in the Heart Study"
-subtitle: "Rmarkdown Parameter Exercise"
+subtitle: "Rmarkdown Parameter Activity"
 output: html_document  
 params: 
   age: 40

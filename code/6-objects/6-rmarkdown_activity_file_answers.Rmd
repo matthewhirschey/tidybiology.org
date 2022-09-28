@@ -6,16 +6,37 @@ output: html_document
 
 ```{r setup, include=FALSE, message=FALSE, warning=FALSE}
 library(tidyverse)
-library(tidybiology)
 library(viridis)
-
-#clear environment
-#rm(list=ls()) 
 ```
 
 ```{r import_data, message=FALSE, echo=FALSE, warning=FALSE}
-heart_url <- "https://raw.githubusercontent.com/matthewhirschey/tidybiology-essentials/master/data/heart.csv"
-heart <-  read_csv(heart_url) #loads dataset-specific variables
+heart_url <- "https://raw.githubusercontent.com/matthewhirschey/tidybiology.org/main/data/heart.csv"
+heart <-  read_csv(heart_url)
+```
+
+# Data cleaning
+```{r cleaning}
+#Turn `sex` variable into a factor
+heart <- 
+  heart %>% 
+  mutate(sex = case_when(
+    sex == 1 ~ "male",
+    sex == 0 ~ "female"
+  ))
+
+#patient IDs
+heart <- 
+  rowid_to_column(heart) %>% 
+  rename(patient_id = rowid)
+
+#second char variable
+heart <- 
+  heart %>% 
+  mutate(fbs = case_when(
+    fbs == 1 ~ "elevated",
+    fbs == 0 ~ "normal"
+  ))
+
 ```
 
 ```{r calculations, include=FALSE, message=FALSE, warning=FALSE}
@@ -67,13 +88,8 @@ heart %>%
   scale_y_continuous(expand = c(0, 0)) +
   geom_vline(data = filter(heart, sex == "male"), aes(xintercept = median(chol)), colour = "yellow", size = 1, linetype  = 2) +
   geom_vline(data = filter(heart, sex == "female"), aes(xintercept = median(chol)), colour = "navy", size = 1, linetype = 2) +
-  scale_fill_viridis(discrete = TRUE, option = "E")
+  scale_fill_viridis(discrete = TRUE, option = "B")
 
 #change code chunks so only the report output and plot are shown on the knitted report
 
-```
-
-```{r provenance, include=FALSE}
-#Session information for provenance and reproducibility
-session_provenance()
 ```

@@ -16,7 +16,7 @@ Exercises are opportunities to practices several concepts from a module. These s
 To begin, click the download button and then drag the exercise file to your working project directory. Again, the "answer" file shows you one way that you can accomplish the task.   
   
 ```{r}
-h4("mtcars Example")
+h4("heart Example")
 make_button(file_name = "4-stringr_exercise_file_heart.Rmd", 
             button_style = "primary")
 make_button(file_name = "4-stringr_exercise_file_heart_answers.Rmd",

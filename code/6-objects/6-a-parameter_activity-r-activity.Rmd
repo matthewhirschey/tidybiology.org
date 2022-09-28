@@ -1,0 +1,22 @@
+---
+title: "Parameterization exercise"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+```{r, include = FALSE}
+#load libraries
+library(learnr)
+```
+
+## Parameter activity
+Parameters of a document are defined in the YAML header, and can pre-populate an Rmarkdown document. To see this in action, download this file for a parameterization activity. As before, move it to an Rstudio project directory. Open the file, and follow these instructions:  
+  
+1. Click the dropdown menu next to Knit and use Knit with Parameters to render the document  
+2. Change the parameter values to match your age and gender, and re-knit.  
+
+This activity doens't have an answer file. Instead, you'll see how changing the parameters can change the output. Try this a few times.  
+```{r, echo = FALSE}
+make_button(file_name = "6-parameter_activity_file.Rmd", 
+            button_style = "danger")
+```
+
