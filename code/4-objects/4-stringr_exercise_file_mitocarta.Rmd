@@ -49,12 +49,12 @@ How would you create a new dataframe that only contains proteins that contain th
 
 ```
 
-Identify proteins that contain the E-box motif - "CANNTG". Create a new column called `e_box` that contains a `TRUE` if a sequence has this motif and a `FALSE` otherwise
+Identify proteins that contain an ATM Kinase target site, which is either SQ or TQ. Create a new column called `atm` that contains a `TRUE` if a protein has this motif and a `FALSE` otherwise
 ```{r}
 
 ```
 
-What are the mean protein lengths for proteins that contain an E-box versus proteins that do not? Hint: use the code you wrote in the last code chunk and build upon it.
+What are the mean protein lengths for proteins that contain an ATM site versus proteins that do not? Hint: use the code you wrote in the last code chunk and build upon it.
 ```{r}
 
 ```

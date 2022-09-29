@@ -71,18 +71,18 @@ proteins %>%
   dplyr::filter(stringr::str_detect(sequence, "RCP.L"))
 ```
 
-Identify proteins that contain the E-box motif - "CANNTG". Create a new column called `e_box` that contains a `TRUE` if a sequence has this motif and a `FALSE` otherwise
+Identify proteins that contain an ATM Kinase target site, which is either SQ or TQ. Create a new column called `atm` that contains a `TRUE` if a protein has this motif and a `FALSE` otherwise
 ```{r}
 proteins %>% 
-  dplyr::mutate(e_box = str_detect(sequence, "CA..TG")) %>% 
-  dplyr::relocate(e_box) # moves the named column to the start of the data frame; not required, but useful
+  dplyr::mutate(atm = str_detect(sequence, "[S|T]Q")) %>% 
+  dplyr::relocate(atm) # moves the named column to the start of the data frame; not required, but useful
 ```
 
-What are the mean protein lengths for proteins that contain an E-box versus proteins that do not? Hint: use the code you wrote in the last code chunk and build upon it.
+What are the mean protein lengths for proteins that contain an ATM site versus proteins that do not? Hint: use the code you wrote in the last code chunk and build upon it.
 ```{r}
 proteins %>% 
-  mutate(e_box = str_detect(sequence, "CA..TG")) %>% 
-  group_by(e_box) %>% 
+  mutate(atm = str_detect(sequence, "[S|T]Q")) %>% 
+  group_by(atm) %>% 
   summarise(mean_length = mean(length))
 ```
 
