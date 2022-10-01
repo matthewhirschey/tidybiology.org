@@ -217,8 +217,8 @@ publish_tidybiology<- function(module_name){
 }
 # publish_tidybiology(module_name = "1-a-introduction_to_data_science-multiple-module.Rmd")
 # publish_tidybiology(module_name = "2-a-introduction_to_dplyr-r-module.Rmd")
-# publish_tidybiology(6)
-# 1:4 %>% purrr::walk(~publish_tidybiology(.x))
+# publish_tidybiology(7)
+# 6:7 %>% purrr::walk(~publish_tidybiology(.x))
 
 #republish all
 publish_tidybiology_all <- function(index = TRUE){

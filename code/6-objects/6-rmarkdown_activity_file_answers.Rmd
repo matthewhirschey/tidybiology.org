@@ -15,7 +15,7 @@ heart <-  read_csv(heart_url)
 ```
 
 # Data cleaning
-```{r cleaning}
+```{r cleaning, echo = FALSE}
 #Turn `sex` variable into a factor
 heart <- 
   heart %>% 
@@ -39,7 +39,7 @@ heart <-
 
 ```
 
-```{r calculations, include=FALSE, message=FALSE, warning=FALSE}
+```{r calculations, include=FALSE, message=FALSE, warning=FALSE, echo = FALSE}
 ##### START HERE #####
 
 #What percent of patients in this dataset are male v. female?

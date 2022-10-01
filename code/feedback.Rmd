@@ -162,6 +162,7 @@ tabPanel('Course',
 
 
 ```{r, context="server"}
+#https://docs.google.com/spreadsheets/d/1uRqB42XRtnfmnuO6qUiiDaezgDvt54rbtT0NQz1hw8M/edit#gid=0
 course_sheet_url <- 'https://docs.google.com/spreadsheets/d/1uRqB42XRtnfmnuO6qUiiDaezgDvt54rbtT0NQz1hw8M/edit?usp=sharing'
 
 #STUDENT SERVER----
@@ -187,6 +188,7 @@ observeEvent(input$submit_student, {
   shinyjs::alert("Thank you for submitting student feedback")
 })
 
+#https://deanattali.com/shinyjs/example
 observeEvent(input$submit_student, {
   shinyjs::reset("student")
 }) 

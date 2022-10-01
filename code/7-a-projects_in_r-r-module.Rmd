@@ -7,11 +7,17 @@ runtime: shiny_prerendered
 ```{r child='setup.Rmd'}
 ```
 
-```{r child='7-objects/7-a-introduction_to_projects-multiple-video.Rmd'}
+```{r child='7-objects/7-a-resources.Rmd'}
 ```
 
-```{r child='7-objects/7-a-title_goes_here-r-project.Rmd'}
-```
+## Stay Tuned!
+Watch this space as we continue to develop more learning materials.
+<!-- # ```{r child='7-objects/7-a-introduction_to_projects-multiple-video.Rmd'} -->
+<!-- # ``` -->
+<!-- #  -->
+<!-- # ```{r child='7-objects/7-a-title_goes_here-r-project.Rmd'} -->
+<!-- # # `r next_module()` -->
+<!-- # ``` -->
 
-`r next_module()`
+
   

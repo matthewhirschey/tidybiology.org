@@ -3,7 +3,7 @@ title: "Assessing Cholesterol Levels in the Heart Study"
 subtitle: "Rmarkdown Parameter Activity"
 output: html_document  
 params: 
-  age: 40
+  age: 42
   gender: "male"
 ---
 

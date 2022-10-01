@@ -28,12 +28,6 @@ library(learnr)
   
 - Workflows save time, achieve reproducibility  
   
-### Resources
-- <a href="https://rstudio.com/resources/cheatsheets" target="_blank">Cheatsheets</a><br>  
-- <a href="https://stackoverflow.com/" target="_blank">Stackoverflow.com</a><br>  
-- <a href="https://r4ds.had.co.nz" target="_blank">R for Data Science</a><br>  
-- <a href="https://github.com/rfordatascience/tidytuesday" target="_blank">Tidytuesday</a><br>  
-  
 ### Acknowledgements 
 **Inspiration, ideas, packages, code**  
 - R4DS (Garrett Grolemund and Hadley Wickham)  

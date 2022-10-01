@@ -26,7 +26,6 @@ runtime: shiny_prerendered
 
 ```{r child='6-objects/6-a-concluding_thoughts-r-slides.Rmd'}
 ```
-  
-## Congratulations
-This concludes your data science journey thus far. However, this is just the beginning. The previous slide provides several resources for learning, so you can continue working on your data science projects. Good luck!
+    
+`r next_module("7-a-projects_in_r-r-module.Rmd")`
   

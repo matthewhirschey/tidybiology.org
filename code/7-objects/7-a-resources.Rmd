@@ -1,0 +1,34 @@
+---
+title: "Resources"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+```{r, include = FALSE}
+#load libraries
+library(learnr)
+```
+
+## Resources
+The ability to turn data into information, glean insights, and communicate them with visuals is a superpower. Finishing Tidybiology means you are just starting your data science journey. Below are some resources to help you continue to learn. This module also has projects — opportunites to practice data science projects that are designed to integrate several functions and concepts and challenge you. Lastly, new materials will continue to be added to tidybiology, so check back often. 
+
+### Rstudio package cheatsheets
+[Cheatsheets](https://www.rstudio.com/resources/cheatsheets/) are excellent, quick-reference resources for both refreshing your understanding of functions, as well as to browse what different packages can do.  
+  
+### Vignettes
+Vignettes are examples of functions that are provided as part of documentation in packages. They are great ways to learn about the different approaches to data science. You can either run the following function to access a vignette (eg) `browseVignettes("dplyr")`. Alternatively, you can view vignettes from the help menu or on [package websites](https://dplyr.tidyverse.org/articles/programming.html).  
+  
+### R for Data Science
+The book R for Data Science, by Grolemund & Wickham is freely available at [https://r4ds.had.co.nz/index.html](https://r4ds.had.co.nz/index.html). It can either be read cover-to-cover, or used as a reference guide.    
+  
+### The internet
+It might sound silly or obvious, but the internet is the go-to place for help troubleshooting bugs or learning how to carry out particular operations. Stackoverflow is a key site that has user provided feedback: [https://stackoverflow.com](https://stackoverflow.com).  
+  
+### YouTube
+We put several videos on Duke's [Center for Computational Thinking](https://www.youtube.com/c/DukeCenterforComputationalThinking) channel, including a special playlist focused on [computational biology](https://studio.youtube.com/channel/UCN-OX45aSM1VtXkzocx8Ppg/videos/upload?filter=%5B%5D&sort=%7B%22columnType%22%3A%22date%22%2C%22sortOrder%22%3A%22DESCENDING%22%7D).  
+  
+### Tidybiology Exercises
+In addition to the exercise files provided in the lessons, several additional exercise files are available for additional practice. 
+  
+### Tidy Tuesday
+[Tidy Tuesday](https://github.com/rfordatascience/tidytuesday) is a weekly community project that releases a data set each Tuesday for practicing data analysis and visualization.  
+
