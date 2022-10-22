@@ -26,6 +26,13 @@ make_button(file_name = "2-dplyr_exercise_file_mitocarta.Rmd",
             button_style = "primary")
 make_button(file_name = "2-dplyr_exercise_file_mitocarta_answers.Rmd",
             button_style = "default")
+br()
+br()
+h4("scRNAseq Example")
+make_button(file_name = "2-dplyr_exercise_file_scrnaseq.Rmd", 
+            button_style = "primary")
+make_button(file_name = "2-dplyr_exercise_file_scrnaseq_answers.Rmd",
+            button_style = "default")
 actionLink("class2_exercise", "", icon = icon("bug"))
 
 conditionalPanel(
@@ -38,9 +45,9 @@ conditionalPanel(
     tags$li("Follow along with the exercise")
   ),
   h4("In-class Example"),
-  make_button(file_name = "2-dplyr_exercise_file_scrnaseq.Rmd",
+  make_button(file_name = "2-dplyr_exercise_file_cmv.Rmd",
               button_style = "danger"), 
-  make_button(file_name = "2-dplyr_exercise_file_scrnaseq_answers.Rmd",
+  make_button(file_name = "2-dplyr_exercise_file_cmv_answers.Rmd",
               button_style = "default"), 
   hr()
 )

@@ -1,0 +1,115 @@
+---
+title: "Dplyr Exercises"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+#install.packages("tidyverse")
+library(tidyverse)
+```
+
+## Required package and data set
+
+Run the code in the code chunk below to load the necessary data set - `cytomegalovirus`
+```{r}
+#install.packages("medicaldata")
+library(medicaldata)
+
+# For more information on this package and the various data sets it contains, visit -
+# https://github.com/higgi13425/medicaldata
+# this is a treasure trove of interesting data sets!
+
+data("cytomegalovirus") # loads this data set 
+View(cytomegalovirus) # View this data set
+?cytomegalovirus # launches the help page for this data set
+```
+
+## Please answer the following questions 
+
+Take a look at the `cytomegalovirus` data frame. How many different types of variables does it contain? 
+
+Hint: Take a glimpse at your data  
+
+What are the dimensions of this data frame?  
+
+```{r}
+glimpse(cytomegalovirus)
+```
+
+How would you select just the columns `time.to.transplant`, `time.to.agvhd`, `time.to.cgvhd`, and `time.to.cmv` from the `cytomegalovirus` data frame?
+
+**Bonus**: Can you identify a helpful function that will help you do this with less typing? Go through this list - https://dplyr.tidyverse.org/reference/dplyr_tidy_select.html
+
+```{r}
+cytomegalovirus %>% 
+  select(time.to.transplant, time.to.agvhd, time.to.cgvhd, time.to.cmv)
+```
+
+How would you select everything between (and including) `CD34.dose` and `cmv`?
+
+```{r}
+cytomegalovirus %>% 
+  select(CD34.dose:cmv)
+```
+
+**Bonus**: Select all variables that **do not** have `.` in their names?
+
+```{r}
+cytomegalovirus %>% 
+  select(!contains("."))
+```
+
+Filter the `cytomegalovirus` data frame so that it only contains information for patients with acute myeloid leukemia
+
+```{r}
+cytomegalovirus %>% 
+  filter(diagnosis == "acute myeloid leukemia")
+```
+
+Now use `filter()` to only keep data for female patients with acute myeloid leukemia 
+
+First try this using multiple filter statements, and then try without writing multiple filter statements 
+
+```{r}
+# with multiple filter statements
+cytomegalovirus %>%
+  filter(diagnosis == "acute myeloid leukemia") %>% 
+  filter(sex == 1)
+  
+# one statement
+cytomegalovirus %>%
+  filter(diagnosis == "acute myeloid leukemia",
+         sex == 1)
+```
+
+Filter out information for patients who have a **below average** time.to.transplant
+
+Hint: Use the base R function `mean()` for this question  
+
+**WARNING**: Is your output an empty data frame? You will need to change the value of one of the arguments of the `mean()` function. Go through the function's documentation to decide which one  
+
+```{r}
+cytomegalovirus %>% 
+  filter(time.to.transplant > mean(time.to.transplant, na.rm = TRUE))
+```
+
+Create a new variable called `time.to.transplant.years` that contains the time.to.transplant for each patient in *years*
+
+As a bonus, re-order the resulting data frame in descending order of `time.to.transplant.years` 
+
+```{r}
+cytomegalovirus %>% 
+  mutate(time.to.transplant.years = time.to.transplant/12) %>% 
+  arrange(desc(time.to.transplant.years))
+```
+
+Let's now find out which diseases have the longest time to transplant. We'll do this by working out the average `time.to.transplant` for each diagnosis
+
+```{r}
+cytomegalovirus %>% 
+  group_by(diagnosis) %>% 
+  summarise(mean(time.to.transplant, na.rm = TRUE))
+```
+
+Congrats! If you want some more practice, please try out some of the other dplyr exercises  

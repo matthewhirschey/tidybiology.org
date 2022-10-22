@@ -1,0 +1,67 @@
+---
+title: 'Tidybiology: Class 5 Report Exercise'
+output: html_document
+params:
+  diagnosis: "acute myeloid leukemia"
+subtitle: 'My disease of interest is `r params$diagnosis`'
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(medicaldata)
+
+data("cytomegalovirus")
+
+cytomegalovirus <- cytomegalovirus %>% 
+                      mutate(cmv_status = if_else(cmv == 0, "no", "yes"),
+                      akir_status = if_else(aKIRs <= 4, "low", "high"),
+                      akir_status = fct_relevel(akir_status, "low"))
+```
+
+## Study Background
+
+These data were obtained from a published study that by Sobecks et al. called 
+[Cytomegalovirus Reactivation After Matched Sibling Donor Reduced-Intensity Conditioning Allogeneic Hematopoietic Stem Cell Transplant Correlates With Donor Killer Immunoglobulin-like Receptor Genotype](http://www.ectrx.org/forms/ectrxcontentshow.php?year=2011&volume=9&issue=1&supplement=0&makale_no=0&spage_number=7&content_type=FULL%20TEXT)  
+
+To learn more about the study and the data produced, run `?cytomegalovirus` in your console    
+
+# Objective  
+
+The goal of this study was to determine if the number of donor activating killer immunoglobulin-like receptors (aKIRs) influenced reactivation of CMV after T-cell replete, matched sibling donor reduced-intensity conditioning allogeneic hematopoietic stem cell transplant  
+
+Donors were divided into two groups - those with either 1-4 or 5-6 alpha killer immunoglobulin-like receptors (recoded as "low" and "high" respectively by us)
+
+CMV reactivation status is either 0 ("no") or 1 ("yes")    
+
+```{r include=FALSE}
+#####STUDENTS START HERE#####
+
+# How many unique diagnoses are there in the `cytomegalovirus` data frame?
+
+
+# How many times does your disease of interest appear in this data frame?
+# Get this number and save it as `num_patients`
+
+
+
+
+# Create an object called `my_choice` that contains data from `cytomegalovirus` JUST FOR your disease of interest
+
+
+# Using `my_choice`, count the number of "yes" and "no" entries for `cmv_status` 
+
+
+# Using `my_choice`, count the number of "yes" and "no" entries for `cmv_status` by `akir_status` group. Save this as a new object called `my_choice_counts`
+
+```
+
+## Visualizing the relationship between the number of aKIR genes and CMV reactivation
+```{r echo = FALSE}
+# Plot `my_choice_counts` as a bar graph
+
+```
+
+## Analysis Summary
+
+My disease of interest is `r params$diagnosis`. There were `r num_patients` patients with this disease in this study. The total number of patients afflicted by this disease who experienced CMV reactivation was `r sum(my_choice$cmv_status == "yes")`, versus `r sum(my_choice$cmv_status == "no")` who did not. There were `r sum(my_choice$sex)` women and `r nrow(my_choice) - sum(my_choice$sex)` men with this disease, compared to `r sum(cytomegalovirus$sex)` women and `r nrow(cytomegalovirus) - sum(cytomegalovirus$sex)` men overall        

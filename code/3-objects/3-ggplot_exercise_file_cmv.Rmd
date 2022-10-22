@@ -1,0 +1,124 @@
+---
+title: "ggplot2"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# ggplot2: Data visualization
+
+## Install packages
+Let's install the following packages: medicaldata, ggplot2, tidyverse, paletter, cowplot, and patchwork needed for this exercise.
+
+Learn more about: [medicaldata](https://higgi13425.github.io/medicaldata/), [ggplot2](https://ggplot2.tidyverse.org/index.html), [paletter](https://github.com/EmilHvitfeldt/paletteer), [cowplot](https://wilkelab.org/cowplot/index.html)
+
+## Load packages
+Now, let's load the these packages: medicaldata, ggplot2, tidyverse, paletter, cowplot, and patchwork
+```{r}
+
+```
+
+We will be using the `cytomegalovirus` dataset from the medicaldata package. Load the dataset and assign it to the following object, `cyto.` Hint: Use the `::` to select for the dataset.
+```{r}
+
+```
+
+Let's take a glimpse of the `cyto` dataset.
+```{r}
+
+```
+
+## ggplot2
+In this section we will be using ggplot to create data visualizations.
+
+## ggplot: geom_bar
+Let's create bar plot with our `cyto` dataset to determine the number of patients per `diagnosis`. Hint: Do not forget to include `geom` for the aesthetics. 
+```{r}
+ 
+```
+
+With the previous script, let's `fill` to the bar plot with color by `diagnosis`. Hint: edit the aesthetic of the bar plot 
+```{r}
+
+```
+
+## Change color scheme:
+Let's add to the script above and use the `miscpalettes::brightPastel` palette from the `paletteer` package to change the color scheme of our graph. Hint: Include the `scale_fill_paletteer_d()` function to make this change. 
+```{r}
+
+```
+
+## Change layout - Theme:
+Now we will be focusing on changing the theme of our bar plot! Continuing from the same script above, let's:
+1. Change the `theme` of the bar plot to black and white (bw)
+2. Edit the `theme`, with the `theme()` function to:
+  2a. Tilt the text on the x-axis to an `angle` of `60` degrees and horizontal adjustment (`hjust`) to `1`.         Hint: Use `axis.text.x = element_text()` from the `theme()` function
+  2b. Remove the title of the x-axis. Hint: Incorporate `axis.title.x = element_blank()` from the `theme()`         function
+  2c. To remove the legend, change the `legend.position` to `none`
+3. Change the title of the y-axis to `Number of patients`. Hint: Use the `labs()` function
+  
+```{r}
+
+```
+
+### ggplot: facet_grid
+Say we want to see if there are any differences in number of patient diagnoses based on sex, we will add the `facet_grid()` function to make this observation. However, since the `sex` variable in our `cyto` dataset is coded by numbers, 0 = Female and 1 = Male, we will have to store this information in an object called `plot_names`. The `plot_names` object will be used as our new `labeller` for the `facet_grid()` function.
+```{r}
+plot_names <- c("0" = "Female", # to create new title names for panels
+                "1" = "Male")
+
+
+```
+
+### ggplot: geom_jitter
+Now we will use another `geom` aesthetic called `jitter` in which we will compare the `CD34.dose` to `CD3.dose` and color the jitters based by `diagnosis`. 
+Let's also change the:
+1. Color palette to `miscpalettes::brightPastel` 
+2. Theme to black and white (bw)
+3. Text on the x-axis to contain an `angle` of `60` degrees and horizontal adjustment (`hjust`) to `1`.
+4. Title of the x-axis to `CD34 Dose`and y-axis to `CD3 Dose`
+
+```{r}
+
+```
+
+### ggplot: geom_boxplot
+Next, with the `cyto` dataset, we will be creating a simple box plot looking the `diagnosis` to `TNC.dose`. 
+```{r}
+
+```
+
+### ggplot: combining a box and jitter plot
+Using the `cyto` dataset, let's create a box plot looking the `diagnosis` to `TNC.dose`, colored by `diagnosis`. Next, add a jitter plot with the same conditions.
+Let's also change the:
+1. Color palette of the plot to `miscpalettes::brightPastel` 
+2. Theme to black and white (bw)
+3. Text on the x-axis to contain an `angle` of `60` degrees and horizontal adjustment (`hjust`) to `1`.Remove     the title of the x-axis and legend.
+4. Title of the y-axis to `TNC Dose`
+```{r}
+
+```
+
+
+### Another package to check out: Patchwork
+Patchwork is a great package used to combine multiple plots into one! 
+Preparation for patchwork:
+Store three of the ggplots into three objects: `NoP` will contain the 1st chunk of code from the Change layout - Theme section, `CD` will be the chunk of code from the ggplot: geom_jitter section, the code from ggplot: combining a box and jitter plot, will be stored in `TNC_P`.
+
+```{r}
+
+```
+
+### Patchwork
+Run the code below to see for yourself:
+```{r}
+(NoP | TNC_P) / CD + # objects we created from our previous chunk of code
+  plot_annotation(tag_levels = c("A", "B", "C")) & # adding labels to our plots
+  theme(plot.tag = element_text(size = 12)) # change the size of the text
+```
+

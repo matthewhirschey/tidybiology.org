@@ -11,7 +11,7 @@ library(learnr)
 
 ## Optional Exercises
 
-Exercises are opportunities to practices several concepts from a module. These should take 20-30 minutes to complete. The `mtcars` and `mitocarta` exercises below are roughly equivalent. Choose one and work through it, downloading the answers if needed. Then, try the other example and see if you can complete it without looking at the answer file. To challenge yourself, try the `subcell` example.  
+Exercises are opportunities to practices several concepts from a module. These should take 20-30 minutes to complete. The `mtcars`, `mitocarta`, and `scRNAseq` exercises below are roughly equivalent. Choose one and work through it, downloading the answers if needed. Then, try the other example and see if you can complete it without looking at the answer file. To challenge yourself, try the `subcell` example.  
   
 To begin, click the download button and then drag the exercise file to your working project directory. Again, the "answer" file shows you one way that you can accomplish the task.   
   
@@ -27,6 +27,13 @@ h4("mitocarta Example")
 make_button(file_name = "3-ggplot_exercise_file_mitocarta.Rmd", 
             button_style = "primary")
 make_button(file_name = "3-ggplot_exercise_file_mitocarta_answers.Rmd",
+            button_style = "default")
+br()
+br()
+h4("scRNAseq Example")
+make_button(file_name = "3-ggplot_exercise_file_scrnaseq.Rmd",
+            button_style = "primary")
+make_button(file_name = "3-ggplot_exercise_file_scrnaseq_answers.Rmd",
             button_style = "default")
 br()
 br()
@@ -47,9 +54,9 @@ conditionalPanel(
     tags$li("Follow along with the exercise")
   ),
   h4("In-class Example"),
-  make_button(file_name = "3-ggplot_exercise_file_scrnaseq.Rmd",
+  make_button(file_name = "3-ggplot_exercise_file_cmv.Rmd",
               button_style = "danger"), 
-  make_button(file_name = "3-ggplot_exercise_file_scrnaseq_answers.Rmd",
+  make_button(file_name = "3-ggplot_exercise_file_cmv_answers.Rmd",
               button_style = "default"), 
   hr()
 )

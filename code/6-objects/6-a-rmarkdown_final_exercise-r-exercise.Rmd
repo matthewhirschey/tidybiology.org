@@ -1,0 +1,49 @@
+---
+title: "rmarkdown Final Exercise"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+```{r, include = FALSE}
+#load libraries
+library(learnr)
+
+```
+
+## Optional Exercises
+
+Exercises are opportunities to practices several concepts from a module. If you did not follow along during the videos, then download these files and complete them on your own. These should take ~30 minutes to finish. Work through the exercises, downloading the answers if needed.  
+  
+To begin, click the download button and then drag the exercise file to your working project directory. Again, the "answer" file shows you one way that you can accomplish the task.   
+  
+```{r}
+h4("rmarkdown Activity")
+make_button(file_name = "6-rmarkdown_activity_file.Rmd", 
+            button_style = "primary")
+make_button(file_name = "6-rmarkdown_activity_file_answers.Rmd",
+            button_style = "default")
+br()
+br()
+h4("Parameter Activity")
+make_button(file_name = "6-parameter_activity_file.Rmd", 
+            button_style = "primary")
+make_button(file_name = "6-parameter_activity_file_answers.Rmd",
+            button_style = "default")
+actionLink("class6_exercise", "", icon = icon("bug"))
+
+conditionalPanel(
+  condition = "input.class6_exercise != 0",
+  hr(),
+  p("If you are participating in tidybiology live, then this is the file we will use in class. If you are not in a synchronous class, then feel free to use this additional file for practice."), 
+  tags$ol(
+    tags$li("Create a new project in Rstudio (optional)"), 
+    tags$li("Download the project Rmd file (big red button)"), 
+    tags$li("Follow along with the exercise")
+  ),
+  h4("In-class Example"),
+  make_button(file_name = "6-rmarkdown_exercise_file_cmv.Rmd",
+              button_style = "danger"), 
+  make_button(file_name = "6-rmarkdown_exercise_file_cmv_answers.Rmd",
+              button_style = "default"), 
+  hr()
+)
+```

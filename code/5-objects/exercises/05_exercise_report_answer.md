@@ -1,0 +1,1 @@
+The `r top$location` has the highest number of unique mitochondrial proteins, with `r top$n` annotated in this tissue. My favorite gene is `r fav$symbol`, which encodes a mitochondrial protein that is most abundant in the `r fav$location` and is `r fav$protein_length` amino acids long.
