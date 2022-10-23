@@ -1,5 +1,5 @@
 ---
-title: "ggplot2"
+title: "ggplot Exercise: CMV"
 output: 
   html_document:
     toc: true
