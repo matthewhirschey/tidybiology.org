@@ -13,6 +13,8 @@ editor_options:
 ```{r, context="data", include=FALSE}
 #download and prep data
 library(BiocManager)
+#options(repos = BiocManager::repositories())
+# you HAVE to run this in your console so that shinyapps.io knows where to look
 library(scRNAseq)
 set.seed(42)
 
@@ -20,8 +22,9 @@ happy <- readr::read_csv("https://raw.githubusercontent.com/matthewhirschey/tidy
 
 happy_full <- 
   readr::read_csv("https://raw.githubusercontent.com/matthewhirschey/tidybiology.org/main/data/world-happiness-report-2021.csv") %>% 
-  janitor::clean_names() %>% 
-  dplyr::rename(region = regional_indicator)
+  janitor::clean_names() 
+# %>% 
+#   dplyr::rename(region = regional_indicator)
 
 # happy_join_one <- 
 #   happy %>% 

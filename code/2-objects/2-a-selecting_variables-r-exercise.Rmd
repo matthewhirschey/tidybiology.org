@@ -8,10 +8,10 @@ library(learnr)
 library(gradethis)
 gradethis::gradethis_setup()
 
-happy_full <- 
-  read_csv("https://raw.githubusercontent.com/BAREJAA/website_for_john/master/datasets/world-happiness-report-2021.csv") %>% 
-  clean_names() %>% 
-  rename(region = regional_indicator)
+# happy_full <- 
+#   read_csv("https://raw.githubusercontent.com/BAREJAA/website_for_john/master/datasets/world-happiness-report-2021.csv") %>% 
+#   clean_names() %>% 
+#   rename(region = regional_indicator)
 ```
 ## Select exercises
 
