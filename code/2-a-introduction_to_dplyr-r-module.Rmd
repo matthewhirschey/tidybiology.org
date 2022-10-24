@@ -16,7 +16,7 @@ library(BiocManager)
 library(scRNAseq)
 set.seed(42)
 
-happy <- readr::read_csv("https://raw.githubusercontent.com/matthewhirschey/tidybiology.org/main/data/world-happiness-report-2021.csv")
+happy <- readr::read_csv("https://raw.githubusercontent.com/matthewhirschey/tidybiology.org/main/data/happy.csv")
 
 happy_full <- 
   readr::read_csv("https://raw.githubusercontent.com/matthewhirschey/tidybiology.org/main/data/world-happiness-report-2021.csv") %>% 
