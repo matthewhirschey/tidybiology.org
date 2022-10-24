@@ -7,7 +7,7 @@ library(tidyverse)
 
 # most packages are on a central repository called CRAN. However, in order to get the next package called 'tidybiology', you need to get it from Github. To do this, you first need either the `remotes` or `devtools` package. Uncomment the two lines below (by removing the # at the beginning) to get the tidybiology package. If it successfully installed, then you can run the last line of this code chunk to load the library. Did it work?
 # install.packages("remotes")
-# remotes::install_github("matthewhirschey/tidybiology")
+# remotes::install_github("matthewhirschey/tidybiology") 
 library(tidybiology)
 ```
 
