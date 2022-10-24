@@ -7,6 +7,29 @@ runtime: shiny_prerendered
 ```{r child='setup.Rmd'}
 ```
 
+```{r, context="data", include=FALSE}
+#download and prep data
+set.seed(42)
+
+happy <- readr::read_csv("https://raw.githubusercontent.com/matthewhirschey/tidybiology.org/main/data/happy.csv")
+
+happy_full <- 
+  readr::read_csv("https://raw.githubusercontent.com/matthewhirschey/tidybiology.org/main/data/world-happiness-report-2021.csv") %>% 
+  janitor::clean_names() %>%
+  dplyr::rename(region = regional_indicator)
+
+happy %>% 
+  inner_join(happy_full, by = "country_name") %>% 
+  select(country_name, healthy_life_expectancy) -> happy_join_one
+
+happy_full %>% 
+  filter(!(country_name %in% happy$country_name)) %>% 
+  slice_sample(n = 5) %>% 
+  select(country_name, healthy_life_expectancy) %>%
+  bind_rows(happy_join_one) %>% 
+  .[-10 ,] -> happy_join
+```
+
 ```{r child='4-objects/4-a-manipulating_strings_using_stringr-r-video.Rmd'}
 ```
 
